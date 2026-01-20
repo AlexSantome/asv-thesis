@@ -1,105 +1,222 @@
-% Author: David Sanchez-Jacome
+% Author: Alejandro Santomé Valverde
 
-\chapter{Introduction and objectives} \label{chap:intro}
+\chapter{Introduction and thesis objectives} \label{chap:intro}
 
-\section{Integrated circuits} \label{sec:integrated_circuits}
+\section{Integrated photonics} \label{sec:integrated_photonics}
 
-Electronic integrated circuits (ICs) have revolutionized the last decades due to their ability to integrate a vast number of functionalities into a small physical space, leading to significant reductions in cost, power consumption, and increases in speed and reliability.
-With the invention of the transistor this solid-state device replaced bulky and less efficient vacuum tubes, enabling miniaturization \cite{bardeen_transistor_1948}.
-This in turn led to the development of the first integrated circuit \cite{kilby_invention_1976, riordan_crystal_1997}.
-This innovation allowed for the fabrication of multiple interconnected electronic components on a single semiconductor substrate, paving the way for complex systems on a chip.
-At the same time, continuous advancements in lithography enabled the fabrication of increasingly smaller and more densely packed transistors, as described by Moore's Law, leading to exponential growth in computing power and functionality \cite{moore_cramming_2006}.
-The development of CMOS (complementary metal-oxide-semiconductor) technology offered low power consumption and high integration density, making it the dominant technology for modern ICs \cite{wanlass_low_1967}.
-CMOS made possible the invention of the microprocessor \cite{noauthor_announcing_nodate}.
-This milestone integrated the central processing unit (CPU) of a computer onto a single chip, enabling the personal computer revolution and the proliferation of digital technologies.
-Building on the density offered by CMOS, the focus has also expanded from monolithic integration on a single chip to system-level integration through advanced packaging \cite{tummala_fundamentals_2001}.
-This approach allows multiple, often specialized, integrated circuits (known as 'chiplets') to be combined into a single compact and high-performance package, pushing the boundaries of miniaturization and functionality even further \cite{naffziger_22_2020}.
-These advancements have collectively driven the ubiquity of ICs across diverse fields by enabling complex information processing, communication, and control in increasingly smaller, cheaper, and more energy-efficient devices.
+Since the advent of electronic integrated circuits in the second half of the twentieth century, the integration 
+of multiple functionalities onto a single chip has been a driving force behind the rapid evolution of information
+and communication technologies \cite{mooreCrammingMoreComponents1965a}. The formulation of Moore's law provided a 
+conceptual framework that guided the semiconductor industry for decades, enabling an exponential increase in 
+transistor density and computational capability. This relentless scaling, together with advances in lithography, 
+materials, and fabrication processes, laid the foundation for modern computing, signal processing, and digital 
+communication systems.
 
-In parallel to the growth of electronic hardware, software has played a pivotal and increasingly significant role in the trajectory of integrated circuits from their inception to their pervasive presence in modern life.
-Initially, software was crucial for the design, simulation, and testing of these nascent integrated circuits.
-As IC complexity grew exponentially, sophisticated Computer-Aided Design (CAD) tools, which are fundamentally software applications, became indispensable for engineers to manage the intricate layouts and functionalities of microchips \cite{lienig_fundamentals_2021}.
-Beyond the design phase, software is the very essence that provides ICs with purpose and enables their application in everyday activities.
-This is possible due to layered architecture adopted for software buildup \cite{tanenbaum_structured_2013} (see Figure~\ref{fig:ch1-abstraction_layers} for an example of software layers).
-At the lowest level, firmware and microcode reside directly within the IC itself, controlling the fundamental hardware operations and basic functionalities \cite{hennessy_computer_2017}.
-The operating system acts as an intermediary layer, managing the IC's resources and providing a standardized platform for software applications \cite{tanenbaum_modern_2009}.
-Device drivers enable the operating system to communicate with specific hardware components, translating generic commands into device-specific instructions \cite{corbet_linux_2005}.
-Libraries and Application Programming Interfaces (APIs) offer collections of reusable code and standardized interaction methods, abstracting hardware complexities for application developers \cite{gamma_design_1994}.
-Finally, applications are the user-facing software programs that perform specific tasks, leveraging the underlying software stack and the capabilities of the ICs to deliver their intended functionalities.
+However, as device dimensions continued to shrink and operating frequencies increased, fundamental limitations of
+electronic integration became increasingly apparent. In particular, issues related to bandwidth constraints, 
+power dissipation, latency, and interconnect scalability emerged as major bottlenecks in advanced electronic 
+systems \cite{millerRationaleChallengesOptical2000}. While transistor switching speeds continued to improve, the 
+performance of electrical interconnects failed to scale at the same pace, leading to growing energy consumption 
+and thermal management challenges \cite{millerDeviceRequirementsOptical2009}. These limitations are especially 
+pronounced in large-scale systems, such as data centers and high-performance computing architectures, where 
+interconnects dominate both power budgets and system-level performance \cite{shalfExascaleComputingTechnology2011}.
 
-\begin{figure}
+In parallel with these developments, photonics emerged as a powerful alternative for signal generation, 
+transmission, and processing. The invention of the laser marked a pivotal milestone in the field of optics, 
+enabling coherent light sources with unprecedented intensity and spectral purity 
+\cite{maimanStimulatedOpticalRadiation1960}. This breakthrough, combined with the development of low-loss optical 
+fibers, paved the way for optical communication systems capable of transmitting information over long distances
+with minimal attenuation. Over the following decades, photonic technologies became indispensable in global 
+telecommunication infrastructures, demonstrating clear advantages over purely electronic approaches in terms of 
+bandwidth and signal integrity.
+
+Building upon decades of progress in discrete optical components, integrated photonics arose as a natural 
+extension of the integration paradigm pioneered by electronics \cite{sorefPresentFutureSilicon2006}. Rather than 
+relying on bulky and alignment-sensitive discrete elements, integrated photonics enables the monolithic or hybrid 
+integration of multiple optical functions on a single substrate. By bringing together waveguides, modulators, filters, 
+multiplexers, and photodetectors within a compact footprint, photonic integrated circuits (PICs) allow complex 
+optical systems to be realized in a stable, scalable, and reproducible manner \cite{thomsonRoadmapSiliconPhotonics2016}. 
+Furthermore, PICs benefit from wafer-scale fabrication processes, offering improved yield, reduced cost per function, 
+and compatibility with mature semiconductor manufacturing technologies.
+
+In this context, integrated photonics leverages light as the information carrier, offering intrinsic advantages 
+over purely electronic circuits. These include ultra-high data transmission rates enabled by optical carrier 
+frequencies, low propagation losses in dielectric waveguides, immunity to electromagnetic interference, and the 
+ability to support dense wavelength-division multiplexing. From an energy perspective, photonic interconnects 
+can significantly reduce power consumption by mitigating resistive losses and capacitive charging effects that 
+plague electrical interconnects, particularly at high data rates 
+\cite{millerRationaleChallengesOptical2000,millerDeviceRequirementsOptical2009}. As electrical interconnects increasingly 
+constitute a dominant performance and energy bottleneck, photonic solutions have gained substantial interest as 
+a complementary or alternative technology.
+
+As a result, integrated photonics has become a key enabling technology for next-generation communication, sensing, 
+and computing systems. Its impact spans a wide range of applications, including optical transceivers for data centers, 
+chip-to-chip and on-chip interconnects for high-performance computing, microwave photonics, and emerging photonic 
+information processing platforms. More recently, the convergence of electronic and photonic integration has 
+given rise to heterogeneous and co-integrated systems, where electronic control and photonic signal processing are 
+combined to exploit the strengths of both domains \cite{youngOpticalTechnologyTeraScale2010,jalaliSiliconPhotonics2006}. 
+This convergence positions integrated photonics as a central technology in addressing the scalability, performance, and 
+energy-efficiency challenges of future information processing systems \cite{bogaertsProgrammablePhotonicCircuits2020}.
+
+
+\begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width=0.35\textwidth]{figures/ch1-abstraction_layers.png}
+		\includegraphics[width=1.0\textwidth]{figures/ch1-evolution.png}
 	\end{center}
-	\caption{Diagram of software abstraction layers of a typical computer system \cite{ondich_cs_2022}}\label{fig:ch1-abstraction_layers}
+	\caption{Conceptual evolution from electronic integration to photonic integrated circuits.}\label{fig:ch1-evolution}
 \end{figure}
 
-Consequently, software stacks have democratized ICs because of their ability to translate physical semiconductor variables into human-readable instructions that can be reused and built upon.
-In other words, while integrated circuits provide the physical substrate for computation and control, it is the multifaceted layers of software that orchestrate their operation, manage their resources, and ultimately translate their capabilities into the diverse array of technologies that underpin our daily lives.
-The advancements in software have been unavoidably linked to the increasing power and versatility of ICs, creating a symbiotic relationship between them that continues to drive technological progress.
 
-\section{The case for programmable integrated photonics} \label{sec:photonics_motivation}
 
-While electronic ICs have undeniably transformed society, photonic integrated circuits (PICs) have gained significant interest and research focus due to their potential to overcome fundamental limitations of electronics and enable entirely new functionalities \cite{soref_past_2006,ye_review_2013,baets_silicon_2017}.
-The motivation stems from several key factors.
-Photonics inherently offers significantly higher bandwidth and lower latency for data transmission compared to electronics.
-Indeed, the vast global infrastructure built upon optical fiber has demonstrated the immense capacity and efficiency of transmitting information using light.
-This success naturally creates a compelling need to develop integrated photonic technologies that can efficiently interface with optical fiber and manipulate these optical signals using PICs.
-As light propagates at higher speeds and with less loss in optical fibers and waveguides, PICs have become ideal for applications requiring massive data throughput, such as AI/ML data center and high-performance computing interconnects \cite{khani_sip-ml_2021,li_silicon_2015,zhou_development_2018}.
-In terms of power consumption, optical communications and analog signal processing can be more energy-efficient than their electronic counterparts in certain applications, particularly over long distances (more than a few meters).
-Photons do not carry an electrical charge, thus eliminating resistive losses and reducing power consumption in interconnects.
-Light signals also provide immunity to electromagnetic interference (EMI) which gives photonic circuit a significant advantage in, otherwise noisy, electrical environments.
-It's important to note that PICs can also be reconfigured through software just like electronic ICs, which enables them to tackle several real-life problems.
-The latter fact makes them attractive for applications in microwave photonics \cite{chen_silicon_2017,marpaung_integrated_2019}, Lidar/Radar \cite{hashemi_review_2022,serafino_toward_2019}, or aerospace \cite{hsu_free-space_2022}, where signal integrity is paramount.
-PICs also offer high sensitivity and precision for applications in environmental monitoring (e.g., gas and chemical sensing) \cite{chrostowski_silicon_2012}, biomedical diagnostics (e.g., lab-on-a-chip devices) \cite{fathpour_silicon_2011}, and precision metrology (e.g., optical gyroscopes) \cite{weimann_silicon_2017,khial_nanophotonic_2018}.
-Likewise, reconfigurable PICs have also emerged as a promising platform for realizing complex and scalable quantum computing and communication networks \cite{harris_large-scale_2016,sibson_integrated_2017}.
-All in all, similarly to electronic ICs, PICs allow for the integration of numerous optical components onto a single chip, leading to smaller, more robust, and potentially lower-cost devices.
-This miniaturization facilitates the deployment of photonic technologies in a wide range of applications that demand increasingly better speed, bandwidth, power efficiency, and sensitivity specs.
 
-In a context were most of PICs are tailored for a single application, multipurpose programmable PICs based on recirculating meshes represent a significant advancement in integrated photonics.
-They have garnered considerable research interest over the last decade due to their unique capabilities and potential to revolutionize various applications.
-These circuits distinguish themselves through their ability to be reconfigured for diverse functionalities on a single chip, offering a level of versatility that is highly desirable in modern photonic systems \cite{bogaerts_programmable_2020,capmany_programmable_2020,perez_multipurpose_2017}.
-The key distinct feature of these PICs is their architecture, which typically consists of an interconnected network of fundamental programmable elements, such as Mach-Zehnder Interferometers (MZIs) or phase shifters, arranged in a grid-like mesh.
-The crucial aspect is the "recirculating" nature of these meshes, allowing light to traverse the network through a wide set of configurations.
-By precisely controlling each individual element, light can be routed along various paths and cycles within the mesh to be split, combined, and phase-shifted with remarkable flexibility.
-This intricate control over the optical path allows for the implementation of a wide range of linear optical transformations, which form the foundation of many photonic applications.
-Furthermore, the mesh structure is scalable within the application's insertion loss budget and reticle size limits.
-Therefore, increasing the number of interconnected elements allows for the creation of more complex circuits capable of tackling increasingly complex tasks.
+\section{From Application-Specific to Programmable Photonic Integrated Circuits} \label{sec:photonics_motivation}
 
-As stated previously, for integrated solutions to become ubiquitous they must be controllable via software and PICs are not the exception.
-The importance of reconfigurable multipurpose PICs largely mirrors the motivations behind reconfigurable electronic platforms like field programmable gate arrays (FPGAs) and their synergy with software control.
-Reconfigurability in PICs is crucial for application testing and prototyping because it enables a single PIC to be adapted to different functionalities or changing operational requirements after fabrication.
-This is particularly valuable in dynamic environments such as telecommunications networks, where traffic patterns and service demands can fluctuate.
-A reconfigurable PIC can be dynamically adjusted on-the-fly to service different scenario needs.
-In the case of multipurpose PICs, hardware reconfigurability significantly speeds up the prototyping and development process of new photonic systems.
-Instead of designing and fabricating a new chip for each iteration or different application, researchers and engineers can program this reconfigurable PIC to test various designs and functionalities.
-This reduces time-to-market and lowers development costs.
-Similarly, a reconfigurable PIC can be utilized for a wider range of applications or tasks compared to a fixed-function PIC.
-This leads to better resource utilization and reduces the need for multiple specialized chips, potentially lowering overall system cost and complexity.
-Following the footsteps of electronic ICs, where reconfigurability enables a higher level of abstraction and control through software, comes the impending need of developing software-defined photonics.
-Just as software engineers can program electronic systems without needing deep knowledge of the underlying hardware, software interfaces for reconfigurable PICs allow users to define and control complex photonic functionalities through programming interfaces.
-As a consequence, the motivation behind reconfigurable PICs, under this thesis framework, is to introduce a level of flexibility and programmability into the photonic domain that mirrors the power and versatility that software brings to electronic hardware.
-This allows for greater adaptability, faster innovation, and broader applicability of photonic integrated circuit technology.
-In other words, if multipurpose programmable PICs are empowered with a robust and user-friendly software stack, this programmability key holds the promise to unlock a vast array of possibilities on a single photonic hardware platform.
+Early generations of photonic integrated circuits were predominantly designed following an application-specific
+paradigm. In this approach, each PIC was optimized to perform a well-defined function, such as optical modulation, 
+filtering, switching, or wavelength multiplexing, with its architecture and component parameters tailored to a 
+particular use case. This design philosophy enabled highly efficient and compact solutions, and played a crucial 
+role in the successful deployment of integrated photonics in applications such as optical communications, sensing, 
+and signal processing \cite{sorefPresentFutureSilicon2006,liangRecentProgressLasers2010,thomsonRoadmapSiliconPhotonics2016}.
+
+However, as photonic systems increased in complexity and diversity, the limitations of purely application-specific 
+photonic integrated circuits became increasingly evident. Designing a new PIC for each target functionality entails 
+long development cycles, high non-recurring engineering costs, and limited flexibility to adapt to evolving system 
+requirements. Moreover, fabrication tolerances, environmental fluctuations, and device aging introduce unavoidable 
+variations that can significantly degrade the performance of fixed-function photonic circuits if no post-fabrication 
+tuning is available \cite{annoniAutomatedRoutingControl2016}.
+
+To mitigate these issues, reconfigurability was gradually introduced into integrated photonic platforms. Initially, 
+tunable elements such as thermo-optic or electro-optic phase shifters were incorporated to compensate for 
+fabrication-induced deviations and to enable limited post-fabrication trimming. While this represented an 
+important step forward, these early reconfigurable circuits were still largely application-specific, as their 
+overall topology and functional scope remained fixed at the design stage.
+
+Inspired by the success of programmable electronic hardware and field-programmable gate arrays (FPGAs), the concept 
+of programmable photonic integrated circuits emerged as a promising alternative to conventional design methodologies 
+\cite{bogaertsProgrammablePhotonicCircuits2020}. Rather than implementing a single 
+predefined function, programmable PICs rely on a generic hardware architecture that can be configured through software 
+to realize a wide range of photonic signal processing tasks. This paradigm shift enables the reuse of the same physical 
+chip across multiple applications, significantly reducing development time and cost while increasing versatility.
+
+A widely adopted approach to programmable photonics is based on networks of tunable 2x2 interferometric building 
+blocks, typically implemented as Mach-Zehnder interferometers (MZIs) equipped with phase shifters and tunable 
+couplers \cite{reckExperimentalRealizationAny1994,perezMultipurposeSiliconPhotonics2017}. By appropriately programming the
+internal phases and coupling ratios, such meshes can be configured to implement arbitrary linear transformations, 
+including filters, switches, beamformers, and mode converters. Several mesh topologies have been proposed, including 
+triangular, rectangular, and hexagonal arrangements, each offering different trade-offs in terms of scalability, 
+robustness, and control complexity \cite{clementsOptimalDesignUniversal2016,perezMultipurposeSiliconPhotonics2017}.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width=1.0\textwidth]{figures/ch1-aspic_vs_programmable.png}
+	\end{center}
+	\caption{Application specific PICs versus Programmable PICs.}\label{fig:ch1-aspic_vs_programmable}
+\end{figure}
+
+Programmable photonic integrated circuits have demonstrated significant potential in a broad range of applications. 
+In optical communications, they enable adaptive filtering, dynamic wavelength routing, and coherent signal processing
+\cite{perezReconfigurableLatticeMesh2016}.
+% ,perezFieldProgrammablePhotonicArrays2018,lopezProgrammableTrueTime2018
+In microwave photonics, programmable PICs provide flexible platforms for beamforming and signal generation. More 
+recently, they have attracted considerable attention in emerging areas such as optical computing, machine learning, 
+and quantum information processing, where hardware adaptability is a critical requirement 
+\cite{shenDeepLearningCoherent2017}.
+
+Despite their promise, programmable photonic integrated circuits also introduce new challenges. The large number 
+of tunable elements required for complex meshes leads to increased power consumption, control overhead, and calibration 
+complexity. Thermal crosstalk, control drift, and scaling limitations must be carefully addressed to ensure stable 
+and reliable operation \cite{millerSelfconfiguringUniversalLinear2013,sacchiIntegratedElectronicController2025}. These 
+challenges have motivated ongoing research into alternative tuning mechanisms, advanced control algorithms, and hybrid 
+electronic-photonic control architectures.
+
+Overall, the transition from application-specific to programmable photonic integrated circuits represents a fundamental 
+evolution in the design philosophy of integrated photonics. By decoupling hardware from functionality, programmable 
+PICs offer a flexible and scalable platform capable of addressing the growing demands of future communication, sensing, 
+and computing systems, while accelerating innovation and reducing barriers to entry in photonic system design
+\cite{bogaertsProgrammablePhotonicCircuits2020}.
+% perezReconfigurablePhotonicProcessors2018
+
+
+
 
 \section{Objectives} \label{sec:objectives}
 
-Given that reconfigurable PICs are poised to become key enablers of several technologies due to the previously stated advantages, this thesis is developed under the framework of creating a commercially available multipurpose software-defined platform with a reconfigurable PIC at its core.
-The aim is to create a technology stack that resembles those in the electronics world to drive and configure a reconfigurable photonic integrated circuit in order to expose a high-level application programming interface (API) to the final users of the platform.
-From bottom to top, this stack should include the photonic core, the control electronics and the software that orchestrates everything and allows to map abstract high-level functionalities to the set of physical parameters driving the PIC.
-With this, we aim to demonstrate how the development of a technology stack is the key to open the door for several applications powered by a single PIC architecture.
+The overarching objective of this doctoral thesis is to address the scalability challenges of programmable photonic 
+integrated circuits, with the aim of enabling their reliable deployment in complex, large-scale photonic systems. 
+While programmable PICs offer unprecedented flexibility and functional versatility, their practical adoption is 
+currently constrained by limitations related to scalability, reliability, fabrication variability, and system-level 
+integration. This work seeks to tackle these challenges through a combination of circuit design, architectural 
+strategies, and experimental validation.
 
-Specifically, the global objective of this industrial PhD is to contribute in creating the technology stack needed to operate a multipurpose programmable PIC and deliver it to a final user in the form of a commercial photonic processor.
-The project started with the design, tape-out and submission to manufacturing of reconfigurable PICs based on hexagonal recirculating meshes.
-It continued with the creation, development, and testing of a closed-loop control system that allows the configuration of the high-density programmable PIC while the manufacturing process was carried on by the foundry.
-Once the semiconductor chips and the control-loop systems arrived from fabrication, the correct functioning of each one of these individual subcomponents was tested/debugged.
-Subsequently, the entire photonic processor system had to be assembled ensuring correct communication and synchronization between its composing subsystems.
-With the system ready, the activities focused on the development and testing of programming strategies and algorithms that allow the optimal configuration of the newly-developed high-density photonic processor.
-Precisely, this part focused on developing a software layer to configure manually and automatically circuits with different functionalities on the photonic processor.
-The final steps of the thesis dealt with the experimental demonstration of several applications using the same photonic processing platform: optical interconnects, reconfigurable beamsplitters, filters, tunable continuous delay lines, optical circuit switches, topological photonic arrays and optical computing architectures, among others.
-A special emphasis was put on the optical computing architectures and in-depth studies were carried out to investigate the implementation and scalability of arbitrary matrix multiply operators on the photonic processor.
+A first major objective of this thesis is to improve the scalability of programmable PICs in terms of the number 
+of tunable elements that can be integrated on a single chip. As programmable photonic architectures grow in size 
+and complexity, the cumulative impact of component imperfections, tuning errors, and environmental perturbations 
+becomes increasingly critical. Ensuring reliable operation in the presence of a large number of active elements 
+requires the development of design methodologies and control strategies that enhance robustness and long-term 
+stability. In this context, particular emphasis is placed on reliability, understood as the ability of the circuit 
+to maintain its intended functionality over time and under realistic operating conditions.
+
+Closely related to this objective is the need to increase fabrication tolerance in programmable photonic designs. 
+Variations arising from lithographic inaccuracies, material non-uniformities, and process fluctuations are unavoidable 
+in large-scale fabrication. This thesis aims to explore design approaches and circuit architectures that are inherently 
+more resilient to such variations, reducing sensitivity to fabrication errors and easing post-fabrication calibration 
+and tuning requirements. Enhancing fabrication tolerance is a key enabler for scaling programmable PICs beyond laboratory 
+demonstrations toward manufacturable and repeatable platforms.
+
+A second central objective is to address scalability at the architectural and system levels. This includes the efficient 
+use of on-chip area as programmable meshes increase in size, as well as the challenges associated with electrical and 
+optical packaging. As the number of control signals, heaters, phase shifters, and optical ports grows, packaging constraints 
+can become a dominant bottleneck, affecting power consumption, thermal management, signal integrity, and overall system 
+complexity. This thesis seeks to investigate architectural solutions and integration strategies that mitigate these 
+constraints, facilitating the realization of scalable programmable photonic systems compatible with realistic packaging 
+and interconnection technologies.
+
+Finally, a key objective of this work is to demonstrate the practical applicability of scalable programmable PICs through 
+representative use cases and applications. Beyond architectural and technological advances, it is essential to show that 
+the proposed scalable solutions can effectively support meaningful photonic functionalities. To this end, the thesis aims 
+to validate the developed concepts through experimental demonstrations in relevant application scenarios, highlighting the 
+benefits of scalability, robustness, and programmability in real-world contexts.
+
+Overall, by addressing scalability across device, circuit, architectural, and application dimensions, this thesis aims to 
+contribute to the maturation of programmable photonic integrated circuits from flexible research platforms toward reliable 
+and scalable technologies suitable for next-generation photonic systems.
+
+
+
+% Given that reconfigurable PICs are poised to become key enablers of several technologies due to the previously stated 
+% advantages, this thesis is developed under the framework of creating a commercially available multipurpose software-defined 
+% platform with a reconfigurable PIC at its core.
+% The aim is to create a technology stack that resembles those in the electronics world to drive and configure a reconfigurable 
+% photonic integrated circuit in order to expose a high-level application programming interface (API) to the final users of the 
+% platform.
+% From bottom to top, this stack should include the photonic core, the control electronics and the software that orchestrates 
+% everything and allows to map abstract high-level functionalities to the set of physical parameters driving the PIC.
+% With this, we aim to demonstrate how the development of a technology stack is the key to open the door for several applications 
+% powered by a single PIC architecture.
+
+% Specifically, the global objective of this industrial PhD is to contribute in creating the technology stack needed to operate a 
+% multipurpose programmable PIC and deliver it to a final user in the form of a commercial photonic processor.
+% The project started with the design, tape-out and submission to manufacturing of reconfigurable PICs based on hexagonal 
+% recirculating meshes.
+% It continued with the creation, development, and testing of a closed-loop control system that allows the configuration of the 
+% high-density programmable PIC while the manufacturing process was carried on by the foundry.
+% Once the semiconductor chips and the control-loop systems arrived from fabrication, the correct functioning of each one of these 
+% individual subcomponents was tested/debugged.
+% Subsequently, the entire photonic processor system had to be assembled ensuring correct communication and synchronization between 
+% its composing subsystems.
+% With the system ready, the activities focused on the development and testing of programming strategies and algorithms that allow 
+% the optimal configuration of the newly-developed high-density photonic processor.
+% Precisely, this part focused on developing a software layer to configure manually and automatically circuits with different 
+% functionalities on the photonic processor.
+% The final steps of the thesis dealt with the experimental demonstration of several applications using the same photonic 
+% processing platform: optical interconnects, reconfigurable beamsplitters, filters, tunable continuous delay lines, optical 
+% circuit switches, topological photonic arrays and optical computing architectures, among others.
+% A special emphasis was put on the optical computing architectures and in-depth studies were carried out to investigate the 
+% implementation and scalability of arbitrary matrix multiply operators on the photonic processor.
 
 % section Objective (end)
+
+
 
 \section{Structure of the thesis} \label{sec:structure}
 
