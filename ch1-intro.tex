@@ -4,40 +4,46 @@
 
 \section{Integrated photonics} \label{sec:integrated_photonics}
 
-Since the advent of electronic integrated circuits in the second half of the twentieth century, the integration 
-of multiple functionalities onto a single chip has been a driving force behind the rapid evolution of information
-and communication technologies \cite{mooreCrammingMoreComponents1965a}. The formulation of Moore's law provided a 
-conceptual framework that guided the semiconductor industry for decades, enabling an exponential increase in 
-transistor density and computational capability. This relentless scaling, together with advances in lithography, 
-materials, and fabrication processes, laid the foundation for modern computing, signal processing, and digital 
-communication systems.
+Since the advent of electronic integrated circuits in the second half of the twentieth century, 
+the integration of multiple functionalities onto a single chip has been a driving force behind 
+the rapid evolution of information and communication technologies 
+\cite{mooreCrammingMoreComponents1965a}. The formulation of Moore's law provided a conceptual 
+framework that guided the semiconductor industry for decades, enabling an exponential increase in 
+transistor density and computational capability. This relentless scaling, together with advances 
+in lithography, materials, and fabrication processes, laid the foundation for modern computing, 
+signal processing, and digital communication systems.
 
-However, as device dimensions continued to shrink and operating frequencies increased, fundamental limitations of
-electronic integration became increasingly apparent. In particular, issues related to bandwidth constraints, 
-power dissipation, latency, and interconnect scalability emerged as major bottlenecks in advanced electronic 
-systems \cite{millerRationaleChallengesOptical2000}. While transistor switching speeds continued to improve, the 
-performance of electrical interconnects failed to scale at the same pace, leading to growing energy consumption 
-and thermal management challenges \cite{millerDeviceRequirementsOptical2009}. These limitations are especially 
-pronounced in large-scale systems, such as data centers and high-performance computing architectures, where 
-interconnects dominate both power budgets and system-level performance \cite{shalfExascaleComputingTechnology2011}.
+However, as device dimensions continued to shrink and operating frequencies increased, fundamental 
+limitations of electronic integration became increasingly apparent. In particular, issues related 
+to bandwidth constraints, power dissipation, latency, and interconnect scalability emerged as major
+bottlenecks in advanced electronic systems \cite{millerRationaleChallengesOptical2000}. While 
+transistor switching speeds continued to improve, the performance of electrical interconnects 
+failed to scale at the same pace, leading to growing energy consumption and thermal management 
+challenges \cite{millerDeviceRequirementsOptical2009}. These limitations are especially pronounced 
+in large-scale systems, such as data centers and high-performance computing architectures, where 
+interconnects dominate both power budgets and system-level performance 
+\cite{shalfExascaleComputingTechnology2011}.
 
-In parallel with these developments, photonics emerged as a powerful alternative for signal generation, 
-transmission, and processing. The invention of the laser marked a pivotal milestone in the field of optics, 
-enabling coherent light sources with unprecedented intensity and spectral purity 
-\cite{maimanStimulatedOpticalRadiation1960}. This breakthrough, combined with the development of low-loss optical 
-fibers, paved the way for optical communication systems capable of transmitting information over long distances
-with minimal attenuation. Over the following decades, photonic technologies became indispensable in global 
-telecommunication infrastructures, demonstrating clear advantages over purely electronic approaches in terms of 
-bandwidth and signal integrity.
+In parallel with these developments, photonics emerged as a powerful alternative for signal 
+generation, transmission, and processing. The invention of the laser marked a pivotal milestone in 
+the field of optics, enabling coherent light sources with unprecedented intensity and spectral 
+purity \cite{maimanStimulatedOpticalRadiation1960}. This breakthrough, combined with the 
+development of low-loss optical fibers, paved the way for optical communication systems capable of 
+transmitting information over long distances with minimal attenuation. Over the following decades, 
+photonic technologies became indispensable in global telecommunication infrastructures, 
+demonstrating clear advantages over purely electronic approaches in terms of bandwidth and signal 
+integrity.
 
-Building upon decades of progress in discrete optical components, integrated photonics arose as a natural 
-extension of the integration paradigm pioneered by electronics \cite{sorefPresentFutureSilicon2006}. Rather than 
-relying on bulky and alignment-sensitive discrete elements, integrated photonics enables the monolithic or hybrid 
-integration of multiple optical functions on a single substrate. By bringing together waveguides, modulators, filters, 
-multiplexers, and photodetectors within a compact footprint, photonic integrated circuits (PICs) allow complex 
-optical systems to be realized in a stable, scalable, and reproducible manner \cite{thomsonRoadmapSiliconPhotonics2016}. 
-Furthermore, PICs benefit from wafer-scale fabrication processes, offering improved yield, reduced cost per function, 
-and compatibility with mature semiconductor manufacturing technologies.
+Building upon decades of progress in discrete optical components, integrated photonics arose as a 
+natural extension of the integration paradigm pioneered by electronics 
+\cite{sorefPresentFutureSilicon2006}. Rather than relying on bulky and alignment-sensitive discrete 
+elements, integrated photonics enables the monolithic or hybrid integration of multiple optical 
+functions on a single substrate. By bringing together waveguides, modulators, filters, 
+multiplexers, and photodetectors within a compact footprint, photonic integrated circuits (PICs) allow complex optical 
+systems to be realized in a stable, scalable, and reproducible manner 
+\cite{thomsonRoadmapSiliconPhotonics2016}. Furthermore, PICs benefit from wafer-scale 
+fabrication processes, offering improved yield, reduced cost per function, and compatibility with 
+mature semiconductor manufacturing technologies.
 
 In this context, integrated photonics leverages light as the information carrier, offering intrinsic advantages 
 over purely electronic circuits. These include ultra-high data transmission rates enabled by optical carrier 
@@ -78,7 +84,7 @@ particular use case. This design philosophy enabled highly efficient and compact
 role in the successful deployment of integrated photonics in applications such as optical communications, sensing, 
 and signal processing \cite{sorefPresentFutureSilicon2006,liangRecentProgressLasers2010,thomsonRoadmapSiliconPhotonics2016}.
 
-However, as photonic systems increased in complexity and diversity, the limitations of purely application-specific 
+However, as photonic systems grew in complexity and diversity, the shortcomings of purely application-specific 
 photonic integrated circuits became increasingly evident. Designing a new PIC for each target functionality entails 
 long development cycles, high non-recurring engineering costs, and limited flexibility to adapt to evolving system 
 requirements. Moreover, fabrication tolerances, environmental fluctuations, and device aging introduce unavoidable 
@@ -181,69 +187,67 @@ Overall, by addressing scalability across device, circuit, architectural, and ap
 contribute to the maturation of programmable photonic integrated circuits from flexible research platforms toward reliable 
 and scalable technologies suitable for next-generation photonic systems.
 
-
-
-% Given that reconfigurable PICs are poised to become key enablers of several technologies due to the previously stated 
-% advantages, this thesis is developed under the framework of creating a commercially available multipurpose software-defined 
-% platform with a reconfigurable PIC at its core.
-% The aim is to create a technology stack that resembles those in the electronics world to drive and configure a reconfigurable 
-% photonic integrated circuit in order to expose a high-level application programming interface (API) to the final users of the 
-% platform.
-% From bottom to top, this stack should include the photonic core, the control electronics and the software that orchestrates 
-% everything and allows to map abstract high-level functionalities to the set of physical parameters driving the PIC.
-% With this, we aim to demonstrate how the development of a technology stack is the key to open the door for several applications 
-% powered by a single PIC architecture.
-
-% Specifically, the global objective of this industrial PhD is to contribute in creating the technology stack needed to operate a 
-% multipurpose programmable PIC and deliver it to a final user in the form of a commercial photonic processor.
-% The project started with the design, tape-out and submission to manufacturing of reconfigurable PICs based on hexagonal 
-% recirculating meshes.
-% It continued with the creation, development, and testing of a closed-loop control system that allows the configuration of the 
-% high-density programmable PIC while the manufacturing process was carried on by the foundry.
-% Once the semiconductor chips and the control-loop systems arrived from fabrication, the correct functioning of each one of these 
-% individual subcomponents was tested/debugged.
-% Subsequently, the entire photonic processor system had to be assembled ensuring correct communication and synchronization between 
-% its composing subsystems.
-% With the system ready, the activities focused on the development and testing of programming strategies and algorithms that allow 
-% the optimal configuration of the newly-developed high-density photonic processor.
-% Precisely, this part focused on developing a software layer to configure manually and automatically circuits with different 
-% functionalities on the photonic processor.
-% The final steps of the thesis dealt with the experimental demonstration of several applications using the same photonic 
-% processing platform: optical interconnects, reconfigurable beamsplitters, filters, tunable continuous delay lines, optical 
-% circuit switches, topological photonic arrays and optical computing architectures, among others.
-% A special emphasis was put on the optical computing architectures and in-depth studies were carried out to investigate the 
-% implementation and scalability of arbitrary matrix multiply operators on the photonic processor.
-
 % section Objective (end)
 
 
 
-\section{Structure of the thesis} \label{sec:structure}
-
-This thesis describes the work carried out to obtain the degree of Doctor of Philosophy (PhD) in Telecommunication Engineering under the doctorate program of the Universitàt Politècnica de València (UPV).
-The research has been performed at the iPronics Programmable Photonics premises and the Photonics Research Labs (PRL) facilities at the UPV under the supervision of Dr.~Daniel Pérez-López and Prof.~Dr.~José Capmany.
-
-The organization of this manuscript aims to provide a complete overview of the theoretical fundamentals, the development process and the experimental demonstration of application behind the research work done.
-This document is subsequently structured in the following chapters:
+\section{Structure of the thesis} \label{sec:structure} 
+This manuscript presents the work conducted to obtain the degree of Doctor of Philosophy (PhD) in Telecommunication Engineering
+within the doctoral program of the Universitàt Politècnica de València (UPV).
 
 \begin{itemize}
-	\item Chapter 1: \nameref{chap:intro} provides context to the reader and goes through the motivation behind programmable integrated photonics.
-	      The need for a technology stack and, particularly, software for photonic integrated circuits is outlined.
-	      The main goals of this doctoral thesis and the roadmap taken during the last 4+ years are detailed.
-	\item Chapter 2: \nameref{chap:fundamentals} covers the theoretical background required by the reader to understand the research developments.
-	      This chapter explores the fundamentals of integrated photonics and the building blocks used to build our recirculating mesh PIC architecture.
-	      This section explores in depth the technical specifications of the photonic processor platform developed under the framework of this thesis.
-	      It finishes making emphasis on the software stack needed to run the system and implement the end-user applications of interest.
-	\item Chapter 3: \nameref{chap:applications_using_fppgas} introduces the reader to an in-depth documentation of the applications demonstrated on the photonic processor.
-	      The chapter provides a technical insight into the algorithms and high-level instructions developed during this thesis to enable different applications.
-	      The applications demonstrated span over field such as optical networking, tunable delay lines, optical signal processing, topological photonics, among others.
-	\item Chapter 4: \nameref{chap:universal_unitary_operators} explores the topic of optical arbitrary matrix-multiply operators in technical detail.
-	      This chapter covers an extensive theoretical work carried out to make this application possible.
-	      Particularly, the importance of this chapter lies on proposing a new theoretical model for MZIs within a recirculating mesh array.
-	      This section finishes showing the software implementation and experimental demonstration of arbitrary parametric matrix-multiply operators on the photonic processor.
-	\item Chapter 5: \nameref{chap:discussion_and_conclusions} outlines the main findings of this thesis as well as discusses the main challenges encountered and addressed during the development process.
-	      Furthermore, it discusses the prospects of the photonic processor technology developed from a commercial and R\&D point of view.
-	      The discussion is closed by providing a glance at the next challenges that must be solved and developments that must be done to boost the impact and democratization of multipurpose programmable photonic platforms.
+	\item Chapter 1: \nameref{chap:intro}  sets the technological context and research motivation 
+		for scalable programmable photonic integrated circuits. It examines the evolution from 
+		application-specific PICs to programmable architectures and identifies the key scalability 
+		challenges at device, circuit, and system levels. The objectives and scope of the thesis 
+		are subsequently defined.
+	\item Chapter 2: \nameref{chap:fundamentals}  develops the theoretical and technological 
+		framework underlying programmable photonic integrated circuits. It details the operating 
+		principles of integrated waveguides and the silicon-on-insulator platform, and examines 
+		the passive and active elements forming programmable circuits. The chapter then addresses 
+		mesh architectures, sources of scalability degradation, and existing calibration and 
+		fault-tolerance techniques for large-scale programmable systems.
+		
+	\item Chapter 3: 
+	% \nameref{chap:applications_using_fppgas} introduces the reader to an in-depth documentation of the applications demonstrated on the photonic processor.
+	%       The chapter provides a technical insight into the algorithms and high-level instructions developed during this thesis to enable different applications.
+	%       The applications demonstrated span over field such as optical networking, tunable delay lines, optical signal processing, topological photonics, among others.
+	\item Chapter 4: 
+	% \nameref{chap:universal_unitary_operators} explores the topic of optical arbitrary matrix-multiply operators in technical detail.
+	%       This chapter covers an extensive theoretical work carried out to make this application possible.
+	%       Particularly, the importance of this chapter lies on proposing a new theoretical model for MZIs within a recirculating mesh array.
+	%       This section finishes showing the software implementation and experimental demonstration of arbitrary parametric matrix-multiply operators on the photonic processor.
+	\item Chapter 5: 
+	% \nameref{chap:discussion_and_conclusions} outlines the main findings of this thesis as well as discusses the main challenges encountered and addressed during the development process.
+	%       Furthermore, it discusses the prospects of the photonic processor technology developed from a commercial and R\&D point of view.
+	%       The discussion is closed by providing a glance at the next challenges that must be solved and developments that must be done to boost the impact and democratization of multipurpose programmable photonic platforms.
 \end{itemize}
 
-At the end of the manuscript, a section is provided with a complete list of the Author’s merits and contributions to scientific journals and conferences.
+% The research has been performed at the iPronics Programmable Photonics premises and the Photonics Research Labs (PRL) facilities
+% at the UPV under the supervision of Dr.~Daniel Pérez-López and Prof.~Dr.~José Capmany.                                                                                                                                                                                                                               
+
+% The organization of this manuscript aims to provide a complete overview of the theoretical fundamentals, the development
+% process and the experimental demonstration of application behind the research work done.
+% This document is subsequently structured in the following chapters:
+
+% \begin{itemize}
+% 	\item Chapter 1: \nameref{chap:intro} provides context to the reader and goes through the motivation behind programmable integrated photonics.
+% 	      The need for a technology stack and, particularly, software for photonic integrated circuits is outlined.
+% 	      The main goals of this doctoral thesis and the roadmap taken during the last 4+ years are detailed.
+% 	\item Chapter 2: \nameref{chap:fundamentals} covers the theoretical background required by the reader to understand the research developments.
+% 	      This chapter explores the fundamentals of integrated photonics and the building blocks used to build our recirculating mesh PIC architecture.
+% 	      This section explores in depth the technical specifications of the photonic processor platform developed under the framework of this thesis.
+% 	      It finishes making emphasis on the software stack needed to run the system and implement the end-user applications of interest.
+% 	\item Chapter 3: \nameref{chap:applications_using_fppgas} introduces the reader to an in-depth documentation of the applications demonstrated on the photonic processor.
+% 	      The chapter provides a technical insight into the algorithms and high-level instructions developed during this thesis to enable different applications.
+% 	      The applications demonstrated span over field such as optical networking, tunable delay lines, optical signal processing, topological photonics, among others.
+% 	\item Chapter 4: \nameref{chap:universal_unitary_operators} explores the topic of optical arbitrary matrix-multiply operators in technical detail.
+% 	      This chapter covers an extensive theoretical work carried out to make this application possible.
+% 	      Particularly, the importance of this chapter lies on proposing a new theoretical model for MZIs within a recirculating mesh array.
+% 	      This section finishes showing the software implementation and experimental demonstration of arbitrary parametric matrix-multiply operators on the photonic processor.
+% 	\item Chapter 5: \nameref{chap:discussion_and_conclusions} outlines the main findings of this thesis as well as discusses the main challenges encountered and addressed during the development process.
+% 	      Furthermore, it discusses the prospects of the photonic processor technology developed from a commercial and R\&D point of view.
+% 	      The discussion is closed by providing a glance at the next challenges that must be solved and developments that must be done to boost the impact and democratization of multipurpose programmable photonic platforms.
+% \end{itemize}
+
+% At the end of the manuscript, a section is provided with a complete list of the Author’s merits and contributions to scientific journals and conferences.
