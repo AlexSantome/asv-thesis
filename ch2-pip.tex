@@ -236,22 +236,40 @@ fixed splitting ratios. In programmable photonic circuits, they are typically de
 50:50 couplers ($L = L_c$), forming the basis of interferometric structures such as Mach-Zehnder 
 interferometers.
 
-The performance of directional couplers is sensitive to wavelength variations and fabrication 
-tolerances, as small deviations in waveguide width or gap separation modify the effective coupling 
-coefficient. These sensitivities must be carefully managed in large-scale programmable 
-architectures.
+Beyond power distribution, the operation of a symmetric directional coupler is more accurately 
+described by its complex-valued transfer matrix $\mathbf{M}_{\text{DC}}$. This matrix relates the 
+input complex field amplitudes $(E_{in,1}, E_{in,2})$ to the output amplitudes 
+$(E_{out,1}, E_{out,2})$ as:
 
-\begin{figure}[h]
+\begin{equation}
+\begin{pmatrix} E_{out,1} \\ E_{out,2} \end{pmatrix} = \mathbf{M}_{\text{DC}} \begin{pmatrix} 
+    E_{in,1} \\ E_{in,2} \end{pmatrix} = \begin{pmatrix} \cos(\kappa L) & -j\sin(\kappa L) \\ 
+        -j\sin(\kappa L) & \cos(\kappa L) \end{pmatrix} \begin{pmatrix} E_{in,1} \\ E_{in,2} 
+        \end{pmatrix}.
+\label{eq:matrix_dc}
+\end{equation}
+
+
+For a perfectly balanced 3-dB coupler, the coupling term $\kappa L$ equals $\pi/4$, yielding a 
+$\pi/2$ phase shift between the bar and cross ports. However, the performance of these components 
+is highly sensitive to wavelength fluctuations and fabrication tolerances. Small stochastic 
+deviations in waveguide width or gap separation modify the effective coupling coefficient 
+($\kappa \pm \Delta\kappa$), resulting in an imbalanced or non-unitary matrix. In large-scale 
+programmable architectures, these systematic errors propagate through the mesh, directly 
+impacting the fidelity of the synthesized optical transformations 
+\cite{chrostowskiSiliconPhotonicsDesign2015}.
+
+
+\begin{figure}[h!]
     \centering
     \includegraphics[width=\linewidth]{figures/ch2-directional_coupler.png}
-    \caption{Directional coupler. 
-    (a) Top-view.
-    (b) Cross-section.}
-    \label{fig:ch2-directional_coupler}
+    \caption{Schematic of a $2\times2$ symmetric directional coupler. 
+    (a) Top-view illustrating the coupling length $L_c$ and the coupling gap. 
+    (b) Cross-section of the coupling region in the SOI platform, where the waveguide width $w$ and 
+    the gap are the critical parameters defining the coupling coefficient $\kappa$.}
 \end{figure}
 
-% \textbf{Suggested figure:} Schematic of two parallel waveguides with coupling region length $L$, 
-% including sinusoidal power exchange plot.
+
 
 \subsubsection*{Multi-Mode Interferometers (MMIs)}
 
@@ -273,31 +291,124 @@ modes, respectively. The length required to form a two-fold self-image can be ap
 L_{\text{MMI}} \approx \frac{3L_\pi}{2}.
 \end{equation}
 
-MMIs are widely used to implement robust 1×2 and 2×2 splitters. Compared to directional couplers, 
-they exhibit reduced sensitivity to fabrication variations and wavelength fluctuations, at the 
-expense of larger footprint. Their tolerance to dimensional deviations makes them attractive for 
-large-scale programmable meshes.
+The self-imaging mechanism in a $2\times2$ MMI results in a transfer matrix 
+$\mathbf{M}_{\text{MMI}}$ that, assuming an ideal device with balanced splitting, is given by:
 
-\textbf{Suggested figure:} Multimode section showing input excitation and formation of two output 
-images at the output plane.
+\begin{equation}
+\mathbf{M}_{\text{MMI}} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & e^{j\pi/2} \\ e^{j\pi/2} & 1 
+\end{pmatrix} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & j \\ j & 1 \end{pmatrix}.
+\label{eq:matrix_mmi}
+\end{equation}
+
+
+
+To illustrate the self-imaging principle in a practical building block, Figure 
+\ref{fig:ch2-mmi_2x2_self_imagin} shows a Beam Propagation Method (BPM) simulation of a $2\times2$ 
+MMI designed for the paired interference regime. By launching the input field at a transverse 
+position of $x = \pm W/6$, the device can function as either a balanced power splitter or a 
+cross-coupler depending on its longitudinal dimension.
+
+As observed in the simulation, at a distance of approximately $L_{\pi}/2$, the interference of the 
+excited modes generates two symmetric images of the input field, realizing a 3-dB splitting ratio. 
+Further propagation to $z \approx L_{\pi}$ results in a single reconstructed image at the opposite 
+(cross) output port. It is worth noting that in high-index-contrast platforms like SOI, numerical 
+calibration is essential to account for the effective width expansion due to field penetration into 
+the cladding. From a fault-tolerance perspective, the stability of these imaging points against 
+small lithographic deviations in $W$ is what makes the MMI a more reliable candidate than 
+directional couplers for the backbone of large-scale programmable meshes.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch2-mmi_2x2_self_imagin.pdf}
+    \caption{BPM simulation of a $2\times2$ MMI. Vertical markers indicate the numerically 
+    calibrated 3-dB splitting ($L_{\pi}/2$) and cross-over ($L_{\pi}$) imaging planes.}
+    \label{fig:ch2-mmi_2x2_self_imagin}
+\end{figure}
+
+In the context of large-scale integration, MMIs offer a significant advantage in terms of 
+\textit{fault tolerance} compared to directional couplers. Their performance is primarily 
+determined by the width of the multimode interference region; since $W_e$ is typically several 
+micrometers wide, nanometric lithographic variations represent a much smaller relative error than 
+in the narrow gaps of directional couplers. Consequently, MMIs exhibit superior robustness against 
+fabrication tolerances and wavelength fluctuations, ensuring a more stable power splitting ratio 
+(lower imbalance) across the chip \cite{soldanoOpticalMultimodeInterference1995}. While they 
+require a larger footprint and may introduce slightly higher insertion losses due to mode mismatch 
+at the junctions, their reliability makes them the preferred choice for the static backbone of 
+programmable photonic meshes.
+
+\FloatBarrier
+
+% \subsubsection*{Waveguide Crossings}
+
+% Waveguide crossings enable optical routing in two-dimensional layouts, allowing waveguides to 
+% intersect without requiring additional layers. They are particularly important in programmable 
+% meshes, where dense interconnections are necessary.
+
+% A simple orthogonal crossing introduces scattering losses and crosstalk due to modal mismatch and 
+% radiation at the intersection region. Advanced crossing designs incorporate tapering, optimized 
+% geometry, or multi-mode interference regions to reduce insertion loss and minimize inter-channel 
+% coupling.
+
+% In large-scale programmable circuits, even small crossing losses accumulate over multiple stages, 
+% directly impacting scalability. Therefore, low-loss and low-crosstalk crossings are essential for 
+% maintaining signal fidelity in deep interferometric networks.
 
 \subsubsection*{Waveguide Crossings}
 
-Waveguide crossings enable optical routing in two-dimensional layouts, allowing waveguides to 
-intersect without requiring additional layers. They are particularly important in programmable 
-meshes, where dense interconnections are necessary.
+Waveguide crossings are essential for enabling complex optical routing in two-dimensional layouts, 
+allowing waveguides to intersect without the need for additional lithographic layers. In 
+large-scale programmable meshes, where dense interconnections and mesh-like topologies are 
+required, the performance of these crossings becomes a critical factor for scalability.
 
-A simple orthogonal crossing introduces scattering losses and crosstalk due to modal mismatch and 
-radiation at the intersection region. Advanced crossing designs incorporate tapering, optimized 
-geometry, or multi-mode interference regions to reduce insertion loss and minimize inter-channel 
-coupling.
+A simple orthogonal intersection of two single-mode waveguides introduces significant scattering 
+losses and crosstalk (typically ranging from $-20$ to $-30$ dB) due to the modal mismatch and 
+radiation at the intersection region. To mitigate these effects, advanced crossing designs—such as 
+those based on parabolic tapers, Bloch-mode engineering, or Multi-Mode Interference (MMI) 
+regions—are employed to expand the mode and minimize field intensity at the waveguide boundaries 
+during the transition.
 
-In large-scale programmable circuits, even small crossing losses accumulate over multiple stages, 
-directly impacting scalability. Therefore, low-loss and low-crosstalk crossings are essential for 
-maintaining signal fidelity in deep interferometric networks.
+The impact of a crossing can be modeled by its transfer matrix $\mathbf{M}_{\text{cross}}$, 
+relating the throughput and the leaked (crosstalk) signals:
+\begin{equation}
+\begin{pmatrix} E_{out,1} \\ E_{out,2} \end{pmatrix} = \mathbf{M}_{\text{cross}} \begin{pmatrix} 
+    E_{in,1} \\ E_{in,2} \end{pmatrix} = \begin{pmatrix} \tau & j\sqrt{\chi} \\ j\sqrt{\chi} & \tau 
+    \end{pmatrix} \begin{pmatrix} E_{in,1} \\ E_{in,2} \end{pmatrix},
+\label{eq:matrix_crossing}
+\end{equation}
+where $\tau$ is the complex transmission coefficient (representing insertion loss) and $\chi$ is 
+the power crosstalk coefficient. 
 
-\textbf{Suggested figure:} Comparison between a simple crossing and an optimized crossing geometry 
-with indicated crosstalk paths.
+In the context of large-scale programmable circuits, even small crossing losses ($<0.1$ dB) 
+accumulate over multiple stages, directly impacting the total power budget. Furthermore, the 
+coherent accumulation of crosstalk from hundreds of crossings acts as a noise floor that 
+interferes with the intended signal, limiting the extinction ratio and the precision of the 
+synthesized optical transformations \cite{maUltralowLossSingle2013}. Therefore, ultra-low-loss 
+and low-crosstalk crossings are paramount for maintaining signal fidelity in deep interferometric 
+networks.
+
+% \textbf{Suggested figure:} Comparison between a simple crossing and an optimized crossing geometry 
+% with indicated crosstalk paths.
+
+To address the scalability limits imposed by conventional intersections, advanced designs such as 
+the one proposed by Ding et al. \cite{maUltralowLossSingle2013} are employed. As illustrated in Figure 
+\ref{fig:ch2-crossing_Ding_adapted}, this geometry utilizes optimized spline-based tapers to adiabatically 
+expand the guided mode before the intersection. By increasing the mode field diameter, the optical 
+intensity at the waveguide corners is significantly reduced, which suppresses scattering and 
+minimizes crosstalk to levels below $-37$ dB with insertion losses as low as $0.028$ dB. Such 
+high-performance characteristics are fundamental for the fault-tolerant operation of large-scale 
+meshes, ensuring that the cumulative noise floor remains below critical thresholds for optical 
+signal processing.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch2-crossing_Ding_adapted} 
+    \caption{Optimized silicon waveguide crossing design. 
+    (a) Layout geometry using spline-based tapers, 
+    (b) electric field intensity simulation, and 
+    (c) transverse mode profiles at different stages of the crossing. 
+    Adapted from Ding et al. \cite{maUltralowLossSingle2013}.}
+    \label{fig:ch2-crossing_Ding_adapted}
+\end{figure}
 
 \subsubsection*{Grating Couplers}
 
@@ -457,35 +568,35 @@ This reconfigurable interferometric element constitutes the fundamental unit of 
 
 
 
-% \section{Architectures of programmable waveguide meshes}
-% \subsection{Mesh topologies}
+\section{Architectures of programmable waveguide meshes}
+\subsection{Mesh topologies}
 % % Comparativa de geometrías.
 % % Forward-only meshes (Redes alimentadas hacia adelante): Triangular, Rectangular. Estructuras que no permiten bucles de realimentación fácilmente.
 % % Recirculating meshes (Redes recirculantes): Hexagonal, Triangular. Permiten sintetizar cavidades y anillos resonadores (importante para "Large-Scale").
-% \subsection{Circuit synthesis and routing}
+\subsection{Circuit synthesis and routing}
 % % Cómo se "programa" un circuito lógico sobre la malla física. Concepto de enrutamiento de luz por software.
 
-% \section{Challenges in large-scale integration: sources of error}
-% \subsection{Fabrication tolerances and process variations}
+\section{Challenges in large-scale integration: sources of error}
+\subsection{Fabrication tolerances and process variations}
 % % Variaciones estocásticas en el ancho y altura de las guías de onda (wafer thickness variations, etching errors). Cómo esto afecta al índice efectivo 
 % % y desbalancea los MZIs.
 
-% \subsection{Component non-idealities}
+\subsection{Component non-idealities}
 
-% \subsection{Yield vs. Scale}
+\subsection{Yield vs. Scale}
 % % Explicación estadística: a medida que aumenta el número de componentes (N), la probabilidad de tener un circuito 100% funcional decae 
 % % exponencialmente sin tolerancia a fallos.
 
 
-% \section{State of the Art: Calibration and fault tolerance techniques}
+\section{State of the Art: Calibration and fault tolerance techniques}
 
-% \subsection{Automated calibration strategies}
+\subsection{Automated calibration strategies}
 % % Métodos actuales para caracterizar cada MZI individualmente (algoritmos de optimización, monitores de potencia integrados).
 
-% \subsection{Redundancy and reconfiguration}
+\subsection{Redundancy and reconfiguration}
 % % Uso de caminos alternativos en la malla para esquivar componentes rotos (re-routing).
 
-% \subsection{Hardware-level fault tolerance}
+\subsection{Hardware-level fault tolerance}
 % % Diseños de acopladores robustos o componentes de banda ancha que son menos sensibles a errores de fabricación (Aquí es donde probablemente 
 % % encajará tu contribución en capítulos posteriores).
 
