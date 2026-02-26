@@ -118,7 +118,7 @@ A widely adopted approach to programmable photonics is based on networks of tuna
 interferometric building blocks, typically implemented as Mach-Zehnder interferometers (MZIs) 
 equipped with phase shifters and tunable couplers 
 \cite{reckExperimentalRealizationAny1994,perezMultipurposeSiliconPhotonics2017}. By 
-appropriately programming theinternal phases and coupling ratios, such meshes can be configured to 
+appropriately programming the internal phases and coupling ratios, such meshes can be configured to 
 implement arbitrary linear transformations, including filters, switches, beamformers, and mode 
 converters. Several mesh topologies have been proposed, including triangular, rectangular, and 
 hexagonal arrangements, each offering different trade-offs in terms of scalability, robustness, and 
@@ -130,6 +130,8 @@ control complexity \cite{clementsOptimalDesignUniversal2016,perezMultipurposeSil
 	\end{center}
 	\caption{Application specific PICs versus Programmable PICs.}\label{fig:ch1-aspic_vs_programmable}
 \end{figure}
+
+\FloatBarrier
 
 Programmable photonic integrated circuits have demonstrated significant potential in a broad range 
 of applications. In optical communications, they enable adaptive filtering, dynamic wavelength 
@@ -156,56 +158,112 @@ accelerating innovation and reducing barriers to entry in photonic system design
 \cite{bogaertsProgrammablePhotonicCircuits2020}.
 % perezReconfigurablePhotonicProcessors2018
 
+\clearpage
+\section{State of the Art and Scalability Challenges} \label{sec:sota_challenges}
+
+The transition toward programmable architectures has been accelerated by significant theoretical 
+and experimental milestones over the last decade. Early work by 
+\cite{reckExperimentalRealizationAny1994} provided the first mathematical proof that a triangular 
+mesh of $2\times2$ interferometers could implement any arbitrary unitary transformation. However, 
+it was the subsequent proposal of the rectangular topology by 
+\cite{clementsOptimalDesignUniversal2016} that optimized the physical footprint and balanced the 
+optical losses, making large-scale integration more feasible.
+
+Today, the field has reached a level of maturity where programmable photonic processors are no 
+longer mere laboratory curiosities. The consolidation of Silicon Photonics as the leading platform 
+has enabled the demonstration of meshes exceeding hundreds of unit cells on a single chip 
+\cite{harrisQuantumTransportSimulations2017}. This progress is comprehensively documented in the 
+seminal work by \cite{capmanyProgrammableIntegratedPhotonics2020}, which establishes the roadmap 
+for the next generation of software-defined photonic circuits. 
+
+Despite these achievements, the state of the art is currently facing a "scalability wall." As the 
+number of components increases, the cumulative effect of phase errors, thermal crosstalk, and power 
+consumption becomes the primary bottleneck. Current research is therefore shifting from the 
+demonstration of basic topologies toward the development of robust, self-calibrating, and 
+fault-tolerant systems 
+\cite{millerSelfconfiguringUniversalLinear2013,annoniUnscramblingLightAutomatically2017}. It is 
+within this technological frontier that the present thesis is situated, seeking to address the 
+underlying hardware and architectural limitations that hinder the large-scale deployment of these 
+processors.
 
 
+% \section{Objectives} \label{sec:objectives}
+
+% The overarching objective of this doctoral thesis is to address the scalability challenges of 
+% programmable photonic integrated circuits, with the aim of enabling their reliable deployment in 
+% complex, large-scale photonic systems. While programmable PICs offer unprecedented flexibility and 
+% functional versatility, their practical adoption is currently constrained by limitations related to 
+% scalability, reliability, fabrication variability, and system-level integration. This work seeks to 
+% tackle these challenges through a combination of circuit design, architectural strategies, and 
+% experimental validation.
+
+% A first major objective of this thesis is to improve the scalability of programmable PICs in terms 
+% of the number of tunable elements that can be integrated on a single chip. As programmable photonic 
+% architectures grow in size and complexity, the cumulative impact of component imperfections, tuning 
+% errors, and environmental perturbations becomes increasingly critical. Ensuring reliable operation 
+% in the presence of a large number of active elements requires the development of design 
+% methodologies and control strategies that enhance robustness and long-term stability. In this 
+% context, particular emphasis is placed on reliability, understood as the ability of the circuit to 
+% maintain its intended functionality over time and under realistic operating conditions.
+
+% Closely related to this objective is the need to increase fabrication tolerance in programmable 
+% photonic designs. Variations arising from lithographic inaccuracies, material non-uniformities, and 
+% process fluctuations are unavoidable in large-scale fabrication. This thesis aims to explore design 
+% approaches and circuit architectures that are inherently more resilient to such variations, 
+% reducing sensitivity to fabrication errors and easing post-fabrication calibration and tuning 
+% requirements. Enhancing fabrication tolerance is a key enabler for scaling programmable PICs beyond 
+% laboratory demonstrations toward manufacturable and repeatable platforms.
+
+% A second central objective is to address scalability at the architectural and system levels. This 
+% includes the efficient use of on-chip area as programmable meshes increase in size, as well as the 
+% challenges associated with electrical and optical packaging. As the number of control signals, 
+% heaters, phase shifters, and optical ports grows, packaging constraints can become a dominant 
+% bottleneck, affecting power consumption, thermal management, signal integrity, and overall system 
+% complexity. This thesis seeks to investigate architectural solutions and integration strategies 
+% that mitigate these constraints, facilitating the realization of scalable programmable photonic 
+% systems compatible with realistic packaging and interconnection technologies.
+
+% Finally, a key objective of this work is to demonstrate the practical applicability of scalable 
+% programmable PICs through representative use cases and applications. Beyond architectural and 
+% technological advances, it is essential to show that the proposed scalable solutions can 
+% effectively support meaningful photonic functionalities. To this end, the thesis aims to validate 
+% the developed concepts through experimental demonstrations in relevant application scenarios, 
+% highlighting the benefits of scalability, robustness, and programmability in real-world contexts.
+
+% Overall, by addressing scalability across device, circuit, architectural, and application 
+% dimensions, this thesis aims to contribute to the maturation of programmable photonic integrated 
+% circuits from flexible research platforms toward reliable and scalable technologies suitable for 
+% next-generation photonic systems.
 
 \section{Objectives} \label{sec:objectives}
 
-The overarching objective of this doctoral thesis is to address the scalability challenges of 
-programmable photonic integrated circuits, with the aim of enabling their reliable deployment in 
-complex, large-scale photonic systems. While programmable PICs offer unprecedented flexibility and 
-functional versatility, their practical adoption is currently constrained by limitations related to 
-scalability, reliability, fabrication variability, and system-level integration. This work seeks to 
-tackle these challenges through a combination of circuit design, architectural strategies, and 
-experimental validation.
+The overarching goal of this doctoral thesis is to address the scalability wall of programmable 
+photonic integrated circuits, enabling their transition from laboratory prototypes to reliable, 
+large-scale systems. To achieve this, the research is divided into the following specific 
+objectives:
 
-A first major objective of this thesis is to improve the scalability of programmable PICs in terms 
-of the number of tunable elements that can be integrated on a single chip. As programmable photonic 
-architectures grow in size and complexity, the cumulative impact of component imperfections, tuning 
-errors, and environmental perturbations becomes increasingly critical. Ensuring reliable operation 
-in the presence of a large number of active elements requires the development of design 
-methodologies and control strategies that enhance robustness and long-term stability. In this 
-context, particular emphasis is placed on reliability, understood as the ability of the circuit to 
-maintain its intended functionality over time and under realistic operating conditions.
+\begin{itemize}
+    \item \textbf{Optimization of Fundamental Building Blocks:} Design and simulate 
+	high-performance silicon photonic components (MMIs and phase shifters) with a focus on 
+	minimizing footprint and optical losses, providing a robust hardware foundation for dense 
+	integration.
+    
+    \item \textbf{Development of Resilient Architectures:} Investigate and model mesh topologies 
+	and unit cell configurations that are inherently tolerant to fabrication-induced variations 
+	and phase errors, reducing the complexity of post-fabrication trimming.
+    
+    \item \textbf{System-Level Scalability and Management:} Analyze the impact of thermal crosstalk 
+	and packaging constraints in large-scale meshes, proposing architectural strategies that 
+	facilitate electrical and optical interfacing without compromising system density.
+    
+    \item \textbf{Experimental Validation and Application Benchmarking:} Demonstrate the practical 
+	utility of the proposed scalable solutions through experimental prototypes, validating their 
+	performance in real-world scenarios such as optical signal processing or computing.
+\end{itemize}
 
-Closely related to this objective is the need to increase fabrication tolerance in programmable 
-photonic designs. Variations arising from lithographic inaccuracies, material non-uniformities, and 
-process fluctuations are unavoidable in large-scale fabrication. This thesis aims to explore design 
-approaches and circuit architectures that are inherently more resilient to such variations, 
-reducing sensitivity to fabrication errors and easing post-fabrication calibration and tuning 
-requirements. Enhancing fabrication tolerance is a key enabler for scaling programmable PICs beyond 
-laboratory demonstrations toward manufacturable and repeatable platforms.
-
-A second central objective is to address scalability at the architectural and system levels. This 
-includes the efficient use of on-chip area as programmable meshes increase in size, as well as the 
-challenges associated with electrical and optical packaging. As the number of control signals, 
-heaters, phase shifters, and optical ports grows, packaging constraints can become a dominant 
-bottleneck, affecting power consumption, thermal management, signal integrity, and overall system 
-complexity. This thesis seeks to investigate architectural solutions and integration strategies 
-that mitigate these constraints, facilitating the realization of scalable programmable photonic 
-systems compatible with realistic packaging and interconnection technologies.
-
-Finally, a key objective of this work is to demonstrate the practical applicability of scalable 
-programmable PICs through representative use cases and applications. Beyond architectural and 
-technological advances, it is essential to show that the proposed scalable solutions can 
-effectively support meaningful photonic functionalities. To this end, the thesis aims to validate 
-the developed concepts through experimental demonstrations in relevant application scenarios, 
-highlighting the benefits of scalability, robustness, and programmability in real-world contexts.
-
-Overall, by addressing scalability across device, circuit, architectural, and application 
-dimensions, this thesis aims to contribute to the maturation of programmable photonic integrated 
-circuits from flexible research platforms toward reliable and scalable technologies suitable for 
-next-generation photonic systems.
+By tackling scalability across these four dimensions---device, circuit, architecture, and 
+application---this work aims to contribute to the maturation of programmable photonics as a 
+reliable and manufacturable technology.
 
 % section Objective (end)
 
@@ -217,26 +275,41 @@ Telecommunication Engineering within the doctoral program of the Universitàt Po
 València (UPV).
 
 \begin{itemize}
-	\item Chapter 1: \nameref{chap:intro}  sets the technological context and research motivation 
-		for scalable programmable photonic integrated circuits. It examines the evolution from 
-		application-specific PICs to programmable architectures and identifies the key scalability 
-		challenges at device, circuit, and system levels. The objectives and scope of the thesis 
-		are subsequently defined.
-	\item Chapter 2: \nameref{chap:fundamentals}  develops the theoretical and technological 
-		framework underlying programmable photonic integrated circuits. It details the operating 
-		principles of integrated waveguides and the silicon-on-insulator platform, and examines 
-		the passive and active elements forming programmable circuits. The chapter then addresses 
-		mesh architectures, sources of scalability degradation, and existing calibration and 
-		fault-tolerance techniques for large-scale programmable systems.
+	\item \textbf{Chapter 1: \nameref{chap:intro}}  sets the technological context and research 
+		motivation for scalable programmable photonic integrated circuits. It examines the 
+		evolution from application-specific PICs to programmable architectures and identifies the 
+		key scalability challenges at device, circuit, and system levels. The objectives and scope 
+		of the thesis are subsequently defined.
+	\item \textbf{Chapter 2: \nameref{chap:fundamentals}} develops the theoretical and technological 
+		framework underlying programmable photonic integrated circuits, presenting the physical and 
+		mathematical foundations of the Programmable Unit Cell (PUC). It details the operating 
+		principles of silicon waveguides and the primary phase modulation mechanisms. Crucially, it 
+		derives the transfer matrix formalism for the symmetric Mach-Zehnder Interferometer as the 
+		fundamental operator of programmable meshes.
 		
-	\item Chapter 3: 
-	
-	\item Chapter 4: 
+	\item \textbf{Chapter 3: Silicon Photonic Building Blocks} focuses on the hardware layer. It 
+	details the design, simulation, and optimization of the fundamental components, including 
+	Multi-mode Interference (MMI) couplers and high-efficiency phase shifters (thermo-optic and 
+	plasma-dispersion based), establishing the building blocks for the subsequent mesh integration.
+    
+    \item \textbf{Chapter 4: Mesh Architectures and System-Level Challenges} addresses the 
+	transition from individual cells to large-scale systems. It explores different network 
+	topologies (Reck, Clements) and the synthesis algorithms required for their configuration. 
+	Furthermore, it analyzes the impact of fabrication tolerances and describes state-of-the-art 
+	calibration and fault-tolerance techniques to ensure reliable operation.
 
-	\item Chapter 5: 
+    \item \textbf{Chapter 5: Applications and Experimental Validation} demonstrates the practical 
+	utility of the developed platform. Through representative use cases, this chapter evaluates the 
+	performance of the scalable architectures in real-world scenarios, highlighting the benefits of 
+	the proposed design methodologies.
+    
+    \item \textbf{Chapter 6: Conclusions and Future Work} summarizes the main contributions of this 
+	thesis and proposes future research lines to continue the advancement of large-scale 
+	programmable photonic systems.
 	
 \end{itemize}
 
 
-% At the end of the manuscript, a section is provided with a complete list of the Author’s merits 
-% and contributions to scientific journals and conferences.
+Concluding the manuscript, a final section outlines the author's merits and scientific 
+contributions, including articles published in indexed journals and presentations at specialized 
+conferences.
