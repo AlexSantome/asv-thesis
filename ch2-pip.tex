@@ -237,12 +237,12 @@ fixed splitting ratios. In programmable photonic circuits, they are typically de
 interferometers.
 
 Beyond power distribution, the operation of a symmetric directional coupler is more accurately 
-described by its complex-valued transfer matrix $\mathbf{M}_{\text{DC}}$. This matrix relates the 
+described by its complex-valued transfer matrix $\mathbf{T}_{\text{DC}}$. This matrix relates the 
 input complex field amplitudes $(E_{in,1}, E_{in,2})$ to the output amplitudes 
 $(E_{out,1}, E_{out,2})$ as:
 
 \begin{equation}
-\begin{pmatrix} E_{out,1} \\ E_{out,2} \end{pmatrix} = \mathbf{M}_{\text{DC}} \begin{pmatrix} 
+\begin{pmatrix} E_{out,1} \\ E_{out,2} \end{pmatrix} = \mathbf{T}_{\text{DC}} \begin{pmatrix} 
     E_{in,1} \\ E_{in,2} \end{pmatrix} = \begin{pmatrix} \cos(\kappa L) & -j\sin(\kappa L) \\ 
         -j\sin(\kappa L) & \cos(\kappa L) \end{pmatrix} \begin{pmatrix} E_{in,1} \\ E_{in,2} 
         \end{pmatrix}.
@@ -292,10 +292,10 @@ L_{\text{MMI}} \approx \frac{3L_\pi}{2}.
 \end{equation}
 
 The self-imaging mechanism in a $2\times2$ MMI results in a transfer matrix 
-$\mathbf{M}_{\text{MMI}}$ that, assuming an ideal device with balanced splitting, is given by:
+$\mathbf{T}_{\text{MMI}}$ that, assuming an ideal device with balanced splitting, is given by:
 
 \begin{equation}
-\mathbf{M}_{\text{MMI}} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & e^{j\pi/2} \\ e^{j\pi/2} & 1 
+\mathbf{T}_{\text{MMI}} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & e^{j\pi/2} \\ e^{j\pi/2} & 1 
 \end{pmatrix} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & j \\ j & 1 \end{pmatrix}.
 \label{eq:matrix_mmi}
 \end{equation}
@@ -354,10 +354,10 @@ those based on parabolic tapers, Bloch-mode engineering, or Multi-Mode Interfere
 employed to expand the mode and minimize field intensity at the waveguide boundaries during the 
 transition.
 
-The impact of a crossing can be modeled by its transfer matrix $\mathbf{M}_{\text{cross}}$, 
+The impact of a crossing can be modeled by its transfer matrix $\mathbf{T}_{\text{cross}}$, 
 relating the throughput and the leaked (crosstalk) signals:
 \begin{equation}
-\begin{pmatrix} E_{out,1} \\ E_{out,2} \end{pmatrix} = \mathbf{M}_{\text{cross}} \begin{pmatrix} 
+\begin{pmatrix} E_{out,1} \\ E_{out,2} \end{pmatrix} = \mathbf{T}_{\text{cross}} \begin{pmatrix} 
     E_{in,1} \\ E_{in,2} \end{pmatrix} = \begin{pmatrix} \tau & j\sqrt{\chi} \\ j\sqrt{\chi} & \tau 
     \end{pmatrix} \begin{pmatrix} E_{in,1} \\ E_{in,2} \end{pmatrix},
 \label{eq:matrix_crossing}
@@ -375,14 +375,14 @@ networks.
 
 
 To address the scalability limits imposed by conventional intersections, advanced designs such as 
-the one proposed by Ding et al. \cite{maUltralowLossSingle2013} are employed. As illustrated in Figure 
-\ref{fig:ch2-crossing_Ding_adapted}, this geometry utilizes optimized spline-based tapers to adiabatically 
-expand the guided mode before the intersection. By increasing the mode field diameter, the optical 
-intensity at the waveguide corners is significantly reduced, which suppresses scattering and 
-minimizes crosstalk to levels below $-37$ dB with insertion losses as low as $0.028$ dB. Such 
-high-performance characteristics are fundamental for the fault-tolerant operation of large-scale 
-meshes, ensuring that the cumulative noise floor remains below critical thresholds for optical 
-signal processing.
+the one proposed by Ding et al. \cite{maUltralowLossSingle2013} are employed. As illustrated in 
+Figure \ref{fig:ch2-crossing_Ding_adapted}, this geometry utilizes optimized spline-based tapers to 
+adiabatically expand the guided mode before the intersection. By increasing the mode field diameter, 
+the optical intensity at the waveguide corners is significantly reduced, which suppresses 
+scattering and minimizes crosstalk to levels below $-37$ dB with insertion losses as low as $0.028$ 
+dB. Such high-performance characteristics are fundamental for the fault-tolerant operation of 
+large-scale meshes, ensuring that the cumulative noise floor remains below critical thresholds for 
+optical signal processing.
 
 \begin{figure}[htbp]
     \centering
@@ -617,252 +617,154 @@ Scalability & High (Thermal limited) & High (Loss limited) & Moderate \\ \hline
 \end{table}
 
 In practical implementations, the integration of these active elements with the passive structures 
-discussed in Section \ref{sec:passive_bb} culminates in the definition of the \textit{Programmable Unit Cell} (PUC). The PUC acts as the fundamental building block of the mesh, enabling the synthesis of arbitrary $2 \times 2$ unitary transformations through the coordinated control of phase and coupling.
-
+discussed in Section \ref{sec:passive_bb} culminates in the definition of the 
+\textit{Programmable Unit Cell} (PUC). The PUC acts as the fundamental building block of the mesh, 
+enabling the synthesis of arbitrary $2 \times 2$ unitary transformations through the coordinated 
+control of phase and coupling.
 
 
 
 \section{The Programmable Unit Cell (PUC)}
-\label{sec:puc}
+\label{sec:ch2-puc}
 
-The transition from individual building blocks to a functional programmable processor is realized 
-through the definition of the \textit{Programmable Unit Cell} (PUC). The PUC is the fundamental, 
-repeating element that, when interconnected in a mesh-like topology, enables the synthesis of 
-complex, large-scale optical functions. In the context of this thesis, the PUC is treated as a 
-reconfigurable $2 \times 2$ port device capable of performing arbitrary unitary transformations.
+The Programmable Unit Cell (PUC) constitutes the fundamental building block of large-scale 
+software-defined photonic integrated circuits. While several topologies exist, the most widely 
+adopted architecture is based on the Mach-Zehnder Interferometer (MZI), which allows for the 
+continuous manipulation of optical signals through controlled interference.
 
-\subsection{Architecture and Principle of Operation}
+\subsection{Symmetric MZI Architecture}
 
-The most prevalent architecture for a PUC is based on the \textit{Mach-Zehnder Interferometer} 
-(MZI). As illustrated in Figure \ref{fig:puc_mzi_architecture}, a standard PUC consists of two 
-$3$-dB couplers (either Directional Couplers or MMIs) connected by two waveguide arms, where at 
-least one of them incorporates an active phase shifter to induce a differential phase shift 
-$\theta$.
+In this work, the PUC is implemented as a balanced, symmetric MZI consisting of two $3$-dB 
+couplers and active phase shifters integrated into both internal arms, as illustrated in 
+Figure \ref{fig:ch2-puc}a. This dual-drive configuration, consistent with established 
+programmable photonics standards \cite{capmanyProgrammableIntegratedPhotonics2020}, provides 
+enhanced control over the interference conditions and improves the overall thermal stability of the 
+device.
+
+The operational state of the cell is governed by the phase induced in the upper arm ($\phi_{upper}$) 
+and the lower arm ($\phi_{lower}$). For the characterization of the cell's response, we define the 
+\textbf{differential phase shift} as:
+
+\begin{equation}
+\Delta\phi = \phi_{upper} - \phi_{lower}
+\label{eq:delta_phi}
+\end{equation}
+
+By modulating $\Delta\phi$, the PUC can be programmed to act as a variable optical attenuator, a 
+tunable power splitter, or a discrete optical switch.
+
+\subsection{Transfer Matrix Formalism}
+
+The mathematical behavior of the PUC is described by its transfer matrix $\mathbf{T}_{\text{PUC}}$. 
+Assuming ideal $3$-dB couplers and neglecting propagation losses, the relationship between the 
+input ($E_{In1}, E_{In2}$) and output ($E_{Out1}, E_{Out2}$) electric fields is given by:
+
+\begin{equation}
+\mathbf{T}_{\text{PUC}}(\phi_{upper}, \phi_{lower}) = 
+i e^{j\frac{\phi_{upper} + \phi_{lower}}{2}} 
+\begin{pmatrix} 
+\sin\left(\frac{\Delta\phi}{2}\right) & \cos\left(\frac{\Delta\phi}{2}\right) \\[10pt] 
+\cos\left(\frac{\Delta\phi}{2}\right) & -\sin\left(\frac{\Delta\phi}{2}\right) 
+\end{pmatrix}
+\label{eq:mzi_symmetric_matrix_phi}
+\end{equation}
+
+In this expression, the term $e^{j(\phi_{upper} + \phi_{lower})/2}$ represents the common phase 
+shift (average phase), while the differential phase $\Delta\phi$ dictates the power splitting 
+ratio. This allows the PUC to transition between two fundamental operational states:
+
+\begin{itemize}
+    \item \textbf{Cross State ($\Delta\phi = 0$):} In the default state, the interference is 
+    constructive at the cross port, meaning the signals are fully swapped ($In_1 \rightarrow Out_2$ 
+    and $In_2 \rightarrow Out_1$). This is the natural response of the two cascaded $3$-dB couplers 
+    in the absence of a differential phase shift.
+    \item \textbf{Bar State ($\Delta\phi = \pi$):} By inducing a differential phase of $\pi$ 
+    radians between the arms, the interference condition is reversed, and the signals are routed to 
+    the direct ports ($In_1 \rightarrow Out_1$ and $In_2 \rightarrow Out_2$).\footnote{Note that the 
+    correspondence between specific phase values and the Bar/Cross states depends on the phase 
+    convention of the $3$-dB couplers and the chosen variable parameterization. While we use the 
+    total differential physical phase $\Delta\phi$, some mathematical models 
+    \cite{capmanyProgrammableIntegratedPhotonics2020} define a parameter $\theta = \Delta\phi/2$, 
+    which shifts these switching points to multiples of $\pi/2$.}
+\end{itemize}
+
+The complementary power evolution at the output ports resulting from this transformation is 
+illustrated in Figure \ref{fig:ch2-puc}b. The periodic exchange of power between $Out_1$ 
+and $Out_2$ demonstrates the cell's ability to implement any arbitrary splitting ratio by 
+accurately controlling $\Delta\phi$.
 
 \begin{figure}[htbp]
     \centering
-    % \includegraphics[width=0.8\textwidth]{figures/puc_mzi_architecture}
-    \caption{Architecture of a Mach-Zehnder Interferometer (MZI) based programmable unit cell. The 
-    internal phase shifter $\theta$ controls the power splitting ratio at the outputs, while an 
-    optional external phase shifter $\phi$ controls the relative phase.}
-    \label{fig:puc_mzi_architecture}
+    \includegraphics[width=\textwidth]{figures/ch2-puc}
+    \caption{Symmetric $2 \times 2$ programmable unit cell: (a) Schematic 
+    architecture showing the dual-drive MZI configuration with phase shifters $\phi_{upper}$ and 
+    $\phi_{lower}$. (b) Simulated transmission characteristics showing the normalized power 
+    evolution and the periodic transition between Bar and Cross states as a function of 
+    $\Delta\phi$.}
+    \label{fig:ch2-puc}
 \end{figure}
 
+\FloatBarrier
 
 
-The operation of the PUC can be described by the multiplication of the transfer matrices of its 
-constituent parts. For a balanced MZI with two ideal $50:50$ couplers and a differential phase 
-shift $\theta$ between the arms, the resulting transfer matrix $\mathbf{M}_{\text{MZI}}$ is derived 
-as:
+\section{Concluding Remarks}
+\label{sec:ch2-concluding-remarks}
 
-\begin{equation}
-\mathbf{M}_{\text{MZI}} = \mathbf{M}_{\text{coupler}} \cdot \mathbf{M}_{\text{phase}}(\theta) 
-\cdot \mathbf{M}_{\text{coupler}}
-\label{eq:mzi_matrix_derivation}
-\end{equation}
+In this chapter, we have established the theoretical and physical foundations required to 
+understand and design programmable photonic integrated circuits. Starting from the fundamental 
+principles of light propagation in silicon waveguides, we analyzed the primary mechanisms for phase 
+modulation, specifically the thermo-optic effect and the plasma dispersion effect in silicon
+structures.
 
-Assuming symmetric $3$-dB couplers with a transfer matrix as defined in Section 2.3.1, the total 
-matrix of the PUC can be expressed as:
-
-\begin{equation}
-\mathbf{M}_{\text{MZI}}(\theta) = i e^{j\frac{\theta}{2}} 
-\begin{pmatrix} 
-\sin\left(\frac{\theta}{2}\right) & \cos\left(\frac{\theta}{2}\right) \\[10pt] 
-\cos\left(\frac{\theta}{2}\right) & -\sin\left(\frac{\theta}{2}\right) 
-\end{pmatrix}
-\label{eq:mzi_matrix_final}
-\end{equation}
-
-This mathematical framework shows that by tuning the internal phase $\theta$, the PUC transitions 
-between two fundamental routing states. It should be noted that the specific mapping of $\theta$ to 
-these states depends on the phase relationship of the $3$-dB couplers; assuming standard symmetric 
-couplers with a $\pi/2$ phase shift between their cross and bar ports, the states are defined as:
+The core of the chapter focused on the \textbf{Programmable Unit Cell (PUC)}, modeled as a 
+symmetric Mach-Zehnder Interferometer. By applying the transfer matrix formalism, we derived the 
+mathematical operator $\mathbf{T}_{\text{PUC}}$, which relates the input and output electric fields 
+as a function of the differential phase $\Delta\phi$. This analysis confirmed that:
 \begin{itemize}
-    \item \textbf{Cross State ($\theta = 0$):} Light entering port 1 exits through port 2, and vice 
-    versa. This occurs when the two $3$-dB coupling stages and the zero differential phase result 
-    in purely constructive interference at the cross port.
-    \item \textbf{Bar State ($\theta = \pi$):} Light entering port 1 exits through port 1. In this 
-    condition, the total phase accumulated through the MZI arms causes the signal to exit through 
-    the same port it entered.
+    \item The unit cell naturally operates in the \textbf{Cross state} when no external stimulus is 
+    applied ($\Delta\phi = 0$).
+    \item A physical phase shift of $\pi$ radians is required to transition to the \textbf{Bar 
+    state}.
+    \item These two degrees of freedom (amplitude via $\Delta\phi$ and common phase) allow the PUC 
+    to perform the unitary transformations necessary for optical signal processing.
 \end{itemize}
 
-
-
-In a fully reconfigurable mesh, a second phase shifter $\phi$ is often added at one of the output 
-ports. While $\theta$ controls the power distribution (the "coupling" of the unit), $\phi$ controls 
-the \textbf{relative phase} between the two outputs. This combination allows the PUC to implement 
-any arbitrary transformation in the $U(2)$ group, providing the universal tunability required for 
-photonic computing and signal processing.
-
-
-\subsection{Degrees of Freedom and Universal Control}
-
-A general $2 \times 2$ unitary transformation $U(2)$ can be described by four degrees of freedom. 
-However, in most programmable photonic applications, the focus lies on the relative power 
-distribution and the relative phase between the ports, which reduces the required control parameters 
-to two primary variables: the \textit{internal} phase shift ($\theta$) and the \textit{external} 
-phase shift ($\phi$).
-
-The internal phase shifter $\theta$, located within the MZI arms, functions as the 
-\textbf{amplitude control}. By modulating $\theta$, the interference condition at the output 
-coupler is modified, allowing the power splitting ratio to be continuously tuned. In the Bloch 
-sphere representation (see Figure \ref{fig:puc_degrees}), this operation corresponds to a rotation 
-that changes the "latitude" of the state, effectively moving the signal between the Bar and Cross 
-states.
-
-To achieve a truly universal $2 \times 2$ transformation, an external phase shifter $\phi$ is added 
-at one of the output ports. This element provides \textbf{phase control}, allowing the adjustment 
-of the relative phase between the two output modes without altering their power levels. The total 
-transfer matrix of such a universal PUC is given by:
-
-\begin{equation}
-\mathbf{M}_{\text{PUC}}(\theta, \phi) = 
-\begin{pmatrix} 1 & 0 \\ 0 & e^{j\phi} \end{pmatrix} 
-\begin{pmatrix} 
-\sin\left(\frac{\theta}{2}\right) & \cos\left(\frac{\theta}{2}\right) \\[10pt] 
-\cos\left(\frac{\theta}{2}\right) & -\sin\left(\frac{\theta}{2}\right) 
-\end{pmatrix}
-\label{eq:universal_puc}
-\end{equation}
-
-This two-degree-of-freedom architecture is essential for universal photonic computing. However, its 
-performance is highly sensitive to the balance of the constituent couplers. If the $3$-dB couplers 
-exhibit deviations from their nominal $50:50$ splitting ratio due to fabrication tolerances, the 
-PUC may no longer be able to reach the ideal Bar or Cross states, leading to a reduced extinction 
-ratio and limiting the overall fidelity of the mesh. These limitations and their impact on fault 
-tolerance are discussed in detail in Section 2.6.
-
-
-\section{Architectures of programmable waveguide meshes}
-\subsection{Mesh topologies}
-% % Comparativa de geometrías.
-% % Forward-only meshes (Redes alimentadas hacia adelante): Triangular, Rectangular. Estructuras que no permiten bucles de realimentación fácilmente.
-% % Recirculating meshes (Redes recirculantes): Hexagonal, Triangular. Permiten sintetizar cavidades y anillos resonadores (importante para "Large-Scale").
-\subsection{Circuit synthesis and routing}
-% % Cómo se "programa" un circuito lógico sobre la malla física. Concepto de enrutamiento de luz por software.
-
-\section{Challenges in large-scale integration: sources of error}
-\subsection{Fabrication tolerances and process variations}
-% % Variaciones estocásticas en el ancho y altura de las guías de onda (wafer thickness variations, etching errors). Cómo esto afecta al índice efectivo 
-% % y desbalancea los MZIs.
-
-\subsection{Component non-idealities}
-
-\subsection{Yield vs. Scale}
-% % Explicación estadística: a medida que aumenta el número de componentes (N), la probabilidad de tener un circuito 100% funcional decae 
-% % exponencialmente sin tolerancia a fallos.
-
-
-\section{State of the Art: Calibration and fault tolerance techniques}
-
-\subsection{Automated calibration strategies}
-% % Métodos actuales para caracterizar cada MZI individualmente (algoritmos de optimización, monitores de potencia integrados).
-
-\subsection{Redundancy and reconfiguration}
-% % Uso de caminos alternativos en la malla para esquivar componentes rotos (re-routing).
-
-\subsection{Hardware-level fault tolerance}
-% % Diseños de acopladores robustos o componentes de banda ancha que son menos sensibles a errores de fabricación (Aquí es donde probablemente 
-% % encajará tu contribución en capítulos posteriores).
+With the mathematical framework and the ideal behavior of the unit cell now defined, the next 
+logical step is to address its physical realization. In the following chapter, we will detail the 
+design, simulation, and optimization of the specific silicon photonic building blocks (MMIs, 
+phase shifters, and couplers) that constitute the hardware layer of these programmable processors.
 
 
 
+% \section{Architectures of programmable waveguide meshes}
+% \subsection{Mesh topologies}
+% % % Comparativa de geometrías.
+% % % Forward-only meshes (Redes alimentadas hacia adelante): Triangular, Rectangular. Estructuras que no permiten bucles de realimentación fácilmente.
+% % % Recirculating meshes (Redes recirculantes): Hexagonal, Triangular. Permiten sintetizar cavidades y anillos resonadores (importante para "Large-Scale").
+% \subsection{Circuit synthesis and routing}
+% % % Cómo se "programa" un circuito lógico sobre la malla física. Concepto de enrutamiento de luz por software.
+
+% \section{Challenges in large-scale integration: sources of error}
+% \subsection{Fabrication tolerances and process variations}
+% % % Variaciones estocásticas en el ancho y altura de las guías de onda (wafer thickness variations, etching errors). Cómo esto afecta al índice efectivo 
+% % % y desbalancea los MZIs.
+
+% \subsection{Component non-idealities}
+
+% \subsection{Yield vs. Scale}
+% % % Explicación estadística: a medida que aumenta el número de componentes (N), la probabilidad de tener un circuito 100% funcional decae 
+% % % exponencialmente sin tolerancia a fallos.
 
 
+% \section{State of the Art: Calibration and fault tolerance techniques}
 
+% \subsection{Automated calibration strategies}
+% % % Métodos actuales para caracterizar cada MZI individualmente (algoritmos de optimización, monitores de potencia integrados).
 
+% \subsection{Redundancy and reconfiguration}
+% % % Uso de caminos alternativos en la malla para esquivar componentes rotos (re-routing).
 
-% \chapter{Fundamentals and State of the Art of Programmable Integrated Photonics} \label{chap:fundamentals}
+% \subsection{Hardware-level fault tolerance}
+% % % Diseños de acopladores robustos o componentes de banda ancha que son menos sensibles a errores de fabricación (Aquí es donde probablemente 
+% % % encajará tu contribución en capítulos posteriores).
 
-% \section{Fundamentals of Integrated Photonics}
-% Integrated photonics aims to generate, guide, manipulate, and detect optical signals within a compact
-% and scalable platform by integrating multiple photonic components on a single substrate. By leveraging 
-% waveguiding structures with high refractive index contrast, integrated photonic circuits enable strong 
-% optical confinement and precise control of light propagation over centimeter-scale distances within 
-% chip-scale footprints. This approach provides a robust and reproducible alternative to bulk and 
-% fiber-based optical systems, while benefiting from wafer-scale fabrication and compatibility with 
-% semiconductor manufacturing processes\cite{sorefPresentFutureSilicon2006,thomsonRoadmapSiliconPhotonics2016}.
-
-% The fundamental building block of integrated photonics is the optical waveguide, which confines light 
-% through total internal reflection or effective index guiding mechanisms. In most integrated platforms, 
-% waveguides consist of a high-index core surrounded by lower-index cladding materials, enabling single-mode 
-% or multi-mode propagation depending on geometry and wavelength. The propagation of light along a waveguide 
-% mode is commonly described in terms of its propagation constant $\beta$, which is related to the effective 
-% refractive index $n_{\mathrm{eff}}$ as
-
-% \begin{equation}
-% \beta = k_0 n_{\mathrm{eff}},
-% \end{equation}
-
-% where $k_0 = 2\pi / \lambda$ is the free-space wavenumber and $\lambda$ is the optical wavelength. The 
-% accumulated optical phase over a waveguide section of length $L$ is therefore given by
-
-% \begin{equation}
-% \phi = \beta L = \frac{2\pi}{\lambda} n_{\mathrm{eff}} L.
-% \end{equation}
-
-% This phase accumulation constitutes the physical basis of interferometric devices and phase-tunable 
-% photonic circuits, which are central to reconfigurable and programmable photonic integrated systems.
-
-% The fundamental building blocks of integrated photonics are summarized in 
-% Fig.~\ref{fig:ch2-photonics_summary}, including waveguide confinement and guided modes,
-% basic passive components, and representative interferometric and resonant structures.
-
-% \begin{figure}[t]
-%     \centering
-%     \includegraphics[width=\linewidth]{figures/ch2-photonics_summary.png}
-%     \caption{Fundamental building blocks of integrated photonics. 
-%     (a) Cross-section of a silicon-on-insulator (SOI) waveguide and representation 
-%     of the fundamental TE and TM guided modes. 
-%     (b) Basic passive photonic components including a directional coupler, 
-%     a Y-branch, and a 1x2 multi-mode interferometer (MMI). 
-%     (c) Mach-Zehnder interferometer (MZI) and a micro-ring resonator (MRR), 
-%     which enable phase control and spectral filtering.}
-%     \label{fig:ch2-photonics_summary}
-% \end{figure}
-
-
-
-
-
-% Among the various material platforms developed for integrated photonics, silicon-on-insulator (SOI) 
-% technology has emerged as the most widely adopted, largely due to its high refractive index contrast, 
-% mature fabrication ecosystem, and compatibility with complementary metal-oxide-semiconductor (CMOS) 
-% processes\cite{sorefPresentFutureSilicon2006}. Silicon photonics enables dense integration of passive 
-% components such as waveguides, bends, 
-% splitters, and interferometers, as well as active devices including modulators and photodetectors. 
-% Alternative platforms, such as silicon nitride and III-V semiconductors, are also widely used, offering 
-% advantages in terms of lower propagation loss, broader transparency windows, or native light emission, 
-% and are often combined with silicon through heterogeneous or hybrid integration approaches.
-
-% Passive photonic components form the backbone of integrated photonic circuits and include waveguides, 
-% directional couplers, multi-mode interferometers (MMIs), filters, and resonant structures. These elements 
-% define the static optical paths and spectral responses of a circuit. Their performance is largely determined 
-% by geometry and material properties, making them highly sensitive to fabrication variations, particularly 
-% in high-index-contrast platforms. As circuit complexity increases, small deviations in waveguide dimensions 
-% or coupling gaps can accumulate and significantly impact overall system performance.
-
-% Active photonic components enable dynamic control of optical signals and are essential for reconfigurable 
-% and, at a higher level, programmable photonic systems. Phase shifters and modulators exploit mechanisms 
-% such as the thermo-optic 
-% effect, free-carrier dispersion, or electro-optic effects to induce controlled changes in the effective 
-% refractive index. Photodetectors provide electrical readout of optical signals and are critical for 
-% monitoring, feedback, and control in complex circuits. The integration of active components introduces 
-% additional constraints related to power consumption, speed, thermal management, and electrical interfacing, 
-% which become increasingly relevant as the scale of integration grows
-% \cite{millerDeviceRequirementsOptical2009}.
-
-% Loss mechanisms play a central role in determining the scalability of integrated photonic circuits. 
-% Propagation losses arising from material absorption, sidewall roughness, and scattering, as well as excess 
-% losses introduced by couplers, bends, and crossings, accumulate as circuit depth increases. In large-scale 
-% photonic integrated circuits, loss accumulation can limit usable circuit size and directly impact 
-% signal-to-noise ratio and energy efficiency. As a result, minimizing loss at both the component and 
-% architectural levels is a key design consideration, particularly for programmable photonic systems that 
-% rely on cascaded interferometric structures.
-
-% Overall, the fundamentals of integrated photonics provide the technological foundation upon which reconfigurable 
-% and programmable photonic integrated circuits are built. While the integration of optical components on a single 
-% chip enables compactness and scalability, it also introduces challenges related to fabrication variability, 
-% loss accumulation, and active control. These aspects become increasingly critical in the context of 
-% large-scale programmable photonic architectures and motivate the need for careful design methodologies and 
-% robust control strategies, which are discussed in the following sections.
