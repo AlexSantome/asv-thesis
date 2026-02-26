@@ -43,11 +43,11 @@ resonant structures enabling phase-sensitive functionality.
     \centering
     \includegraphics[width=\linewidth]{figures/ch2-photonics_summary.png}
     \caption{Fundamental building blocks of integrated photonics. 
-    (a) Cross-section of a generic silicon-on-insulator (SOI) waveguide and representation of the 
+    (a) Cross-section of a generic silicon-on-insulator waveguide and representation of the 
     fundamental TE and TM guided modes. 
     (b) Examples of passive photonic components including a directional coupler, a Y-branch, and 
-    a 1x2 multi-mode interferometer (MMI). 
-    (c) Mach-Zehnder interferometer (MZI) and a micro-ring resonator (MRR).}
+    a 1x2 multi-mode interferometer. 
+    (c) Mach-Zehnder interferometer and a micro-ring resonator.}
     \label{fig:ch2-photonics_summary}
 \end{figure}
 
@@ -192,7 +192,7 @@ Cell (PUC), which combines passive coupling structures with tunable phase shifte
 fully controllable 2x2 linear optical transformation. Before introducing the PUC in detail, it is 
 necessary to review the passive and active building blocks from which it is constructed.
 
-\subsection{Fundamental Passive Building Blocks}
+\subsection{Fundamental Passive Building Blocks}\label{sec:passive_bb}
 
 Passive building blocks define the static optical backbone of programmable photonic circuits. They 
 determine how light is distributed, combined, routed, and coupled within the chip. Although they 
@@ -338,20 +338,7 @@ programmable photonic meshes.
 
 \FloatBarrier
 
-% \subsubsection*{Waveguide Crossings}
 
-% Waveguide crossings enable optical routing in two-dimensional layouts, allowing waveguides to 
-% intersect without requiring additional layers. They are particularly important in programmable 
-% meshes, where dense interconnections are necessary.
-
-% A simple orthogonal crossing introduces scattering losses and crosstalk due to modal mismatch and 
-% radiation at the intersection region. Advanced crossing designs incorporate tapering, optimized 
-% geometry, or multi-mode interference regions to reduce insertion loss and minimize inter-channel 
-% coupling.
-
-% In large-scale programmable circuits, even small crossing losses accumulate over multiple stages, 
-% directly impacting scalability. Therefore, low-loss and low-crosstalk crossings are essential for 
-% maintaining signal fidelity in deep interferometric networks.
 
 \subsubsection*{Waveguide Crossings}
 
@@ -363,9 +350,9 @@ required, the performance of these crossings becomes a critical factor for scala
 A simple orthogonal intersection of two single-mode waveguides introduces significant scattering 
 losses and crosstalk (typically ranging from $-20$ to $-30$ dB) due to the modal mismatch and 
 radiation at the intersection region. To mitigate these effects, advanced crossing designs—such as 
-those based on parabolic tapers, Bloch-mode engineering, or Multi-Mode Interference (MMI) 
-regions—are employed to expand the mode and minimize field intensity at the waveguide boundaries 
-during the transition.
+those based on parabolic tapers, Bloch-mode engineering, or Multi-Mode Interference regions—are 
+employed to expand the mode and minimize field intensity at the waveguide boundaries during the 
+transition.
 
 The impact of a crossing can be modeled by its transfer matrix $\mathbf{M}_{\text{cross}}$, 
 relating the throughput and the leaked (crosstalk) signals:
@@ -386,8 +373,6 @@ synthesized optical transformations \cite{maUltralowLossSingle2013}. Therefore, 
 and low-crosstalk crossings are paramount for maintaining signal fidelity in deep interferometric 
 networks.
 
-% \textbf{Suggested figure:} Comparison between a simple crossing and an optimized crossing geometry 
-% with indicated crosstalk paths.
 
 To address the scalability limits imposed by conventional intersections, advanced designs such as 
 the one proposed by Ding et al. \cite{maUltralowLossSingle2013} are employed. As illustrated in Figure 
@@ -410,162 +395,342 @@ signal processing.
     \label{fig:ch2-crossing_Ding_adapted}
 \end{figure}
 
+
 \subsubsection*{Grating Couplers}
 
-Grating couplers provide vertical coupling between optical fibers and planar waveguides. They 
-operate based on diffraction from a periodic perturbation in the waveguide, enabling phase matching 
-between the guided mode and an externally incident fiber mode.
+Grating couplers provide a practical solution for out-of-plane coupling between single-mode optical 
+fibers and planar waveguides. They operate based on the diffraction from a periodic perturbation in 
+the waveguide, enabling phase matching between the guided mode and an externally incident fiber 
+mode. 
 
-The grating period $\Lambda$ must satisfy the phase-matching condition
+As illustrated in Figure \ref{fig:ch2-grating}, the fiber is typically positioned at a 
+tilt angle $\theta$ (usually $8^\circ$ to $10^\circ$) relative to the surface normal to prevent 
+second-order reflections back into the fiber. The grating period $\Lambda$ must satisfy the 
+phase-matching condition:
 
 \begin{equation}
 \Lambda = \frac{\lambda}{n_{\text{eff}} - n_{\text{clad}}\sin\theta},
+\label{eq:grating_period}
 \end{equation}
 
 where $\lambda$ is the operating wavelength, $n_{\text{eff}}$ is the effective index of the guided 
-mode, $n_{\text{clad}}$ is the refractive index of the cladding, and $\theta$ is the fiber tilt 
-angle.
+mode, and $n_{\text{clad}}$ is the refractive index of the cladding material.
 
-Grating couplers enable wafer-scale testing and simplify packaging, although they typically 
-introduce higher insertion loss compared to edge coupling techniques. Their bandwidth and 
-efficiency depend strongly on etch depth, duty cycle, and apodization profile.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/ch2-grating}
+    \caption{Schematic cross-section of a Silicon-on-Insulator grating coupler. The diagram 
+    illustrates the diffraction of light from a tilted single-mode fiber into the silicon waveguide 
+    core. Key parameters such as the grating period $\Lambda$, the tilt angle $\theta$, and the 
+    layer stack (Cladding, BOX, and Substrate) are indicated.}
+    \label{fig:ch2-grating}
+\end{figure}
 
-\textbf{Suggested figure:} Surface grating with tilted fiber positioned above the chip, indicating diffraction angle.
+\FloatBarrier
+
+Grating couplers are highly advantageous for large-scale integration as they enable wafer-scale 
+testing without the need for dicing or facet polishing. However, they typically introduce higher 
+insertion losses ($3$--$5$ \text{dB}) and have a limited operational bandwidth compared to edge 
+coupling techniques. Their efficiency and spectral response are highly sensitive to fabrication 
+parameters such as the etch depth and the duty cycle of the grating teeth.
+
 
 \subsubsection*{Edge Couplers}
 
-Edge couplers provide lateral coupling between optical fibers and on-chip waveguides. They 
-typically rely on adiabatic tapers that gradually expand the mode size of the silicon waveguide 
-to better match the mode field diameter of the fiber.
 
-By slowly varying the waveguide width over a sufficiently long taper length, scattering losses 
-are minimized and high coupling efficiencies can be achieved. Unlike grating couplers, edge 
-couplers offer lower insertion loss and broader bandwidth, but require polished chip facets and 
-more complex packaging.
+Edge couplers, also known as Spot-Size Converters (SSCs), facilitate in-plane coupling between the 
+optical fibers and the photonic chip. In the SOI platform, the high refractive index contrast leads 
+to extremely high mode confinement within the silicon waveguides (typically with sub-micrometer 
+dimensions of $500 \times 220$ nm). This presents a significant challenge for direct coupling, as 
+standard single-mode fibers (SMF-28) exhibit a Mode Field Diameter (MFD) of approximately 
+$10 \ \mu$m. The vast mismatch between these two mode sizes would result in prohibitive insertion 
+losses without a dedicated transformation mechanism.
 
-In programmable photonic processors intended for high-performance applications, edge coupling is 
-often preferred when minimizing total insertion loss is critical.
+To bridge this gap, edge couplers utilize adiabatic tapers that gradually transition the mode from 
+the high-confinement silicon core to a larger area that better matches the MFD of an external 
+lensed fiber or an ultra-high numerical aperture (UHNA) fiber, which typically provide MFDs in the 
+range of $2$ to $3 \ \mu$m. 
 
-\textbf{Suggested figure:} Long adiabatic taper expanding toward the chip facet and aligned optical 
-fiber.
+As shown in Figure \ref{fig:ch2-edge_coupler_info}, this is often achieved by narrowing the silicon 
+waveguide width (inverted taper), which forces the optical field to expand into the cladding, 
+effectively increasing the spot size before it reaches the chip facet.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch2-edge_coupler_info}
+    \caption{Edge coupler analysis: (a) 3D perspective of the inverse adiabatic taper embedded in a 
+    low-index cladding. (b) $|E|^2$ mode field profiles showing the expansion of the optical mode 
+    as the silicon core width decreases. (c) Calculated coupling loss as a function of lateral 
+    fiber offset, illustrating the alignment tolerance of the interface.}
+    \label{fig:ch2-edge_coupler_info}
+\end{figure}
+
+\FloatBarrier
+
+The physical principle behind this expansion is shown in the mode field profiles of Figure 
+\ref{fig:ch2-edge_coupler_info}b. By reducing the core width, the optical field is forced out of the 
+silicon into the surrounding cladding, effectively increasing the spot size. Unlike grating 
+couplers, edge couplers are non-resonant, providing a significantly broader operational bandwidth 
+and lower insertion losses (typically $< 1$ dB per facet).
+However, the efficiency of this coupling is highly sensitive to the mechanical positioning of the 
+fiber. Figure \ref{fig:ch2-edge_coupler_info}c shows the impact of lateral misalignment on the total 
+coupling loss. In the context of large-scale programmable meshes, these losses contribute to the 
+overall power budget and can be a source of systematic error if the packaging process exhibits 
+variations. Achieving sub-micrometer alignment remains a critical requirement for maintaining 
+high-fidelity optical transformations across the circuit.
 
 
+~ \\
+% Closing of section 2.3.1 - Fundamental Passive Building Blocks 
 The passive building blocks described above define the structural and interferometric framework of 
-programmable photonic circuits. While they do not provide tunability, they establish the coupling 
-and interference pathways necessary for implementing linear optical transformations.
+programmable photonic circuits. While these components do not provide tunability by themselves, 
+they establish the essential coupling and interference pathways required to implement linear 
+optical transformations.
 
 When combined with active phase tuning elements, these passive structures form reconfigurable 
-interferometric units capable of realizing arbitrary 2x2 transformations. The integration of 
-passive and active elements culminates in the definition of the Programmable Unit Cell, which 
-will be introduced after discussing the mechanisms enabling dynamic phase control.
-
+interferometric units capable of realizing arbitrary $2 \times 2$ transformations. The integration 
+of these passive and active elements culminates in the definition of the \textit{Programmable 
+Unit Cell} (PUC), the fundamental building block of the mesh, which will be introduced in detail 
+after discussing the physical mechanisms enabling dynamic phase control in the following section.
 
 
 
 \subsection{Active Tuning Mechanisms}
 
-Active tuning mechanisms provide the dynamic control required for programmable photonic operation. While passive structures define fixed coupling and interference pathways, active elements enable external electrical control over the effective refractive index or absorption of guided modes. By inducing controlled phase shifts within interferometric structures, they allow the realization of arbitrary linear optical transformations.
+Active tuning mechanisms provide the dynamic control required for programmable photonic operation.
+ While passive structures define fixed coupling and interference pathways, active elements enable 
+ external electrical control over the effective refractive index ($n_{\text{eff}}$) or the 
+ absorption coefficient ($\alpha$) of guided modes. By inducing controlled phase shifts within 
+ interferometric structures, these mechanisms allow the realization of arbitrary linear optical 
+ transformations.
 
-In silicon photonics, tunability is primarily achieved by exploiting physical mechanisms that modify the refractive index of silicon. The most relevant approaches are based on the thermo-optic effect and the plasma dispersion effect. Alternative electro-optic mechanisms may also be employed in hybrid or heterogeneous platforms.
+In silicon photonics, tunability is primarily achieved by exploiting physical effects that modify 
+the refractive index of silicon. The most relevant approaches are based on the thermo-optic effect 
+and the plasma dispersion effect, each offering different trade-offs in terms of speed, power 
+consumption, and optical loss.
+
 
 
 \subsubsection*{Thermo-Optic Phase Shifters}
 
-The thermo-optic effect constitutes the most widely used tuning mechanism in silicon photonics. Silicon exhibits a relatively large thermo-optic coefficient,
+The thermo-optic (T-O) effect is the most widely adopted tuning mechanism in silicon photonics due 
+to its high efficiency, relatively simple fabrication, and compatibility with standard CMOS 
+processes. Silicon exhibits a large thermo-optic coefficient:
 
 \begin{equation}
 \frac{dn}{dT} \approx 1.86 \times 10^{-4} \ \text{K}^{-1},
 \end{equation}
 
-which enables efficient phase modulation through local heating.
-
-When a resistive heater placed above the waveguide increases the local temperature by $\Delta T$, the induced phase shift over a length $L$ is given by
+which enables efficient phase modulation through local heating. By integrating a resistive 
+micro-heater (typically made of TiN, NiCr, or Tungsten) above the waveguide cladding, the 
+temperature of the silicon core can be precisely controlled. The induced phase shift $\Delta \phi$ 
+over a length $L$ is given by:
 
 \begin{equation}
 \Delta \phi = \frac{2\pi}{\lambda} \frac{dn}{dT} \Delta T L,
+\label{eq:thermo_phase}
 \end{equation}
 
-where $\lambda$ is the operating wavelength. The phase shift is therefore proportional to temperature change and interaction length.
+where $\Delta T$ represents the local temperature increase and $\lambda$ is the operating 
+wavelength.
 
-Thermo-optic phase shifters offer several advantages:
-\begin{itemize}
-\item Large tuning range (multiple $2\pi$ phase shifts),
-\item Simple fabrication,
-\item Compatibility with standard CMOS processes.
-\end{itemize}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/ch2-tops}
+    \caption{Thermo-optic phase shifter (TOPS) analysis: (a) Cross-sectional schematic of an SOI 
+    waveguide showing the micro-heater and the heat diffusion paths. (b) Simulated vertical 
+    temperature profile from the heater surface towards the substrate, highlighting the thermal 
+    gradient reaching the silicon core.}
+    \label{fig:ch2-tops}
+\end{figure}
 
-However, they also present important limitations:
-\begin{itemize}
-\item Relatively high power consumption (typically mW per $\pi$ shift),
-\item Limited modulation speed (kHz–MHz range),
-\item Thermal crosstalk between adjacent elements.
-\end{itemize}
 
-In large programmable meshes containing hundreds or thousands of phase shifters, thermal management and power scalability become critical constraints.
+The physical arrangement and the resulting thermal distribution are illustrated in Figure 
+\ref{fig:ch2-tops}. As shown in the cross-section (Fig. \ref{fig:ch2-tops}a), the heat generated by 
+the metallic element must diffuse through the upper cladding to reach the waveguide core. The 
+simulated temperature gradient in Fig. \ref{fig:ch2-tops}b demonstrates that while the silicon core 
+reaches the necessary $\Delta T$ for phase shifting, a significant amount of heat also spreads 
+laterally.
 
-\textbf{Suggested figure:} Cross-sectional view of a silicon waveguide with metallic heater above oxide cladding, indicating heat diffusion profile.
+While TOPS offer a large tuning range and negligible additional propagation loss, this lateral heat 
+spread leads to \textbf{thermal crosstalk}, where the operation of one heater inadvertently affects 
+neighboring interferometers. Furthermore, the mechanism is limited by the thermal diffusion time 
+constant, resulting in millisecond-scale response times ($\tau \approx 10$--$100 \ \mu\text{s}$). 
+In large-scale programmable meshes, managing these thermal effects is a critical challenge that 
+requires specialized isolation structures or compensation algorithms 
+\cite{bogaertsProgrammablePhotonicCircuits2020}.
+
+\FloatBarrier
 
 
 \subsubsection*{Carrier-Based Phase Shifters}
 
-An alternative approach relies on the plasma dispersion effect, where variations in free carrier concentration modify both the refractive index and absorption coefficient of silicon. This mechanism enables significantly faster modulation compared to thermal tuning.
-
-The refractive index variation induced by changes in electron ($\Delta N_e$) and hole ($\Delta N_h$) concentrations can be approximated by empirical relations of the form
-
-\begin{equation}
-\Delta n = - (8.8 \times 10^{-22}) \Delta N_e 
-           - (8.5 \times 10^{-18}) (\Delta N_h)^{0.8},
-\end{equation}
-
-with carrier concentrations expressed in cm$^{-3}$. The negative sign indicates that increasing carrier density reduces the refractive index.
-
-Carrier-based phase shifters are typically implemented using PN or PIN junctions embedded in the waveguide. Two primary operation modes are employed:
-
-\begin{itemize}
-\item \textbf{Carrier injection}, where forward bias increases carrier density, enabling large phase shifts but introducing additional absorption losses.
-\item \textbf{Carrier depletion}, where reverse bias modifies the depletion region width, enabling faster modulation with reduced optical loss.
-\end{itemize}
-
-Compared to thermo-optic tuning, plasma dispersion phase shifters offer:
-\begin{itemize}
-\item Higher modulation speed (up to tens of GHz),
-\item Lower static power consumption (in depletion mode),
-\item Direct electrical control.
-\end{itemize}
-
-However, they introduce additional propagation loss due to free-carrier absorption and require more complex fabrication processes involving doping and electrical isolation.
-
-\textbf{Suggested figure:} Lateral PN junction integrated within a rib waveguide, showing depletion region and applied voltage.
-
-\subsubsection*{Electro-Optic and Hybrid Approaches}
-
-Silicon lacks a strong linear electro-optic (Pockels) effect due to its centrosymmetric crystal structure. Consequently, pure silicon platforms cannot exploit direct electric-field-induced refractive index changes.
-
-To overcome this limitation, hybrid or heterogeneous integration with materials exhibiting strong electro-optic coefficients, such as lithium niobate or certain polymers, has been investigated. In such configurations, phase modulation can be achieved through the Pockels effect,
+For applications requiring high-speed reconfiguration, the plasma dispersion effect is employed.
+Variations in the free carrier concentration modify both the real part of the refractive index and 
+the absorption coefficient of silicon. According to the empirical relations provided by Soref and 
+Bennett \cite{sorefElectroopticalEffectsSilicon1987}, the variations at $\lambda = 1550$ nm are:
 
 \begin{equation}
-\Delta n = -\frac{1}{2} n^3 r E,
+\Delta n = - [8.8 \times 10^{-22} \Delta N_e + 8.5 \times 10^{-18} (\Delta N_h)^{0.8}]
+\end{equation}
+\begin{equation}
+\Delta \alpha \ [\text{cm}^{-1}] = 8.5 \times 10^{-18} \Delta N_e + 6.0 \times 10^{-18} \Delta N_h
 \end{equation}
 
-where $r$ is the electro-optic coefficient and $E$ is the applied electric field.
+where $\Delta N_e$ and $\Delta N_h$ are the changes in electron and hole concentrations 
+(in $\text{cm}^{-3}$), respectively. 
 
-These approaches enable ultra-fast and low-loss modulation, but at the expense of increased fabrication complexity and reduced compatibility with standard silicon processes. For large-scale programmable photonic processors, thermo-optic and carrier-based mechanisms remain the most widely adopted solutions.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/ch2-pn_doped_si}
+    \caption{Schematic of a lateral PN junction integrated within a silicon rib waveguide. The 
+    modulation of the depletion region width under reverse bias enables high-speed phase control.}
+    \label{fig:h2-pn_doped_si}
+\end{figure}
 
+\FloatBarrier
+
+Carrier-based phase shifters are typically implemented using PN or PIN junctions 
+\cite{reedSiliconOpticalModulators2010}. While they offer modulation speeds up to tens of GHz, they 
+introduce intrinsic electro-optical trade-offs: carrier injection provides high efficiency but 
+limited speed and high loss, while carrier depletion offers ultra-fast operation with lower 
+efficiency.
 
 \subsubsection*{Performance Trade-Offs and Scalability}
 
-The choice of tuning mechanism directly impacts the scalability of programmable photonic circuits. As the number of active elements increases, cumulative power consumption, electrical routing density, and thermal management become limiting factors.
+The choice of tuning mechanism directly impacts the scalability of programmable photonic circuits. 
+Table \ref{tab:tuning_comparison} summarizes the key performance metrics for the discussed 
+mechanisms.
 
-Thermo-optic tuning scales poorly in power for very large meshes due to static power requirements, whereas carrier-based approaches introduce additional optical loss that accumulates across multiple interferometric stages. The trade-off between tuning efficiency, modulation speed, insertion loss, and fabrication complexity must therefore be carefully balanced depending on the target application.
+\begin{table}[htbp]
+\centering
+\caption{Comparison of active tuning mechanisms in SOI.}
+\label{tab:tuning_comparison}
+\begin{tabular}{l c c c}
+\hline
+\textbf{Feature} & \textbf{Thermo-Optic} & \textbf{Carrier Depletion} & \textbf{Carrier Injection} \\ \hline
+Response Time & $\sim \mu\text{s}$ to ms & $\sim \text{ps}$ & $\sim \text{ns}$ \\
+Added Optical Loss & Negligible & Moderate & High \\
+Power Consumption & High (Static) & Ultra-low & Moderate \\
+Scalability & High (Thermal limited) & High (Loss limited) & Moderate \\ \hline
+\end{tabular}
+\end{table}
 
-In practical implementations, programmable photonic processors often integrate monitoring photodiodes within the circuit to enable feedback-based calibration. This closed-loop control becomes essential to compensate for thermal drift, fabrication variability, and environmental fluctuations.
+In practical implementations, the integration of these active elements with the passive structures 
+discussed in Section \ref{sec:passive_bb} culminates in the definition of the \textit{Programmable Unit Cell} (PUC). The PUC acts as the fundamental building block of the mesh, enabling the synthesis of arbitrary $2 \times 2$ unitary transformations through the coordinated control of phase and coupling.
 
 
-When integrated within interferometric configurations, active phase shifters enable continuous control over optical interference. By combining passive coupling structures with tunable phase elements, it becomes possible to implement fully controllable 2×2 linear optical transformations.
-
-This reconfigurable interferometric element constitutes the fundamental unit of programmability in photonic circuits and is formally defined as the Programmable Unit Cell (PUC), which will be described in the following subsection.
 
 
+\section{The Programmable Unit Cell (PUC)}
+\label{sec:puc}
+
+The transition from individual building blocks to a functional programmable processor is realized 
+through the definition of the \textit{Programmable Unit Cell} (PUC). The PUC is the fundamental, 
+repeating element that, when interconnected in a mesh-like topology, enables the synthesis of 
+complex, large-scale optical functions. In the context of this thesis, the PUC is treated as a 
+reconfigurable $2 \times 2$ port device capable of performing arbitrary unitary transformations.
+
+\subsection{Architecture and Principle of Operation}
+
+The most prevalent architecture for a PUC is based on the \textit{Mach-Zehnder Interferometer} 
+(MZI). As illustrated in Figure \ref{fig:puc_mzi_architecture}, a standard PUC consists of two 
+$3$-dB couplers (either Directional Couplers or MMIs) connected by two waveguide arms, where at 
+least one of them incorporates an active phase shifter to induce a differential phase shift 
+$\theta$.
+
+\begin{figure}[htbp]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{figures/puc_mzi_architecture}
+    \caption{Architecture of a Mach-Zehnder Interferometer (MZI) based programmable unit cell. The 
+    internal phase shifter $\theta$ controls the power splitting ratio at the outputs, while an 
+    optional external phase shifter $\phi$ controls the relative phase.}
+    \label{fig:puc_mzi_architecture}
+\end{figure}
+
+
+
+The operation of the PUC can be described by the multiplication of the transfer matrices of its 
+constituent parts. For a balanced MZI with two ideal $50:50$ couplers and a differential phase 
+shift $\theta$ between the arms, the resulting transfer matrix $\mathbf{M}_{\text{MZI}}$ is derived 
+as:
+
+\begin{equation}
+\mathbf{M}_{\text{MZI}} = \mathbf{M}_{\text{coupler}} \cdot \mathbf{M}_{\text{phase}}(\theta) 
+\cdot \mathbf{M}_{\text{coupler}}
+\label{eq:mzi_matrix_derivation}
+\end{equation}
+
+Assuming symmetric $3$-dB couplers with a transfer matrix as defined in Section 2.3.1, the total 
+matrix of the PUC can be expressed as:
+
+\begin{equation}
+\mathbf{M}_{\text{MZI}}(\theta) = i e^{j\frac{\theta}{2}} 
+\begin{pmatrix} 
+\sin\left(\frac{\theta}{2}\right) & \cos\left(\frac{\theta}{2}\right) \\[10pt] 
+\cos\left(\frac{\theta}{2}\right) & -\sin\left(\frac{\theta}{2}\right) 
+\end{pmatrix}
+\label{eq:mzi_matrix_final}
+\end{equation}
+
+This mathematical framework shows that by tuning the internal phase $\theta$, the PUC transitions 
+between two fundamental routing states. It should be noted that the specific mapping of $\theta$ to 
+these states depends on the phase relationship of the $3$-dB couplers; assuming standard symmetric 
+couplers with a $\pi/2$ phase shift between their cross and bar ports, the states are defined as:
+\begin{itemize}
+    \item \textbf{Cross State ($\theta = 0$):} Light entering port 1 exits through port 2, and vice 
+    versa. This occurs when the two $3$-dB coupling stages and the zero differential phase result 
+    in purely constructive interference at the cross port.
+    \item \textbf{Bar State ($\theta = \pi$):} Light entering port 1 exits through port 1. In this 
+    condition, the total phase accumulated through the MZI arms causes the signal to exit through 
+    the same port it entered.
+\end{itemize}
+
+
+
+In a fully reconfigurable mesh, a second phase shifter $\phi$ is often added at one of the output 
+ports. While $\theta$ controls the power distribution (the "coupling" of the unit), $\phi$ controls 
+the \textbf{relative phase} between the two outputs. This combination allows the PUC to implement 
+any arbitrary transformation in the $U(2)$ group, providing the universal tunability required for 
+photonic computing and signal processing.
+
+
+\subsection{Degrees of Freedom and Universal Control}
+
+A general $2 \times 2$ unitary transformation $U(2)$ can be described by four degrees of freedom. 
+However, in most programmable photonic applications, the focus lies on the relative power 
+distribution and the relative phase between the ports, which reduces the required control parameters 
+to two primary variables: the \textit{internal} phase shift ($\theta$) and the \textit{external} 
+phase shift ($\phi$).
+
+The internal phase shifter $\theta$, located within the MZI arms, functions as the 
+\textbf{amplitude control}. By modulating $\theta$, the interference condition at the output 
+coupler is modified, allowing the power splitting ratio to be continuously tuned. In the Bloch 
+sphere representation (see Figure \ref{fig:puc_degrees}), this operation corresponds to a rotation 
+that changes the "latitude" of the state, effectively moving the signal between the Bar and Cross 
+states.
+
+To achieve a truly universal $2 \times 2$ transformation, an external phase shifter $\phi$ is added 
+at one of the output ports. This element provides \textbf{phase control}, allowing the adjustment 
+of the relative phase between the two output modes without altering their power levels. The total 
+transfer matrix of such a universal PUC is given by:
+
+\begin{equation}
+\mathbf{M}_{\text{PUC}}(\theta, \phi) = 
+\begin{pmatrix} 1 & 0 \\ 0 & e^{j\phi} \end{pmatrix} 
+\begin{pmatrix} 
+\sin\left(\frac{\theta}{2}\right) & \cos\left(\frac{\theta}{2}\right) \\[10pt] 
+\cos\left(\frac{\theta}{2}\right) & -\sin\left(\frac{\theta}{2}\right) 
+\end{pmatrix}
+\label{eq:universal_puc}
+\end{equation}
+
+This two-degree-of-freedom architecture is essential for universal photonic computing. However, its 
+performance is highly sensitive to the balance of the constituent couplers. If the $3$-dB couplers 
+exhibit deviations from their nominal $50:50$ splitting ratio due to fabrication tolerances, the 
+PUC may no longer be able to reach the ideal Bar or Cross states, leading to a reduced extinction 
+ratio and limiting the overall fidelity of the mesh. These limitations and their impact on fault 
+tolerance are discussed in detail in Section 2.6.
 
 
 \section{Architectures of programmable waveguide meshes}
