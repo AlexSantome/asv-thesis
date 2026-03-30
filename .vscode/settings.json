@@ -1,0 +1,47 @@
+{
+  "latex-workshop.latex.outDir": "%DIR%/build",
+
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "LuaLaTeX + Biber",
+      "tools": [
+        "lualatex",
+        "biber",
+        "lualatex",
+      ]
+    }
+  ],
+
+  "latex-workshop.latex.tools": [
+    {
+      "name": "lualatex",
+      "command": "/usr/local/texlive/2025/bin/x86_64-linux/lualatex",
+      "args": [
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-output-directory=%OUTDIR%",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "biber",
+      "command": "/usr/local/texlive/2025/bin/x86_64-linux/biber",
+      "args": [
+        "%DOCFILE%",
+        "--input-directory=%OUTDIR%",
+        "--output-directory=%OUTDIR%"
+      ]
+    },
+    {
+      "name": "makeglossaries",
+      "command": "makeglossaries",
+      "args": [
+        "-d",
+        "build",
+        "%DOCFILE%"
+      ]
+    }
+
+  ]
+}
+
