@@ -1,3 +1,173 @@
 % Author: Alejandro Santomé Valverde
 
-\chapter{Building Blocks}\label{chap:blocks} % (fold)
+
+\chapter{Optimization and Characterization of Fundamental SOI Building Blocks}\label{chap:blocks} % (fold)
+
+\section{Introduction to the Fabrication Platform} \label{sec:fabrication_platform}
+
+The realization of the programmable photonic circuits discussed in this thesis relies on the 
+maturity and precision of the Silicon-on-Insulator platform. This section details the technological 
+framework, the computational tools employed for device optimization, and the experimental 
+infrastructure used to validate the performance of the fundamental building blocks.
+
+\subsection{SOI Fabrication Platforms} \label{subsec:foundry}
+
+The devices characterized in this work were fabricated using \textbf{dedicated wafer runs} across 
+different fabrication facilities. The use of dedicated runs allowed for full-wafer layout control 
+and the implementation of specific process optimizations tailored to the requirements of 
+large-scale programmable architectures. 
+
+The baseline platform consists of a standard SOI wafer with a nominal silicon device layer 
+thickness of $220$~nm, resting on a thick Buried Oxide (BOX) layer that ensures modal isolation 
+from the handle substrate. To ensure portability across different manufacturing environments, the 
+building blocks were adapted to the specific Process Design Kits (PDKs) and design rules of each 
+foundry. This included adjustments in the slab thickness for rib geometries (typically ranging 
+between $70$~nm and $90$~nm) and and the re-optimization of critical dimensions to comply with 
+fabrication constraints, such as the minimum achievable tip width for the silicon waveguides.
+
+Furthermore, the designs account for the specific Back-End-Of-Line (BEOL) stack of each process. 
+The vertical distance and composition of the dielectric cladding and metal layers were critical 
+parameters for the optimization of active components, such as thermo-optic phase shifters, ensuring 
+that the building blocks remain compatible with the multi-layer metal routing required for 
+large-scale system integration.
+
+\subsection{Design and Simulation Workflow} \label{subsec:workflow}
+
+The transition from theoretical concepts to physical layout follows a rigorous multi-step 
+simulation and optimization workflow. The choice of numerical method was strategically dictated 
+by the physical dimensions and the nature of the light-matter interaction in each building block 
+to balance computational efficiency and accuracy.
+
+\begin{itemize}
+    \item \textbf{Waveguide and Modal Analysis:} The fundamental propagation properties, including 
+    effective indices ($n_{eff}$) and group indices ($n_g$), were analyzed using Finite Difference 
+    Eigenmode (FDE) solvers. This analysis provided the necessary baseline for phase shifter 
+    designs and established the confinement conditions across the different SOI platforms used.
+    
+    \item \textbf{Edge Coupler Simulation (BPM):} Given the relatively large longitudinal 
+    dimensions of the spot-size converters---typically in the order of hundreds of 
+    micrometers---the Beam Propagation Method (BPM) was employed. Specifically, Synopsys RSoft 
+    BeamPROP was used to simulate the adiabatic expansion of the mode along the inverted tapers. 
+    This approach allowed for an efficient evaluation of coupling efficiency and modal evolution, 
+    providing a reliable design framework with a significantly lower computational cost than 
+    full-wave methods.
+    
+    \item \textbf{MMI Optimization (FDTD):} For the design of compact and high-performance MMI 
+    couplers, where scattering and multi-mode interference effects are dominant, the 
+    Finite-Difference Time-Domain (FDTD) method was utilized via Ansys Lumerical. This solver 
+    provides the necessary precision to capture broadband responses and complex phase 
+    relationships. Furthermore, the Adjoint optimization method was integrated into the FDTD 
+    workflow to explore a high-dimensional design space, resulting in the optimized geometries 
+    discussed in Section \ref{sec:mmi_adjoint}.
+    
+    \item \textbf{Layout Generation:} Once the design targets were achieved, the device geometries 
+    were translated into GDSII files. Depending on the specific fabrication run and circuit 
+    complexity, layouts were generated using Synopsys OptoDesigner for certain designs, while the 
+    Python-based framework gdsfactory was utilized for others. These tools enabled script-based 
+    generation to ensure sub-nanometer precision in the definition of adiabatic curves and complex 
+    optimized shapes, with KLayout serving as the primary environment for final inspection and 
+    design rule verification.
+\end{itemize}
+
+Other specialized components, such as Arrayed Waveguide Gratings (AWGs), required dedicated 
+simulation approaches tailored to their specific dispersive properties. For these devices, the 
+EPIPProp tool from Photon Design was employed, which provides a specialized framework for modeling 
+the complex phase and amplitude relationships in waveguide-array-based structures. Further details 
+on these designs will be provided in their respective sections later in this work.
+
+
+
+\subsection{Experimental Characterization Setup} \label{subsec:setup}
+
+To validate the performance of the designed building blocks, two distinct experimental 
+characterization benches were employed. Both setups share a common optical backbone consisting of a 
+tunable CW laser source, a polarization controller to excite the fundamental TE mode, and 
+high-sensitivity power meters. Figures \ref{fig:setup_siso} and \ref{fig:setup_array} show the 
+schematic and photographic evidence of these infrastructures.
+
+\subsubsection{Single Input-Single Output (SISO) Setup}
+
+The first setup is designed for maximum flexibility, allowing for the characterization of 
+individual components and test structures. It features high-precision motorized stages that can be 
+configured for two coupling geometries:
+\begin{itemize}
+    \item \textbf{Edge Coupling:} Horizontal alignment using cleaved SMF-28 fibers to interface 
+    with the spot-size converters at the chip facet.
+    \item \textbf{Vertical Coupling:} Out-of-plane alignment for devices featuring grating couplers.
+\end{itemize}
+
+This setup also serves as the primary station for active component characterization. It is equipped 
+with a probe station that allows for electrical excitation of the phase shifters. Depending on the 
+contact density and pad configuration, either individual DC needles or multi-contact probes are 
+used to provide the necessary current or voltage to the thermo-optic heaters.
+
+\subsubsection{High-Throughput Semi-Automated Setup}
+
+For the precise extraction of performance metrics in passive components, such as the excess loss 
+and imbalance of the MMIs, a high-throughput setup is utilized. This bench is equipped with a 
+64-channel fiber array mounted on a high-precision hexapod positioner. 
+
+The use of a semi-automated alignment routine enables the efficient characterization of cascaded 
+structures. Specifically, by measuring chains of 16 to 18 cascaded MMIs, the cumulative loss can be 
+characterized with significantly reduced experimental error. This statistical approach allows for 
+the extraction of the mean insertion loss per component through linear regression of the cascaded 
+stages, filtering out the fluctuations inherent in single-device measurements and fiber-to-chip 
+coupling variations.
+
+\subsubsection{Thermal Management and Stability}
+
+Given the high thermo-optic coefficient of silicon, all measurements were conducted under strict 
+thermal control. The photonic chips were mounted on a specialized vacuum chuck equipped with a 
+high-power Thermo-Electric Cooler (TEC) and a feedback thermistor. This system ensures a constant 
+operating temperature, typically maintained at $25^{\circ}\text{C}$ for standard characterization 
+or $45^{\circ}\text{C}$ to simulate high-density operating environments. This stabilization is 
+critical to avoid spectral shifts during the swept-wavelength measurements and to ensure the 
+repeatability of the results across different fabrication runs.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Fiber-to-Chip Interface}
+Simple Inverted Taper
+
+\subsection{Geometry and Design}
+Dimensiones de la punta (tip width) y longitud del taper
+
+\subsection{Simulation Results}
+Perfiles de modo y eficiencia de acoplamiento teórica
+
+\subsection{Experimental Characterization}
+Pérdidas de inserción medidas y dependencia con la longitud de onda en la banda C
+
+
+\section{High-Performance MMI via Adjoint Optimization}  
+
+\subsection{Motivation for Inverse Design}
+Por qué un MMI estándar no era suficiente (ancho de banda, tamaño o tolerancia)
+
+\subsection{Adjoint Method Implementation}
+Explicar brevemente la función objetivo (ej. maximizar transmisión y balance en 1530-1565 nm)
+
+\subsection{Performance Comparison}
+Tabla/Gráfica comparando el MMI "analítico" vs. el "optimizado"
+
+\subsection{Experimental Results}
+Medidas de Excess Loss e Imbalance
+
+\section{Active Tuning}
+Phase Shifter Designs
+
+\subsection{Design of [Thermo-optic/Plasma-dispersion] Shifters}
+Geometría del calentador o de la unión PN
+
+\subsection{Static and Dynamic Simulation}
+Distribución de calor o perfiles de portadores
+
+\subsection{Experimental Performance}
+El valor clave de $P_\pi$ (potencia para desfase de $\pi$), eficiencia y linealidad
+
+\subsection{Chapter Summary (or Concluding Remarks)}
+Recapitulación de los mejores resultados obtenidos que se usarán para construir la malla en los siguientes capítulos.
+
