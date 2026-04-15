@@ -82,47 +82,79 @@ on these designs will be provided in their respective sections later in this wor
 To validate the performance of the designed building blocks, two distinct experimental 
 characterization benches were employed. Both setups share a common optical backbone consisting of a 
 tunable CW laser source, a polarization controller to excite the fundamental TE mode, and 
-high-sensitivity power meters. Figures \ref{fig:setup_siso} and \ref{fig:setup_array} show the 
-schematic and photographic evidence of these infrastructures.
+high-sensitivity power meters. The choice between these setups depends on whether the 
+characterization requires high flexibility for active tuning or statistical data through 
+high-throughput measurements.
 
 \subsubsection{Single Input-Single Output (SISO) Setup}
 
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch3-siso_setup.png}
+    \caption{SISO characterization bench: (a) Schematic representation showing the stages for edge 
+    and vertical fiber coupling. (b) Photograph of the experimental setup, where the dashed cyan 
+    box highlights the region detailed in the inset. (c) Close-up of the chip showing vertical 
+    fiber alignment and DC probe needles for electrical excitation}
+    \label{fig:ch3-siso_setup}
+\end{figure}
+
 The first setup is designed for maximum flexibility, allowing for the characterization of 
-individual components and test structures. It features high-precision motorized stages that can be 
-configured for two coupling geometries:
+individual components and test structures. As illustrated in the schematic of Figure 
+\ref{fig:ch3-siso_setup}a, the bench features high-precision motorized stages for coarse 
+positioning, which are complemented by piezoelectric actuators for fine alignment. This 
+sub-micrometric control is essential for maximizing coupling efficiency, particularly when dealing 
+with the narrow mode-field diameters of edge couplers.
+
+The setup can be configured for two primary coupling geometries:
 \begin{itemize}
     \item \textbf{Edge Coupling:} Horizontal alignment using cleaved SMF-28 fibers to interface 
     with the spot-size converters at the chip facet.
-    \item \textbf{Vertical Coupling:} Out-of-plane alignment for devices featuring grating couplers.
+    \item \textbf{Vertical Coupling:} Out-of-plane alignment for devices featuring grating 
+    couplers.
 \end{itemize}
 
-This setup also serves as the primary station for active component characterization. It is equipped 
-with a probe station that allows for electrical excitation of the phase shifters. Depending on the 
-contact density and pad configuration, either individual DC needles or multi-contact probes are 
-used to provide the necessary current or voltage to the thermo-optic heaters.
+The physical implementation is shown in Figure \ref{fig:ch3-siso_setup}b. This setup serves as the 
+primary station for the characterization of active components. A dashed cyan box highlights the 
+interaction area between the optical and electrical probes, which is further detailed in the inset 
+of Figure \ref{fig:ch3-siso_setup}c. This close-up view shows the vertical fiber alignment and the 
+two DC probe needles used to provide the electrical excitation to the thermo-optic phase shifters, 
+a configuration required to characterize tuning efficiency and phase-power relationships.
+
+
 
 \subsubsection{High-Throughput Semi-Automated Setup}
 
-For the precise extraction of performance metrics in passive components, such as the excess loss 
-and imbalance of the MMIs, a high-throughput setup is utilized. This bench is equipped with a 
-64-channel fiber array mounted on a high-precision hexapod positioner. 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch3-hexapod_setup.png}
+    \caption{High-throughput semi-automated characterization bench: (a) Schematic representation 
+    showing the 64-channel fiber array and the hexapod positioner. (b) Photograph of the 
+    experimental setup during the measurement of cascaded MMI 2x2 splitters.}
+    \label{fig:ch3-hexapod_setup}
+\end{figure}
 
-The use of a semi-automated alignment routine enables the efficient characterization of cascaded 
-structures. Specifically, by measuring chains of 16 to 18 cascaded MMIs, the cumulative loss can be 
-characterized with significantly reduced experimental error. This statistical approach allows for 
-the extraction of the mean insertion loss per component through linear regression of the cascaded 
-stages, filtering out the fluctuations inherent in single-device measurements and fiber-to-chip 
-coupling variations.
+For the precise extraction of performance metrics in passive components, such as the excess loss 
+and imbalance of MMI couplers, a high-throughput setup is utilized. As shown in the schematic of 
+Figure \ref{fig:ch3-hexapod_setup}a, this bench is equipped with a 64-channel fiber array mounted 
+on a high-precision hexapod positioner, enabling semi-automated alignment routines.
+
+The physical implementation is captured in Figure \ref{fig:ch3-hexapod_setup}b during the 
+characterization of cascaded structures. By measuring chains of 16 to 18 cascaded MMIs, the 
+cumulative loss can be determined with significantly reduced experimental error. This statistical 
+approach allows for the extraction of the mean insertion loss per component through linear 
+regression of the cascaded stages, effectively filtering out fluctuations from single-device 
+measurements and fiber-to-chip coupling variations.
 
 \subsubsection{Thermal Management and Stability}
 
-Given the high thermo-optic coefficient of silicon, all measurements were conducted under strict 
-thermal control. The photonic chips were mounted on a specialized vacuum chuck equipped with a 
-high-power Thermo-Electric Cooler (TEC) and a feedback thermistor. This system ensures a constant 
-operating temperature, typically maintained at $25^{\circ}\text{C}$ for standard characterization 
-or $45^{\circ}\text{C}$ to simulate high-density operating environments. This stabilization is 
-critical to avoid spectral shifts during the swept-wavelength measurements and to ensure the 
-repeatability of the results across different fabrication runs.
+Given the high thermo-optic coefficient of silicon \cite{cocorullo2002measurement}, all 
+measurements were conducted under strict thermal control to prevent unwanted spectral shifts and 
+ensure the reliability of the experimental data. The photonic chips were mounted on a specialized 
+vacuum chuck equipped with a high-power Thermo-Electric Cooler (TEC) and a feedback thermistor. 
+This closed-loop system ensures a constant operating temperature, typically maintained at 
+$25^{\circ}\text{C}$ or $45^{\circ}\text{C}$. This stabilization is critical to avoid the drift of 
+resonant structures and to ensure the repeatability of the results across different fabrication 
+runs and measurement sessions.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -147,7 +179,7 @@ Pérdidas de inserción medidas y dependencia con la longitud de onda en la band
 \subsection{Motivation for Inverse Design}
 Por qué un MMI estándar no era suficiente (ancho de banda, tamaño o tolerancia)
 
-\subsection{Adjoint Method Implementation}
+\subsection{Adjoint Method Implementation}\label{sec:mmi_adjoint}
 Explicar brevemente la función objetivo (ej. maximizar transmisión y balance en 1530-1565 nm)
 
 \subsection{Performance Comparison}
