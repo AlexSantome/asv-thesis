@@ -157,21 +157,114 @@ resonant structures and to ensure the repeatability of the results across differ
 runs and measurement sessions.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Simple Inverted Taper for Edge Coupling} \label{sec:taper}
+
+While grating couplers offer high flexibility for wafer-level testing, they present significant 
+limitations for certain advanced packaging paradigms. Specifically, the vertical emission of 
+grating couplers is often incompatible with flip-chip bonding architectures, where the top 
+surface of the photonic chip is obstructed by a mounted electronic or laser die. To overcome this 
+and enable the ultra-dense integration required for the systems described in \ref{chap:systems}, a 
+side-coupling approach using a simple inverted taper was implemented.
 
 
-\section{Fiber-to-Chip Interface}
-Simple Inverted Taper
+% \subsection{Design Rationale and Geometry}
 
-\subsection{Geometry and Design}
-Dimensiones de la punta (tip width) y longitud del taper
+% The primary goal of this edge coupler is to act as a SSC that transitions the highly confined mode 
+% of a standard $220 \text{ nm} \times 500 \text{ nm}$ silicon waveguide to a larger, less confined 
+% mode that better matches the Mode Field Diameter (MFD) of an external fiber. 
 
-\subsection{Simulation Results}
-Perfiles de modo y eficiencia de acoplamiento teórica
+% The edge coupler design is directly dictated by the specific SOI layer stack and the lithographic 
+% constraints of the foundry used in this work. Figure \ref{fig:ch3-taper_design}(a) shows the particular cross-section of 
+% the platform, while Figure \ref{fig:ch3-taper_design}(b) presents the top-view geometry of the inverted taper.
+
+% \begin{figure}[!ht]
+%     \centering
+%     \includegraphics[width=0.7\textwidth]{figures/ch3-edge_coupler_design.png}
+%     \caption{Geometry of the inverted taper edge coupler: (a) Cross-section of the SOI 
+%     waveguide showing the $220 \text{ nm} \times 500 \text{ nm}$ silicon core on BOX. 
+%     (b) Top-view of the $500 \ \mu\text{m}$ long linear taper transitioning from the 
+%     standard waveguide to the $100 \text{ nm}$ minimum tip width.
+%     Note: Dimensions are not to scale for visualization purposes.}
+%     \label{fig:ch3-taper_design}
+% \end{figure}
+
+% As illustrated in Figure \ref{fig:ch3-taper_design}, the design consists of a linear taper where 
+% the silicon core width is gradually reduced from $500 \text{ nm}$ down to a tip width of $100 
+% \text{ nm}$ (the minimum value allowed by the foundry) over a total length of $500 \ \mu \text{m}$. 
+% Note that the aspect ratio in Figure \ref{fig:ch3-taper_design}(b) is significantly modified for 
+% clarity, as the device length is three orders of magnitude larger than its width.
+% This reduction in the silicon cross-section forces the optical power to delocalize from the core, 
+% effectively expanding the mode into the surrounding cladding of $SiO_2$.
+
+\subsection{Design Rationale and Geometry}
+
+The edge coupler design is dictated by the specific layer stack and the lithographic constraints of 
+the SOI foundry used in this work. Figure \ref{fig:ch3-taper_design}(a) illustrates the particular
+cross-section of the platform, while Figure \ref{fig:ch3-taper_design}(b) presents the top-view 
+geometry of the implemented inverted taper.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/ch3-edge_coupler_design.png}
+    \caption{Geometry of the inverted taper edge coupler: (a) Cross-section of the SOI stack 
+    provided by the foundry. (b) Top-view of the $500 \ \mu\text{m}$ long linear taper 
+    transitioning from the bus waveguide to the $100 \text{ nm}$ tip. Note: Dimensions in (b) are 
+    not to scale.}
+    \label{fig:ch3-taper_design}
+\end{figure}
+
+The physical dimensions of the SSC were selected to maximize mode expansion at the chip facet 
+within the following foundry-specific parameters:
+\begin{itemize}
+    \item \textbf{Waveguide Stack:} The $220 \text{ nm}$ thick silicon core sits on a $2200 
+    \text{ nm}$ BOX and is covered by a $4000 \text{ nm}$ $SiO_2$ upper cladding. This stack 
+    thickness is critical as it defines the maximum volume available for the mode to expand as it 
+    delocalizes from the silicon core.
+    \item \textbf{Lithographic Limit ($w_{tip}$):} The width is reduced from the nominal 
+    $500 \text{ nm}$ waveguide to a tip width of $100 \text{ nm}$. This is the minimum feature size
+    allowed by the foundry's design rules, representing the narrowest possible tip to achieve the 
+    highest MFD mismatch reduction.
+    \item \textbf{Adiabatic Transition ($L_{taper}$):} A length of $500 \ \mu\text{m}$ was
+    implemented to ensure an adiabatic modal transition. This length ensures that power is 
+    transferred efficiently from the confined waveguide mode to the expanded cladding mode without 
+    significant radiation losses.
+\end{itemize}
+
+As the device length is three orders of magnitude larger than its width, the schematic in Figure \ref{fig:ch3-taper_design}(b) uses a modified aspect ratio for clarity, focusing on the geometric transition rather than physical proportions.
+
+
+
+\subsection{Simulation and Performance Baseline}
+
+The design was simulated using the Beam Propagation Method (BPM) in RSoft to establish a 
+performance baseline. Given that the focus of this work lies in the system-level integration rather 
+than the optimization of the coupling interface itself, a straightforward linear geometry was 
+prioritized for its fabrication robustness.
+
+The key performance metrics extracted from the simulations are:
+\begin{itemize}
+    \item \textbf{Coupling Efficiency:} The simulated coupling loss is approximately $3.5 
+    \text{ dB/facet}$ when interfacing with a $2.5 \ \mu \text{m}$ MFD lensed fiber at 
+    $\lambda = 1550 \text{ nm}$.
+    \item \textbf{Alignment Tolerance:} The $1\text{ dB}$ alignment tolerance is estimated at 
+    $\pm 0.7 \ \mu \text{m}$ for both horizontal and vertical axes. This requires the use of the 
+    piezoelectric-assisted alignment stages described in Section \ref{subsec:setup}.
+\end{itemize}
+
+Despite its modest performance compared to more complex multi-layered or sub-wavelength grating (SWG) tapers, this simple SSC provides the necessary building block for **flip-chip compatible** architectures. By moving the optical interface to the chip facet, it ensures that the top surface remains available for electrical interconnections and thermal management of active components, fulfilling a critical requirement for the high-density systems characterized in this thesis.
+
+
+
+
 
 \subsection{Experimental Characterization}
 Pérdidas de inserción medidas y dependencia con la longitud de onda en la banda C
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{High-Performance MMI via Adjoint Optimization}  
