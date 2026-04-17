@@ -194,7 +194,31 @@
 %%%%%%%%%  Representative set-up for biblatex  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Numerical citations of references
-\usepackage[style=ext-numeric-comp,giveninits=true,maxbibnames=10,sorting=none, url=false, isbn=false]{biblatex}
+\usepackage[style=ext-numeric-comp,giveninits=true,maxbibnames=10,sorting=none, url=true, isbn=false]{biblatex}
+% \AtEveryBibitem{%
+%   \ifentrytype{misc}{%
+%     % Es de tipo @misc (tu fibra): No hacemos nada, se queda como está.
+%   }{%
+%     % NO es @misc (tus papers): Borramos URL y fecha de acceso.
+%     \clearfield{url}%
+%     \clearfield{urldate}%
+%   }%
+% }
+
+% 2. Redefinimos el comando de impresión de la URL
+\renewbibmacro*{url}{%
+  \ifentrytype{misc}
+    {\printfield{url}} % Si es misc (fibra), imprime la URL
+    {} % Si es cualquier otra cosa, no imprimas NADA
+}
+
+% 3. Redefinimos el comando de impresión de la fecha de acceso (el "visited on")
+\renewbibmacro*{urldate}{%
+  \ifentrytype{misc}
+    {\printurldate} % Si es misc, imprime la fecha de visita
+    {} % Si es cualquier otra cosa, no imprimas NADA
+}
+
 
 %% IEEE style citations and references
 % \usepackage[style=ieee,maxbibnames=10,sorting=none]{biblatex}% style=ext-numeric-comp,articlein=false,giveninits=true

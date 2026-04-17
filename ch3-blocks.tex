@@ -157,7 +157,6 @@ resonant structures and to ensure the repeatability of the results across differ
 runs and measurement sessions.
 
 
-
 \section{Simple Inverted Taper for Edge Coupling} \label{sec:taper}
 
 While grating couplers offer high flexibility for wafer-level testing, they present significant 
@@ -167,35 +166,6 @@ surface of the photonic chip is obstructed by a mounted electronic or laser die.
 and enable the ultra-dense integration required for the systems described in \ref{chap:systems}, a 
 side-coupling approach using a simple inverted taper was implemented.
 
-
-% \subsection{Design Rationale and Geometry}
-
-% The primary goal of this edge coupler is to act as a SSC that transitions the highly confined mode 
-% of a standard $220 \text{ nm} \times 500 \text{ nm}$ silicon waveguide to a larger, less confined 
-% mode that better matches the Mode Field Diameter (MFD) of an external fiber. 
-
-% The edge coupler design is directly dictated by the specific SOI layer stack and the lithographic 
-% constraints of the foundry used in this work. Figure \ref{fig:ch3-taper_design}(a) shows the particular cross-section of 
-% the platform, while Figure \ref{fig:ch3-taper_design}(b) presents the top-view geometry of the inverted taper.
-
-% \begin{figure}[!ht]
-%     \centering
-%     \includegraphics[width=0.7\textwidth]{figures/ch3-edge_coupler_design.png}
-%     \caption{Geometry of the inverted taper edge coupler: (a) Cross-section of the SOI 
-%     waveguide showing the $220 \text{ nm} \times 500 \text{ nm}$ silicon core on BOX. 
-%     (b) Top-view of the $500 \ \mu\text{m}$ long linear taper transitioning from the 
-%     standard waveguide to the $100 \text{ nm}$ minimum tip width.
-%     Note: Dimensions are not to scale for visualization purposes.}
-%     \label{fig:ch3-taper_design}
-% \end{figure}
-
-% As illustrated in Figure \ref{fig:ch3-taper_design}, the design consists of a linear taper where 
-% the silicon core width is gradually reduced from $500 \text{ nm}$ down to a tip width of $100 
-% \text{ nm}$ (the minimum value allowed by the foundry) over a total length of $500 \ \mu \text{m}$. 
-% Note that the aspect ratio in Figure \ref{fig:ch3-taper_design}(b) is significantly modified for 
-% clarity, as the device length is three orders of magnitude larger than its width.
-% This reduction in the silicon cross-section forces the optical power to delocalize from the core, 
-% effectively expanding the mode into the surrounding cladding of $SiO_2$.
 
 \subsection{Design Rationale and Geometry}
 
@@ -241,27 +211,83 @@ The design was simulated using the Beam Propagation Method (BPM) in RSoft to est
 performance baseline. Given that the focus of this work lies in the system-level integration rather 
 than the optimization of the coupling interface itself, a straightforward linear geometry was 
 prioritized for its fabrication robustness.
+The simulation also pretends verifying the assumption that standard optical fibers are 
+fundamentally mismatched with the mode expansion capabilities of a $100 \text{ nm}$ silicon tip. 
+By establishing a performance baseline, we evaluate the necessity of employing specialized 
+high-numerical aperture fibers and quantify the impact of fabrication tolerances.
+Figure \ref{fig:ch3-taper_sims} summarizes the performance of the 
+inverted taper regarding modal matching, spectral behavior, and dicing tolerances.
 
-The key performance metrics extracted from the simulations are:
-\begin{itemize}
-    \item \textbf{Coupling Efficiency:} The simulated coupling loss is approximately $3.5 
-    \text{ dB/facet}$ when interfacing with a $2.5 \ \mu \text{m}$ MFD lensed fiber at 
-    $\lambda = 1550 \text{ nm}$.
-    \item \textbf{Alignment Tolerance:} The $1\text{ dB}$ alignment tolerance is estimated at 
-    $\pm 0.7 \ \mu \text{m}$ for both horizontal and vertical axes. This requires the use of the 
-    piezoelectric-assisted alignment stages described in Section \ref{subsec:setup}.
-\end{itemize}
+The relationship between fiber MFD and coupling efficiency, shown in Figure 
+\ref{fig:ch3-taper_sims}(a), confirms that the delocalized mode at the $100 \text{ nm}$ tip is 
+insufficient to match the $\sim 10.4 \ \mu\text{m}$ MFD of a standard SMF-28 fiber, resulting in 
+losses above $4.25 \text{ dB}$. To validate the need for a specialized interface, we compared these 
+results with Ultra-High Numerical Aperture (UHNA) fibers. As illustrated in the 
+spectral response in Figure \ref{fig:ch3-taper_sims}(b), UHNA1 \cite{coherent_uhna1} 
+($MFD \approx 4.8 \ \mu\text{m}$) provides the optimal match with an excess loss of approximately 
+$2.5 \text{ dB}$ and a remarkably flat behavior across the C-band. In contrast, UHNA7 
+\cite{coherent_uhna7} ($MFD \approx 3.2 \ \mu\text{m}$) shows higher losses due to 
+over-confinement, confirming UHNA1 as the necessary bridge for this SOI interface.
 
-Despite its modest performance compared to more complex multi-layered or sub-wavelength grating (SWG) tapers, this simple SSC provides the necessary building block for **flip-chip compatible** architectures. By moving the optical interface to the chip facet, it ensures that the top surface remains available for electrical interconnections and thermal management of active components, fulfilling a critical requirement for the high-density systems characterized in this thesis.
+\clearpage
 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/ch3-edge_coupler_simulations.png}
+    \caption{Edge coupler simulation results: (a) Excess loss vs. Mode Field Diameter (MFD). 
+    (b) Spectral performance comparison across the C-band for SMF-28, UHNA1, and UHNA7 fibers.
+    (c) Schematic representation of the spacing ($sp$) between the PIC facet and the taper tip. 
+    (d) Excess loss as a function of $sp$ for a $4.8 \ \mu\text{m}$ MFD.}
+    \label{fig:ch3-taper_sims}
+\end{figure}
 
+Beyond modal matching, the longitudinal alignment between the taper tip and the chip facet ($sp$) 
+was analyzed, as schematized in Figure \ref{fig:ch3-taper_sims}(c). In practice, dicing or 
+polishing offsets often prevent the silicon tip from reaching the absolute edge. The simulation for 
+the $4.8 \ \mu\text{m}$ MFD case, presented in Figure \ref{fig:ch3-taper_sims}(d), reveals a linear 
+increase in loss with a slope of approximately $0.1 \text{ dB}/\mu\text{m}$. This sensitivity 
+analysis is critical for the packaging stages described in \nameref{chap:systems}, as it quantifies 
+the power budget penalty associated with facet preparation tolerances.
+
+% Despite its modest performance compared to more complex multi-layered or sub-wavelength grating 
+% (SWG) tapers, this simple SSC provides the necessary building block for flip-chip compatible 
+% architectures. By moving the optical interface to the chip facet, it ensures that the top surface 
+% remains available for electrical interconnections and thermal management of active components, 
+% fulfilling a critical requirement for the high-density systems characterized in this thesis.
 
 
 
 \subsection{Experimental Characterization}
-Pérdidas de inserción medidas y dependencia con la longitud de onda en la banda C
+
+\begin{table}[!ht]
+\centering
+\caption{Expected edge coupler performance by simulation at $1550 \text{ nm}$.}
+\label{tab:ec_sim_results}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Optical Fiber} & \textbf{MFD ($\mu\text{m}$)} & \textbf{EC Loss (dB)} & \textbf{PIC In-Out Loss (dB)} & \textbf{Bandwidth} \\ \midrule
+SMF-28 & 10.4 & 4.4 & 8.8 & $>60 \text{ nm}$ \\ \bottomrule
+\end{tabular}
+\end{table}
 
 
+\begin{table}[!ht]
+\centering
+\caption{Experimental measurement results for different Edge Coupler (EC) instances.}
+\label{tab:ec_measurement_results}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Edge Coupler ID} & \textbf{Median @ $1550 \text{ nm}$ (dB)} & \textbf{STD @ $1550 \text{ nm}$ (dB)} \\ \midrule
+EC\#1 & 9.10  & 0.22 \\
+EC\#2 & 9.56  & 0.11 \\
+EC\#3 & 10.59 & 0.42 \\
+EC\#4 & 11.20 & 0.24 \\
+EC\#5 & 15.78 & 0.12 \\
+EC\#6 & 8.59  & 0.29 \\
+EC\#7 & 8.33  & 0.33 \\
+EC\#8 & 8.39  & 0.32 \\ \bottomrule
+\end{tabular}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
