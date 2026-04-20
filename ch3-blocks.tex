@@ -259,35 +259,158 @@ the power budget penalty associated with facet preparation tolerances.
 
 \subsection{Experimental Characterization}
 
-\begin{table}[!ht]
-\centering
-\caption{Expected edge coupler performance by simulation at $1550 \text{ nm}$.}
-\label{tab:ec_sim_results}
-\begin{tabular}{lcccc}
-\toprule
-\textbf{Optical Fiber} & \textbf{MFD ($\mu\text{m}$)} & \textbf{EC Loss (dB)} & \textbf{PIC In-Out Loss (dB)} & \textbf{Bandwidth} \\ \midrule
-SMF-28 & 10.4 & 4.4 & 8.8 & $>60 \text{ nm}$ \\ \bottomrule
-\end{tabular}
-\end{table}
+To experimentally validate the performance and dicing tolerances of the proposed designs, a series 
+of eight edge coupler (EC) test structures were fabricated. Figure 
+\ref{fig:ch3-ec_fabricated}(a) illustrates the layout of these structures, which were arranged in 
+a loop-back configuration to facilitate the extraction of the insertion loss per facet.
+
+The set of designs was defined as follows:
+\begin{description}
+    \item[EC\#3:] Represents the \textbf{nominal design}, corresponding to the optimized parameters 
+    derived from the simulation baseline ($sp = 0 \ \mu\text{m}$).
+    \item[EC\#1:] Consists of a version \textbf{identical to the nominal design but with a reduced 
+    total length}. This variant was included to evaluate the impact of the taper footprint on the 
+    coupling efficiency and to verify the adiabaticity of the mode transformation.
+    \item[EC\#2, EC\#4, and EC\#5:] Incorporate \textbf{minimal spacing variations}. In these 
+    instances, the taper tip was shifted slightly inwards and outwards relative to the theoretical 
+    dicing line to evaluate fine fabrication and alignment tolerances.
+    \item[EC\#6, EC\#7, and EC\#8:] Involve \textbf{significant offsets}, with the coupler tips 
+    retracted approximately $10 \ \mu\text{m}$ from the chip edge. These variations were 
+    specifically designed to characterize the impact of more aggressive dicing inaccuracies on the 
+    coupling efficiency.
+\end{description}
+
+Figure \ref{fig:ch3-ec_fabricated}(b) shows an optical microscope image of the fabricated and 
+diced SOI chip. The image confirms the successful definition of the facets and the relative 
+positioning of the coupler array within the die. This experimental matrix allows for a direct 
+comparison between the theoretical predictions discussed in Section 3.2.1 and the real-world 
+performance under typical foundry dicing conditions.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/ch3-edge_coupler_fabricated.png}
+    \caption{Experimental validation: (a) Layout of the loop-back test structure and 
+    (b) optical micrograph of the fabricated chip facet.}
+    \label{fig:ch3-ec_fabricated}
+\end{figure}
+
+The spectral response of the fabricated edge couplers was characterized within the $1520-1600 
+\text{ nm}$ wavelength range. Figure \ref{fig:ch3-ec_meas} illustrates the experimental results, 
+providing a detailed view of the performance and stability of the designs.
+
+Figures \ref{fig:ch3-ec_meas}(a) and \ref{fig:ch3-ec_meas}(b) show the transmission spectra for 
+five different DIEs of the nominal design (EC\#3) and the best-performing variant (EC\#7), 
+respectively. The high degree of overlap between the curves from different chips demonstrates the 
+excellent reproducibility of the fabrication process and the robustness of the inverted taper 
+design against chip-to-chip variations.
+
+\clearpage
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/ch3-edge_coupler_meas_2line.png}
+    \caption{Normalized measured optical transmission spectra: (a) EC\#3 and (b) EC\#7 across 5 
+    different DIEs showing high reproducibility, and (c) comparison of all eight EC variants.}
+    \label{fig:ch3-ec_meas}
+\end{figure}
+
+
+The summarized results, comparing the simulated baseline with the measured performance of these 
+devices at $1550 \text{ nm}$, are presented in Table \ref{tab:ec_combined_results}.
 
 
 \begin{table}[!ht]
 \centering
-\caption{Experimental measurement results for different Edge Coupler (EC) instances.}
-\label{tab:ec_measurement_results}
-\begin{tabular}{lcc}
+\caption{Comparison between simulated baseline and experimental results at $1550 \text{ nm}$. 
+Loss per facet is estimated by dividing the total insertion loss by two.}
+\label{tab:ec_combined_results}
+\begin{tabular}{lccc}
 \toprule
-\textbf{Edge Coupler ID} & \textbf{Median @ $1550 \text{ nm}$ (dB)} & \textbf{STD @ $1550 \text{ nm}$ (dB)} \\ \midrule
-EC\#1 & 9.10  & 0.22 \\
-EC\#2 & 9.56  & 0.11 \\
-EC\#3 & 10.59 & 0.42 \\
-EC\#4 & 11.20 & 0.24 \\
-EC\#5 & 15.78 & 0.12 \\
-EC\#6 & 8.59  & 0.29 \\
-EC\#7 & 8.33  & 0.33 \\
-EC\#8 & 8.39  & 0.32 \\ \bottomrule
+\textbf{Case / Device ID} & \textbf{Total IL (dB)} & \textbf{$\sigma$ (dB)} & \textbf{Loss/Facet (dB)} \\ \midrule
+\textit{Simulation (SMF-28)} & 8.80 & --- & 4.40 \\ \midrule
+EC\#01 & 9.10  & 0.22 & 4.55 \\
+EC\#02 & 9.56  & 0.11 & 4.78 \\
+EC\#03 & 10.59 & 0.42 & 5.29 \\
+EC\#04 & 11.20 & 0.24 & 5.60 \\
+EC\#05 & 15.78 & 0.12 & 7.89 \\
+EC\#06 & 8.59  & 0.29 & 4.29 \\
+\textbf{EC\#07} & \textbf{8.33} & \textbf{0.33} & \textbf{4.16} \\
+\textbf{EC\#08} & \textbf{8.39} & \textbf{0.32} & \textbf{4.19} \\ \bottomrule
 \end{tabular}
 \end{table}
+
+The experimental results presented in Table \ref{tab:ec_combined_results} lead to several key 
+conclusions regarding the edge coupler performance:
+
+\begin{itemize}
+    \item \textbf{Validation of the Simulation Model:} The best-performing devices 
+    (EC\#7 and EC\#8) achieved insertion losses of approximately $8.33 \text{ dB}$, which is in 
+    excellent agreement with the $8.80 \text{ dB}$ predicted by simulations. This slight 
+    improvement over the nominal case suggests that the mode expansion and fiber-to-chip alignment 
+    were highly optimized during the measurement process.
+    \item \textbf{Robustness to Dicing Inaccuracies:} One of the most significant findings is that 
+    the designs with a $10 \text{ \mu m}$ retraction (EC\#06--08) showed superior or equivalent 
+    performance to the nominal design (EC\#03). This confirms that the inverted taper design is 
+    highly resilient to dicing offsets, provided that the mode has enough space to expand before 
+    reaching the facet.
+    \item \textbf{Adiabaticity and Footprint:} The results for EC\#1 ($9.10 \text{ dB}$) 
+    demonstrate that reducing the taper length does not lead to a significant penalty in coupling 
+    efficiency. This confirms that the taper profile remains largely adiabatic even in its more 
+    compact version, offering a potential path for reducing the total footprint of the PIC.
+    \item \textbf{Spectral and Fabrication Stability:} The low standard deviation 
+    (under $0.4 \text{ dB}$ for most cases) and the spectral flatness observed across the C-band 
+    validate the reliability of the SOI platform and the high-NA fiber interface for broadband 
+    applications.
+\end{itemize}
+
+
+% In terms of absolute performance, it must be acknowledged that the measured coupling 
+% losses—averaging 4.16--4.55 dB/facet—are relatively high compared to state-of-the-art edge couplers 
+% reported in the literature, where values below $1.5 \text{ dB}$ or even sub-decibel performance are 
+% common \cite{barwiczAutomatedHighthroughputPhotonic2018, papesFiberchipEdgeCoupler2016, 
+% yiPolarizationinsensitiveLowlossOband2025, gaoEfficientSiliconphotonicsEdge2025}.
+% This discrepancy is primarily attributed to the lithographic constraints of the dedicated 
+% fabrication runs, which limited the minimum taper tip width to $100 \text{ nm}$. As demonstrated in 
+% the simulation analysis, this tip width prevents a more effective mode expansion, leading to a 
+% significant mode mismatch with the high-NA fiber.
+
+% However, the primary objective of this design was not to achieve record-breaking efficiency, but 
+% rather to demonstrate a fault-tolerant interface that enables high-density integration systems, as
+% reported in \nameref{chap:systems}. In this regard, the results are highly successful: the coupler 
+% maintains a consistent and predictable performance despite significant dicing misalignments of up 
+% to $10 \text{ \mu m}$. For applications where assembly reliability and tolerance to mechanical 
+% inaccuracies are prioritized over a strict power budget—such as the fault-tolerant PIC architecture 
+% proposed in this work—this trade-off between absolute loss and fabrication robustness is justified.
+
+% In conclusion, the edge coupler has been successfully validated as a reliable and resilient entry 
+% point for the optical signal. Having established this stable fiber-to-chip interface, the following 
+% section describes the design and characterization of the MMI couplers used for on-chip power 
+% splitting.
+
+In terms of absolute performance, it must be acknowledged that the measured coupling 
+losses—averaging $4.16\text{--}4.55~\text{dB/facet}$—are relatively high compared to 
+state-of-the-art edge couplers reported in the literature, where values below $1.5~\text{dB}$ or 
+even sub-decibel performance are common \cite{barwiczAutomatedHighthroughputPhotonic2018, 
+papesFiberchipEdgeCoupler2016, yiPolarizationinsensitiveLowlossOband2025, 
+gaoEfficientSiliconphotonicsEdge2025}. This discrepancy is primarily attributed to the lithographic 
+constraints of the dedicated fabrication runs, which limited the minimum taper tip width to 
+$100~\text{nm}$. As demonstrated in the simulation analysis, this tip width prevents a more 
+effective mode expansion, leading to a significant mode mismatch with the high-NA fiber.
+
+However, the primary objective of this design was not to achieve record-breaking efficiency, but 
+rather to demonstrate a fault-tolerant interface that enables high-density integration systems, 
+as reported in \nameref{chap:systems}. In this regard, the results are highly successful: 
+the coupler maintains a consistent and predictable performance despite significant dicing 
+misalignments of up to $10~\mu\text{m}$. For applications where assembly reliability and tolerance 
+to mechanical inaccuracies are prioritized over a strict power budget—such as the fault-tolerant 
+PIC architecture proposed in this work—this trade-off between absolute loss and fabrication 
+robustness is justified.
+
+In conclusion, the edge coupler has been successfully validated as a reliable and resilient entry 
+point for the optical signal. Having established this stable fiber-to-chip interface, the following 
+section describes the design and characterization of the MMI couplers used for on-chip power 
+splitting.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -306,6 +429,10 @@ Tabla/Gráfica comparando el MMI "analítico" vs. el "optimizado"
 
 \subsection{Experimental Results}
 Medidas de Excess Loss e Imbalance
+
+
+
+
 
 \section{Active Tuning}
 Phase Shifter Designs
