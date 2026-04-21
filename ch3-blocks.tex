@@ -328,14 +328,14 @@ Loss per facet is estimated by dividing the total insertion loss by two.}
 \toprule
 \textbf{Case / Device ID} & \textbf{Total IL (dB)} & \textbf{$\sigma$ (dB)} & \textbf{Loss/Facet (dB)} \\ \midrule
 \textit{Simulation (SMF-28)} & 8.80 & --- & 4.40 \\ \midrule
-EC\#01 & 9.10  & 0.22 & 4.55 \\
-EC\#02 & 9.56  & 0.11 & 4.78 \\
-EC\#03 & 10.59 & 0.42 & 5.29 \\
-EC\#04 & 11.20 & 0.24 & 5.60 \\
-EC\#05 & 15.78 & 0.12 & 7.89 \\
-EC\#06 & 8.59  & 0.29 & 4.29 \\
-\textbf{EC\#07} & \textbf{8.33} & \textbf{0.33} & \textbf{4.16} \\
-\textbf{EC\#08} & \textbf{8.39} & \textbf{0.32} & \textbf{4.19} \\ \bottomrule
+EC\#1 & 9.10  & 0.22 & 4.55 \\
+EC\#2 & 9.56  & 0.11 & 4.78 \\
+EC\#3 & 10.59 & 0.42 & 5.29 \\
+EC\#4 & 11.20 & 0.24 & 5.60 \\
+EC\#5 & 15.78 & 0.12 & 7.89 \\
+EC\#6 & 8.59  & 0.29 & 4.29 \\
+\textbf{EC\#7} & \textbf{8.33} & \textbf{0.33} & \textbf{4.16} \\
+\textbf{EC\#8} & \textbf{8.39} & \textbf{0.32} & \textbf{4.19} \\ \bottomrule
 \end{tabular}
 \end{table}
 
@@ -344,48 +344,25 @@ conclusions regarding the edge coupler performance:
 
 \begin{itemize}
     \item \textbf{Validation of the Simulation Model:} The best-performing devices 
-    (EC\#7 and EC\#8) achieved insertion losses of approximately $8.33 \text{ dB}$, which is in 
-    excellent agreement with the $8.80 \text{ dB}$ predicted by simulations. This slight 
-    improvement over the nominal case suggests that the mode expansion and fiber-to-chip alignment 
-    were highly optimized during the measurement process.
-    \item \textbf{Robustness to Dicing Inaccuracies:} One of the most significant findings is that 
-    the designs with a $10 \text{ \mu m}$ retraction (EC\#06--08) showed superior or equivalent 
-    performance to the nominal design (EC\#03). This confirms that the inverted taper design is 
-    highly resilient to dicing offsets, provided that the mode has enough space to expand before 
-    reaching the facet.
-    \item \textbf{Adiabaticity and Footprint:} The results for EC\#1 ($9.10 \text{ dB}$) 
-    demonstrate that reducing the taper length does not lead to a significant penalty in coupling 
-    efficiency. This confirms that the taper profile remains largely adiabatic even in its more 
-    compact version, offering a potential path for reducing the total footprint of the PIC.
-    \item \textbf{Spectral and Fabrication Stability:} The low standard deviation 
-    (under $0.4 \text{ dB}$ for most cases) and the spectral flatness observed across the C-band 
-    validate the reliability of the SOI platform and the high-NA fiber interface for broadband 
-    applications.
+    (EC\#7 and EC\#8) achieved insertion losses of approximately $8.33~\text{dB}$ 
+    ($4.16~\text{dB/facet}$), which is in excellent agreement with the $8.80~\text{dB}$ predicted 
+    by simulations. 
+    \item \textbf{Efficiency and Lithographic Trade-off:} The absolute coupling losses are 
+    acknowledged to be higher than those of record-breaking State-of-the-Art (SOTA) designs. This 
+    is a direct consequence of the $100~\text{nm}$ taper tip limitation, representing a deliberate 
+    trade-off where record efficiency was secondary to Design for Manufacturability (DfM) and 
+    high-yield fabrication.
+    \item \textbf{Fault-Tolerance to Dicing Inaccuracies:} The results confirm the primary thesis 
+    objective: the designs with a $10~\mu\text{m}$ retraction (EC\#6--8) showed equivalent or 
+    superior performance to the nominal design. This demonstrates that the inverted taper is highly 
+    resilient to dicing offsets, validating its fault-tolerant nature.
+    \item \textbf{Adiabaticity and Footprint:} The results for EC\#1, the shorter variant, which 
+    achieved $9.10~\text{dB}$ of total loss, demonstrate that reducing the taper length does not 
+    lead to a significant penalty in coupling efficiency. This confirms that the taper profile 
+    remains largely adiabatic even in its more compact version, offering a potential path for 
+    reducing the total footprint of the PIC without compromising performance.
 \end{itemize}
 
-
-% In terms of absolute performance, it must be acknowledged that the measured coupling 
-% losses—averaging 4.16--4.55 dB/facet—are relatively high compared to state-of-the-art edge couplers 
-% reported in the literature, where values below $1.5 \text{ dB}$ or even sub-decibel performance are 
-% common \cite{barwiczAutomatedHighthroughputPhotonic2018, papesFiberchipEdgeCoupler2016, 
-% yiPolarizationinsensitiveLowlossOband2025, gaoEfficientSiliconphotonicsEdge2025}.
-% This discrepancy is primarily attributed to the lithographic constraints of the dedicated 
-% fabrication runs, which limited the minimum taper tip width to $100 \text{ nm}$. As demonstrated in 
-% the simulation analysis, this tip width prevents a more effective mode expansion, leading to a 
-% significant mode mismatch with the high-NA fiber.
-
-% However, the primary objective of this design was not to achieve record-breaking efficiency, but 
-% rather to demonstrate a fault-tolerant interface that enables high-density integration systems, as
-% reported in \nameref{chap:systems}. In this regard, the results are highly successful: the coupler 
-% maintains a consistent and predictable performance despite significant dicing misalignments of up 
-% to $10 \text{ \mu m}$. For applications where assembly reliability and tolerance to mechanical 
-% inaccuracies are prioritized over a strict power budget—such as the fault-tolerant PIC architecture 
-% proposed in this work—this trade-off between absolute loss and fabrication robustness is justified.
-
-% In conclusion, the edge coupler has been successfully validated as a reliable and resilient entry 
-% point for the optical signal. Having established this stable fiber-to-chip interface, the following 
-% section describes the design and characterization of the MMI couplers used for on-chip power 
-% splitting.
 
 In terms of absolute performance, it must be acknowledged that the measured coupling 
 losses—averaging $4.16\text{--}4.55~\text{dB/facet}$—are relatively high compared to 
@@ -418,21 +395,138 @@ splitting.
 
 \section{High-Performance MMI via Adjoint Optimization}  
 
-\subsection{Motivation for Inverse Design}
-Por qué un MMI estándar no era suficiente (ancho de banda, tamaño o tolerancia)
+\label{sec:mmi_design}
 
-\subsection{Adjoint Method Implementation}\label{sec:mmi_adjoint}
-Explicar brevemente la función objetivo (ej. maximizar transmisión y balance en 1530-1565 nm)
+The $2\times2$ Multimode Interference (MMI) coupler is the fundamental building block for the 
+splitting and cross-coupling of optical signals within the system. As established in 
+Section~\ref{sec:ch2-puc}, each PUC is based on a symmetric MZI architecture, which inherently 
+incorporates two MMIs in its structure. Consequently, the insertion loss of an individual coupler 
+is encountered twice within every unit cell, compounding the total power penalty across the 
+programmable fabric.
 
-\subsection{Performance Comparison}
-Tabla/Gráfica comparando el MMI "analítico" vs. el "optimizado"
+In fact, these couplers are identified as the predominant source of loss within the integrated 
+architecture. Therefore, reducing splitter losses is not merely a design refinement but a critical 
+requirement for the scalability of the system; minimizing the power penalty at each junction is 
+essential to preserve a viable power budget as the number of cascaded PUCs increases. This section 
+details the experimental validation of our baseline design and the subsequent implementation of 
+advanced shape optimization techniques to push its performance toward the physical limit.
 
-\subsection{Experimental Results}
-Medidas de Excess Loss e Imbalance
+\subsection{Parametric Baseline Design}
+
+The design process for the MMI stage originated from a $2\times2$ geometry previously optimized 
+through conventional parametric sweeps and fabricated on a $220~\text{nm}$ SOI platform. To ensure 
+high performance and low loss, the device was implemented using shallow-etched waveguides with a 
+$150~\text{nm}$ silicon slab. This choice of partial etching provides a smoother transition for the 
+optical modes and reduces scattering compared to fully-etched strip waveguides.
+
+The MMI body features a footprint of approximately $40~\mu\text{m}$ in length and $15~\mu\text{m}$ 
+in width. To optimize the mode transition between the access waveguides and the multimode 
+interference region, $3~\mu\text{m}$ long tapers were integrated at each port. These access 
+structures utilize a $90~\text{nm}$ slab profile, specifically designed to bridge the modal 
+mismatch and minimize back-reflections at the junctions.
+
+To establish a reliable reference for the subsequent optimization stages, this parametric design 
+was experimentally characterized across several dies and wafers. 
+Figure~\ref{fig:ch3-baseline_mmi_sr} shows the measured splitting ratio over a $60~\text{nm}$ 
+bandwidth. The response remains remarkably balanced, with a deviation of less than $1\%$ from the 
+ideal $50/50$ distribution across the entire range ($1520\text{--}1580~\text{nm}$). This stability 
+demonstrates a high degree of wavelength insensitivity, which is a critical requirement for the 
+proposed architecture.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/ch3-baseline_mmi_sr.png} 
+    \caption{Experimental splitting ratio of the parametric $2\times2$ MMI baseline. The shaded 
+    regions represent the standard deviation across different dies (G3, B5, D4, and C2), showing a 
+    highly balanced and consistent $50/50$ response.}
+    \label{fig:ch3-baseline_mmi_sr}
+\end{figure}
+
+Furthermore, the device exhibits exceptionally low excess losses, as illustrated in 
+Figure~\ref{fig:ch3-baseline_mmi_el}. The loss reaches a minimum of approximately $0.13~\text{dB}$ 
+at $1550~\text{nm}$ and remains below $0.25~\text{dB}$ throughout the measured spectrum. Notably, 
+the consistency across samples—indicated by the shaded regions—reinforces the fault-tolerant nature 
+of the design against fabrication tolerances.
+
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/ch3-baseline_mmi_el.png} 
+    \caption{Measured excess losses for the parametric $2\times2$ MMI. The device shows a minimum 
+    loss of $0.13~\text{dB}$ and remains below $0.25~\text{dB}$ for the entire C-band, validating 
+    the efficiency of the shallow-etch design.}
+    \label{fig:ch3-baseline_mmi_el}
+\end{figure}
+
+Despite these high-performance metrics, this rectangular geometry represents a performance 
+plateau for traditional design methods. The following subsections describe the methodology used to 
+push these boundaries even further, employing shape optimization to minimize the remaining 
+scattering and further flatten the spectral response.
+
+
+\subsection{Shape Optimization Methodology}
+
+To determine if the performance of the already-optimized $2\times2$ MMI could be further enhanced, 
+a \textbf{shape optimization} strategy was implemented using the \texttt{lumopt} framework. The 
+core idea was to move beyond the limitations of rectangular boundaries and allow the device to 
+evolve into an "organic" profile that better accommodates the internal multimode interference 
+patterns.
+
+The optimization utilized the \textbf{gradient-based Adjoint Method}, which calculates the 
+sensitivity of a Figure of Merit (FoM) with respect to an arbitrary number of boundary parameters 
+using only two full-wave simulations per iteration. The optimization was configured as follows:
+
+\begin{itemize}
+    \item \textbf{Initial State:} The starting geometry was the experimentally-validated 
+    rectangular MMI.
+    \item \textbf{Figure of Merit (FoM):} The goal was to maximize the transmission into the 
+    fundamental TE modes of both output ports while simultaneously minimizing the imbalance across 
+    the C-band ($1530\text{--}1565~\text{nm}$).
+    \item \textbf{Design Parameters:} The side-walls of the MMI body were defined as B-spline 
+    curves controlled by multiple points. These points were allowed to shift, effectively 
+    "morphing" the MMI width along its longitudinal axis.
+    \item \textbf{Fabrication Constraints:} A minimum feature size and curvature radius were 
+    enforced to ensure the optimized shape remains fully compatible with the $100~\text{nm}$ 
+    lithography rules, preserving the \textbf{fault-tolerant} nature of the fabrication.
+\end{itemize}
+
+\subsection{Results and Performance Comparison}
+
+The comparison between the parametric baseline and the shape-optimized MMI reveals that even 
+well-established designs can be refined using inverse-design techniques. 
+Figure~\ref{fig:mmi_geometry_comparison} shows the evolution from the initial rectangular footprint 
+to the final optimized "waisted" profile.
+
+The spectral response, illustrated in Figure~\ref{fig:mmi_spectra}, demonstrates that the optimized 
+MMI achieves a flatter transmission profile and a reduction in insertion loss from 
+$X.XX~\text{dB}$ to $Y.YY~\text{dB}$. More importantly, the imbalance was further suppressed, 
+reaching a near-ideal $50/50$ distribution with less than $Z.ZZ~\text{dB}$ of deviation across the 
+entire bandwidth. This refinement confirms that the Adjoint Method can successfully extract 
+additional performance from designs that have already saturated their parametric optimization 
+potential.
+
+% --- PLACEHOLDER PARA LA TABLA COMPARATIVA ---
+\begin{table}[!ht]
+\centering
+\caption{Performance comparison between the experimentally-validated parametric design and the 
+shape-optimized MMI at $1550~\text{nm}$.}
+\label{tab:mmi_comparison}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Parameter} & \textbf{Parametric Design} & \textbf{Shape-Optimized} \\ \midrule
+Insertion Loss (dB) & $X.XX$ & $Y.YY$ \\
+Imbalance (dB)      & $X.XX$ & $Y.YY$ \\
+Bandwidth (nm)      & $>XX$  & $>YY$  \\ \bottomrule
+\end{tabular}
+\end{table}
 
 
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Active Tuning}
 Phase Shifter Designs
