@@ -249,12 +249,6 @@ increase in loss with a slope of approximately $0.1 \text{ dB}/\mu\text{m}$. Thi
 analysis is critical for the packaging stages described in \nameref{chap:systems}, as it quantifies 
 the power budget penalty associated with facet preparation tolerances.
 
-% Despite its modest performance compared to more complex multi-layered or sub-wavelength grating 
-% (SWG) tapers, this simple SSC provides the necessary building block for flip-chip compatible 
-% architectures. By moving the optical interface to the chip facet, it ensures that the top surface 
-% remains available for electrical interconnections and thermal management of active components, 
-% fulfilling a critical requirement for the high-density systems characterized in this thesis.
-
 
 
 \subsection{Experimental Characterization}
@@ -414,16 +408,15 @@ advanced shape optimization techniques to push its performance toward the physic
 \subsection{Parametric Baseline Design}
 
 The design process for the MMI stage originated from a $2\times2$ geometry previously optimized 
-through conventional parametric sweeps and fabricated on a $220~\text{nm}$ SOI platform. To ensure 
-high performance and low loss, the device was implemented using shallow-etched waveguides with a 
-$150~\text{nm}$ silicon slab. This choice of partial etching provides a smoother transition for the 
-optical modes and reduces scattering compared to fully-etched strip waveguides.
+through conventional parametric sweeps following the self-imaging 
+principle~\cite{soldanoOpticalMultimodeInterference1995}.  
 
-The MMI body features a footprint of approximately $40~\mu\text{m}$ in length and $15~\mu\text{m}$ 
-in width. To optimize the mode transition between the access waveguides and the multimode 
-interference region, $3~\mu\text{m}$ long tapers were integrated at each port. These access 
-structures utilize a $90~\text{nm}$ slab profile, specifically designed to bridge the modal 
-mismatch and minimize back-reflections at the junctions.
+Fabricated on a $220~\text{nm}$ SOI platform, the device was implemented using shallow-etched 
+waveguides with a $150~\text{nm}$ silicon slab. The MMI body features a footprint of 
+$33.7~\mu\text{m}$ in length and $5~\mu\text{m}$ in width, placed upon a $15~\mu\text{m}$ wide 
+slab region to ensure proper modal confinement. To optimize the mode transition, $3~\mu\text{m}$ 
+long tapers with a $90~\text{nm}$ slab profile were integrated at each access port, specifically 
+designed to bridge the modal mismatch and minimize back-reflections at the junctions.
 
 To establish a reliable reference for the subsequent optimization stages, this parametric design 
 was experimentally characterized across several dies and wafers. 
@@ -466,59 +459,103 @@ scattering and further flatten the spectral response.
 
 \subsection{Shape Optimization Methodology}
 
-To determine if the performance of the already-optimized $2\times2$ MMI could be further enhanced, 
-a \textbf{shape optimization} strategy was implemented using the \texttt{lumopt} framework. The 
-core idea was to move beyond the limitations of rectangular boundaries and allow the device to 
-evolve into an "organic" profile that better accommodates the internal multimode interference 
-patterns.
+To determine if the performance of the experimentally-validated $2\times2$ MMI could be further 
+enhanced, a shape optimization strategy was implemented using the \texttt{lumopt} framework within 
+the Ansys Lumerical suite. The core objective was to move beyond the limitations of rigid 
+rectangular boundaries and allow the device walls to evolve into an organic profile that better 
+matches the internal multimode interference patterns, thereby suppressing scattering and 
+mode-mismatch losses.
 
-The optimization utilized the \textbf{gradient-based Adjoint Method}, which calculates the 
-sensitivity of a Figure of Merit (FoM) with respect to an arbitrary number of boundary parameters 
-using only two full-wave simulations per iteration. The optimization was configured as follows:
+\subsubsection{FDTD Simulation Setup and Computational Domain}
+
+The optimization environment was constructed using a custom Python-driven \texttt{build} script to 
+ensure a precise model of the $220~\text{nm}$ SOI platform. To minimize loss and maximize modal 
+control, the device utilizes a multi-layer shallow-etch profile. The MMI body consists of a 
+$150~\text{nm}$ silicon slab with an initial footprint of $33.7~\mu\text{m} \times 5~\mu\text{m}$ 
+(placed upon a $15~\mu\text{m}$ wide slab region), while the access ports integrate $3~\mu\text{m}$ 
+long tapers with a $90~\text{nm}$ slab profile to bridge the modal mismatch at the junctions.
+
+The numerical simulation was configured with the following parameters to ensure high gradient 
+accuracy:
+\begin{itemize}
+    \item \textbf{Symmetry and Boundary Conditions:} A 3D-FDTD region was defined using Z-symmetry 
+    at the center of the silicon layer. This optimization reduces the computational overhead by 
+    half without compromising the accuracy of the fundamental TE mode analysis.
+    \item \textbf{Mesh Resolution:} A mesh step of $\Delta x = \Delta y = \Delta z = 45~\text{nm}$ 
+    (Mesh Accuracy 4) was utilized to balance simulation time and accuracy during the iterative 
+    process. 
+    \item \textbf{Spectral Window:} The simulation targets the extended C-band 
+    ($1520\text{--}1580~\text{nm}$) using $11$ frequency points. This $60~\text{nm}$ bandwidth 
+    aligns with recent industry trends toward \textit{Super C-band} systems that aim to maximize 
+    fiber capacity.
+\end{itemize}
+
+
+\subsubsection{Optimization Strategy and Figure of Merit}
+
+The optimization process is based on the gradient-based Adjoint 
+Method~\cite{lalau-keralyShapeOptimizationNanophotonic2014}. This inverse-design technique is 
+particularly efficient as it calculates the sensitivity of a defined Figure of Merit (FoM) with 
+respect to an arbitrary number of design parameters using only two full-wave simulations per 
+iteration: a forward and an adjoint simulation~\cite{piggottInverseDesignDemonstration2015}. 
+The optimization was performed using the \texttt{lumopt} framework, employing the L-BFGS-B 
+algorithm for efficient convergence under boundary constraints~\cite{byrdLimitedMemoryAlgorithm1995}.
+
 
 \begin{itemize}
-    \item \textbf{Initial State:} The starting geometry was the experimentally-validated 
-    rectangular MMI.
-    \item \textbf{Figure of Merit (FoM):} The goal was to maximize the transmission into the 
-    fundamental TE modes of both output ports while simultaneously minimizing the imbalance across 
-    the C-band ($1530\text{--}1565~\text{nm}$).
-    \item \textbf{Design Parameters:} The side-walls of the MMI body were defined as B-spline 
-    curves controlled by multiple points. These points were allowed to shift, effectively 
-    "morphing" the MMI width along its longitudinal axis.
-    \item \textbf{Fabrication Constraints:} A minimum feature size and curvature radius were 
-    enforced to ensure the optimized shape remains fully compatible with the $100~\text{nm}$ 
-    lithography rules, preserving the \textbf{fault-tolerant} nature of the fabrication.
+    \item \textbf{Geometry Parameterization:} A custom \texttt{ParameterizedGeometry} 
+    function was used to define the side-walls. The boundary was constructed using cubic spline 
+    interpolation (\texttt{interp1d} with \textit{cubic} kind) based on a set of lateral 
+    displacement parameters. This approach ensures a smooth, continuous curvature that is more 
+    physically realistic and lower-loss than a discrete vertex-based polygon.
+    \item \textbf{Symmetry Enforcement:} To ensure a consistent $50/50$ splitting ratio and 
+    preserve the phase relationship, a four-fold symmetry was enforced. The algorithm optimizes the 
+    parameters of a single quadrant, which is then reflected across both the longitudinal and 
+    transversal axes to build the full MMI geometry.
+    \item \textbf{Figure of Merit (FoM):} A multi-objective FoM was defined by summing the 
+    mode-match transmission of both output ports (\texttt{fomS31} and \texttt{fomS41}). The target 
+    was set to $0.5$ for each port across the entire $60~\text{nm}$ bandwidth, effectively 
+    minimizing both insertion loss and imbalance.
+    \item \textbf{Constraints:} Lateral boundaries were constrained within a range of 
+    $\pm 200~\text{nm}$ (\textit{d\_bound}) relative to the initial width to maintain the device 
+    within a manufacturable footprint and ensure the stability of the interference pattern.
 \end{itemize}
+
+By iteratively updating the spline control points based on the adjoint gradient, the algorithm 
+progressively refines the MMI shape, seeking a global maximum for the FoM that represents the 
+physical limit of the device's efficiency.
+
+
 
 \subsection{Results and Performance Comparison}
 
-The comparison between the parametric baseline and the shape-optimized MMI reveals that even 
-well-established designs can be refined using inverse-design techniques. 
-Figure~\ref{fig:mmi_geometry_comparison} shows the evolution from the initial rectangular footprint 
-to the final optimized "waisted" profile.
+% The comparison between the parametric baseline and the shape-optimized MMI reveals that even 
+% well-established designs can be refined using inverse-design techniques. 
+% Figure~\ref{fig:mmi_geometry_comparison} shows the evolution from the initial rectangular footprint 
+% to the final optimized "waisted" profile.
 
-The spectral response, illustrated in Figure~\ref{fig:mmi_spectra}, demonstrates that the optimized 
-MMI achieves a flatter transmission profile and a reduction in insertion loss from 
-$X.XX~\text{dB}$ to $Y.YY~\text{dB}$. More importantly, the imbalance was further suppressed, 
-reaching a near-ideal $50/50$ distribution with less than $Z.ZZ~\text{dB}$ of deviation across the 
-entire bandwidth. This refinement confirms that the Adjoint Method can successfully extract 
-additional performance from designs that have already saturated their parametric optimization 
-potential.
+% The spectral response, illustrated in Figure~\ref{fig:mmi_spectra}, demonstrates that the optimized 
+% MMI achieves a flatter transmission profile and a reduction in insertion loss from 
+% $X.XX~\text{dB}$ to $Y.YY~\text{dB}$. More importantly, the imbalance was further suppressed, 
+% reaching a near-ideal $50/50$ distribution with less than $Z.ZZ~\text{dB}$ of deviation across the 
+% entire bandwidth. This refinement confirms that the Adjoint Method can successfully extract 
+% additional performance from designs that have already saturated their parametric optimization 
+% potential.
 
-% --- PLACEHOLDER PARA LA TABLA COMPARATIVA ---
-\begin{table}[!ht]
-\centering
-\caption{Performance comparison between the experimentally-validated parametric design and the 
-shape-optimized MMI at $1550~\text{nm}$.}
-\label{tab:mmi_comparison}
-\begin{tabular}{lcc}
-\toprule
-\textbf{Parameter} & \textbf{Parametric Design} & \textbf{Shape-Optimized} \\ \midrule
-Insertion Loss (dB) & $X.XX$ & $Y.YY$ \\
-Imbalance (dB)      & $X.XX$ & $Y.YY$ \\
-Bandwidth (nm)      & $>XX$  & $>YY$  \\ \bottomrule
-\end{tabular}
-\end{table}
+% % --- PLACEHOLDER PARA LA TABLA COMPARATIVA ---
+% \begin{table}[!ht]
+% \centering
+% \caption{Performance comparison between the experimentally-validated parametric design and the 
+% shape-optimized MMI at $1550~\text{nm}$.}
+% \label{tab:mmi_comparison}
+% \begin{tabular}{lcc}
+% \toprule
+% \textbf{Parameter} & \textbf{Parametric Design} & \textbf{Shape-Optimized} \\ \midrule
+% Insertion Loss (dB) & $X.XX$ & $Y.YY$ \\
+% Imbalance (dB)      & $X.XX$ & $Y.YY$ \\
+% Bandwidth (nm)      & $>XX$  & $>YY$  \\ \bottomrule
+% \end{tabular}
+% \end{table}
 
 
 
