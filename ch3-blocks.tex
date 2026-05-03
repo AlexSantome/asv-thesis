@@ -163,8 +163,8 @@ While grating couplers offer high flexibility for wafer-level testing, they pres
 limitations for certain advanced packaging paradigms. Specifically, the vertical emission of 
 grating couplers is often incompatible with flip-chip bonding architectures, where the top 
 surface of the photonic chip is obstructed by a mounted electronic or laser die. To overcome this 
-and enable the ultra-dense integration required for the systems described in \ref{chap:systems}, a 
-side-coupling approach using a simple inverted taper was implemented.
+and enable the ultra-dense integration required for the systems described in Chapter 
+\ref{chap:systems}, a side-coupling approach using a simple inverted taper was implemented.
 
 
 \subsection{Design Rationale and Geometry}
@@ -370,7 +370,7 @@ effective mode expansion, leading to a significant mode mismatch with the high-N
 
 However, the primary objective of this design was not to achieve record-breaking efficiency, but 
 rather to demonstrate a fault-tolerant interface that enables high-density integration systems, 
-as reported in \nameref{chap:systems}. In this regard, the results are highly successful: 
+as discussed in Chapter~\ref{chap:systems}. In this regard, the results are highly successful: 
 the coupler maintains a consistent and predictable performance despite significant dicing 
 misalignments of up to $10~\mu\text{m}$. For applications where assembly reliability and tolerance 
 to mechanical inaccuracies are prioritized over a strict power budget—such as the fault-tolerant 
@@ -383,13 +383,9 @@ section describes the design and characterization of the MMI couplers used for o
 splitting.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \section{High-Performance MMI via Adjoint Optimization}  
 
-\label{sec:mmi_design}
+\label{sec:mmi_adjoint}
 
 The $2\times2$ Multimode Interference (MMI) coupler is the fundamental building block for the 
 splitting and cross-coupling of optical signals within the system. As established in 
@@ -405,49 +401,69 @@ essential to preserve a viable power budget as the number of cascaded PUCs incre
 details the experimental validation of our baseline design and the subsequent implementation of 
 advanced shape optimization techniques to push its performance toward the physical limit.
 
-\subsection{Parametric Baseline Design}
+\subsection{Parametric Baseline Design}\label{subsec:baseline_mmi}
 
 The design process for the MMI stage originated from a $2\times2$ geometry previously optimized 
 through conventional parametric sweeps following the self-imaging 
 principle~\cite{soldanoOpticalMultimodeInterference1995}.  
 
-Fabricated on a $220~\text{nm}$ SOI platform, the device was implemented using shallow-etched 
-waveguides with a $150~\text{nm}$ silicon slab. The MMI body features a footprint of 
-$33.7~\mu\text{m}$ in length and $5~\mu\text{m}$ in width, placed upon a $15~\mu\text{m}$ wide 
-slab region to ensure proper modal confinement. To optimize the mode transition, $3~\mu\text{m}$ 
-long tapers with a $90~\text{nm}$ slab profile were integrated at each access port, specifically 
-designed to bridge the modal mismatch and minimize back-reflections at the junctions.
-
-To establish a reliable reference for the subsequent optimization stages, this parametric design 
-was experimentally characterized across several dies and wafers. 
-Figure~\ref{fig:ch3-baseline_mmi_sr} shows the measured splitting ratio over a $60~\text{nm}$ 
-bandwidth. The response remains remarkably balanced, with a deviation of less than $1\%$ from the 
-ideal $50/50$ distribution across the entire range ($1520\text{--}1580~\text{nm}$). This stability 
-demonstrates a high degree of wavelength insensitivity, which is a critical requirement for the 
-proposed architecture.
+The device was implemented using a multi-level shallow-etch process to maximize modal control, as 
+illustrated in the cross-section of Figure~\ref{fig:ch3-mmi_geometry}(a). The MMI body features a 
+total height of $220~\text{nm} (h_{220})$ and is etched down to a $150~\text{nm}$ silicon slab 
+($h_{150}$), providing high confinement for the interference pattern. As shown in the top-view in 
+Figure~\ref{fig:ch3-mmi_geometry}(b), this interference region has a footprint of 
+$33.7~\mu\text{m} \times 5~\mu\text{m}$ and is placed upon a $15~\mu\text{m}$ wide slab to prevent 
+boundary scattering. Furthermore, the access ports include $3~\mu\text{m}$ long tapers that utilize 
+a deeper $90~\text{nm}$ etch ($h_{90}$) to bridge the modal mismatch and ensure a smooth transition 
+from the access waveguides.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.85\textwidth]{figures/ch3-baseline_mmi_sr.png} 
-    \caption{Experimental splitting ratio of the parametric $2\times2$ MMI baseline. The shaded 
-    regions represent the standard deviation across different dies (G3, B5, D4, and C2), showing a 
-    highly balanced and consistent $50/50$ response.}
+    \includegraphics[width=1.0\textwidth]{figures/ch3-baseline_mmi.png} 
+    \caption{Geometric definition of the $2\times2$ MMI baseline. (a) Transversal cross-section of 
+    the SOI platform detailing the different etch levels: $h_{220}$ for the waveguide core, 
+    $h_{150}$ for the MMI body slab, and $h_{90}$ for the taper transition regions. (b) Top-view 
+    schematic illustrating the $33.7~\mu\text{m} \times 5~\mu\text{m}$ interference region and the 
+    surrounding $15~\mu\text{m}$ wide slab footprint.}
+    \label{fig:ch3-mmi_geometry}
+\end{figure}
+
+
+To establish a reliable reference for the subsequent optimization stages, the parametric design was 
+characterized both numerically and experimentally, as compared in Figure~\ref{fig:ch3-baseline_mmi_sr}. 
+Specifically, the splitting ratio performance of the simulated MMI in panel (a) shows an almost 
+ideal distribution, which is closely mirrored by the experimental measurements in (b). This response 
+remains remarkably balanced across the full spectrum, with experimental data showing a standard 
+deviation across dies that stays within 1\% of the target. Such wavelength insensitivity is 
+critical for the robustness and scalability of the proposed programmable architecture.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch3-baseline_mmi_sr_sim_meas_H.png} 
+    \caption{Splitting ratio comparison for the $2\times2$ MMI baseline. (a) High-fidelity 3D-FDTD
+    simulation showing a stable $50/50$ distribution. (b) Measured results across multiple dies
+    showing a deviation of less than $1\%$ from the ideal splitting across the
+    $1520\text{--}1580~\text{nm}$ range.}
     \label{fig:ch3-baseline_mmi_sr}
 \end{figure}
 
-Furthermore, the device exhibits exceptionally low excess losses, as illustrated in 
-Figure~\ref{fig:ch3-baseline_mmi_el}. The loss reaches a minimum of approximately $0.13~\text{dB}$ 
-at $1550~\text{nm}$ and remains below $0.25~\text{dB}$ throughout the measured spectrum. Notably, 
+
+\FloatBarrier
+
+Furthermore, power efficiency was similarly evaluated through excess loss (EL) analysis,
+as illustrated in Figure~\ref{fig:ch3-baseline_mmi_el}. The device exhibits exceptionally low 
+excess losses, with measured values remaining below $0.25~\text{dB}$ throughout the spectrum.
+reaching a minimum of approximately $0.13~\text{dB}$ at $1550~\text{nm}$. Notably, 
 the consistency across samples—indicated by the shaded regions—reinforces the fault-tolerant nature 
 of the design against fabrication tolerances.
 
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.85\textwidth]{figures/ch3-baseline_mmi_el.png} 
-    \caption{Measured excess losses for the parametric $2\times2$ MMI. The device shows a minimum 
-    loss of $0.13~\text{dB}$ and remains below $0.25~\text{dB}$ for the entire C-band, validating 
-    the efficiency of the shallow-etch design.}
+    \includegraphics[width=\textwidth]{figures/ch3-baseline_mmi_el_sim_meas_H.png} 
+    \caption{Excess loss comparison for the $2\times2$ MMI baseline. (a) Simulation estimating a 
+    loss of $\sim 0.24$~dB at $1550~\text{nm}$. (b) Measured EL reaching a minimum of 
+    $\sim 0.15$~dB, validating the efficiency of the shallow-etch design.}
     \label{fig:ch3-baseline_mmi_el}
 \end{figure}
 
@@ -468,12 +484,13 @@ mode-mismatch losses.
 
 \subsubsection{FDTD Simulation Setup and Computational Domain}
 
-The optimization environment was constructed using a custom Python-driven \texttt{build} script to 
-ensure a precise model of the $220~\text{nm}$ SOI platform. To minimize loss and maximize modal 
-control, the device utilizes a multi-layer shallow-etch profile. The MMI body consists of a 
-$150~\text{nm}$ silicon slab with an initial footprint of $33.7~\mu\text{m} \times 5~\mu\text{m}$ 
-(placed upon a $15~\mu\text{m}$ wide slab region), while the access ports integrate $3~\mu\text{m}$ 
-long tapers with a $90~\text{nm}$ slab profile to bridge the modal mismatch at the junctions.
+The optimization environment was constructed using a custom Python-driven \texttt{build} script 
+designed to replicate the multi-level geometry described in Section~\ref{subsec:baseline_mmi}. 
+This script ensures that the complex etch profiles ($h_{220}$, $h_{150}$, and $h_{90}$) are 
+precisely mapped into the 3D-FDTD domain. By parameterizing the baseline footprint and its 
+surrounding slab region within the \texttt{lumopt} framework, the environment is prepared to handle 
+the subsequent morphological changes of the side-walls while maintaining the physical constraints 
+of the SOI platform.
 
 The numerical simulation was configured with the following parameters to ensure high gradient 
 accuracy:
@@ -491,7 +508,7 @@ accuracy:
 \end{itemize}
 
 
-\subsubsection{Optimization Strategy and Figure of Merit}
+\subsubsection{Inverse Design Framework and Figure of Merit}
 
 The optimization process is based on the gradient-based Adjoint 
 Method~\cite{lalau-keralyShapeOptimizationNanophotonic2014}. This inverse-design technique is 
@@ -521,6 +538,28 @@ algorithm for efficient convergence under boundary constraints~\cite{byrdLimited
     within a manufacturable footprint and ensure the stability of the interference pattern.
 \end{itemize}
 
+\subsubsection{Computational Workflow and Optimization Stages}
+
+The optimization was carried out in two main stages, moving from a constrained body-only refinement 
+to a comprehensive device optimization. This phased approach allowed for a systematic evaluation of 
+the impact of numerical resolution and fabrication constraints.
+
+\begin{itemize}
+    \item \textbf{Stage 1: Body-Only Optimization:} In this stage, only the side-walls of the MMI 
+    interference region were optimized, while the access tapers remained fixed to the baseline 
+    geometry. To identify the most reliable and high-performance configuration, four distinct cases 
+    were evaluated:
+    \begin{itemize}
+        \item \textbf{Etch depth comparison:} Two scenarios were tested based on the taper etch 
+        levels: $h_{90}$ (deep etch) and $h_{150}$ (shallow etch).
+        \item \textbf{Numerical convergence:} For each etch depth, the optimization was performed 
+        at both low resolution (for rapid design space exploration) and high resolution (to ensure 
+        gradient accuracy and eliminate mesh artifacts).
+    \end{itemize}
+    
+    \item \textbf{Stage 2: Integrated Body and Access Optimization:} Leveraging the experience and results from the first stage, the optimization was extended to include both the MMI body and the access tapers. Based on the convergence study in Stage 1, this final refinement was performed exclusively using the optimal etch-depth configuration and high-resolution settings to achieve the physical limit of the device performance.
+\end{itemize}
+
 By iteratively updating the spline control points based on the adjoint gradient, the algorithm 
 progressively refines the MMI shape, seeking a global maximum for the FoM that represents the 
 physical limit of the device's efficiency.
@@ -529,33 +568,33 @@ physical limit of the device's efficiency.
 
 \subsection{Results and Performance Comparison}
 
-% The comparison between the parametric baseline and the shape-optimized MMI reveals that even 
-% well-established designs can be refined using inverse-design techniques. 
-% Figure~\ref{fig:mmi_geometry_comparison} shows the evolution from the initial rectangular footprint 
-% to the final optimized "waisted" profile.
+The comparison between the parametric baseline and the shape-optimized MMI reveals that even 
+well-established designs can be refined using inverse-design techniques. 
+Figure~\ref{fig:mmi_geometry_comparison} shows the evolution from the initial rectangular footprint 
+to the final optimized "waisted" profile.
 
-% The spectral response, illustrated in Figure~\ref{fig:mmi_spectra}, demonstrates that the optimized 
-% MMI achieves a flatter transmission profile and a reduction in insertion loss from 
-% $X.XX~\text{dB}$ to $Y.YY~\text{dB}$. More importantly, the imbalance was further suppressed, 
-% reaching a near-ideal $50/50$ distribution with less than $Z.ZZ~\text{dB}$ of deviation across the 
-% entire bandwidth. This refinement confirms that the Adjoint Method can successfully extract 
-% additional performance from designs that have already saturated their parametric optimization 
-% potential.
+The spectral response, illustrated in Figure~\ref{fig:mmi_spectra}, demonstrates that the optimized 
+MMI achieves a flatter transmission profile and a reduction in insertion loss from 
+$X.XX~\text{dB}$ to $Y.YY~\text{dB}$. More importantly, the imbalance was further suppressed, 
+reaching a near-ideal $50/50$ distribution with less than $Z.ZZ~\text{dB}$ of deviation across the 
+entire bandwidth. This refinement confirms that the Adjoint Method can successfully extract 
+additional performance from designs that have already saturated their parametric optimization 
+potential.
 
-% % --- PLACEHOLDER PARA LA TABLA COMPARATIVA ---
-% \begin{table}[!ht]
-% \centering
-% \caption{Performance comparison between the experimentally-validated parametric design and the 
-% shape-optimized MMI at $1550~\text{nm}$.}
-% \label{tab:mmi_comparison}
-% \begin{tabular}{lcc}
-% \toprule
-% \textbf{Parameter} & \textbf{Parametric Design} & \textbf{Shape-Optimized} \\ \midrule
-% Insertion Loss (dB) & $X.XX$ & $Y.YY$ \\
-% Imbalance (dB)      & $X.XX$ & $Y.YY$ \\
-% Bandwidth (nm)      & $>XX$  & $>YY$  \\ \bottomrule
-% \end{tabular}
-% \end{table}
+% --- PLACEHOLDER PARA LA TABLA COMPARATIVA ---
+\begin{table}[!ht]
+\centering
+\caption{Performance comparison between the experimentally-validated parametric design and the 
+shape-optimized MMI at $1550~\text{nm}$.}
+\label{tab:mmi_comparison}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Parameter} & \textbf{Parametric Design} & \textbf{Shape-Optimized} \\ \midrule
+Insertion Loss (dB) & $X.XX$ & $Y.YY$ \\
+Imbalance (dB)      & $X.XX$ & $Y.YY$ \\
+Bandwidth (nm)      & $>XX$  & $>YY$  \\ \bottomrule
+\end{tabular}
+\end{table}
 
 
 
