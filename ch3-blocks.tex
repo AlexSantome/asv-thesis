@@ -557,47 +557,257 @@ the impact of numerical resolution and fabrication constraints.
         gradient accuracy and eliminate mesh artifacts).
     \end{itemize}
     
-    \item \textbf{Stage 2: Integrated Body and Access Optimization:} Leveraging the experience and results from the first stage, the optimization was extended to include both the MMI body and the access tapers. Based on the convergence study in Stage 1, this final refinement was performed exclusively using the optimal etch-depth configuration and high-resolution settings to achieve the physical limit of the device performance.
+    \item \textbf{Stage 2: Integrated Body and Access Optimization:} Leveraging the experience and 
+    results from the first stage, the optimization was extended to include both the MMI body and 
+    the access tapers. Based on the convergence study in Stage 1, this final refinement was 
+    performed exclusively using the optimal etch-depth configuration and high-resolution settings 
+    to achieve the physical limit of the device performance.
 \end{itemize}
 
-By iteratively updating the spline control points based on the adjoint gradient, the algorithm 
-progressively refines the MMI shape, seeking a global maximum for the FoM that represents the 
-physical limit of the device's efficiency.
+
+\subsection{Results and Performance Comparison}\label{sec:ch3-mmi_results}
+
+This section discusses the numerical results obtained from the adjoint optimization process. 
+Following the established methodology, the analysis primarily evaluates the morphological evolution 
+of the MMI body and the performance metrics across different simulation scenarios.
+
+\subsubsection{Stage 1: Body Morphological Evolution}
+
+The transition from a conventional rectangular geometry to an organic profile is illustrated in 
+Figure~\ref{fig:ch3-shape_evolution}, specifically for the 90~nm Low Resolution case.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/ch3-mmi_090_low_shape_evolution.png}
+    \caption{Morphological evolution of the MMI body permittivity profile ($\epsilon_r$) from 
+    iteration 0 to 16. The side walls gradually abandon the rectangular rigidity to progressively 
+    adapt to the internal multimodal interference pattern.}
+    \label{fig:ch3-shape_evolution}
+\end{figure}
 
 
+The optimization process starts at Iteration 0, utilizing the initial parametric design as the 
+baseline. As shown in the evolution sequence, the algorithm begins modifying the MMI side walls 
+as early as Iteration 1, where the first morphological perturbations become observable. From 
+Iteration 5 onwards, the structure shows a clear convergence trend toward its optimal profile. This 
+final geometry is reached at Iteration 16, representing a stable state where the boundaries 
+adiabatically follow the field nodes within the silicon core.
 
-\subsection{Results and Performance Comparison}
+\subsubsection{Optimization Convergence and Physical Insights}
 
-The comparison between the parametric baseline and the shape-optimized MMI reveals that even 
-well-established designs can be refined using inverse-design techniques. 
-Figure~\ref{fig:mmi_geometry_comparison} shows the evolution from the initial rectangular footprint 
-to the final optimized "waisted" profile.
+To understand the underlying physics, the state of the optimizer at the final iteration is analyzed 
+in Figure~\ref{fig:ch3-it16_dashboard}.
 
-The spectral response, illustrated in Figure~\ref{fig:mmi_spectra}, demonstrates that the optimized 
-MMI achieves a flatter transmission profile and a reduction in insertion loss from 
-$X.XX~\text{dB}$ to $Y.YY~\text{dB}$. More importantly, the imbalance was further suppressed, 
-reaching a near-ideal $50/50$ distribution with less than $Z.ZZ~\text{dB}$ of deviation across the 
-entire bandwidth. This refinement confirms that the Adjoint Method can successfully extract 
-additional performance from designs that have already saturated their parametric optimization 
-potential.
 
-% --- PLACEHOLDER PARA LA TABLA COMPARATIVA ---
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/ch3-mmi_090_low_it_16.png}
+    \caption{Optimization dashboard at iteration 16. (a) Figure of Merit (FoM) convergence history, 
+    (b) sparse perturbation gradient sensitivity map, and (c) forward-propagating field intensity 
+    ($E^2$).}
+    \label{fig:ch3-it16_dashboard}
+\end{figure}
+
+\clearpage
+
+It is important to note that the initial FoM values reflect a numerical baseline inherent to the 
+simplified simulation environment—utilizing coarser discretization and tighter boundaries—required 
+to maintain reasonable computation times during the adjoint process. While these numerical 
+constraints lead to an underestimation of the absolute transmission and a penalization of the 
+initial excess losses, the optimization remains physically valid as the gradient correctly 
+identifies the direction of performance improvement.
+
+The convergence history (left panel) demonstrates how the optimizer effectively addresses the 
+initial power imbalance. Starting from asymmetrical values (approx. 0.22 vs. 0.30 in FoM), the port 
+responses converge toward a balanced state (approx. 0.48 vs. 0.45) as the total transmission 
+exceeds 93\%. The sparse perturbation gradient map (center) identifies the junctions between the 
+multimode body and the access tapers as the primary drivers for performance gain. This is 
+corroborated by the forward field intensity ($E^2$) in the right panel, which shows the 
+self-imaging pattern being adiabatically guided into the output ports with minimal scattering into 
+the slab region.
+
+
+\subsubsection{Field Distribution and Spectral Performance}
+
+The modal propagation within the optimized geometry was verified through the analysis of the
+electric field components, as shown in Figure~\ref{fig:ch3-fields}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch3-mmi_090_Ex_Ey_E.png}
+    \caption{Steady-state electric field distribution for the optimized MMI body. The panels 
+    display (a) the real part of $E_x$, (b) the real part of $E_y$, and (c) the total field 
+    magnitude $|E|$.}
+    \label{fig:ch3-fields}
+\end{figure}
+
+Panels (a) and (b) illustrate the phase distribution and the complex interference pattern formed 
+within the multimode region. The total field magnitude in panel (c) confirms that the self-imaging 
+effect is correctly reconstructed at the output ports, showcasing the adiabatic nature of the 
+optimized boundaries which minimize light scattering into the surrounding slab.
+
+\clearpage
+
+The resulting spectral response is characterized in Figure~\ref{fig:ch3-spectral_results}. As 
+established by the previous numerical considerations, the absolute EL values in the top panel are 
+subject to a numerical offset. Nevertheless, the design achieves a remarkable minimum EL of 
+approximately 0.12~dB near 1535~nm even under these conservative simulation conditions.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch3-EL_SR_h90_low.png}
+    \caption{Spectral characterization of the optSimized 90~nm Low Resolution design. The top panel 
+    shows the excess loss (EL) in dB, while the bottom panel depicts the splitting ratio (SR) for 
+    ports $S_{31}$ and $S_{41}$.}
+    \label{fig:ch3-spectral_results}
+\end{figure}
+
+More importantly, the design exhibits remarkable spectral stability and power balance, as evidenced 
+by the SR in the bottom panel. The power distribution between ports $S_{31}$ and $S_{41}$ remains 
+extremely close to the ideal $0.50 \pm 0.02$ over a broad 100~nm bandwidth. 
+
+
+\subsubsection{Comparative Analysis of Stage 1 Scenarios}
+
+A definitive finding of this initial stage is the critical influence of numerical resolution on the 
+adjoint optimization process. Figure~\ref{fig:ch3-stage1_convergence} shows the convergence history 
+for the four scenarios evaluated. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/ch3-mmi_convergence_comparison.png}
+    \caption{Convergence history of the total transmission (FoM) for 90~nm and 150~nm cases. All 
+    simulations start from a baseline between 0.51 and 0.59 and achieve stability within 20 to 26 
+    iterations, validating the robustness of the adjoint method.}
+    \label{fig:ch3-stage1_convergence}
+\end{figure}
+
+The convergence curves show that High Resolution simulations not only start from a higher 
+transmission baseline but also provide a more stable gradient for the optimizer. While most cases 
+converge in approximately 19 iterations, the 150~nm High Resolution scenario requires up to 26 
+iterations to reach a steady state, reflecting the higher complexity of the captured organic 
+boundaries.
+
+The final performance metrics, extracted after convergence, are summarized in 
+Table~\ref{tab:stage1_comparison} and visualized in Figure~\ref{fig:ch3-stage1_performance}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/ch3-mmi_performance_comparison.png}
+    \caption{Final performance metrics comparison. The chart highlights the trade-off between 
+    Excess Loss (dB) and Power Imbalance (dB) across the evaluated scenarios.}
+    \label{fig:ch3-stage1_performance}
+\end{figure}
+
 \begin{table}[!ht]
 \centering
-\caption{Performance comparison between the experimentally-validated parametric design and the 
-shape-optimized MMI at $1550~\text{nm}$.}
-\label{tab:mmi_comparison}
-\begin{tabular}{lcc}
-\toprule
-\textbf{Parameter} & \textbf{Parametric Design} & \textbf{Shape-Optimized} \\ \midrule
-Insertion Loss (dB) & $X.XX$ & $Y.YY$ \\
-Imbalance (dB)      & $X.XX$ & $Y.YY$ \\
-Bandwidth (nm)      & $>XX$  & $>YY$  \\ \bottomrule
+\caption{Final performance metrics for Stage 1 optimization scenarios at $\lambda = 1550$~nm.}
+\label{tab:stage1_comparison}
+\begin{tabular}{lcccc}
+\hline
+\textbf{Scenario} & \textbf{Final FoM} & \textbf{Excess Loss (dB)} & \textbf{Imbalance (dB)} & \textbf{Resolution} \\ \hline
+90~nm Low Res & 0.9369 & 0.283 & 0.293 & Low \\
+90~nm High Res & \textbf{0.9593} & \textbf{0.180} & \textbf{0.046} & High \\
+150~nm Low Res & 0.9432 & 0.254 & 0.200 & Low \\
+150~nm High Res & 0.9651 & 0.154 & 0.079 & High \\ \hline
 \end{tabular}
 \end{table}
 
+The quantitative data confirms that High Resolution meshes are essential to accurately capture the 
+optimized walls, leading to a substantial reduction in scattering. Specifically, the 90~nm High 
+Resolution case achieved the most balanced response with an imbalance of only 0.046~dB. Although 
+the 150~nm High Resolution scenario exhibited the lowest absolute losses (0.154~dB), the superior 
+power balance of the 90~nm configuration led to its selection for the final integrated optimization 
+stage.
+
+\clearpage
+
+\subsubsection{Stage 2: Integrated Device Optimization and Final Performance}
+
+The second stage of the optimization process represents a transition toward a holistic device 
+design. Unlike the previous stage, which focused exclusively on the MMI body, this phase performs a 
+simultaneous optimization of 45 geometric parameters encompassing both the multimode region and the 
+access tapers. While this optimization starts from the initial parametric design (Iteration 0), it 
+focuses specifically on the 90 nm etch depth configuration, which was identified in Stage 1 as the 
+most promising architecture for achieving high power symmetry.
+
+To manage the high dimensionality of this integrated design space, the optimization was conducted 
+using a standard (Low Resolution) mesh. This choice ensures computational tractability and algorithm 
+stability. Although Stage 1 established that high-resolution meshes provide superior absolute 
+accuracy for scattering, the standard resolution provides a sufficiently reliable gradient for the 
+L-BFGS-B optimizer to identify the optimal morphological trends without the numerical noise often 
+present in high-dimensional adjoint sensitivities.
+
+The complete convergence history for this integrated stage is summarized in 
+Figure~\ref{fig:total_optimization_history}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/ch3-mmi_stage2_convergence.png}
+    \caption{Total Adjoint Optimization History. The dashed lines represent the Stage 1 preliminary 
+    runs used to evaluate the etch depth impact. The solid black line depicts the Stage 2 
+    integrated optimization, starting from the initial design and achieving a superior Figure of 
+    Merit (FoM > 0.97) through simultaneous body and taper refinement.}
+    \label{fig:total_optimization_history}
+\end{figure}
+
+As observed, the integrated optimization (Stage 2) demonstrates a robust convergence trend. Despite 
+starting from an initial FoM of approximately 0.5668, it ultimately surpasses the performance of 
+all Stage 1 body-only configurations. To further examine the physical mechanisms of the final 
+design, Figure~\ref{fig:stage2_dashboard} provides a detailed view of the optimization state at the 
+final iteration.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/ch3-mmi_stage2_dashboard.png}
+    \caption{Stage 2 Optimization Dashboard. (a) FoM highlighting the convergence toward a balanced 
+    state. (b) Gradient sensitivity at taper-to-body interfaces. (c) Final optimized permittivity 
+    profile ($\epsilon_r$). (d) Forward field intensity ($E^2$) showcasing the reconstructed 
+    self-imaging effect.}
+    \label{fig:stage2_dashboard}
+\end{figure}
+
+% The sensitivity map (Figure~\ref{fig:stage2_dashboard}b) confirms that the most significant 
+% performance gains in this stage are achieved by sculpting the junction between the access tapers 
+% and the MMI body. This integrated approach results in an organic morphology that adiabatically 
+% guides the light, as shown in the field intensity distribution 
+% (Figure~\ref{fig:stage2_dashboard}d).
 
 
+The sensitivity map (Figure~\ref{fig:stage2_dashboard}b) confirms that the most significant 
+performance gains are achieved by sculpting the junction between the access tapers and the MMI 
+body. This integrated approach results in an organic morphology that adiabatically guides the 
+light with minimal scattering. As a detailed validation of the final geometry, the spectral 
+response is depicted in Figure~\ref{fig:ch3-stage2_spectral}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch3-EL_SR_stage2.png}
+    \caption{Final spectral characterization: (a) Excess Loss (EL) showing a peak efficiency of 
+    $\sim$0.077 dB and (b) Splitting Ratio (SR) demonstrating near-ideal 50/50 balance across a 100 
+    nm bandwidth.}
+    \label{fig:ch3-stage2_spectral}
+\end{figure}
+
+The spectral results show that the splitting ratio remains virtually ideal ($0.50 \pm 0.005$) 
+across the entire 1.50--1.60 $\mu$m range. This exceptional spectral flatness confirms that the 
+simultaneous refinement of the transition regions and the multimode body is essential for 
+broadband operation. Finally, the quantitative impact of this integrated design in comparison 
+with the best result from Stage 1 is summarized in Figure~\ref{fig:performance_improvement}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/ch3-mmi_stage2_performance.png}
+    \caption{Performance Improvement: Comparison between the best body-only result (90 nm High Res) 
+    and the final Stage 2 integrated design.}
+    \label{fig:performance_improvement}
+\end{figure}
+
+The comparison reveals a significant enhancement in all key metrics. By integrating the tapers into 
+the optimization from the start, the excess loss was reduced to approximately 0.077 dB. More 
+remarkably, the power imbalance was virtually eliminated, dropping to a near-ideal value of 
+0.0035 dB. These results validate that optimizing the transition regions in conjunction with the 
+multimode body is essential for achieving state-of-the-art 50/50 power splitting.
 
 
 
