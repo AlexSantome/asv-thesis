@@ -5,10 +5,10 @@
 
 \section{Introduction to the Fabrication Platform} \label{sec:fabrication_platform}
 
-The realization of the programmable photonic circuits discussed in this thesis relies on the 
-maturity and precision of the Silicon-on-Insulator platform. This section details the technological 
-framework, the computational tools employed for device optimization, and the experimental 
-infrastructure used to validate the performance of the fundamental building blocks.
+Realizing the programmable photonic circuits discussed in this thesis depends fundamentally on the 
+maturity and precision of the Silicon-on-Insulator platform. Outlined in this section are the 
+technological framework, the computational tools employed for device optimization, and the 
+experimental infrastructure used to validate the performance of these fundamental building blocks.
 
 \subsection{SOI Fabrication Platforms} \label{subsec:foundry}
 
@@ -33,10 +33,10 @@ large-scale system integration.
 
 \subsection{Design and Simulation Workflow} \label{subsec:workflow}
 
-The transition from theoretical concepts to physical layout follows a rigorous multi-step 
-simulation and optimization workflow. The choice of numerical method was strategically dictated 
-by the physical dimensions and the nature of the light-matter interaction in each building block 
-to balance computational efficiency and accuracy.
+Transitioning from theoretical concepts to physical layout follows a rigorous multi-step simulation 
+and optimization workflow. The choice of numerical method was strategically dictated by the 
+physical dimensions and the nature of the light-matter interaction in each building block to 
+balance computational efficiency and accuracy.
 
 \begin{itemize}
     \item \textbf{Waveguide and Modal Analysis:} The fundamental propagation properties, including 
@@ -138,7 +138,7 @@ and imbalance of MMI couplers, a high-throughput setup is utilized. As shown in 
 Figure \ref{fig:ch3-hexapod_setup}a, this bench is equipped with a 64-channel fiber array mounted 
 on a high-precision hexapod positioner, enabling semi-automated alignment routines.
 
-The physical implementation is captured in Figure \ref{fig:ch3-hexapod_setup}b during the 
+Figure \ref{fig:ch3-hexapod_setup}b illustrates the actual measurement bench during the 
 characterization of cascaded structures. By measuring chains of 16 to 18 cascaded MMIs, the 
 cumulative loss can be determined with significantly reduced experimental error. This statistical 
 approach allows for the extraction of the mean insertion loss per component through linear 
@@ -184,31 +184,33 @@ geometry of the implemented inverted taper.
     \label{fig:ch3-taper_design}
 \end{figure}
 
-The physical dimensions of the SSC were selected to maximize mode expansion at the chip facet 
-within the following foundry-specific parameters:
+To maximize mode expansion at the chip facet, physical dimensions for the SSC were selected 
+according to these foundry-specific parameters:
 \begin{itemize}
     \item \textbf{Waveguide Stack:} The $220 \text{ nm}$ thick silicon core sits on a $2200 
     \text{ nm}$ BOX and is covered by a $4000 \text{ nm}$ $SiO_2$ upper cladding. This stack 
     thickness is critical as it defines the maximum volume available for the mode to expand as it 
     delocalizes from the silicon core.
-    \item \textbf{Lithographic Limit ($w_{tip}$):} The width is reduced from the nominal 
-    $500 \text{ nm}$ waveguide to a tip width of $100 \text{ nm}$. This is the minimum feature size
-    allowed by the foundry's design rules, representing the narrowest possible tip to achieve the 
-    highest MFD mismatch reduction.
+    \item \textbf{Lithographic Limit ($w_{tip}$):} Width reduction from the nominal 
+    $500 \text{ nm}$ to a tip width of $100 \text{ nm}$ was implemented. As the minimum feature 
+    size allowed by the foundry's design rules, this tip represents the narrowest possible geometry 
+    to achieve the highest MFD mismatch reduction.
     \item \textbf{Adiabatic Transition ($L_{taper}$):} A length of $500 \ \mu\text{m}$ was
     implemented to ensure an adiabatic modal transition. This length ensures that power is 
     transferred efficiently from the confined waveguide mode to the expanded cladding mode without 
     significant radiation losses.
 \end{itemize}
 
-As the device length is three orders of magnitude larger than its width, the schematic in Figure \ref{fig:ch3-taper_design}(b) uses a modified aspect ratio for clarity, focusing on the geometric transition rather than physical proportions.
+As the device length is three orders of magnitude larger than its width, the schematic in 
+Figure \ref{fig:ch3-taper_design}(b) uses a modified aspect ratio for clarity, focusing on the 
+geometric transition rather than physical proportions.
 
 
 
 \subsection{Simulation and Performance Baseline}
 
-The design was simulated using the Beam Propagation Method (BPM) in RSoft to establish a 
-performance baseline. Given that the focus of this work lies in the system-level integration rather 
+Beam Propagation Method (BPM) simulations conducted in RSoft established a performance baseline for 
+the design. Given that the focus of this work lies in the system-level integration rather 
 than the optimization of the coupling interface itself, a straightforward linear geometry was 
 prioritized for its fabrication robustness.
 The simulation also pretends verifying the assumption that standard optical fibers are 
@@ -218,8 +220,8 @@ high-numerical aperture fibers and quantify the impact of fabrication tolerances
 Figure \ref{fig:ch3-taper_sims} summarizes the performance of the 
 inverted taper regarding modal matching, spectral behavior, and dicing tolerances.
 
-The relationship between fiber MFD and coupling efficiency, shown in Figure 
-\ref{fig:ch3-taper_sims}(a), confirms that the delocalized mode at the $100 \text{ nm}$ tip is 
+Analyzing the relationship between fiber MFD and coupling efficiency in Figure 
+\ref{fig:ch3-taper_sims}(a) confirms that the delocalized mode at the $100 \text{ nm}$ tip is 
 insufficient to match the $\sim 10.4 \ \mu\text{m}$ MFD of a standard SMF-28 fiber, resulting in 
 losses above $4.25 \text{ dB}$. To validate the need for a specialized interface, we compared these 
 results with Ultra-High Numerical Aperture (UHNA) fibers. As illustrated in the 
@@ -407,10 +409,10 @@ The design process for the MMI stage originated from a $2\times2$ geometry previ
 through conventional parametric sweeps following the self-imaging 
 principle~\cite{soldanoOpticalMultimodeInterference1995}.  
 
-The device was implemented using a multi-level shallow-etch process to maximize modal control, as 
-illustrated in the cross-section of Figure~\ref{fig:ch3-mmi_geometry}(a). The MMI body features a 
-total height of $220~\text{nm} (h_{220})$ and is etched down to a $150~\text{nm}$ silicon slab 
-($h_{150}$), providing high confinement for the interference pattern. As shown in the top-view in 
+To maximize modal control, a multi-level shallow-etch process was implemented, as illustrated in 
+the cross-section of Figure~\ref{fig:ch3-mmi_geometry}(a). The MMI body features a total height of 
+$220~\text{nm} (h_{220})$ and is etched down to a $150~\text{nm}$ silicon slab ($h_{150}$), 
+providing high confinement for the interference pattern. As shown in the top-view in 
 Figure~\ref{fig:ch3-mmi_geometry}(b), this interference region has a footprint of 
 $33.7~\mu\text{m} \times 5~\mu\text{m}$ and is placed upon a $15~\mu\text{m}$ wide slab to prevent 
 boundary scattering. Furthermore, the access ports include $3~\mu\text{m}$ long tapers that utilize 
@@ -484,7 +486,7 @@ mode-mismatch losses.
 
 \subsubsection{FDTD Simulation Setup and Computational Domain}
 
-The optimization environment was constructed using a custom Python-driven \texttt{build} script 
+Constructing the optimization environment relied on a custom Python-driven \texttt{build} script 
 designed to replicate the multi-level geometry described in Section~\ref{subsec:baseline_mmi}. 
 This script ensures that the complex etch profiles ($h_{220}$, $h_{150}$, and $h_{90}$) are 
 precisely mapped into the 3D-FDTD domain. By parameterizing the baseline footprint and its 
@@ -492,8 +494,8 @@ surrounding slab region within the \texttt{lumopt} framework, the environment is
 the subsequent morphological changes of the side-walls while maintaining the physical constraints 
 of the SOI platform.
 
-The numerical simulation was configured with the following parameters to ensure high gradient 
-accuracy:
+To guarantee high gradient accuracy, the numerical simulation was configured with the following 
+parameters:
 \begin{itemize}
     \item \textbf{Symmetry and Boundary Conditions:} A 3D-FDTD region was defined using Z-symmetry 
     at the center of the silicon layer. This optimization reduces the computational overhead by 
@@ -573,8 +575,8 @@ of the MMI body and the performance metrics across different simulation scenario
 
 \subsubsection{Stage 1: Body Morphological Evolution}
 
-The transition from a conventional rectangular geometry to an organic profile is illustrated in 
-Figure~\ref{fig:ch3-shape_evolution}, specifically for the 90~nm Low Resolution case.
+Figure~\ref{fig:ch3-shape_evolution} illustrates the transition from a conventional rectangular 
+geometry to an organic profile, specifically for the 90~nm Low Resolution case.
 
 \begin{figure}[!ht]
     \centering
@@ -617,8 +619,8 @@ constraints lead to an underestimation of the absolute transmission and a penali
 initial excess losses, the optimization remains physically valid as the gradient correctly 
 identifies the direction of performance improvement.
 
-The convergence history (left panel) demonstrates how the optimizer effectively addresses the 
-initial power imbalance. Starting from asymmetrical values (approx. 0.22 vs. 0.30 in FoM), the port 
+An effective correction of the initial power imbalance is evidenced by the convergence history 
+(left panel). Starting from asymmetrical values (approx. 0.22 vs. 0.30 in FoM), the port 
 responses converge toward a balanced state (approx. 0.48 vs. 0.45) as the total transmission 
 exceeds 93\%. The sparse perturbation gradient map (center) identifies the junctions between the 
 multimode body and the access tapers as the primary drivers for performance gain. This is 
@@ -688,7 +690,7 @@ converge in approximately 19 iterations, the 150~nm High Resolution scenario req
 iterations to reach a steady state, reflecting the higher complexity of the captured organic 
 boundaries.
 
-The final performance metrics, extracted after convergence, are summarized in 
+After convergence, the final performance metrics are summarized in 
 Table~\ref{tab:stage1_comparison} and visualized in Figure~\ref{fig:ch3-stage1_performance}.
 
 \begin{figure}[!ht]
@@ -713,7 +715,7 @@ Table~\ref{tab:stage1_comparison} and visualized in Figure~\ref{fig:ch3-stage1_p
 \end{tabular}
 \end{table}
 
-The quantitative data confirms that High Resolution meshes are essential to accurately capture the 
+Quantitative results confirm that High Resolution meshes are essential to accurately capture the 
 optimized walls, leading to a substantial reduction in scattering. Specifically, the 90~nm High 
 Resolution case achieved the most balanced response with an imbalance of only 0.046~dB. Although 
 the 150~nm High Resolution scenario exhibited the lowest absolute losses (0.154~dB), the superior 
@@ -724,12 +726,12 @@ stage.
 
 \subsubsection{Stage 2: Integrated Device Optimization and Final Performance}
 
-The second stage of the optimization process represents a transition toward a holistic device 
-design. Unlike the previous stage, which focused exclusively on the MMI body, this phase performs a 
-simultaneous optimization of 45 geometric parameters encompassing both the multimode region and the 
-access tapers. While this optimization starts from the initial parametric design (Iteration 0), it 
-focuses specifically on the 90 nm etch depth configuration, which was identified in Stage 1 as the 
-most promising architecture for achieving high power symmetry.
+Optimization stage 2 represents a transition toward a holistic device design. Unlike the previous 
+stage, which focused exclusively on the MMI body, this phase performs a simultaneous optimization 
+of 45 geometric parameters encompassing both the multimode region and the access tapers. While this 
+optimization starts from the initial parametric design (Iteration 0), it focuses specifically on 
+the 90 nm etch depth configuration, which was identified in Stage 1 as the most promising 
+architecture for achieving high power symmetry.
 
 To manage the high dimensionality of this integrated design space, the optimization was conducted 
 using a standard (Low Resolution) mesh. This choice ensures computational tractability and algorithm 
@@ -767,17 +769,11 @@ final iteration.
     \label{fig:stage2_dashboard}
 \end{figure}
 
-% The sensitivity map (Figure~\ref{fig:stage2_dashboard}b) confirms that the most significant 
-% performance gains in this stage are achieved by sculpting the junction between the access tapers 
-% and the MMI body. This integrated approach results in an organic morphology that adiabatically 
-% guides the light, as shown in the field intensity distribution 
-% (Figure~\ref{fig:stage2_dashboard}d).
 
-
-The sensitivity map (Figure~\ref{fig:stage2_dashboard}b) confirms that the most significant 
-performance gains are achieved by sculpting the junction between the access tapers and the MMI 
-body. This integrated approach results in an organic morphology that adiabatically guides the 
-light with minimal scattering. As a detailed validation of the final geometry, the spectral 
+Figure~\ref{fig:stage2_dashboard}b presents the sensitivity map, confirming that the most 
+significant performance gains are achieved by sculpting the junction between the access tapers and 
+the MMI body. This integrated approach results in an organic morphology that adiabatically guides 
+the light with minimal scattering. As a detailed validation of the final MMI, the spectral 
 response is depicted in Figure~\ref{fig:ch3-stage2_spectral}.
 
 \begin{figure}[!ht]
@@ -803,29 +799,129 @@ with the best result from Stage 1 is summarized in Figure~\ref{fig:performance_i
     \label{fig:performance_improvement}
 \end{figure}
 
-The comparison reveals a significant enhancement in all key metrics. By integrating the tapers into 
-the optimization from the start, the excess loss was reduced to approximately 0.077 dB. More 
-remarkably, the power imbalance was virtually eliminated, dropping to a near-ideal value of 
+A significant enhancement across all key metrics emerges from this comparison. By integrating the 
+tapers into the optimization from the start, the excess loss was reduced to approximately 0.077 dB. 
+More remarkably, the power imbalance was virtually eliminated, dropping to a near-ideal value of 
 0.0035 dB. These results validate that optimizing the transition regions in conjunction with the 
 multimode body is essential for achieving state-of-the-art 50/50 power splitting.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% REVIEWED UNTIL HERE %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Experimental Characterization and Validation}
+
+To validate the theoretical performance of the optimized architectures, a total of eight 
+independent structures were selected for fabrication on the SOI platform. These devices are 
+classified into three groups according to the optimization stage and the specific parameters 
+evaluated:
+
+\begin{enumerate}
+    \item \textbf{Body Optimizations (Stage 1):} Devices \textbf{D1} and \textbf{D2} represent the 
+    optimized MMI bodies without integrated taper refinement. \textbf{D1} utilizes the 150 nm 
+    shallow etch layer, while \textbf{D2} utilizes the 90 nm layer. Both were optimized using 
+    high-resolution meshes ($45 \times 10^{-6}$ mesh size and accuracy 4).
+    \item \textbf{Integrated Body + Access Optimizations (Stage 2):} Devices \textbf{D3} and 
+    \textbf{D4} represent the holistic design approach. Both utilize the 90 nm shallow layer. 
+    \textbf{D3} serves as the low-resolution benchmark ($60 \times 10^{-6}$ mesh, accuracy 1), 
+    whereas \textbf{D4} is the final optimized design at mid-resolution ($45 \times 10^{-6}$ mesh, 
+    accuracy 4).
+    \item \textbf{Tolerance and Sensitivity Study (D4 Variants):} To assess the robustness of the 
+    final integrated design (\textbf{D4}), four variants were fabricated to simulate critical 
+    manufacturing deviations:
+    \begin{itemize}
+        \item \textbf{D4.1 and D4.2:} Evaluate longitudinal tolerances by increasing and decreasing 
+        the MMI body length by 0.25 $\mu$m, respectively.
+        \item \textbf{D4.3 and D4.4:} Evaluate transversal tolerances by increasing and decreasing 
+        the MMI body width by 0.25 $\mu$m, respectively.
+    \end{itemize}
+\end{enumerate}
+
+Evaluating the SR and EL across the C-band constitutes the core of the experimental 
+characterization. To achieve this, specific test structures were included on the fabricated chip 
+to decouple intrinsic MMI performance from auxiliary components, as illustrated in 
+Figure~\ref{fig:ch3-mmi_pic}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch3-mmi_pic.png}
+    \caption{Experimental layout and fabrication overview of MMI: (a) GDS capture of the test 
+    structures including. (b) Photograph of the fabricated PIC. (c) Zoomed view of the cascades of 
+    MMI showing dedicated BAR and CROSS port connections for SR measurement. (d) GDS layout of the 
+    final optimized MMI geometry (D1).(e) Magnified micrograph of the physical MMI implementation.}
+    \label{fig:ch3-mmi_pic}
+\end{figure}
+
+Characterizing these devices relies on two distinct MMI cascades (Figure~\ref{fig:ch3-mmi_pic}c): 
+one interconnecting the BAR ports and another interconnecting the CROSS ports. Using both 
+configurations simultaneously provides the necessary data to extract the SR. Additionally, these 
+combined measurements allow for a precise calculation of the EL through linear regression, as the 
+total loss scales with the number of cascaded devices in each path. Detailed performance results 
+and fabrication tolerances are presented in the following figures.
+
+% ======================================================
+% PLACEHOLDERS 
+% ======================================================
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch3-mmi_EL_D1-D2-D3-D4.png}
+    \caption{Measured EL for the  MMI D4 across the C-band.}
+    \label{fig:ch3-exp_EL}
+\end{figure}
+
+% \begin{figure}[!ht]
+%     \centering
+%     % \includegraphics[width=\textwidth]{figures/ch3-experimental_SR_results.png}
+%     \caption{Measured SR for D4 and its tolerance variants (D4.1-D4.4).}
+%     \label{fig:ch3-exp_SR}
+% \end{figure}
+
+\subsection{Conclusions of Chapter 3 (TO BE DONE!)} %%%%% PLACEHOLDER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Developing the 3 dB power splitter presented in this chapter validates that a hierarchical, 
+adjoint-based optimization strategy is essential for high-performance photonic components. 
+Several key findings and achievements highlight the success of this work:
+
+\begin{itemize}
+    \item \textbf{Optimization Methodology:} The two-stage approach allowed for the identification 
+    of the 90 nm shallow etch as the superior depth for power balance in Stage 1, followed by a 
+    successful 45-parameter integrated refinement in Stage 2.
+    \item \textbf{Performance Excellence:} Theoretical characterization of the final design 
+    (\textbf{D4}) indicates a peak Excess Loss of 0.077 dB and an exceptional splitting ratio 
+    balance of $0.50 \pm 0.005$ over a 100 nm bandwidth.
+    \item \textbf{Numerical Robustness:} The use of mid-resolution meshes for the final integrated 
+    stage ensured algorithm stability in a high-dimensional design space, avoiding numerical noise 
+    while maintaining high physical fidelity during the adjoint process.
+    \item \textbf{Fabrication Robustness:} The inclusion of devices \textbf{D4.1} through 
+    \textbf{D4.4} provides a comprehensive framework to validate the design's sensitivity to 
+    $\pm$0.25 $\mu$m variations in length and width, ensuring the practical reliability of the 
+    organic MMI morphology under real-world tolerances.
+\end{itemize}
+
+Ultimately, the established performance and validated robustness of these splitters provide a 
+critical building block for the next generation of wideband photonic integrated circuits.
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% DECIDE IF ADD PHASESHIFTERS %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Active Tuning}
-Phase Shifter Designs
+% \section{Active Tuning}
+% Phase Shifter Designs
 
-\subsection{Design of [Thermo-optic/Plasma-dispersion] Shifters}
-Geometría del calentador o de la unión PN
+% \subsection{Design of [Thermo-optic/Plasma-dispersion] Shifters}
+% Geometría del calentador o de la unión PN
 
-\subsection{Static and Dynamic Simulation}
-Distribución de calor o perfiles de portadores
+% \subsection{Static and Dynamic Simulation}
+% Distribución de calor o perfiles de portadores
 
-\subsection{Experimental Performance}
-El valor clave de $P_\pi$ (potencia para desfase de $\pi$), eficiencia y linealidad
+% \subsection{Experimental Performance}
+% El valor clave de $P_\pi$ (potencia para desfase de $\pi$), eficiencia y linealidad
 
-\subsection{Chapter Summary (or Concluding Remarks)}
-Recapitulación de los mejores resultados obtenidos que se usarán para construir la malla en los siguientes capítulos.
+% \subsection{Chapter Summary (or Concluding Remarks)}
+% Recapitulación de los mejores resultados obtenidos que se usarán para construir la malla en los siguientes capítulos.
 
