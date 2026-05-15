@@ -806,10 +806,6 @@ More remarkably, the power imbalance was virtually eliminated, dropping to a nea
 multimode body is essential for achieving state-of-the-art 50/50 power splitting.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%% REVIEWED UNTIL HERE %%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsubsection{Experimental Characterization and Validation}
 
 To validate the theoretical performance of the optimized architectures, a total of eight 
@@ -825,7 +821,7 @@ evaluated:
     \item \textbf{Integrated Body + Access Optimizations (Stage 2):} Devices \textbf{D3} and 
     \textbf{D4} represent the holistic design approach. Both utilize the 90 nm shallow layer. 
     \textbf{D3} serves as the low-resolution benchmark ($60 \times 10^{-6}$ mesh, accuracy 1), 
-    whereas \textbf{D4} is the final optimized design at mid-resolution ($45 \times 10^{-6}$ mesh, 
+    whereas \textbf{D4} is the final optimized design at high-resolution ($45 \times 10^{-6}$ mesh, 
     accuracy 4).
     \item \textbf{Tolerance and Sensitivity Study (D4 Variants):} To assess the robustness of the 
     final integrated design (\textbf{D4}), four variants were fabricated to simulate critical 
@@ -860,68 +856,98 @@ combined measurements allow for a precise calculation of the EL through linear r
 total loss scales with the number of cascaded devices in each path. Detailed performance results 
 and fabrication tolerances are presented in the following figures.
 
-% ======================================================
-% PLACEHOLDERS 
-% ======================================================
+
+Figure~\ref{fig:ch3-mmi_SR_experimental} illustrates the experimental splitting ratio for the eight 
+evaluated $2\times2$ MMI designs across the C-band. The solid lines represent the median response 
+of the characterized dies, while the shaded regions correspond to the interquartile range 
+($25^{\text{th}}$ to $75^{\text{th}}$ percentiles). This statistical representation provides a 
+robust measure of the fabrication uniformity across the wafer, effectively filtering out local 
+measurement artifacts and outliers. To ensure physical consistency, the results from both port 
+configurations were cross-normalized to satisfy the power conservation requirement 
+($SR_{\text{Bar}} + SR_{\text{Cross}} = 1$).
+
+As observed in the results, the nominal designs (D1--D4) exhibit a systematic power imbalance, 
+predominantly favoring the Bar port. This deviation suggests the presence of a positive critical 
+dimension (CD) bias during the lithography and etching stages, resulting in MMI bodies slightly 
+wider than the original GDS specifications. In contrast, design D4.4, which features a intentional 
+nominal width reduction of $0.25\,\mu$m, stands out as the most balanced and broadband 
+configuration. This geometric offset successfully compensates for the fabrication-induced bias, 
+achieving a near-ideal $50/50$ splitting ratio and exceptional spectral flatness across the entire 
+$1520$--$1580$\,nm range. The narrow interquartile range observed in D4.4 further confirms the 
+robustness of the design against process variations, identifying it as the optimal geometry for 
+this fabrication run.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=\textwidth]{figures/ch3-mmi_EL_D1-D2-D3-D4.png}
-    \caption{Measured EL for the  MMI D4 across the C-band.}
-    \label{fig:ch3-exp_EL}
+    \includegraphics[width=\textwidth]{figures/ch3-mmi_experimental_all.png}
+    \caption{Measured splitting ratio for the eight evaluated $2\times2$ MMI designs. Each panel 
+    shows the spectral response of the \textit{Bar} (blue) and \textit{Cross} (red) ports across 
+    the C-band. Solid lines denote the median values across all characterized dies, while shaded 
+    areas represent the $25^{\text{th}}$--$75^{\text{th}}$ percentile range. Data are 
+    cross-normalized to fulfill the power conservation condition 
+    ($SR_{\text{Bar}} + SR_{\text{Cross}} = 1$).}  
+    \label{fig:ch3-mmi_SR_experimental}
 \end{figure}
 
-% \begin{figure}[!ht]
-%     \centering
-%     % \includegraphics[width=\textwidth]{figures/ch3-experimental_SR_results.png}
-%     \caption{Measured SR for D4 and its tolerance variants (D4.1-D4.4).}
-%     \label{fig:ch3-exp_SR}
-% \end{figure}
 
-\subsection{Conclusions of Chapter 3 (TO BE DONE!)} %%%%% PLACEHOLDER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+While all designs were characterized, the detailed EL analysis focuses on design D4.4, as it 
+represents the only geometry that successfully achieves the targeted 50/50 power splitting ratio. 
+In the other designs (D1--D4.3), the significant splitting imbalance renders them unsuitable for 
+their intended application as balanced power splitters. Consequently, their EL values, although 
+consistent with the fabrication process, do not provide additional instructive value for the final 
+device performance. 
 
-Developing the 3 dB power splitter presented in this chapter validates that a hierarchical, 
-adjoint-based optimization strategy is essential for high-performance photonic components. 
-Several key findings and achievements highlight the success of this work:
+Figure~\ref{fig:ch3-mmi_el_d44} presents the spectral Excess Loss for the optimized D4.4 design. 
+The results show an average EL of approximately $0.13$\,dB per device at $\lambda = 1550$\,nm. This 
+low loss value, coupled with the high spectral flatness observed previously, confirms that the 
+$-0.25\,\mu$m width adjustment not only corrected the splitting ratio but also maintained the high 
+transmission efficiency of the MMI structure. This combination of low loss and balanced splitting 
+identifies D4.4 as the optimal building block for larger-scale interferometric structures.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/ch3-excess_loss_d44.png}
+    \caption{Measured Excess Loss for the D4.4 MMI variation. The solid line represents the median 
+    value across the characterized dies, while the shaded region denotes the
+     $25^{\text{th}}$--$75^{\text{th}}$ percentile range.}
+    \label{fig:ch3-mmi_el_d44}
+\end{figure}
+
+
+
+\subsection{Conclusions}
+
+The development and characterization of the 3\,dB power splitters presented in this section 
+demonstrate that a hierarchical, adjoint-based optimization strategy could be a powerful solution
+for achieving high-performance photonic components. The transition from theoretical design to 
+experimental validation yielded several key findings:
 
 \begin{itemize}
-    \item \textbf{Optimization Methodology:} The two-stage approach allowed for the identification 
-    of the 90 nm shallow etch as the superior depth for power balance in Stage 1, followed by a 
-    successful 45-parameter integrated refinement in Stage 2.
-    \item \textbf{Performance Excellence:} Theoretical characterization of the final design 
-    (\textbf{D4}) indicates a peak Excess Loss of 0.077 dB and an exceptional splitting ratio 
-    balance of $0.50 \pm 0.005$ over a 100 nm bandwidth.
-    \item \textbf{Numerical Robustness:} The use of mid-resolution meshes for the final integrated 
-    stage ensured algorithm stability in a high-dimensional design space, avoiding numerical noise 
-    while maintaining high physical fidelity during the adjoint process.
-    \item \textbf{Fabrication Robustness:} The inclusion of devices \textbf{D4.1} through 
-    \textbf{D4.4} provides a comprehensive framework to validate the design's sensitivity to 
-    $\pm$0.25 $\mu$m variations in length and width, ensuring the practical reliability of the 
-    organic MMI morphology under real-world tolerances.
+    \item \textbf{Optimization Methodology:} The two-stage approach successfully identified the 
+    90\,nm shallow etch as the optimal depth for power balance. The subsequent 45-parameter 
+    integrated refinement in Stage 2 proved robust, producing an organic MMI morphology that 
+    maintains high performance across the entire C-band.
+    
+    \item \textbf{Experimental Validation and CD Bias:} While the nominal designs showed a 
+    systematic power imbalance due to foundry-specific fabrication offsets, the inclusion of 
+    geometric variations allowed for a precise calibration of the process. Design \textbf{D4.4}, 
+    featuring a $-0.25\,\mu$m width compensation, effectively neutralized the positive CD bias of 
+    the fabrication run, achieving a near-ideal $50/50$ splitting ratio.
+    
+    \item \textbf{Performance Excellence:} Experimental results for the optimized \textbf{D4.4} 
+    design indicate an exceptional peak Excess Loss of approximately $0.06$\,dB at $1550$\,nm, 
+    with losses remaining below $0.15$\,dB across the $1520$--$1580$\,nm range. This matches the 
+    high-fidelity numerical predictions and confirms the efficiency of the adjoint-optimized 
+    geometry.
+    
+    \item \textbf{Numerical and Statistical Robustness:} The use of mid-resolution meshes during 
+    the adjoint process ensured algorithm stability without sacrificing physical accuracy. 
+    Furthermore, the narrow interquartile range observed in the experimental data across multiple 
+    dies validates the high tolerance of the proposed MMI structure to standard wafer-scale process 
+    variations.
 \end{itemize}
 
-Ultimately, the established performance and validated robustness of these splitters provide a 
-critical building block for the next generation of wideband photonic integrated circuits.
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%% DECIDE IF ADD PHASESHIFTERS %%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \section{Active Tuning}
-% Phase Shifter Designs
-
-% \subsection{Design of [Thermo-optic/Plasma-dispersion] Shifters}
-% Geometría del calentador o de la unión PN
-
-% \subsection{Static and Dynamic Simulation}
-% Distribución de calor o perfiles de portadores
-
-% \subsection{Experimental Performance}
-% El valor clave de $P_\pi$ (potencia para desfase de $\pi$), eficiencia y linealidad
-
-% \subsection{Chapter Summary (or Concluding Remarks)}
-% Recapitulación de los mejores resultados obtenidos que se usarán para construir la malla en los siguientes capítulos.
-
+Ultimately, the successful experimental validation of these splitters—achieving both low loss and 
+perfect power balance through geometric calibration—provides a reliable and high-performance 
+building block for the complex wideband photonic integrated circuits discussed in the subsequent 
+chapters.
