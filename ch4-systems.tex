@@ -233,7 +233,10 @@ phase.
 
 To validate the final layout, rigorous numerical simulations were performed. The resulting spectral 
 response, illustrated in Figure \ref{fig:ch4-awg_simulation}, confirms that the device successfully 
-achieves the broad spectral coverage required for C+L band operation.
+achieves the broad spectral coverage required for C+L band operation. The simulation results 
+confirm an insertion loss of approximately 6 dB and an FSR of 59.2 nm, evidenced by the spectral 
+gaps around 1.52 \textmu m and 1.58 \textmu m. Furthermore, the isolation levels validate the 
+design target of -10 dB for both inter-channel and intra-channel crosstalk. 
 
 \begin{figure}[htbp]
     \centering
@@ -243,11 +246,6 @@ achieves the broad spectral coverage required for C+L band operation.
     achieved crosstalk levels.}
     \label{fig:ch4-awg_simulation}
 \end{figure}
-
-The simulation results confirm an insertion loss of approximately -6 dB and an FSR of 59.2 nm, 
-evidenced by the spectral gaps around 1.52 \textmu m and 1.58 \textmu m. Furthermore, the 
-isolation levels validate the design target of -10 dB for both inter-channel and intra-channel 
-crosstalk. 
 
 
 \subsubsection{Experimental Characterization}
@@ -259,27 +257,28 @@ were accessed via specialized grating couplers. To account for the spectral depe
 couplers, reference loopback structures were measured in close proximity, allowing for a precise 
 de-embedding of the coupling losses from the intrinsic AWG transmission data. Figure 
 \ref{fig:ch4-awg_test_structures} details the architecture of this test structure, presenting 
-both the GDS layout and an optical micrograph of the fabricated SOI die. This setup allows for 
-precise, automated spectral scans by moving the input fiber between input ports and sequentially 
-measuring the serialized outputs.
+both the GDS layout (a) alongside optical micrographs of the fabricated SOI die (b) and a 
+magnification of the free propagation region (c). This components arrangement allows for precise, 
+automated spectral scans by moving the input fiber between input ports and sequentially measuring 
+the serialized outputs.
 
-Utilizing this specialized setup, measurements were performed with a tunable C+L band laser source 
+Utilizing this specialized setup, characterization involved a tunable C+L band laser source 
 and a high-fidelity optical power meter. The PIC was temperature-stabilized at 25~$^\circ$C using a 
 Peltier-based TEC to prevent thermo-optic shifts, while the laser was swept with a 0.1~nm resolution 
-across the target wavelength range. Figure \ref{fig:ch4-awg_measured_spectrum} presents the measured 
-normalized transmission spectra for the 35 monitored output channels.
+across the target wavelength range. Resulting normalized transmission spectra for the 35 monitored
+output channels are presented in Figure \ref{fig:ch4-awg_measured_spectrum}.
 
-The experimental results show that the normalized measured insertion loss—which accounts for the 
-removal of the grating coupler response—is remarkably low, with most of the values below the 
-expected 6dB extracted from simulation. Crucially, the measured crosstalk levels are typically 
-around -11~dB, remaining consistent with the -10~dB target threshold required for robust centroid 
-detection algorithms. While fabrication tolerances introduce slight variations, the data exhibits 
-smooth and well-defined spectral peaks, validating the complex Rowland circle geometry and the 
-waveguide array design.
+Analysis of the experimental results reveals that the normalized measured insertion loss—which 
+accounts for the removal of the grating coupler response—is remarkably low, with most of the values 
+below the expected 6dB extracted from simulation. Crucially, the measured crosstalk levels are 
+typically around -11~dB, remaining consistent with the -10~dB target threshold required for robust 
+centroid detection algorithms. While fabrication tolerances introduce slight variations, the data 
+exhibits smooth and well-defined spectral peaks, validating the complex Rowland circle geometry and 
+the waveguide array design.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/ch4-awg_test_structures.png}
+    \includegraphics[width=\textwidth]{figures/ch4-awg_test_structures.png}
     \caption{Architecture and physical realization of the test AWG. (a) GDS layout of the complete 
     characterization structure, featuring serialized input and output ports. (b) Optical micrograph 
     of the fabricated device. (c) High-magnification inset of the Free Propagation Region, 
@@ -292,14 +291,29 @@ waveguide array design.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{figures/ch4-awg_measurements.png}
-    \caption{Experimental spectral response of the 35-channel serialized test AWG spectrometer. The 
-    plot displays the clean normalized transmission in dB, demonstrating well-defined spectral 
-    peaks across the broad C+L bandwidth, validating the -10 dB crosstalk target for centroid 
-    detection.}
+    \caption{Experimental spectral response of the 35-channel test AWG spectrometer.}
     \label{fig:ch4-awg_measured_spectrum}
 \end{figure}
 
 \FloatBarrier
+
+Spectral correspondence between the simulated design and the experimental results is illustrated in 
+Figure~\ref{fig:ch4-awg_sim_vs_meas}. Measured data for output channel \#0 exhibits high 
+morphological fidelity to the simulated response, particularly regarding the main peak width and 
+the secondary lobe suppression. However, a noticeable wavelength offset and an expanded FSR are 
+present in the fabricated device. Such discrepancies are typically attributed to the sensitivity of 
+the phased waveguide array to the effective group index ($n_g$), which slightly differs from the 
+nominal values used during the simulation phase due to the over-etching effects identified in 
+Chapter 3.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/ch4-awg_sim_meas.png}
+    \caption{Comparison between simulated (black) and measured (blue) spectral responses for output 
+    port \#0.}
+    \label{fig:ch4-awg_sim_vs_meas}
+\end{figure}
+
 
 Beyond the characterization of a single device, the robustness of the AWG design was evaluated 
 across five different dies (B7, E6, D5, F3, and G8). This statistical approach is essential to 
@@ -319,8 +333,8 @@ compared against the initial design targets.
         Ch. spacing [nm] & 1.6 & 1.6 $\pm$ 0.1 & 1.59 $\pm$ 0.14 & 1.6 $\pm$ 0.12 & 
         1.6 $\pm$ 0.12 & 1.6 $\pm$ 0.12 \\
         FSR [nm] & 59.2 & 63.40 & 63.46 & 63.47 & 63.53 & 63.41 \\
-        IL [dB] & - & -5.14 $\pm$ 0.6 & -5.01 $\pm$ 0.9 & -3.54 $\pm$ 0.9 
-        & -3.87 $\pm$ 0.7 & -4.36 $\pm$ 0.7 \\
+        IL [dB] & - & 5.14 $\pm$ 0.6 & 5.01 $\pm$ 0.9 & 3.54 $\pm$ 0.9 
+        & 3.87 $\pm$ 0.7 & 4.36 $\pm$ 0.7 \\
         Crosstalk [dB] & -10.0 & -12.37 & -10.87 & -9.64 & -9.90 & -11.60 \\ \hline
     \end{tabular}
     }
@@ -335,7 +349,7 @@ a common occurrence in SOI photonics due to the high sensitivity of the effectiv
 final etched waveguide geometry.
 
 Regarding power efficiency, insertion losses demonstrate excellent performance, with values as low 
-as -3.54 dB in chip D5. These results are notably superior to the initial conservative estimates, 
+as 3.54 dB in chip D5. These results are notably superior to the initial conservative estimates, 
 validating the use of widened waveguide sections to minimize propagation and scattering losses. The 
 intra-channel crosstalk remains well-aligned with the -10 dB requirement, with mean values hovering 
 around -11 dB. Although chip D5 and F3 show marginal deviations (-9.64 dB and -9.90 dB 
@@ -350,12 +364,17 @@ the reliability of the AWG as a foundational building block for the autonomous t
 The second HPB category addresses the mitigation of physical layer impairments, specifically 
 chromatic dispersion. While a hexagonal mesh can implement various filter responses, synthesizing 
 the steep and precise phase profiles required for dispersion compensation is more efficiently 
-handled by dedicated reconfigurable lattice filters.
-
-These filters consist of cascaded stages of Mach-Zehnder Interferometers (MZIs) and delay lines, 
-allowing for the independent control of the magnitude and phase response. The synthesis of these 
-filters is geared toward providing a tunable inverse-dispersion profile that can compensate for 
-varying lengths of standard single-mode fiber (SSMF). 
+handled by dedicated reconfigurable filters. These filters could be based on lattice 
+configurations \cite{djordjevicFullyReconfigurableSilicon2011,binbinguanCMOSCompatibleReconfigurable2014,ibrahimDemonstrationFastreconfigurableSilicon2011},
+Ring-Assisted Mach-Zehnder Interferometer (RAMZI) 
+\cite{catala-lahozSelfConfiguringProgrammableIntegrated2025}, coupled resonator optical waveguide 
+(CROW) \cite{zhuSiliconPhotonicTunable2025}, among others.
+Specifically, the type selected as the most appropiate for the programmable dispersion compensation
+is a lattice filter \cite{takiguchiDispersionSlopeEqualizer1998}. It consist of cascaded stages of 
+Mach-Zehnder Interferometers and delay lines, allowing for the independent control of the magnitude 
+and phase response. The synthesis of these filters is geared toward providing a tunable 
+inverse-dispersion profile that can compensate for varying lengths of standard single-mode fiber 
+(SSMF). 
 
 As we will discuss in Section \ref{sec:inductive_modeling}, the ability to model these lattice 
 filters as discrete $2\times2$ blocks is what enables their seamless integration into the larger 
