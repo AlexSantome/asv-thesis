@@ -361,26 +361,132 @@ the reliability of the AWG as a foundational building block for the autonomous t
 \subsection{Dispersion Compensation: Reconfigurable Lattice Filters}
 \label{subsec:lattice_design}
 
-The second HPB category addresses the mitigation of physical layer impairments, specifically 
-chromatic dispersion. While a hexagonal mesh can implement various filter responses, synthesizing 
-the steep and precise phase profiles required for dispersion compensation is more efficiently 
-handled by dedicated reconfigurable filters. These filters could be based on lattice 
-configurations \cite{djordjevicFullyReconfigurableSilicon2011,binbinguanCMOSCompatibleReconfigurable2014,ibrahimDemonstrationFastreconfigurableSilicon2011},
-Ring-Assisted Mach-Zehnder Interferometer (RAMZI) 
-\cite{catala-lahozSelfConfiguringProgrammableIntegrated2025}, coupled resonator optical waveguide 
-(CROW) \cite{zhuSiliconPhotonicTunable2025}, among others.
-Specifically, the type selected as the most appropiate for the programmable dispersion compensation
-is a lattice filter \cite{takiguchiDispersionSlopeEqualizer1998}. It consist of cascaded stages of 
-Mach-Zehnder Interferometers and delay lines, allowing for the independent control of the magnitude 
-and phase response. The synthesis of these filters is geared toward providing a tunable 
-inverse-dispersion profile that can compensate for varying lengths of standard single-mode fiber 
-(SSMF). 
+Addressing the mitigation of physical layer impairments, specifically chromatic dispersion, 
+constitutes the second HPB category. While a hexagonal mesh can implement various filter responses, 
+synthesizing the steep and precise phase profiles required for dispersion compensation is handled 
+more efficiently by dedicated reconfigurable filters. These architectures could be based on lattice 
+configurations \cite{djordjevicFullyReconfigurableSilicon2011, 
+binbinguanCMOSCompatibleReconfigurable2014, ibrahimDemonstrationFastreconfigurableSilicon2011}, 
+Ring-Assisted Mach-Zehnder Interferometers (RAMZI) 
+\cite{catala-lahozSelfConfiguringProgrammableIntegrated2025}, or coupled resonator optical 
+waveguides (CROW) \cite{zhuSiliconPhotonicTunable2025}, among others.
 
-As we will discuss in Section \ref{sec:inductive_modeling}, the ability to model these lattice 
-filters as discrete $2\times2$ blocks is what enables their seamless integration into the larger 
-dual-polarization fabric. This modularity allows the smart transceiver to dynamically allocate its 
-processing power: using the hexagonal mesh for spatial routing and the lattice filters for 
-fine-grained spectral shaping.
+\subsubsection{Design Specifications}
+
+Selecting the lattice filter architecture \cite{takiguchiDispersionSlopeEqualizer1998} over 
+resonant-based alternatives—such as CROW or RAMZI—is driven by strict operational stability and 
+control requirements. While Infinite Impulse Response (IIR) topologies like RAMZIs can achieve 
+steeper phase slopes and highly compact footprints, they inherently suffer from extreme 
+sensitivity to thermal fluctuations and fabrication tolerances. Furthermore, the high-Q resonances 
+characteristic of ring-based designs often introduce significant group delay ripple and amplitude 
+distortions at the channel edges.
+
+Conversely, the cascaded MZIs and delay line structure of a lattice filter synthesizes a 
+Finite Impulse Response (FIR). This feed-forward topology guarantees unconditional structural 
+stability and provides a smoother, ripple-free phase profile across the targeted passband. 
+Additionally, from a system-level control perspective, mapping the desired inverse-dispersion 
+profile to the tuning parameters—specifically the independent control of magnitude and phase 
+response at each MZI stage—presents a well-conditioned optimization problem. Avoiding the highly 
+nonlinear, easily-trapped tuning landscapes associated with multi-ring architectures ensures that 
+the programmable smart transceiver can reliably synthesize the necessary FIR profiles for robust 
+dispersion mitigation.
+
+Architecture of a single compensation stage is illustrated in 
+Figure~\ref{fig:ch4-lattice_schematic}, where the orange boxes represent the 
+physical path length difference ($\Delta L$) responsible for the differential group delay. 
+% Synthesis of these filters is geared toward providing a tunable inverse-dispersion profile capable 
+% of compensating for varying lengths of standard single-mode fiber (SSMF).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch4-lattice_filter_8stage.png}
+    \caption{Schematic representation of an 8-stage reconfigurable lattice filter architecture.}
+    \label{fig:ch4-lattice_schematic}
+\end{figure}
+
+
+Exploration of the fundamental physical limitations inherent to these lattice structures analyzed 
+the critical trade-off between the maximum achievable dispersion ($D$) and the usable filter 
+bandwidth\footnote{The theoretical study, synthesis, and simulation characterization of the 
+dispersion compensation lattice filters detailed in this section were conducted by C. 
+Gómez-Hidalgo.}. In a lattice architecture with a constant unit delay $T$ between stages, the 
+synthesized group delay response is periodic with $\text{FSR} = 1/T$. 
+
+Mathematical modeling of the 8-stage compensator dictates that the achievable dispersion is 
+fundamentally proportional to the square of the unit delay. For a standard architecture, this 
+relationship is approximated as: 
+\begin{equation}
+    D = \frac{12·T}{\Delta\lambda}
+\end{equation}
+where $\lambda_0$ is the central operating wavelength and $c$ is the speed of light. 
+Substituting for the 8-stage lattice filter, the dispersion can be computed as:
+\begin{equation}
+    D = 12·5·\frac{T^2}{\lambda_0^2} c
+\end{equation}
+However, synthesizing a perfectly linear group delay profile—required to invert fiber 
+dispersion—from the sinusoidal responses of the MZI stages is only accurate near the center of the 
+period. Based on standard synthesis guidelines, the distortion-free linear phase region, which 
+dictates the usable channel bandwidth ($\Delta f_{\text{pass}}$), is tightly restricted to 
+approximately 20\% of the FSR:
+\begin{equation}
+    \Delta f_{\text{pass}} \approx \frac{\text{FSR}}{5}
+\end{equation}
+
+Applying these governing equations to a practical telecommunications scenario clarifies the origin 
+of the performance bottleneck. Designing the 8-stage lattice filter to compensate for 70~km of 
+SSMF, which requires a dispersion of $D \approx 1200$~ps/nm at $\lambda_0 = 1550$~nm, algebraically 
+forces a unit delay of $T \approx 12.66$~ps. This physical delay inherently fixes the $\text{FSR}$ 
+at approximately 79~GHz. Consequently, restricting the operation to the distortion-free linear 
+region yields a maximum usable passband of strictly 15.8~GHz.
+
+Compatibility with Optical Transport Network (OTN) standards defines the practical bandwidth 
+requirements for these HPBs, immediately contextualizing the limitations of low-order filters. For 
+standard 100G (OTU4) signals operating at $\sim$32~Gbaud, the lattice filter must maintain a clear, 
+distortion-free spectral window of at least 35--40~GHz to prevent signal clipping and filtering 
+penalties. Transitioning to 400G (OTUCn) services necessitates even wider windows, typically 
+exceeding 75~GHz. 
+
+\subsubsection{Design and performance analysis}
+
+Overcoming the 15.8~GHz limitation to support modern high-baud-rate signals inherently requires 
+either scaling the filter architecture or dividing the compensation process into different 
+sequential steps. Decoupling the dispersion-bandwidth inverse relationship mathematically dictates 
+increasing the number of physical stages. Performance evaluation of this architectural scaling is 
+presented in Figure~\ref{fig:ch4-lattice_performance}, which plots the maximum achievable 
+dispersion against the number of cascaded stages for various channel bandwidth configurations. 
+
+The analysis of these trends provides a clear visual confirmation of the theoretical constraints. 
+Hitting the nominal target dispersion of 1200~ps/nm—equivalent to approximately 70~km of standard 
+single-mode fiber —while simultaneously maintaining a robust 25~GHz clear passband, strictly 
+requires extending the filter beyond the baseline 8-stage configuration to at least 12 stages. 
+Such an architectural expansion ensures a high dispersion-bandwidth product, successfully 
+accommodating wideband OTN channels while providing the steep phase slopes required for effective 
+regional mitigation.
+
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/ch4-dp_filters_comparison.png}
+    \caption{Performance trade-offs in MZI lattice filters for dispersion compensation, showing the
+    achievable dispersion versus the number of cascaded stages for different usable bandwidths and 
+    FSR. The shaded region denotes the target design space for compensating over 70~km of standard 
+    single-mode fiber ($D \geq 1200$~ps/nm).}
+    \label{fig:ch4-lattice_performance}
+\end{figure}
+
+
+\subsubsection{Filter selection and conclusions}
+
+Considering that even for a high number of stages the lattice filter would not have enough 
+bandwidth to cover OTN signals, the dispersion compensation is necessary divided in steps (i.e.,
+the spectrum to compensate can be divided in smaller slices). Therefore, the chosen filter for
+fabrication is a 8-stage with FSR of 100 GHz.
+
+Modularity of these lattice filters as discrete $2\times2$ blocks, as discussed further in 
+Section \ref{sec:inductive_modeling}, is what enables their seamless integration into the larger 
+dual-polarization fabric. This hierarchical architecture allows the smart transceiver to 
+dynamically allocate its processing power: utilizing the hexagonal mesh for spatial routing while 
+delegating fine-grained spectral shaping to the dedicated lattice HPBs.
 
 
 
@@ -391,14 +497,74 @@ The methodology developed for this kilo-scale architecture addresses the inheren
 traditional simulation environments when scaling to 1020 PUCs and 332 monitors 
 \cite{Santome2026_ECIO}. While previous frameworks relied on piecewise element modeling, the 
 approach presented here utilizes an inductive method based on recursive signal flow graphs to 
-achieve holistic system-level simulation.
+achieve holistic system-level simulation. Based on the results shown in 
+\cite{sanchezSimulationHighlyCoupled2022}, a scenario for $2\times2$ networks has been created,
+as depicted in \ref{fig:ch4-scenario_sch}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/ch4-scenario_schematic.png} 
+    \caption{Description of the inductive method scenario for $2\times2$ networks to compute the
+    scattering matrix of a hexagonal waveguide mesh. (a) Interconnection of the mesh and the
+    lattice. (b) Ports description of the lattice network. (c) Example of connection of the 
+    $2\times2$ lattice to a hexagonal mesh.}
+    \label{fig:ch4-scenario_sch}
+\end{figure}
+
+Following the same approach than \cite{sanchezSimulationHighlyCoupled2022}, the model of the PUC is
+simplified, considering that backscattering or signal reflections are negligible. The authors 
+affirm this assumption can be done because the contribution of these two elements is dominated by 
+the optical crosstalk. 
+The equation that models the scattering matrix of the simplified PUC is:
+
+\begin{equation}
+     S_{PUC} = -je^{-j\Delta}
+    \begin{bmatrix}
+        0 & 0 & cos\theta & -sin\theta \\
+        0 & 0 & sin\theta & cos\theta \\
+        cos\theta & sin\theta & 0 & 0 \\
+        -sin\theta & cos\theta & 0 & 0 \\
+    \end{bmatrix}
+    \cdot \alpha e^{-j \omega \tau}
+\end{equation}
+ 
+where $\Delta$ is the sum of the phases of each arm of the PUC ($\phi_{upper} + \phi_{lower}$) 
+divided by 2, $\theta$ is the subtraction of these phases divided by 2, $\alpha$ is the IL of 
+the couplers, $\omega$ is the optical frequency and $\tau$ is the propagation delay.
+
+
+Computing the contribution of the lattice connected to the mesh shown in Figure 
+\ref{fig:ch4-scenario_sch} is based on the signal flow graph of Figure 
+\ref{fig:ch4-scenario_graph}. The four nodes at the right (w,y,z,x) represent each port of the 
+lattice, where the connections at the right side of the dashed line between the nodes are the
+contributions of the recirculation of signal from/to the lattice. At the left side of the dashed 
+line, the connections show the contributions coming from the hexagonal mesh to the lattice that is
+being connected.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/ch4-scenario_graph.png} 
+    \caption{Signal flow graph of the inductive method scenario for $2\times2$ networks.}
+    \label{fig:ch4-scenario_graph}
+\end{figure}
+
+The response of the circuit after connecting the $2\times2$ structure will be determined by node 
+$m$, which receives the contributions from links X, W, V, U and Y (see Appendix~\ref{app:A})
+
+\begin{equation}
+    m = UX_{out_6}+VZ_{out_6}+WY_{out_6}+XW_{out_6} + Y
+\end{equation}
+
+After computing the response of the equation above using a matrix solver (e.g., \textit{Matlab}), the 
+resulting matrices can be included in the overall response of the programmable system.
+
 
 A fundamental advantage of this inductive approach is the systematic concatenation of $2\times2$ 
 building blocks. Prior to the development of this tool, the design environment lacked a robust 
-mechanism to integrate High-Performance Building Blocks (HPBs)—such as lattice filters—directly 
-with the programmable mesh core. By abstracting each component as a four-port network, we can now 
-cascade diverse functional stages and predict the global transfer matrix of the dual-polarization 
-processor without the exponential computational cost typically associated with large-scale PICs.
+mechanism to integrate High-Performance Building Blocks —such as lattice filters—directly with the
+programmable mesh core. By abstracting each component as a four-port network, we can now cascade 
+diverse functional stages and predict the global transfer matrix of the dual-polarization processor
+without the exponential computational cost typically associated with large-scale PICs.
 
 This framework also enables a hybrid verification flow. By feeding experimental data from 
 individual calibrated blocks back into the signal flow graphs, the simulation accounts for 
@@ -410,17 +576,17 @@ effects of the 1020-cell fabric remained within operational bounds.
 
 
 
-% \section{Physical Layout and Electrical Interfacing: Scaling to 1020 PUCs}
-% \label{sec:physical_layout}
+\section{Physical Layout and Electrical Interfacing: Scaling to 1020 PUCs}
+\label{sec:physical_layout}
 
-% Achieving a high-density integration on a $18.7 \times 15.1 \text{ mm}^2$ SOI die demands a 
-% meticulous layout strategy to balance optical performance with electrical connectivity. 
-% High-resolution definition of the internal waveguide mesh is complemented by an array of flip-chip 
-% bonding pads, which serve as the primary electrical interface for the 2040 thermo-optic phase 
-% shifters. This packaging-centric design ensures that the photonic core remains accessible and 
-% controllable despite the massive number of control signals. Furthermore, the strategic distribution 
-% of 332 integrated photodetectors provides a layer of observability that is critical for managing 
-% thermal crosstalk and fabrication tolerances in such a large-scale SoC.
+Achieving a high-density integration on a $18.7 \times 15.1 \text{ mm}^2$ SOI die demands a 
+meticulous layout strategy to balance optical performance with electrical connectivity. 
+High-resolution definition of the internal waveguide mesh is complemented by an array of flip-chip 
+bonding pads, which serve as the primary electrical interface for the 2040 thermo-optic phase 
+shifters. This packaging-centric design ensures that the photonic core remains accessible and 
+controllable despite the massive number of control signals. Furthermore, the strategic distribution 
+of 332 integrated photodetectors provides a layer of observability that is critical for managing 
+thermal crosstalk and fabrication tolerances in such a large-scale SoC.
 
 
 
