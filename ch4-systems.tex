@@ -555,8 +555,8 @@ $m$, which receives the contributions from links X, W, V, U and Y (see Appendix~
     m = UX_{out_6}+VZ_{out_6}+WY_{out_6}+XW_{out_6} + Y
 \end{equation}
 
-After computing the response of the equation above using a matrix solver (e.g., \textit{Matlab}), the 
-resulting matrices can be included in the overall response of the programmable system.
+After computing the response of the equation above using a matrix solver (e.g., \textit{Matlab}), 
+the resulting matrices can be included in the overall response of the programmable system.
 
 
 A fundamental advantage of this inductive approach is the systematic concatenation of $2\times2$ 
@@ -574,19 +574,155 @@ effects of the 1020-cell fabric remained within operational bounds.
 
 
 
-
-
 \section{Physical Layout and Electrical Interfacing: Scaling to 1020 PUCs}
 \label{sec:physical_layout}
 
-Achieving a high-density integration on a $18.7 \times 15.1 \text{ mm}^2$ SOI die demands a 
-meticulous layout strategy to balance optical performance with electrical connectivity. 
-High-resolution definition of the internal waveguide mesh is complemented by an array of flip-chip 
-bonding pads, which serve as the primary electrical interface for the 2040 thermo-optic phase 
-shifters. This packaging-centric design ensures that the photonic core remains accessible and 
-controllable despite the massive number of control signals. Furthermore, the strategic distribution 
-of 332 integrated photodetectors provides a layer of observability that is critical for managing 
-thermal crosstalk and fabrication tolerances in such a large-scale SoC.
+Achieving a high-density integration on a SOI die demands a meticulous layout strategy to balance 
+optical performance with electrical connectivity. 
+The physical realization of large-scale programmable PICs introduces severe electrical packaging 
+challenges due to the massive number of required control interfaces. Traditional wire-bonding 
+techniques have long served as a highly reliable and robust solution for standard optical 
+transceivers and low-complexity circuits. However, as the architectural density scales---demanding 
+hundreds of closely packed active elements such as thermo-optic phase actuators and monitoring 
+photodetectors---wire-bonding rapidly becomes a fundamental bottleneck. The physical constraints 
+of minimum pad pitch, combined with the necessity to route all electrical signal traces to the 
+perimeter of the photonic die, severely limit the achievable component density and increase the 
+risk of routing congestion and signal crosstalk.
+
+To overcome these perimeter-routing limitations in high-density PIC designs, flip-chip bonding 
+emerges as a mandatory integration strategy \cite{bogaertsProgrammablePhotonicCircuits2020, 
+carrollPhotonicPackagingTransforming2016}. By utilizing micro-bumps or copper pillars to directly 
+attach the PIC face-down onto an electrical interposer or printed circuit board (PCB), flip-chip 
+integration enables a two-dimensional area-array distribution of the electrical contacts. This 
+vertical integration allows the electrical I/Os to be placed directly above the active optical 
+components within the hexagonal mesh and the dedicated HPBs. Consequently, this approach not only 
+alleviates the spatial footprint bottleneck but also minimizes parasitic inductance and resistance, 
+ensuring the scalable and efficient control of the dense actuator arrays.
+
+
+\subsection{Pad Distribution and Pitch Optimization}
+\label{subsubsec:pad_distribution}
+
+Implementing the area-array electrical interface requires a meticulous co-design strategy to align 
+the dense flip-chip bump array with the underlying optical architecture. Maximizing the utilization 
+of the available silicon real estate, the electrical pads are strategically distributed within the 
+intrinsic physical boundaries dictated by the PUCs. Rather than placing metal contacts directly 
+over sensitive optical waveguides—which could induce unwanted absorption or stress—the pads are 
+vertically aligned with the internal gaps and symmetry axes defined by the hexagonal mesh topology.
+
+Geometric analysis of this optical mesh, fundamentally characterized by the hexagon's inscribed 
+radius ($r$) and side length ($L$), determines the maximum allowable pad density. Exploration of 
+different spatial arrangements is illustrated in Figure~\ref{fig:ch4-pads_geometry}, evaluating 
+configurations capable of accommodating the necessary pads per hexagonal cell footprint. 
+Balancing the required number of independent electrical connections per PUC—typically dictating 
+individual control for phase shifters and a shared electrical ground—against the strict minimum 
+pitch rules of commercial foundries is critical for avoiding bump bridging during the reflow 
+process.
+
+$L$ is determined by the dimensions of the PUCs, where PS length is a design parameter that can be 
+modified in a certain range (notice that PUC power consumption vary depending on PS length). Thus, 
+the size of the hexagon in Figure \ref{fig:ch4-pads_geometry}(a) is configurable. Examples (b), 
+(c) and (d) illustrate three possible pad allocations inside the hexagon, where length ($L$) and 
+pitch ($p$) are directly proportional.
+spatial distance between adjacent contacts, allowing the design to comfortably meet standard 
+flip-chip pitch requirements (such as 100 µm or 150 µm) while packing enough I/Os to fully control 
+the high-density active elements. This geometric matching ensures that the electrical interposer 
+can be routed cleanly without imposing severe bottlenecks on the underlying photonic routing.
+
+Considering all the parameters involved, the solution implemented is based on configuration (b).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch4-allegro_pads.png} 
+    \caption{Geometric study of pad distribution over the hexagonal mesh. The underlying optical 
+    unit cells dictate the available physical footprint, defined in (a) by the apothem ($r = a$) 
+    and side length ($L$). Configurations (b), (c) and (d) illustrate different combinations 
+    placing two, three or four pads, respectively, along the vertical axis of adjacent cells. 
+    (e) Horizontal and vertical distance between pads in function of the flip-chip pitch.}    
+\label{fig:ch4-pads_geometry}
+\end{figure}
+
+\clearpage
+
+\subsection{Overall Chip Layout and Subsystem Integration}
+\label{subsec:overall_layout}
+
+Consolidating the dense integration of active and passive components discussed in the previous 
+packaging analysis, the final layout of the programmable photonic integrated circuit occupies a 
+footprint of $18.7 \times 15.1\,\text{mm}^2$. Optical I/O interfaces rely on a dense array 
+of 64 edge couplers, a design choice previously justified in Section \ref{sec:taper} as the 
+optimal solution for broadband scalability and high-density packaging. Distributing these optical 
+interfaces efficiently, 60 of the edge couplers are directly cascaded with Polarization Splitter 
+and Rotators to enable the dual-polarization signal processing architecture. Remaining apart from 
+the functional signal paths, the four additional edge couplers are routed as dedicated optical 
+loopbacks to facilitate sub-micrometer active alignment during the fiber-array attachment process.
+
+Dominating the right area of the die, two independent hexagonal meshes of order 16 are 
+instantiated to serve as the programmable spatial routing core, with each mesh inherently capable 
+of supporting full $16\times16$ switching fabrics. Handling a total of 100 optical input/output 
+ports per mesh, the internal connectivity is meticulously mapped to maximize the transceiver's 
+versatility. Specifically, 60 ports from each mesh interface directly with the Monitoring Unit 
+Array (MUA) to assess signal integrity. Allocating the remaining 40 ports involves a strategic mix 
+of connections routed to the central High-Performance Blocks, interspersed photodetectors for 
+internal tapping, and hardwired short-circuited ports. Creating these permanent short-circuits 
+allows the mesh to synthesize resonant optical rings with cavity lengths significantly shorter than 
+those achievable strictly relying on standard Programmable Unit Cells. 
+
+Visual representation of this comprehensive integration strategy is provided in Figure 
+\ref{fig:ch4-allegro_layout}, illustrating the exact placement and relative proportions of all 
+core functional subsystems. Furthermore, to guarantee operational stability across such a massive 
+area, two on-chip thermistors (T) are strategically embedded within the layout, providing real-time 
+thermal telemetry to the external control electronics.
+
+Quantifying the massive scale of the aforementioned physical layout, Table \ref{tab:pic_elements} 
+provides a comprehensive breakdown of the integrated components across all functional sub-blocks. 
+Scaling to unprecedented levels of complexity for a single programmable die, the complete 
+architecture encompasses $1020$ PUCs. Driving this highly granular optical fabric requires the 
+simultaneous control of $2104$ thermo-optic phase shifters, operating in tandem with an array of 
+$332$ distributed photodetectors for real-time monitoring. Unsurprisingly, the two order-16 
+hexagonal meshes consume the vast majority of these resources, accounting for $864$ PUCs dedicated 
+exclusively to flexible spatial routing. 
+
+Complementing this main routing core, the MUA and the High-Performance Blocks integrate the highest 
+density of specialized photodetectors to ensure strict signal integrity and accurate spectral 
+characterization. Managing this enormous volume of $2436$ active electrical components (combining 
+phase shifters and photodetectors) decisively validates the necessity of the flip-chip bonding 
+approach discussed earlier, as routing thousands of independent wire-bonds to the die perimeter 
+would be physically unrealizable within the $18.7 \times 15.1\,\text{mm}^2$ footprint.
 
 
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch4-allegro_pic_layout.png} 
+    \caption{Physical layout of the programmable photonic integrated circuit. Annotated regions 
+    identify the core functional subsystems forming the dual-polarization smart transceiver 
+    architecture. Optical input/output interfaces are managed by ECs and PSRs. Signal integrity and 
+    tap routing are controlled by MUA. The central processing fabric is composed of two independent 
+    hexagonal meshes for dynamic spatial routing, which strategically enclose the central HPBs. 
+    These HPBs embed the dedicated AWGs and lattice filters required for fine-grained spectral 
+    monitoring and dispersion compensation.}    
+\label{fig:ch4-allegro_layout}
+\end{figure}
+
+
+\begin{table}
+    \centering
+    \caption{Quantitative breakdown of the integrated components comprising the PIC.}
+    \label{tab:pic_elements}
+    \begin{tabular}{lcccc}
+    \hline
+    \textbf{PIC element} & \textbf{\# of elements} & \textbf{\# of PUCs} & 
+    \textbf{\# of PSs} & \textbf{\# of PDs}  \\ 
+    \hline
+    EC & 64 & n/a & n/a & n/a\\
+    PSR & 60 & n/a & n/a & n/a\\
+    MUA & 2 & 120 & 240 & 240\\
+    Hexagonal Mesh & 2 & 864 & 1728 & 22\\ 
+    Lattice Filter & 4 & 36 & 136 & n/a\\
+    AWG & 2 & n/a & n/a & 70\\ 
+    \hline
+    \textbf{Total} & \textbf{134} & \textbf{1020} & \textbf{2104} & \textbf{332} \\ 
+    \hline
+    \end{tabular}
+\end{table}
