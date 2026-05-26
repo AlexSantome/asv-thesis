@@ -18,8 +18,8 @@ that perfectly mirrors the functional path of the main transceiver—comprising 
 polarization splitter and rotators, and a central programmable unit cell—this section validates the 
 hardware's dynamic response. Through the application of variable optical delays, the experimental 
 assessment demonstrates the subsystem's impact on standard, high-speed data traffic, explicitly 
-evaluating Local Area Network Wavelength Division Multiplexing (LWDM)\cite{ieee_lwdm}, Coarse 
-Wavelength Division Multiplexing (CWDM)\cite{itut_g694_2}, and Datacenter Reach 4-lane (DR4) 
+evaluating local area network wavelength division multiplexing (LWDM)\cite{ieee_lwdm}, coarse 
+wavelength division multiplexing (CWDM)\cite{itut_g694_2}, and datacenter reach 4-lane (DR4) 
 \cite{ieee_dr4} communication standards.
 
 Projecting these validated building blocks into complex network topologies, Section 
@@ -29,7 +29,7 @@ collaborative projects, this theoretical analysis evaluates the insertion of the
 mesh into both \textit{Route-and-Select} and \textit{Broadcast-and-Select} configurations, 
 demonstrating its potential to revolutionize dynamic capacity allocation and spectral management.
 
-Finally, Section \ref{sec:multicast} broadens the scope to massive Optical Circuit Switches (OCS) 
+Finally, Section \ref{sec:multicast} broadens the scope to massive optical circuit switches (OCS) 
 to address the ultimate challenge of spatial scalability and point-to-multipoint signal distribution.
 Building upon the spatial routing principles established by the hexagonal meshes in the previous 
 chapter, a highly scalable $32 \times 32$ OCS operating in the O-band is evaluated. This study 
@@ -42,9 +42,9 @@ $1 \times 32$ optical distribution.
 To empirically evaluate the impact of differential group delay within the polarization diversity 
 scheme, a dedicated test structure was designed and fabricated. As depicted in Figure 
 \ref{fig:ch5-pol_div_test_str}, the layout comprises four parallel variants of the core 
-polarization subsystem. Each variant consists of an input Edge Coupler, a Polarization 
-Splitter-Rotator, a central Programmable Unit Cell coupled with a Phase Shifter , a Polarization 
-Rotator-Combiner (PRC), and an output EC. The fundamental difference among the four structures 
+polarization subsystem. Each variant consists of an input edge coupler, a polarization 
+splitter-rotator, a central programmable unit cell coupled with a phase shifter , a polarization 
+rotator-combiner (PRC), and an output EC. The fundamental difference among the four structures 
 lies in the engineered on-chip delay lines introduced immediately after the PSR. Specifically, the 
 path length differences ($\Delta L$) between the upper and lower arms are set to 0 µm, 700 µm, 
 3500 µm, and 7000 µm. These physical length variations introduce approximate temporal delays of 
@@ -62,28 +62,28 @@ delay-induced signal degradation.
 
 
 The experimental testbed was designed to emulate realistic, high-capacity network environments. 
-Data generation was driven by a Bit Error Rate Tester (BERT) equipped with commercial 400GE 
+Data generation was driven by a bit error rate tester (BERT) equipped with commercial 400GE 
 transceiver modules. To cover a comprehensive range of standard data streams, the evaluation 
 utilized co-polarized 400GE-LWDM, both co-polarized and non-co-polarized 400GE-CWDM, and DR4 
 transmitters. To rigorously test the hardware's polarization handling capabilities, a polarization 
 controller was inserted at the output of the transmitter. Prior to coupling the signal into the 
-photonic integrated circuit, a polarimeter was employed to verify and calibrate the input State of 
-Polarization (SOP). This precise pre-calibration enabled systematic measurements under three 
+photonic integrated circuit, a polarimeter was employed to verify and calibrate the input state of 
+polarization (SOP). This precise pre-calibration enabled systematic measurements under three 
 distinct injection scenarios: 100\% TE, 100\% TM, and a perfectly balanced 50-50\% TE-TM mixed 
 state.
 
 Physical light coupling was achieved using cleaved optical fibers aligned to the on-chip edge 
 couplers. The alignment process was optimized on an optical table equipped with piezo-controlled 
-micro-positioners, utilizing an Optical Power Meter (OPM) to provide real-time feedback and 
+micro-positioners, utilizing an optical power meter (OPM) to provide real-time feedback and 
 maximize insertion efficiency. To guarantee stable operating conditions and avoid thermal drift 
-during the measurements, a Thermo-Electric Cooler (TEC) was used to firmly fix the chip 
+during the measurements, a thermo-electric cooler (TEC) was used to firmly fix the chip 
 temperature at 45°C. Finally, the active components of the test structure—namely the PUC and the 
 phase shifters—were electrically driven via a multi-contact probe. Two independent current sources 
 were employed to feed the upper and lower arms individually, ensuring highly precise and decoupled 
 tuning of the subsystem.
 
 To compensate for the inherent insertion losses of the test structure and the fiber-to-chip 
-coupling interfaces, a Semiconductor Optical Amplifier (SOA) was placed at the output of the PIC. 
+coupling interfaces, a semiconductor optical amplifier (SOA) was placed at the output of the PIC. 
 This stage boosts the optical signal to an optimal power level before it is fed back into the BERT 
 receiver for error analysis. A comprehensive view of the experimental testbed is presented in 
 Figure \ref{fig:ch5-pol_div_setup}, where a photograph of the laboratory environment is overlaid 
@@ -99,7 +99,7 @@ with the logical block diagram of the interconnected instruments.
 
 \FloatBarrier
 
-The rigorous pre-calibration of the input State of Polarization, performed prior to each 
+The rigorous pre-calibration of the input state of polarization, performed prior to each 
 measurement campaign, is visually confirmed in Figure \ref{fig:ch5-SOP}. Using the feedback from 
 the polarimeter, the polarization controller was finely adjusted to generate the required test 
 scenarios: purely TE modes ($0^\circ$ azimuth), purely TM modes ($90^\circ$ azimuth), and a 
@@ -156,12 +156,215 @@ section.
 
 \FloatBarrier
 
-\subsection{BER analysis}
+To further validate the polarization-agnostic nature of the subsystem, an evaluation of the 
+polarization-dependent loss was conducted on the matched-length structure 
+($\Delta L = 0~\mu\mathrm{m}$). By systematically varying the input state of polarization across 
+multiple azimuth ($30^\circ, 45^\circ$, and $60^\circ$) and ellipticity 
+($0^\circ, 15^\circ, 30^\circ$, and $45^\circ$) configurations, the optical response was recorded 
+across the entire O-band. Note that changing the state of polarization implies decoupling the 
+light to the chip, measuring with the polarimeter and coupling again to the PIC facet. Despite
+using very precise equipment in the optical coupling stations, minimum power variations can be 
+present (typically below 0.1 dBm).
+
+As shown in Figure \ref{fig:ch5-pdl_grouped}, the transmission spectra 
+exhibit minimal variance regardless of the input polarization state. The maximum recorded PDL 
+remained tightly bounded below 2.09~dB, with an average value of 1.15~dB across the measured 
+spectrum. This minimal fluctuation demonstrates robust resilience against the random polarization 
+drifts typically encountered in deployed single-mode fiber links, confirming the excellent 
+performance of the integrated polarization diversity scheme.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/ch5-pdl_grouped.png}
+    \caption{Extended polarization-dependent Loss characterization for the 
+    $\Delta L = 0~\mu\mathrm{m}$ structure. The top panels display the transmission spectra grouped 
+    by input azimuth ($30^\circ, 45^\circ, \text{and } 60^\circ$) under varying ellipticities. The 
+    bottom panel shows the overall wavelength-dependent PDL, confirming the polarization-agnostic 
+    behavior of the subsystem.}
+    \label{fig:ch5-pdl_grouped}
+\end{figure}
 
 
-\section{The Smart Transceiver in Next-Generation Switching Nodes}\label{sec:switching_nodes}
+\subsection{Dynamic Performance at 400G}\label{subsec:dynamic_perf}
+
+Following the static validation, the dynamic transmission performance of the polarization diversity 
+subsystem was evaluated using standard 400G data streams. The bit error rate (BER) was measured 
+before any forward error correction (pre-FEC) was applied. To evaluate the resilience of the system 
+against differential group delay (DGD), the measurements were carried out across the four path 
+length differences $\Delta L = (0, 700, 3500, 7000)~\mu\mathrm{m}$ using four distinct 
+transmitter configurations: co-polarized LWDM, co-polarized CWDM, non-co-polarized CWDM (no-COP), 
+and DR4. The measured pre-FEC BER values are presented in Figure \ref{fig:ch5-ber_results}.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/ch5-ber_results.png}
+    \caption{Dynamic transmission results showing the pre-FEC BER as a function of the added path 
+    length difference ($\Delta L$). The evaluation covers LWDM, CWDM, non-co-polarized CWDM, and 
+    DR4 formats.}
+    \label{fig:ch5-ber_results}
+\end{figure}
+
+It is worth noting that for the DR4 transceiver, the measurements were performed using only one of 
+its four spatial lanes. Unlike LWDM and CWDM, which multiplex four wavelengths into a single 
+optical fiber, DR4 relies on parallel optics, utilizing four independent fibers that each carry a 
+100G signal at 1310~nm. Given the single-input/single-output architecture of the photonic test 
+structure, evaluating a single DR4 lane is mechanically necessary and fully representative of the 
+standard's performance under DGD constraints.
+
+For the strictly co-polarized injection states (pure TE and pure TM), the pre-FEC BER remains well 
+below the standard KP4 FEC threshold (typically around $2.4 \times 10^{-4}$) 
+\cite{ieee_802_3ck-2022} for all tested delay lines and transceiver formats. In these scenarios, 
+the PSR routes almost the entirety of the optical power through a single physical arm. 
+Consequently, the signal does not experience any multipath interference upon recombination at the 
+PRC, making the transmission completely immune to the physical delay engineered in the parallel 
+empty arm.
+
+However, a critical degradation is observed for the 50-50\% TE-TM mixed state and the CWDM no-COP 
+scenario. In these cases, the optical power is split between the upper and lower arms. 
+At $\Delta L = 0~\mu\mathrm{m}$ and $\Delta L = 700~\mu\mathrm{m}$ (representing approximately 0 
+and 10~ps of delay, respectively), the pre-FEC BER remains stable below the threshold, thus the 
+FEC done by RS(544, 514) decoding ensures error-free transmission. This indicates that the internal 
+digital signal processing (DSP) equalizers of the commercial 400G receivers are capable of 
+successfully compensating for up to $\sim 10$~ps of temporal skew between the polarization 
+branches.
+
+Conversely, when the path length difference is increased to $3500~\mu\mathrm{m}$ 
+($\sim 50$~ps) and $7000~\mu\mathrm{m}$ ($\sim 101$~ps), the link completely drops, marked as 
+``FAIL'' in the corresponding plots. State-of-the-art 400G Ethernet relies on 53-Gbaud PAM4 
+modulation, yielding a symbol duration of approximately 18.8~ps. A temporal skew of 50 or 100~ps 
+means the delayed copy of the signal shifts by several symbol periods, causing severe inter-symbol 
+interference (ISI) that vastly exceeds the equalization tap limits of the receiver DSP. This 
+catastrophic failure is equally reflected in the CWDM no-COP measurements, as the independent and 
+random polarization of each wavelength inherently forces power splitting across both delayed arms.
+
+Ultimately, these dynamic results demonstrate that while the proposed polarization diversity scheme 
+introduces negligible penalty under matched-length conditions, strict path length balancing is 
+mandatory. To guarantee error-free 400G operation, the structural length difference between the 
+active and passive arms must be carefully minimized to keep the temporal skew well within the 
+receiver's equalization capabilities.
+
+\clearpage
+
+\section{Smart Transceiver in Next-Generation Switching Nodes}
+\label{sec:switching_nodes}
+
+\let\thefootnote\relax\footnotetext{\textit{The author would like to gratefully acknowledge 
+Dr. José Manuel Rivas-Moscoso - Telefónica for providing the conceptual schematics of the switching 
+node architectures discussed in this section.}}
+
+As optical networks scale to accommodate the exponential growth in data traffic, the flexibility 
+and reconfigurability of the routing elements become paramount. While the previous sections 
+validated the performance of the proposed structures in point-to-point (P2P) links, modern optical 
+networks rely heavily on dynamically reconfigurable optical switching nodes to manage traffic 
+across meshed topologies. In this context, the integration of smart transceivers—capable of 
+adapting to varying network conditions, routing paths, and signal formats—provides a significant 
+advantage for next-generation architectures \cite{bhat6GEcosystemCurrent2021, 
+welchPointtoMultipointOpticalNetworks2021}.
+
+Optical switching nodes, often implemented as reconfigurable optical add-drop multiplexers 
+(ROADMs), are typically based on two predominant internal architectures: broadcast-and-select 
+(B\&S) and route-and-select (R\&S). In a broadcast-and-select architecture, such as the one 
+depicted in Figure \ref{fig:ch5-broadcast_and_select}, incoming optical signals are passively 
+split and distributed (broadcast) to all possible output directions using optical power splitters. 
+In the architecture presented in the figure, the splitting is done exclusively by the programmable 
+PIC core. At each output port, a wavelength selective switch (WSS) or a tunable filter is employed 
+to select the specific wavelengths destined for that path, blocking all others. While B\&S is 
+cost-effective and straightforward to implement for nodes with a low degree of connectivity, the 
+inherent splitting losses scale poorly as the number of ports increases.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/ch5-broadcast_and_select.png}
+    \caption{Schematic representation of a broadcast-and-select (B\&S) optical switching node. 
+    Courtesy of Dr. José Manuel Rivas-Moscoso - Telefónica. Note: PSR not shown for simplicity, but 
+    two IO ports are required in the smart transceiver.}
+    \label{fig:ch5-broadcast_and_select}
+\end{figure}
+
+Conversely, the route-and-select architecture utilizes active switching elements at both the 
+ingress and egress stages, as illustrated in Figure \ref{fig:ch5-route_and_select}. For standard 
+express traffic, an input WSS dynamically routes the incoming wavelengths directly to their 
+intended output WSS, which then multiplexes them into the outgoing fiber. The R\&S paradigm 
+significantly reduces the insertion losses associated with passive splitting, offering superior 
+scalability and enhanced channel isolation.
+
+In addition to point-to-point express routing, these nodes must support advanced multicast 
+capabilities, such as the drop-and-continue (D\&C) functionality. D\&C allows a specific wavelength 
+to be split within the node so that a fraction of the optical power is dropped locally to a 
+receiver, while the remaining signal continues its path through the egress WSS toward subsequent 
+nodes in the network. To enable this, the affected signals are diverted through an internal local 
+mesh (typically comprising optical splitters or multicast switches). 
+
+However, as indicated in the architectural schematics, express connections that do not require D\&C 
+functionality can completely skip this internal mesh, traveling directly from the input WSS to the 
+output WSS to minimize insertion losses and free up internal resources. Moreover, to provide 
+further routing flexibility and enable contentionless add/drop capabilities, more than one 
+connection can be established between each WSS and the local mesh, (if there are enough ports 
+available).
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch5-route_and_select.png}
+    \caption{Schematic representation of a route-and-select (R\&S) optical switching node. 
+    Courtesy of Dr. José Manuel Rivas-Moscoso - Telefónica}
+    \label{fig:ch5-route_and_select}
+\end{figure}
+
+
+\subsection{Smart Transceiver for Route \& Select Architecture: Performance Estimation and 
+Limitations}
+
+To evaluate the feasibility of deploying the proposed smart transceiver within a route-and-select 
+architecture, a power budget analysis was conducted to estimate the total insertion losses and 
+structural limitations. In this configuration, the optical signal traverses active switching 
+components, such as the WSSs, and potentially the local mesh before interfacing with the 
+transceiver. While the R\&S paradigm avoids the severe optical penalties associated with passive 
+broadcasting, the cascading of optical switches intrinsically introduces cumulative insertion 
+losses. 
+
+Based on the transceiver's output power limits and the receiver's pre-FEC sensitivity threshold, 
+the estimated total insertion losses for the R\&S optical path were calculated to be approximately 
+[XX]~dB. Taking this available power margin into consideration, the maximum scalable dimensions of 
+the switching elements were determined. The theoretical analysis reveals that the system power 
+budget can reliably support a maximum of [YY] cascaded stages when using $1\times 2$ switching 
+configurations. Furthermore, if higher-radix switches are employed to minimize the footprint, the 
+transceiver can sustain up to [ZZ] cascaded stages of $1\times 4$ configurations without requiring 
+intermediate optical amplification.
+
+\subsection{Smart Transceiver for Broadcast \& Select Architecture: Performance Estimation and 
+Limitations}
+
+In the broadcast-and-select architecture, the power budget constraints are dictated by 
+fundamentally different mechanisms. As highlighted in the architectural schematics, a distinctive 
+advantage of integrating the proposed smart transceiver is that the optical splitting required for 
+the broadcast operation can be performed exclusively by the programmable PIC core, eliminating the 
+need for external passive splitters. 
+
+However, this inherent power division inside the chip still imposes a strict physical limit. In 
+ideal conditions, every $1\times 2$ optical split intrinsically reduces the signal power by at 
+least 3~dB, in addition to the excess insertion and propagation losses of the on-chip tunable 
+couplers and waveguides. For this scenario, the theoretical calculations yield an estimated total 
+insertion loss of approximately [AA]~dB. Because the splitting penalty scales logarithmically with 
+the node degree, the available optical power budget directly limits the maximum connectivity of the 
+node. The analysis demonstrates that, relying solely on the smart transceiver's capabilities, the 
+maximum number of reachable directions—or adjacent nodes—is limited to [BB]. Beyond this threshold, 
+the split optical signal falls below the detectable sensitivity limit, meaning that further scaling 
+of the B\&S node would strictly require optical amplification.
+
+
+
+
 
 \section{Scaling up Routing Capabilities: Multicasting in O-Band OCS}\label{sec:multicast}
+
+% \begin{center}
+%     \textit{The content of this chapter is largely based on the work accepted for presentation at 
+%     the 27th European Conference on Integrated Optics (ECIO 2026) \cite{Santome2026_SummerTopicals}. It 
+%     provides a comprehensive technical extension of the concepts and results reported therein.}
+% \end{center}
+% \vspace{1em}
+
+\cite{Santome2026_SummerTopicals}
 
 \section{Chapter Summary and Outlook}
 

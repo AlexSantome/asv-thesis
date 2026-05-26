@@ -44,8 +44,8 @@ are unattainable in purely feedforward schemes.
 
 Within large-scale systems, managing the inherent polarization randomness of light coupled from 
 standard fibers remains a critical hurdle. To address this, the architecture proposed in this 
-chapter adopts a \textbf{polarization diversity} scheme. Utilizing a Polarization Splitter and 
-Rotator (PSR), arbitrary input light is separated into its constituent TE and TM components, which 
+chapter adopts a \textbf{polarization diversity} scheme. Utilizing a polarization splitter and 
+rotator (PSR), arbitrary input light is separated into its constituent TE and TM components, which 
 are then processed independently by dedicated reconfigurable meshes. Such an approach ensures 
 robust operation regardless of input conditions and significantly expands the computational 
 capacity of the Photonic Integrated Circuit, enabling a higher degree of functional density than 
@@ -65,7 +65,7 @@ CMOS-compatible chip\cite{Santome2026_ECIO}.
 The architecture of this kilo-scale processor represents an evolution in general-purpose programmable 
 photonics. While previous application-agnostic designs were often limited to single-polarization 
 operation and lacked internal observability—restricting their use to controlled benchtop 
-experimentation—the system described here is engineered as an application-ready Silicon-on-Chip 
+experimentation—the system described here is engineered as an application-ready silicon-on-chip 
 (SoC). It maintains the inherent flexibility of a programmable hexagonal fabric while satisfying the 
 rigorous functional requirements of a software-defined smart transceiver.
 
@@ -97,7 +97,7 @@ primary technical pillars:
     core that can handle such high-capacity data flows across both TE and rotated TM components.
 
     \item \textbf{Integrated Spectral Interrogation:} To enable real-time link monitoring without 
-    external equipment, the chip incorporates two 35-channel Arrayed Waveguide Gratings 
+    external equipment, the chip incorporates two 35-channel arrayed waveguide gratings 
     (AWGs) \cite{Santome2026_ECIO}. These act as on-chip spectrometers, providing high-resolution 
     monitoring for fiber sensing and link characterization \cite{pathakComparisonAWGsEchelle2014}.
     
@@ -118,9 +118,9 @@ operating in dynamic cognitive optical networks \cite{torrijos-moranIndustryInsi
 \label{sec:hpb_design}
 
 To transcend the functional limits of standard programmable meshes, the kilo-scale processor 
-integrates specialized High-Performance Building Blocks (HPBs). These components are designed to 
+integrates specialized high-performance building blocks (HPBs). These components are designed to 
 perform complex spectral functions that, while theoretically possible within a universal mesh, would 
-require a prohibitive number of Programmable Unit Cells PUCs, leading to excessive insertion losses 
+require a prohibitive number of programmable unit cells, leading to excessive insertion losses 
 and control complexity. By embedding optimized AWGs and lattice filters, the system achieves a 
 hybrid architecture that balances general-purpose flexibility with application-specific performance.
 
@@ -154,7 +154,7 @@ mode in the array waveguides.
 
 Architectural robustness is further reinforced by the inclusion of 3 input channels, providing the 
 redundancy and multi-point interrogation capabilities summarized in Table \ref{tab:awg_specs}. A 
-key constraint in this high-density integration was the Free Spectral Range (FSR); at 59.2 nm, the 
+key constraint in this high-density integration was the free spectral range (FSR); at 59.2 nm, the 
 FSR acts as a critical guardband to prevent spectral aliasing across the target operational window.
 Directly dictated by the path length difference, and accounting for the chromatic dispersion of 
 silicon through the group index $n_g$, the FSR is defined as:
@@ -367,7 +367,7 @@ synthesizing the steep and precise phase profiles required for dispersion compen
 more efficiently by dedicated reconfigurable filters. These architectures could be based on lattice 
 configurations \cite{djordjevicFullyReconfigurableSilicon2011, 
 binbinguanCMOSCompatibleReconfigurable2014, ibrahimDemonstrationFastreconfigurableSilicon2011}, 
-Ring-Assisted Mach-Zehnder Interferometers (RAMZI) 
+ring-assisted Mach-Zehnder interferometers (RAMZI) 
 \cite{catala-lahozSelfConfiguringProgrammableIntegrated2025}, or coupled resonator optical 
 waveguides (CROW) \cite{zhuSiliconPhotonicTunable2025}, among others.
 
@@ -375,14 +375,14 @@ waveguides (CROW) \cite{zhuSiliconPhotonicTunable2025}, among others.
 
 Selecting the lattice filter architecture \cite{takiguchiDispersionSlopeEqualizer1998} over 
 resonant-based alternatives—such as CROW or RAMZI—is driven by strict operational stability and 
-control requirements. While Infinite Impulse Response (IIR) topologies like RAMZIs can achieve 
+control requirements. While infinite impulse response (IIR) topologies like RAMZIs can achieve 
 steeper phase slopes and highly compact footprints, they inherently suffer from extreme 
 sensitivity to thermal fluctuations and fabrication tolerances. Furthermore, the high-Q resonances 
 characteristic of ring-based designs often introduce significant group delay ripple and amplitude 
 distortions at the channel edges.
 
 Conversely, the cascaded MZIs and delay line structure of a lattice filter synthesizes a 
-Finite Impulse Response (FIR). This feed-forward topology guarantees unconditional structural 
+finite impulse response (FIR). This feed-forward topology guarantees unconditional structural 
 stability and provides a smoother, ripple-free phase profile across the targeted passband. 
 Additionally, from a system-level control perspective, mapping the desired inverse-dispersion 
 profile to the tuning parameters—specifically the independent control of magnitude and phase 
@@ -394,8 +394,6 @@ dispersion mitigation.
 Architecture of a single compensation stage is illustrated in 
 Figure~\ref{fig:ch4-lattice_schematic}, where the orange boxes represent the 
 physical path length difference ($\Delta L$) responsible for the differential group delay. 
-% Synthesis of these filters is geared toward providing a tunable inverse-dispersion profile capable 
-% of compensating for varying lengths of standard single-mode fiber (SSMF).
 
 \begin{figure}[htbp]
     \centering
@@ -423,7 +421,7 @@ Substituting for the 8-stage lattice filter, the dispersion can be computed as:
 \begin{equation}
     D = 12·5·\frac{T^2}{\lambda_0^2} c
 \end{equation}
-However, synthesizing a perfectly linear group delay profile—required to invert fiber 
+However, synthesizing a perfectly linear group delay profile—required to invert fiber
 dispersion—from the sinusoidal responses of the MZI stages is only accurate near the center of the 
 period. Based on standard synthesis guidelines, the distortion-free linear phase region, which 
 dictates the usable channel bandwidth ($\Delta f_{\text{pass}}$), is tightly restricted to 
@@ -439,7 +437,7 @@ forces a unit delay of $T \approx 12.66$~ps. This physical delay inherently fixe
 at approximately 79~GHz. Consequently, restricting the operation to the distortion-free linear 
 region yields a maximum usable passband of strictly 15.8~GHz.
 
-Compatibility with Optical Transport Network (OTN) standards defines the practical bandwidth 
+Compatibility with optical transport network (OTN) standards defines the practical bandwidth 
 requirements for these HPBs, immediately contextualizing the limitations of low-order filters. For 
 standard 100G (OTU4) signals operating at $\sim$32~Gbaud, the lattice filter must maintain a clear, 
 distortion-free spectral window of at least 35--40~GHz to prevent signal clipping and filtering 
@@ -561,7 +559,7 @@ the resulting matrices can be included in the overall response of the programmab
 
 A fundamental advantage of this inductive approach is the systematic concatenation of $2\times2$ 
 building blocks. Prior to the development of this tool, the design environment lacked a robust 
-mechanism to integrate High-Performance Building Blocks —such as lattice filters—directly with the
+mechanism to integrate high-performance building blocks —such as lattice filters—directly with the
 programmable mesh core. By abstracting each component as a four-port network, we can now cascade 
 diverse functional stages and predict the global transfer matrix of the dual-polarization processor
 without the exponential computational cost typically associated with large-scale PICs.
@@ -679,8 +677,8 @@ Dominating the right area of the die, these two independent hexagonal meshes of 
 instantiated to serve as the programmable spatial routing core, with each mesh inherently capable 
 of supporting full $16\times16$ switching fabrics. Handling a total of 100 optical input/output 
 ports per mesh, the internal connectivity is meticulously mapped to maximize the transceiver's 
-versatility. Specifically, 60 ports from each mesh interface directly with the Monitoring Unit 
-Array (MUA) to assess signal integrity. Allocating the remaining 40 ports involves a strategic mix 
+versatility. Specifically, 60 ports from each mesh interface directly with the monitoring unit 
+array (MUA) to assess signal integrity. Allocating the remaining 40 ports involves a strategic mix 
 of connections routed to the central High-Performance Blocks, interspersed photodetectors for 
 internal tapping, and hardwired short-circuited ports. Creating these permanent short-circuits 
 allows the mesh to synthesize resonant optical rings with cavity lengths significantly shorter than 
