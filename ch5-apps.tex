@@ -43,7 +43,7 @@ To empirically evaluate the impact of differential group delay within the polari
 scheme, a dedicated test structure was designed and fabricated. As depicted in Figure 
 \ref{fig:ch5-pol_div_test_str}, the layout comprises four parallel variants of the core 
 polarization subsystem. Each variant consists of an input edge coupler, a polarization 
-splitter-rotator, a central programmable unit cell coupled with a phase shifter , a polarization 
+splitter-rotator, a central programmable unit cell coupled with a phase shifter, a polarization 
 rotator-combiner (PRC), and an output EC. The fundamental difference among the four structures 
 lies in the engineered on-chip delay lines introduced immediately after the PSR. Specifically, the 
 path length differences ($\Delta L$) between the upper and lower arms are set to 0 µm, 700 µm, 
@@ -262,45 +262,15 @@ advantage for next-generation architectures \cite{bhat6GEcosystemCurrent2021,
 welchPointtoMultipointOpticalNetworks2021}.
 
 Optical switching nodes, often implemented as reconfigurable optical add-drop multiplexers 
-(ROADMs), are typically based on two predominant internal architectures: broadcast-and-select 
-(B\&S) and route-and-select (R\&S). In a broadcast-and-select architecture, such as the one 
-depicted in Figure \ref{fig:ch5-broadcast_and_select}, incoming optical signals are passively 
-split and distributed (broadcast) to all possible output directions using optical power splitters. 
-In the architecture presented in the figure, the splitting is done exclusively by the programmable 
-PIC core. At each output port, a wavelength selective switch (WSS) or a tunable filter is employed 
-to select the specific wavelengths destined for that path, blocking all others. While B\&S is 
-cost-effective and straightforward to implement for nodes with a low degree of connectivity, the 
-inherent splitting losses scale poorly as the number of ports increases.
+(ROADMs), are typically based on two predominant internal architectures: route-and-select (R\&S) 
+and broadcast-and-select (B\&S). 
 
-\begin{figure}[htpb]
-    \centering
-    \includegraphics[width=0.95\textwidth]{figures/ch5-broadcast_and_select.png}
-    \caption{Schematic representation of a broadcast-and-select (B\&S) optical switching node. 
-    Courtesy of Dr. José Manuel Rivas-Moscoso - Telefónica. Note: PSR not shown for simplicity, but 
-    two IO ports are required in the smart transceiver.}
-    \label{fig:ch5-broadcast_and_select}
-\end{figure}
-
-Conversely, the route-and-select architecture utilizes active switching elements at both the 
-ingress and egress stages, as illustrated in Figure \ref{fig:ch5-route_and_select}. For standard 
-express traffic, an input WSS dynamically routes the incoming wavelengths directly to their 
-intended output WSS, which then multiplexes them into the outgoing fiber. The R\&S paradigm 
-significantly reduces the insertion losses associated with passive splitting, offering superior 
-scalability and enhanced channel isolation.
-
-In addition to point-to-point express routing, these nodes must support advanced multicast 
-capabilities, such as the drop-and-continue (D\&C) functionality. D\&C allows a specific wavelength 
-to be split within the node so that a fraction of the optical power is dropped locally to a 
-receiver, while the remaining signal continues its path through the egress WSS toward subsequent 
-nodes in the network. To enable this, the affected signals are diverted through an internal local 
-mesh (typically comprising optical splitters or multicast switches). 
-
-However, as indicated in the architectural schematics, express connections that do not require D\&C 
-functionality can completely skip this internal mesh, traveling directly from the input WSS to the 
-output WSS to minimize insertion losses and free up internal resources. Moreover, to provide 
-further routing flexibility and enable contentionless add/drop capabilities, more than one 
-connection can be established between each WSS and the local mesh, (if there are enough ports 
-available).
+In a route-and-select architecture, as illustrated in Figure \ref{fig:ch5-route_and_select}, active 
+switching elements are utilized at both the ingress and egress stages. For standard express 
+traffic, an input WSS dynamically routes the incoming wavelengths directly to their intended output 
+WSS, which then multiplexes them into the outgoing fiber. The R\&S paradigm minimizes the insertion 
+losses associated with passive splitting, offering superior scalability and enhanced channel 
+isolation.
 
 \begin{figure}[htpb]
     \centering
@@ -310,46 +280,239 @@ available).
     \label{fig:ch5-route_and_select}
 \end{figure}
 
+In addition to point-to-point express routing, these nodes must support advanced multicast 
+capabilities, such as the drop-and-continue (D\&C) functionality. D\&C allows a specific wavelength 
+to be split within the node so that a fraction of the optical power is dropped locally to a 
+receiver, while the remaining signal continues its path through the egress WSS toward subsequent 
+nodes in the network. To enable this, the affected signals are diverted through an internal local 
+mesh (typically comprising optical splitters or multicast switches).
+
+However, as indicated in the architectural schematics, express connections that do not require D\&C 
+functionality can completely skip this internal mesh, traveling directly from the input WSS to the 
+output WSS to minimize insertion losses and save internal resources. Moreover, to provide further 
+routing flexibility and enable contentionless add/drop capabilities, more than one connection can 
+be established between each WSS and the local mesh (if there are enough ports available).
+
+
+Conversely, in a broadcast-and-select architecture, such as the one depicted in Figure 
+\ref{fig:ch5-broadcast_and_select}, incoming optical signals are passively split and distributed 
+(broadcast) to all possible output directions using optical power splitters. In the architecture 
+presented in the figure, a distinctive feature is that the splitting is done exclusively by the 
+programmable PIC core. At each output port, a wavelength selective switch (WSS) or a tunable filter 
+is employed to select the specific wavelengths destined for that path, blocking all others. While 
+B\&S is cost-effective and straightforward to implement for nodes with a low degree of connectivity, 
+the inherent splitting losses scale poorly as the number of ports increases.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch5-broadcast_and_select.png}
+    \caption{Schematic representation of a broadcast-and-select (B\&S) optical switching node. 
+    Courtesy of Dr. José Manuel Rivas-Moscoso - Telefónica. Note: PSR not shown for simplicity, but 
+    two IO ports are required in the smart transceiver.}
+    \label{fig:ch5-broadcast_and_select}
+\end{figure}
+
 
 \subsection{Smart Transceiver for Route \& Select Architecture: Performance Estimation and 
 Limitations}
 
-To evaluate the feasibility of deploying the proposed smart transceiver within a route-and-select 
-architecture, a power budget analysis was conducted to estimate the total insertion losses and 
-structural limitations. In this configuration, the optical signal traverses active switching 
-components, such as the WSSs, and potentially the local mesh before interfacing with the 
-transceiver. While the R\&S paradigm avoids the severe optical penalties associated with passive 
-broadcasting, the cascading of optical switches intrinsically introduces cumulative insertion 
-losses. 
+In a route-and-select architecture, the smart transceiver operates by dynamically routing signals 
+to and from the local mesh or directly interfacing with the corresponding wavelength selective 
+switches (WSSs). To evaluate the feasibility of deploying the proposed programmable PIC core 
+within this architecture, a comprehensive scalability and power budget analysis was conducted. 
 
-Based on the transceiver's output power limits and the receiver's pre-FEC sensitivity threshold, 
-the estimated total insertion losses for the R\&S optical path were calculated to be approximately 
-[XX]~dB. Taking this available power margin into consideration, the maximum scalable dimensions of 
-the switching elements were determined. The theoretical analysis reveals that the system power 
-budget can reliably support a maximum of [YY] cascaded stages when using $1\times 2$ switching 
-configurations. Furthermore, if higher-radix switches are employed to minimize the footprint, the 
-transceiver can sustain up to [ZZ] cascaded stages of $1\times 4$ configurations without requiring 
-intermediate optical amplification.
+The overall insertion loss of the smart transceiver is highly dependent on the physical length and 
+complexity of the configured optical circuit within the hexagonal mesh. According to the estimated 
+performance metrics, the baseline penalty includes an edge coupling loss (in/out) ranging from 2.5 
+to 5~dB, combined with a static routing loss of 4 to 6~dB. The total attenuation is then determined 
+by the number of traversed PUCs and the intrinsic 3~dB penalty introduced by every $1\times 2$ 
+optical split. Notice that, apart from crossing the mesh cells, there is an extra PUC in the MUA
+that should be accounted for.
+
+Figure \ref{fig:ch5-RS_mesh} illustrates several routing examples mapped onto the 
+PIC. For instance, a short routing path spanning just 3 PUCs (e.g., the magenta path connecting 
+adjacent ports) introduces a total loss between 11.1 and 16.4~dB. Conversely, a highly complex path 
+crossing 35 PUCs from one end of the chip to the other (e.g., the purple path) can scale the losses 
+up to 23.9 -- 35.6~dB. A detailed breakdown of these path-dependent insertion losses is provided in 
+Table \ref{tab:ch5-rs_path_losses}.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.92\textwidth]{figures/ch5-RS_mesh.png}
+    \caption{Examples of dynamic routing paths configured within the hexagonal waveguide mesh for 
+    R\&S operation. The length and complexity of the selected path (e.g., the short magenta path 
+    vs. the long undulating purple path) directly determine the number of traversed PUCs and the 
+    overall insertion loss.}
+    \label{fig:ch5-RS_mesh}
+\end{figure}
+
+\begin{table}[htpb]
+    \centering
+    \caption{Detailed insertion loss breakdown for the routing examples illustrated in Figure 
+    \ref{fig:ch5-RS_mesh}. The estimated total loss includes a baseline penalty comprising 
+    edge coupling (2.5 -- 5~dB) and static routing losses (4 -- 6~dB).}
+    \label{tab:ch5-rs_path_losses}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{lccc}
+        \hline
+        \textbf{Circuit} & \textbf{Path Configuration} & \textbf{Path Loss} & 
+        \textbf{Total Estimated Loss} \\
+        \textbf{(Color)} & \textbf{(\# of PUCs)} & \textbf{(min -- max)} & 
+        \textbf{(min -- max)} \\
+        \hline
+        Magenta & 3 PUCs + 3~dB split  & 4.2 -- 4.8~dB & 11.1 -- 16.4~dB \\
+        Green   & 6 PUCs + 3~dB split  & 5.4 -- 6.6~dB & 12.3 -- 18.2~dB \\
+        Orange  & 8 PUCs + 3~dB split  & 6.2 -- 7.8~dB & 13.1 -- 19.4~dB \\
+        Purple  & 35 PUCs + 3~dB split & 17 -- 24~dB & 23.9 -- 35.6~dB \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\FloatBarrier
+
+To interface effectively with an R\&S node, the transceiver must allocate sufficient input/output 
+(IO) ports for each WSS connection. Considering the full system specifications (which provide a 
+total of 60 available IO ports per polarization distributed across two available hexagonal meshes), 
+the maximum spatial capacity of the transceiver can be accurately quantified.
+
+Table \ref{tab:ch5-rs_scalability} details the performance limits when configuring the PIC core to 
+serve specific splitting functionalities for the WSS connections. A standard $1\times 2$ splitter 
+configuration requires 3 IO ports per WSS input. Under this setup, the internal mesh can 
+comfortably sustain up to 16 simultaneous circuits without spatial contention (utilizing paths 
+ranging from 3 to 24 PUCs). Alternatively, achieving higher-degree connectivity, such as a 
+$1\times 4$ splitting configuration, requires 5 IO ports per WSS input and can support up to 9 
+simultaneous circuits. These results confirm that the transceiver possesses ample spatial capacity 
+to act as a highly flexible routing engine within modern R\&S topologies. However, for applications 
+where the optical power budget is strictly critical, the maximum number of simultaneous circuits 
+may need to be reduced to prioritize shorter routing paths with lower insertion losses.
+
+\begin{table}[htpb]
+    \centering
+    \caption{Estimated performance and spatial capacity of the programmable PIC core acting as an 
+    integrated routing element for R\&S WSS connections.}
+    \label{tab:ch5-rs_scalability}
+    \begin{tabular}{lccc}
+        \hline
+        \textbf{Circuit} & \textbf{IO ports required} & \textbf{Max. simultaneous} & 
+        \textbf{Estimated losses} \\
+        & \textbf{per WSS input} & \textbf{circuits} & \textbf{(shortest -- longest)} \\
+        \hline
+        $1\times 2$ splitter & 3 & 16 & 13.5 -- 24~dB \\
+        $1\times 4$ splitter & 5 & 9  & 18.0 -- 25.5~dB \\
+        \hline
+    \end{tabular}
+    \parbox{0.82\textwidth}{\footnotesize Loss estimations are done using median values 
+    (0.5 dB, 5 dB and 3.5 dB for PUCs, routing and coupling, respectively).}
+\end{table}
+
+
+To further demonstrate the practical applicability of the proposed transceiver in real-world 
+network scenarios, a full routing implementation for a two-degree R\&S ROADM node was mapped onto 
+the PIC. In a standard two-degree node (typically representing East and West network directions), 
+the local mesh must simultaneously handle express traffic traversing the node and local traffic 
+being added or dropped.
+
+Figure \ref{fig:ch5-rs_2degree_1} illustrates a mapping strategy to achieve this functionality 
+entirely within the hexagonal waveguide mesh. The WSSs from both degrees interface with the edge 
+ports of the PIC. The programmable mesh seamlessly routes express connections (e.g., the blue and 
+yellow paths) directly between opposing WSSs. Concurrently, local add and drop connections (e.g., 
+the green and purple paths) are intelligently routed to the transceiver's local IO ports. 
+
+Crucially, this implementation highlights the mesh's ability to natively manage spatial routing 
+conflicts. By dynamically configuring internal waveguide crossings (highlighted by black circles) 
+and optical combiners/splitters for add/drop multiplexing (highlighted by black squares), the PIC 
+provides full directionless and contentionless capabilities. This level of integration proves that 
+the smart transceiver can effectively absorb the complexity of the internal local mesh, replacing 
+the bulky fiber shuffling typically required in two-degree R\&S nodes.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch5-rs_2degree_1.png}
+    \caption{Mapping strategy for a two-degree R\&S node. The internal mesh manages simultaneous 
+    express routing and local add/drop operations, utilizing internal waveguide crossings (black 
+    circles) and splitters/combiners (black squares).}
+    \label{fig:ch5-rs_2degree_1}
+\end{figure}
+
+
 
 \subsection{Smart Transceiver for Broadcast \& Select Architecture: Performance Estimation and 
 Limitations}
 
-In the broadcast-and-select architecture, the power budget constraints are dictated by 
-fundamentally different mechanisms. As highlighted in the architectural schematics, a distinctive 
-advantage of integrating the proposed smart transceiver is that the optical splitting required for 
-the broadcast operation can be performed exclusively by the programmable PIC core, eliminating the 
-need for external passive splitters. 
+In the broadcast-and-select architecture, the power budget constraints are primarily dictated by 
+the optical power splitting required to distribute the signal. As highlighted in the architectural 
+schematics, a distinctive advantage of integrating the proposed smart transceiver is that the 
+optical splitting required for the broadcast operation can be performed exclusively by the 
+programmable PIC core, eliminating the need for external passive splitters. 
+
+To evaluate this capability, the internal hexagonal waveguide mesh of the transceiver was 
+configured to route and split the optical signal into multiple paths simultaneously, as depicted in 
+Figure \ref{fig:ch5-BS_mesh}. The mesh can dynamically form complex $1\times N$ splitting trees to 
+serve both the local add/drop ports and the express directions toward adjacent network nodes.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.92\textwidth]{figures/ch5-BS_mesh.png}
+    \caption{Routing and splitting configurations within the programmable PIC core. The hexagonal
+    waveguide mesh can be dynamically configured to create customized $1\times N$ optical 
+    splitters (e.g., $1\times 2$ or $1\times 6$), distributing the input signal across multiple 
+    output ports for B\&S operation.}    
+    \label{fig:ch5-BS_mesh}
+\end{figure}
+
 
 However, this inherent power division inside the chip still imposes a strict physical limit. In 
 ideal conditions, every $1\times 2$ optical split intrinsically reduces the signal power by at 
-least 3~dB, in addition to the excess insertion and propagation losses of the on-chip tunable 
-couplers and waveguides. For this scenario, the theoretical calculations yield an estimated total 
-insertion loss of approximately [AA]~dB. Because the splitting penalty scales logarithmically with 
-the node degree, the available optical power budget directly limits the maximum connectivity of the 
-node. The analysis demonstrates that, relying solely on the smart transceiver's capabilities, the 
-maximum number of reachable directions—or adjacent nodes—is limited to [BB]. Beyond this threshold, 
-the split optical signal falls below the detectable sensitivity limit, meaning that further scaling 
-of the B\&S node would strictly require optical amplification.
+least 3~dB. This intrinsic splitting penalty is further compounded by the physical insertion and 
+propagation losses of the PIC. Applying the same baseline metrics defined in the previous 
+section—including fiber-to-chip coupling, static routing, and individual PUC insertion losses—the 
+total attenuation for complex broadcast trees can be accurately estimated.
+
+Table \ref{tab:ch5-bs_scalability} summarizes the theoretical scalability and the estimated overall 
+insertion losses for different splitting configurations based on these metrics. The calculations 
+yield insertion losses ranging from $13.5$~dB for the shortest $1\times 2$ path up to $27.3$~dB for 
+a complex $1\times 6$ splitter routing. 
+
+\begin{table}[htpb]
+    \centering
+    \caption{Estimated performance and scalability limits of the programmable PIC core acting as an 
+    integrated optical splitter for B\&S architectures.}
+    \label{tab:ch5-bs_scalability}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{lcccc}
+        \hline
+        \textbf{\# of directions} & \textbf{Circuit} & \textbf{Max. simultaneous} & 
+        \textbf{Estimated losses} & \textbf{Feasible?} \\
+        \textbf{(nodes)} & & \textbf{circuits} & \textbf{(shortest -- longest)} & \\
+        \hline
+        Only add-drop & $1\times2$ splitter & 16 & 13.5 -- 24.0~dB & YES \\
+        1 + add-drop  & $1\times3$ splitter & 11 & 16.8 -- 17.3~dB & YES \\
+        2 + add-drop  & $1\times4$ splitter & 9  & 18.0 -- 25.5~dB & YES \\
+        3 + add-drop  & $1\times5$ splitter & 7  & 19.0 -- 20.0~dB & YES \\
+        4 + add-drop  & $1\times6$ splitter & 6  & 20.3 -- 27.3~dB & YES \\
+        5 + add-drop  & $1\times7$ splitter & 4  & n/a*            & YES* \\
+        \hline
+    \end{tabular}
+    \vspace{0.15cm}
+    \parbox{\textwidth}{\footnotesize *It cannot be manually implemented. It 
+    requires the use of a graph-based pathfinding algorithm.}
+\end{table}
+
+Because the splitting penalty scales with the node degree, 
+the available optical power budget directly limits the maximum connectivity. The analysis 
+demonstrates that the PIC core can feasibly support up to 5 network directions plus the local 
+add/drop port (requiring a $1\times 7$ splitter configuration). Moreover, depending on the required 
+splitting ratio, the mesh possesses sufficient spatial capacity to allocate between 4 and 16 
+simultaneous optical circuits without spatial contention.
+
+It is worth noting that while spatial contention is strictly avoided in the presented routing 
+configurations, traversing multiple internal components and waveguide crossings inevitably 
+introduces a certain degree of optical crosstalk. However, the foundational building blocks of the 
+programmable mesh, particularly the waveguide crossings, are typically designed to exhibit high 
+optical isolation. Therefore, for the scope of this scalability and power budget analysis, the 
+accumulated crosstalk is assumed to remain within acceptable system-level penalty margins, 
+preserving the required signal integrity for the simultaneous optical circuits.
+
 
 
 
@@ -357,21 +520,299 @@ of the B\&S node would strictly require optical amplification.
 
 \section{Scaling up Routing Capabilities: Multicasting in O-Band OCS}\label{sec:multicast}
 
-% \begin{center}
-%     \textit{The content of this chapter is largely based on the work accepted for presentation at 
-%     the 27th European Conference on Integrated Optics (ECIO 2026) \cite{Santome2026_SummerTopicals}. It 
-%     provides a comprehensive technical extension of the concepts and results reported therein.}
-% \end{center}
-% \vspace{1em}
+\begin{center}
+    \textit{The results and figures presented in this section have been published in: 
+    A. Santomé-Valverde \textit{et al.}, "Programmable 1xN Multicast for 400G Data Center Networks 
+    via a 32x32 SDN-Controlled Silicon Photonics Optical Circuit Switch," \textit{IEEE Summer 
+    Topicals Meeting Series (SUM)}, 2026 \cite{Santome2026_SummerTopicals}. \copyright~2026 IEEE.}
+\end{center}
+\vspace{1em}
 
-\cite{Santome2026_SummerTopicals}
+While the previous sections have explored various routing capabilities and test structures—ranging 
+from the polarization diversity characterizations in Section \ref{sec:pol_diversity} to the complex 
+ROADM architectures tailored for telecom networks in Section \ref{sec:switching_nodes}—modern 
+optical networking faces equally critical bottlenecks at a different scale: within the data centers 
+themselves. The exponential growth of cloud computing, data-intensive applications, and 
+particularly artificial intelligence (AI) workloads has fundamentally transformed intra-data center 
+traffic \cite{patronasOpticalSwitchingData2025, poutievskiJupiterEvolvingTransforming2022}.
+
+
+Traditional hierarchical switching architectures, primarily designed for north-south traffic, are 
+struggling to efficiently manage the massive surge of modern east-west inter-server communications 
+\cite{satoOpticalSwitchingWill2024}. To address this, OCS implemented via silicon photonics (SiPh) 
+are being rapidly adopted to provide high-bandwidth, low-latency, and energy-efficient 
+reconfigurable fabrics. In this AI-centric context, multicast communication emerges as a critical 
+networking primitive. Multicasting allows a single data stream to be delivered simultaneously to 
+multiple recipients, significantly increasing bandwidth efficiency and reducing transmission 
+latency compared to multiple unicast streams. 
+
+Despite its tremendous potential for distributed AI training and database replication, optical 
+multicast has historically seen limited adoption in large-scale data centers due to severe 
+scalability concerns and the lack of flexible support in conventional electronic switching 
+hardware \cite{komolafeIPMulticastVirtualized2017, 
+rizzelliAnalysisExperimentalDemonstration2025}. The intrinsic power penalty associated with 
+splitting an optical signal to multiple ports typically degrades the signal-to-noise ratio beyond 
+acceptable limits for high-speed datacom transceivers.
+
+
+To overcome these physical limitations, this section shifts the experimental focus to a different 
+hardware platform explicitly tailored for the datacom regime. Expanding upon the earlier O-band 
+evaluations, the experimental validation presented here utilizes a highly scalable $32\times32$ 
+SDN-controlled SiPh OCS to route and split 400G LAN-WDM traffic. By leveraging the flexible 
+routing of this $32\times32$ mesh in combination with the intra-system gain compensation provided 
+by external SOAs incorporated within the OCS module, the inherent splitting losses of the multicast 
+tree are effectively mitigated, enabling error-free point-to-multipoint (P2MP) transmissions for 
+next-generation Ethernet standards.
+
+
+\subsection{Experimental Setup for 400G WDM Multicast}
+\label{subsec:multicast_setup}
+
+A 400G WDM testbed was deployed to experimentally validate the multicasting capabilities of the 
+programmable optical circuit switch in a datacom scenario. Figure \ref{fig:ch5-multicast_setup} 
+illustrates the complete experimental setup used for this demonstration.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/ch5-multicast_setup.png} 
+    \caption{SDN-controlled $32\times32$ SiPh OCS experimental setup for 400G WDM multicast 
+    ($1\times4$ configuration) using gNMI. \textit{Reproduced from 
+    \cite{Santome2026_SummerTopicals}. \copyright~2026 IEEE.}}
+    \label{fig:ch5-multicast_setup}
+\end{figure}
+
+At the transmitter side, a commercial 400G quad small form factor pluggable double density 
+(QSFP-DD) LAN-WDM transceiver acts as the optical source, generating four 100G PAM4 modulated 
+wavelengths operating in the O-band. With a total optical power budget of 12.5~dB, this module 
+requires a minimum loss suppression of 5~dB to prevent receiver saturation. Once generated, the 
+multi-wavelength signal is injected into input port 18 of the $32\times32$ SiPh OCS.
+
+Within the core switching fabric, light is routed through a mesh of programmable unit cells based 
+on $2\times2$ MZIs. Unlike traditional passive splitters, the programmable PIC works in tandem
+with external SOAs, building a gain-controlled OCS system. These active components provide 
+the necessary gain compensation to mitigate the splitting losses inherent to the multicast 
+operation. 
+
+To enable the point-to-multipoint (P2MP) multicast operation, an SDN controller dynamically 
+configures the PUCs in tunable-state (TS) via the gNMI protocol by adjusting their arm-loaded phase 
+shifters. This configuration allows the input signal to be accurately split across multiple output 
+ports simultaneously.
+
+For characterization and signal integrity assessment, the multicast outputs are routed to two 
+primary instruments. First, an optical spectrum analyzer (OSA) handles spectral verification and 
+optical signal-to-noise ratio (OSNR) monitoring. Simultaneously, a BER tester is employed for 
+transmission quality analysis. In order to validate the system performance against the IEEE 
+802.3ck-2022 standard for 400 Gb/s Ethernet, the measurements must fall below the KP4 FEC 
+threshold (pre-FEC $BER \le 2.4 \times 10^{-4}$) to guarantee error-free data recovery. 
+Theoretically, the expected BER for PAM4 signals operating over additive white Gaussian noise 
+(AWGN) channels can be estimated as:
+
+\begin{equation}
+    BER_{PAM4} \approx \frac{3}{8} \cdot \text{erfc}\left(\sqrt{\frac{SNR}{5}}\right)
+\end{equation}
+
+
+\subsection{Multicast Performance and Scalability Limitations}
+\label{subsec:multicast_results}
+
+\subsubsection{Fundamental $1\times2$ Multicast Validation}
+
+Initiating the experimental validation of the point-to-multipoint capabilities, a fundamental 
+$1\times2$ multicast configuration was first characterized in the spectral domain. Thorough 
+analysis of the optical signal-to-noise ratio and power uniformity across the output ports is 
+required to ensure that the silicon switching fabric does not introduce spectral distortion or 
+severe power imbalances.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch5-1x2_multicast_spectra.png}
+    \caption{Spectral characterization of the $1\times2$ multicast operation. (a) Optical spectrum 
+    of the baseline 400G LWDM signal generated by the transceiver. (b) Overlaid spectra of the 
+    transmitted signal (input port 18) and the received multicast signals at output ports 23 and 
+    25. The inset provides a magnified view of a single LWDM peak, highlighting the high power 
+    uniformity.}
+    \label{fig:ch5-1x2_multicast_spectra}
+\end{figure}
+
+Figure \ref{fig:ch5-1x2_multicast_spectra}(a) establishes the baseline by showing the optical 
+spectrum of the 400G LWDM signal, captured directly from the QSFP-DD transceiver before entering 
+the OCS. Once this signal is injected into input port 18, the SDN controller dynamically configures 
+the internal mesh to divide the optical power evenly, routing the data streams toward output ports 
+23 and 25 simultaneously.
+
+The resulting overlaid spectra of the transmitted and received signals, presented in Figure 
+\ref{fig:ch5-1x2_multicast_spectra}(b), confirm that both multicast outputs maintain a high 
+signal-to-noise ratio. Moreover, the spectral shape of the four LAN-WDM channels is preserved 
+without any noticeable filtering penalties or out-of-band noise. This excellent power balance 
+between the two spatial paths is further detailed in the inset of (b). By zooming in on a single 
+wavelength peak, the measurement reveals a minimal optical power imbalance of just 0.3~dB 
+($\Delta_{23-25}$).
+
+Achieving such a precise optical split demonstrates that the tunable-state configuration of the 
+internal MZIs can be accurately calibrated. In practical datacom scenarios, maintaining this strict 
+uniformity is critical to guarantee that all receiving nodes in the multicast tree experience 
+nearly identical optical link budgets.
+
+
+To quantify the impact of the $1\times2$ multicast operation on data integrity, the pre-FEC BER was 
+evaluated for all four LAN-WDM lanes across both output branches. As a baseline reference, a direct 
+fiber loopback connecting the transmitter and receiver of the QSFP-DD module yields an average BER 
+of $4.81 \times 10^{-8}$.
+
+Table \ref{tab:ch5-1x2_ber} summarizes the measured BER values after the signal traverses the 
+optical circuit switch. While the introduction of the silicon PIC and the active SOA gain 
+compensation naturally degrades the signal compared to the ideal loopback scenario, the measured 
+values remain highly robust. The link average BER stands at $5.150 \times 10^{-6}$ for output 23 
+and $1.554 \times 10^{-5}$ for output 25. Most importantly, even the worst-performing lane 
+(1304.58~nm at output 25, yielding $4.545 \times 10^{-5}$) operates comfortably below the IEEE 
+802.3ck KP4 FEC threshold of $2.4 \times 10^{-4}$. These results conclusively validate that the OCS 
+can successfully sustain error-free 400G multicasting without compromising the essential signal 
+quality.
+
+\begin{table}[htpb]
+    \centering
+    \caption{Pre-FEC BER measurements for the $1\times2$ multicast configuration across the four 
+    LAN-WDM lanes. The reference baseline loopback BER of the system is $4.81 \times 10^{-8}$.}
+    \label{tab:ch5-1x2_ber}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{lcc}
+        \hline
+        \textbf{LWDM Lane} & \multicolumn{2}{c}{\textbf{Pre-FEC BER}} \\
+        \cline{2-3}
+        & \textbf{Output 23} & \textbf{Output 25} \\
+        \hline
+        1295.56~nm & $1.026 \times 10^{-6}$ & $2.327 \times 10^{-6}$ \\
+        1300.05~nm & $3.825 \times 10^{-6}$ & $1.065 \times 10^{-5}$ \\
+        1304.58~nm & $1.326 \times 10^{-5}$ & $4.545 \times 10^{-5}$ \\
+        1309.14~nm & $2.490 \times 10^{-6}$ & $3.758 \times 10^{-6}$ \\
+        \hline
+        \textbf{Link Average} & \textbf{$5.150 \times 10^{-6}$} & \textbf{$1.554 \times 10^{-5}$} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Scaling to Higher-Radix Configurations ($1\times3$ and $1\times4$)}
+
+Building upon the initial $1\times2$ validation, the experimental evaluation was extended to 
+stress-test the system under higher-radix multicast configurations. Therefore, the optical circuit 
+switch was sequentially programmed to form $1\times3$ and $1\times4$ splitting trees. 
+
+The spectral integrity of these configurations is presented in Figure 
+\ref{fig:ch5-1x3_1x4_multicast_spectra}. Depicting the optical spectra for both the $1\times3$ 
+(a) and $1\times4$ (b) scenarios, the measurements confirm that the switching fabric continues to 
+deliver the four LAN-WDM channels to all targeted output ports simultaneously, avoiding severe 
+spectral distortion even as the physical routing complexity increases.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch5-1x3_1x4_multicast_spectra.png}
+    \caption{Optical spectra of the transmitted and received LAN-WDM signals for higher-radix 
+    multicast configurations: (a) $1\times3$ optical split, and (b) $1\times4$ optical split.}
+    \label{fig:ch5-1x3_1x4_multicast_spectra}
+\end{figure}
+
+To comprehensively evaluate the impact of this spatial scaling on data recovery, the pre-FEC BER 
+was recorded across all active ports for every tested configuration. Figure 
+\ref{fig:ch5-BER_multicast} visually summarizes this progressive performance evolution, comparing 
+the unicast ($1\times1$) and multicast ($1\times2, 1\times3$, and $1\times4$) setups against the 
+baseline loopback measurement. 
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/ch5-BER_multicast.png}
+    \caption{Comprehensive pre-FEC BER evaluation across different routing configurations. The bar 
+    chart compares the link average BER for the baseline loopback, unicast ($1\times1$), and 
+    point-to-multipoint ($1\times2, 1\times3$, and $1\times4$) scenarios.}
+    \label{fig:ch5-BER_multicast}
+\end{figure}
+
+\FloatBarrier
+
+As dictated by the physical principles discussed in Section \ref{sec:switching_nodes}, increasing 
+the multicast radix inherently introduces a continuous optical splitting penalty. Counteracting 
+this structural attenuation requires the external SOAs within the OCS module to provide 
+progressively higher gain. Pushing the amplifiers closer to their saturation limit inevitably 
+introduces optical noise and non-linearities, which fundamentally explains the stepped BER 
+degradation observed in the chart. 
+
+Specifically, transitioning to the $1\times3$ configuration raises the average pre-FEC BER to 
+$3.49 \times 10^{-5}$. Maximizing the splitting ratio of the current testbed to a $1\times4$ radix 
+further increases the average BER to $1.22 \times 10^{-4}$. Despite this expected physical 
+degradation, the crucial takeaway from Figure \ref{fig:ch5-BER_multicast} is that all measured 
+ports across every configuration remain strictly below the standard KP4 FEC threshold. By 
+preserving a robust operational margin, the system guarantees error-free signal recovery, 
+successfully proving the viability of programmable silicon photonics for 400G point-to-multipoint 
+datacenter architectures.
+
+
+\subsubsection{Power Budget Constraints and Scalability towards $1\times32$}
+
+Despite the successful experimental demonstrations up to a $1\times4$ radix, scaling the system 
+toward a fully non-blocking $1\times32$ multicast tree remains constrained by current power budget 
+limitations. Primarily bounded by the SOA saturation regime and the passive insertion losses of the 
+silicon switching fabric, the maximum feasible P2MP distribution is currently capped. 
+
+Operating in the fundamental $1\times1$ configuration, the OCS presents a baseline insertion loss 
+of 12~dB. Given an input transceiver power of 6~dBm and a target output power of 2~dBm, the SOA is 
+required to provide 8~dB of gain. Scaling the routing tree to a $1\times4$ radix adds a 6~dB 
+optical splitting loss, inherently pushing the required SOA gain to 14~dB. Hitting the device's 
+exact saturation limit, this demanding operating point introduces the optical noise and 
+non-linearities responsible for the stepped BER degradation observed in Figure 
+\ref{fig:ch5-BER_multicast}.
+
+Consequently, enabling a massive $1\times32$ multicast split necessitates targeted hardware 
+optimizations. Intrinsically adding a 15~dB optical penalty, this extreme splitting ratio requires 
+careful budget management. Considering the current transceiver sensitivity of -12.1~dBm, 
+error-free $1\times32$ routing demands a minimum output power of -3~dBm. Achieving this signal 
+integrity within the strict linear regime of the amplifiers will require future iterations of the 
+OCS module to reduce intrinsic baseline losses to approximately 6~dB—potentially through optimized 
+ultra-low-loss splitters \cite{papadovasilakisFabricationTolerantOBandWDM2024} and advanced edge 
+couplers—while simultaneously enhancing the noise figure of the integrated gain blocks. 
+
+Fulfilling these optimized optical conditions would allow the $32\times32$ SiPh OCS to fully 
+support massive high-radix multicasting. Overcoming these physical barriers will ultimately 
+consolidate programmable photonics as a definitive solution to meet the ultra-high bandwidth and 
+low-latency demands of next-generation AI-driven data centers.
+
+\clearpage
 
 \section{Chapter Summary and Outlook}
+\label{sec:ch5_conclusions}
 
+Bridging the critical gap between integrated photonic design and system-level implementation, this 
+chapter has successfully projected the capabilities of programmable optical circuits from 
+foundational hardware emulation up to massive core-network switching architectures. 
 
+Validating the fundamental physical layer, the experimental characterization of the polarization 
+diversity subsystem demonstrated robust compatibility with standard 400G communication formats. 
+Under matched-length conditions, the subsystem exhibits minimal polarization-dependent loss, 
+ensuring highly reliable signal recovery regardless of the input state of polarization. However, 
+the dynamic evaluation highlighted strict path length balancing as an absolute design imperative. 
+Because uncompensated temporal skews exceeding 50~ps introduce severe inter-symbol interference 
+that vastly surpasses the equalization limits of commercial receiver DSPs, minimizing differential 
+group delay is mandatory for future transceiver iterations.
 
-% Si no me permiten usar Switching nodes
-% 5.1 Introduction
-% 5.2 Experimental Assessment of Polarization Diversity Dynamics
-% 5.3 Advanced Spatial Routing: Multicasting Capabilities in Large-Scale Meshes
+Projecting these validated building blocks onto metro and core telecom networks, theoretical 
+evaluation confirmed the strategic value of the smart transceiver within modern ROADM topologies. 
+By dynamically managing spatial routing and internal power splitting, the programmable hexagonal 
+waveguide mesh can effectively absorb the complexity of both Route-and-Select and 
+Broadcast-and-Select nodes. This high-density integration provides collision-free add/drop 
+multiplexing and flexible capacity allocation, significantly reducing the reliance on bulky 
+external hardware elements. 
+
+Addressing the explosive bandwidth demands of modern intra-data center traffic, the final 
+experimental campaign successfully scaled the routing paradigm to a $32\times32$ SDN-controlled 
+silicon photonics OCS. Engineered specifically for the datacom regime, this active switching 
+fabric enabled software-defined point-to-multipoint routing, achieving error-free 400G LAN-WDM 
+multicasting up to a $1\times4$ radix. Although current power budget constraints—primarily bounded 
+by the saturation threshold of the integrated SOAs—temporarily cap the maximum splitting ratio, 
+quantifying these exact limitations provides a clear technological roadmap. Implementing targeted 
+loss-reduction strategies in future chip generations will decisively unlock fully non-blocking 
+$1\times32$ multicast capabilities.
+
+Ultimately, the comprehensive evaluations presented throughout this chapter confirm the 
+transformative potential of programmable photonics. Proving highly versatile across both C-band 
+telecom infrastructures and O-band AI-driven datacenters, intelligent optical switching emerges as 
+a cornerstone technology to meet the ultra-high bandwidth, low-latency, and dynamic 
+reconfigurability demands of next-generation optical networks.
 
