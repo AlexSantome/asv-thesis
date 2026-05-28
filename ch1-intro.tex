@@ -36,14 +36,14 @@ integrity.
 
 Building upon decades of progress in discrete optical components, integrated photonics arose as a 
 natural extension of the integration paradigm pioneered by electronics 
-\cite{sorefPresentFutureSilicon2006}. Rather than relying on bulky and alignment-sensitive discrete 
-elements, integrated photonics enables the monolithic or hybrid integration of multiple optical 
-functions on a single substrate. By bringing together waveguides, modulators, filters, 
-multiplexers, and photodetectors within a compact footprint, photonic integrated circuits (PICs) 
-allow complex optical systems to be realized in a stable, scalable, and reproducible manner 
-\cite{thomsonRoadmapSiliconPhotonics2016}. Furthermore, PICs benefit from wafer-scale 
-fabrication processes, offering improved yield, reduced cost per function, and compatibility with 
-mature semiconductor manufacturing technologies.
+\cite{sorefPresentFutureSilicon2006}, as conceptualized in Figure \ref{fig:ch1-evolution}. Rather 
+than relying on bulky and alignment-sensitive discrete elements, integrated photonics enables the 
+monolithic or hybrid integration of multiple optical functions on a single substrate. By bringing 
+together waveguides, modulators, filters, multiplexers, and photodetectors within a compact 
+footprint, photonic integrated circuits (PICs) allow complex optical systems to be realized in a 
+stable, scalable, and reproducible manner \cite{thomsonRoadmapSiliconPhotonics2016}. Furthermore, 
+PICs benefit from wafer-scale fabrication processes, offering improved yield, reduced cost per 
+function, and compatibility with mature semiconductor manufacturing technologies.
 
 In this context, integrated photonics leverages light as the information carrier, offering 
 intrinsic advantages over purely electronic circuits. These include ultra-high data transmission 
@@ -68,18 +68,19 @@ This convergence positions integrated photonics as a central technology in addre
 scalability, performance, and energy-efficiency challenges of future information processing systems 
 \cite{bogaertsProgrammablePhotonicCircuits2020}.
 
-
 \begin{figure}[htbp]
 	\begin{center}
 		\includegraphics[width=1.0\textwidth]{figures/ch1-evolution.png}
 	\end{center}
-	\caption{Conceptual evolution from electronic integration to photonic integrated circuits.}\label{fig:ch1-evolution}
+	\caption{Conceptual evolution from electronic integration to photonic integrated circuits.}
+	% \textit{Note: The background artwork for this figure was generated using Gemini and 
+	% subsequently modified and annotated by the author.}}
+	\label{fig:ch1-evolution}
 \end{figure}
 
 
-
-
-\section{From Application-Specific to Programmable Photonic Integrated Circuits} \label{sec:photonics_motivation}
+\section{From Application-Specific to Programmable Photonic Integrated Circuits} 
+\label{sec:photonics_motivation}
 
 Early generations of photonic integrated circuits were predominantly designed following an 
 application-specific paradigm. In this approach, each PIC was optimized to perform a well-defined 
@@ -87,8 +88,7 @@ function, such as optical modulation, filtering, switching, or wavelength multip
 architecture and component parameters tailored to a particular use case. This design philosophy 
 enabled highly efficient and compact solutions, and played a crucial role in the successful 
 deployment of integrated photonics in applications such as optical communications, sensing, and 
-signal processing 
-\cite{sorefPresentFutureSilicon2006,liangRecentProgressLasers2010,thomsonRoadmapSiliconPhotonics2016}.
+signal processing \cite{thomsonRoadmapSiliconPhotonics2016}.
 
 However, as photonic systems grew in complexity and diversity, the shortcomings of purely 
 application-specific photonic integrated circuits became increasingly evident. Designing a new PIC 
@@ -110,9 +110,10 @@ Inspired by the success of programmable electronic hardware and field-programmab
 alternative to conventional design methodologies \cite{bogaertsProgrammablePhotonicCircuits2020}. 
 Rather than implementing a single predefined function, programmable PICs rely on a generic 
 hardware architecture that can be configured through software to realize a wide range of photonic 
-signal processing tasks. This paradigm shift enables the reuse of the same physical chip across 
-multiple applications, significantly reducing development time and cost while increasing 
-versatility.
+signal processing tasks, a paradigm shift illustrated in Figure 
+\ref{fig:ch1-aspic_vs_programmable}. This paradigm shift enables the reuse of the same physical 
+chip across multiple applications, significantly reducing development time and cost while 
+increasing versatility.
 
 A widely adopted approach to programmable photonics is based on networks of tunable 2x2 
 interferometric building blocks, typically implemented as Mach-Zehnder interferometers (MZIs) 
@@ -132,7 +133,6 @@ control complexity \cite{clementsOptimalDesignUniversal2016,perezMultipurposeSil
 	\label{fig:ch1-aspic_vs_programmable}
 \end{figure}
 
-\FloatBarrier
 
 Programmable photonic integrated circuits have demonstrated significant potential in a broad range 
 of applications. In optical communications, they enable adaptive filtering, dynamic wavelength 
@@ -141,6 +141,7 @@ In microwave photonics, programmable PICs provide flexible platforms for beamfor
 generation. More recently, they have attracted considerable attention in emerging areas such as 
 optical computing, machine learning, and quantum information processing, where hardware 
 adaptability is a critical requirement \cite{shenDeepLearningCoherent2017}.
+
 
 Despite their promise, programmable photonic integrated circuits also introduce new challenges. 
 The large number of tunable elements required for complex meshes leads to increased power 
@@ -158,8 +159,6 @@ accelerating innovation and reducing barriers to entry in photonic system design
 \cite{bogaertsProgrammablePhotonicCircuits2020}.
 
 
-
-\clearpage
 \section{State of the Art and Scalability Challenges} \label{sec:sota_challenges}
 
 The transition toward programmable architectures has been accelerated by significant theoretical 
@@ -187,54 +186,14 @@ within this technological frontier that the present thesis is situated, seeking 
 underlying hardware and architectural limitations that hinder the large-scale deployment of these 
 processors.
 
-
-% \section{Objectives} \label{sec:objectives}
-
-% The overarching objective of this doctoral thesis is to address the scalability challenges of 
-% programmable photonic integrated circuits, with the aim of enabling their reliable deployment in 
-% complex, large-scale photonic systems. While programmable PICs offer unprecedented flexibility and 
-% functional versatility, their practical adoption is currently constrained by limitations related to 
-% scalability, reliability, fabrication variability, and system-level integration. This work seeks to 
-% tackle these challenges through a combination of circuit design, architectural strategies, and 
-% experimental validation.
-
-% A first major objective of this thesis is to improve the scalability of programmable PICs in terms 
-% of the number of tunable elements that can be integrated on a single chip. As programmable photonic 
-% architectures grow in size and complexity, the cumulative impact of component imperfections, tuning 
-% errors, and environmental perturbations becomes increasingly critical. Ensuring reliable operation 
-% in the presence of a large number of active elements requires the development of design 
-% methodologies and control strategies that enhance robustness and long-term stability. In this 
-% context, particular emphasis is placed on reliability, understood as the ability of the circuit to 
-% maintain its intended functionality over time and under realistic operating conditions.
-
-% Closely related to this objective is the need to increase fabrication tolerance in programmable 
-% photonic designs. Variations arising from lithographic inaccuracies, material non-uniformities, and 
-% process fluctuations are unavoidable in large-scale fabrication. This thesis aims to explore design 
-% approaches and circuit architectures that are inherently more resilient to such variations, 
-% reducing sensitivity to fabrication errors and easing post-fabrication calibration and tuning 
-% requirements. Enhancing fabrication tolerance is a key enabler for scaling programmable PICs beyond 
-% laboratory demonstrations toward manufacturable and repeatable platforms.
-
-% A second central objective is to address scalability at the architectural and system levels. This 
-% includes the efficient use of on-chip area as programmable meshes increase in size, as well as the 
-% challenges associated with electrical and optical packaging. As the number of control signals, 
-% heaters, phase shifters, and optical ports grows, packaging constraints can become a dominant 
-% bottleneck, affecting power consumption, thermal management, signal integrity, and overall system 
-% complexity. This thesis seeks to investigate architectural solutions and integration strategies 
-% that mitigate these constraints, facilitating the realization of scalable programmable photonic 
-% systems compatible with realistic packaging and interconnection technologies.
-
-% Finally, a key objective of this work is to demonstrate the practical applicability of scalable 
-% programmable PICs through representative use cases and applications. Beyond architectural and 
-% technological advances, it is essential to show that the proposed scalable solutions can 
-% effectively support meaningful photonic functionalities. To this end, the thesis aims to validate 
-% the developed concepts through experimental demonstrations in relevant application scenarios, 
-% highlighting the benefits of scalability, robustness, and programmability in real-world contexts.
-
-% Overall, by addressing scalability across device, circuit, architectural, and application 
-% dimensions, this thesis aims to contribute to the maturation of programmable photonic integrated 
-% circuits from flexible research platforms toward reliable and scalable technologies suitable for 
-% next-generation photonic systems.
+Beyond thermal and phase error constraints, the physical limits of electronic packaging and the 
+optical power budget constitute the most critical bottlenecks for massive-scale adoption. 
+Traditional perimeter wire-bonding techniques become physically unviable when addressing hundreds 
+of tunable elements, demanding a transition towards high-density area-array interfacing. 
+Furthermore, the intrinsic splitting penalties of general-purpose meshes limit their applicability 
+in real-world scenarios, highlighting the need for hybrid architectures that combine versatile 
+routing fabrics with specialized high-performance building blocks, as well as polarization-diverse 
+schemes to handle standard fiber deployments.
 
 \section{Objectives} \label{sec:objectives}
 
@@ -243,23 +202,45 @@ photonic integrated circuits, enabling their transition from laboratory prototyp
 large-scale systems. To achieve this, the research is divided into the following specific 
 objectives:
 
+% \begin{itemize}
+%     \item \textbf{Optimization of Fundamental Building Blocks:} Design and simulate 
+% 	high-performance silicon photonic components (MMIs and phase shifters) with a focus on 
+% 	minimizing footprint and optical losses, providing a robust hardware foundation for dense 
+% 	integration.
+    
+%     \item \textbf{Development of Resilient Architectures:} Investigate and model mesh topologies 
+% 	and unit cell configurations that are inherently tolerant to fabrication-induced variations 
+% 	and phase errors, reducing the complexity of post-fabrication trimming.
+    
+%     \item \textbf{System-Level Scalability and Management:} Analyze the impact of thermal crosstalk 
+% 	and packaging constraints in large-scale meshes, proposing architectural strategies that 
+% 	facilitate electrical and optical interfacing without compromising system density.
+    
+%     \item \textbf{Experimental Validation and Application Benchmarking:} Demonstrate the practical 
+% 	utility of the proposed scalable solutions through experimental prototypes, validating their 
+% 	performance in real-world scenarios such as optical signal processing or computing.
+% \end{itemize}
+
 \begin{itemize}
-    \item \textbf{Optimization of Fundamental Building Blocks:} Design and simulate 
-	high-performance silicon photonic components (MMIs and phase shifters) with a focus on 
-	minimizing footprint and optical losses, providing a robust hardware foundation for dense 
-	integration.
-    
-    \item \textbf{Development of Resilient Architectures:} Investigate and model mesh topologies 
-	and unit cell configurations that are inherently tolerant to fabrication-induced variations 
-	and phase errors, reducing the complexity of post-fabrication trimming.
-    
-    \item \textbf{System-Level Scalability and Management:} Analyze the impact of thermal crosstalk 
-	and packaging constraints in large-scale meshes, proposing architectural strategies that 
-	facilitate electrical and optical interfacing without compromising system density.
-    
-    \item \textbf{Experimental Validation and Application Benchmarking:} Demonstrate the practical 
-	utility of the proposed scalable solutions through experimental prototypes, validating their 
-	performance in real-world scenarios such as optical signal processing or computing.
+    \item \textbf{Device-Level Optimization:} Design and experimentally validate high-performance 
+	silicon photonic building blocks—specifically targeting ultra-low loss multi-mode 
+	interferometers via adjoint shape optimization and fault-tolerant edge couplers—establishing a 
+	robust hardware foundation for dense integration.
+
+    \item \textbf{Kilo-Scale Architecture and Packaging:} Overcome traditional I/O bottlenecks by 
+	implementing a scalable flip-chip packaging strategy, enabling the control of a massive-scale 
+	programmable processor featuring over 1000 programmable unit cells and hundreds of integrated 
+	monitors.
+
+    \item \textbf{Hybrid System Design and Modeling:} Develop a computationally efficient inductive 
+	modeling framework to synthesize a hybrid architecture that seamlessly integrates a 
+	general-purpose hexagonal mesh with specialized high-performance building blocks (AWGs and 
+	lattice filters) and a polarization-diversity scheme.
+
+    \item \textbf{System-Level Network Application:} Demonstrate the practical viability of the 
+	scaled architecture in high-capacity real-world scenarios, validating its performance for 
+	intelligent ROADM core switching in telecom networks and high-radix O-band multicasting for 
+	next-generation datacenters.
 \end{itemize}
 
 By tackling scalability across these four dimensions---device, circuit, architecture, and 
@@ -295,20 +276,39 @@ València (UPV).
 	minimizing power imbalance, this chapter establishes the fundamental structures required for 
 	the large-scale programmable architectures presented in the remainder of this thesis.
     
-    \item \textbf{Chapter 4: \nameref{chap:systems}} addresses the transition from individual cells 
-	to large-scale systems. It explores different network topologies (Reck, Clements) and the 
-	synthesis algorithms required for their configuration. Furthermore, it analyzes the impact of 
-	fabrication tolerances and describes state-of-the-art calibration and fault-tolerance 
-	techniques to ensure reliable operation.
+    % \item \textbf{Chapter 4: \nameref{chap:systems}} addresses the transition from individual cells 
+	% to large-scale systems. It explores different network topologies (Reck, Clements) and the 
+	% synthesis algorithms required for their configuration. Furthermore, it analyzes the impact of 
+	% fabrication tolerances and describes state-of-the-art calibration and fault-tolerance 
+	% techniques to ensure reliable operation.
 
-    \item \textbf{Chapter 5: \nameref{chap:apps}} demonstrates the practical 
-	utility of the developed platform. Through representative use cases, this chapter evaluates the 
-	performance of the scalable architectures in real-world scenarios, highlighting the benefits of 
-	the proposed design methodologies.
+	\item \textbf{Chapter 4: \nameref{chap:systems}} addresses the architectural leap from 
+	individual cells to massive-scale systems. It introduces a hybrid topology combining a 
+	dual-polarization hexagonal mesh with high-performance building blocks. Furthermore, it details 
+	the physical layout optimization for flip-chip integration and presents a novel inductive 
+	modeling method to simulate the complete 1020-PUC network.
+
+
+    % \item \textbf{Chapter 5: \nameref{chap:apps}} demonstrates the practical 
+	% utility of the developed platform. Through representative use cases, this chapter evaluates the 
+	% performance of the scalable architectures in real-world scenarios, highlighting the benefits of 
+	% the proposed design methodologies.
+
+    \item \textbf{Chapter 5: \nameref{chap:apps}} demonstrates the practical utility of the 
+	developed technologies in real-world communication links. It experimentally characterizes the 
+	polarization diversity core at 400G and evaluates the smart transceiver's impact within modern 
+	ROADM topologies. Finally, it addresses datacom scalability by experimentally demonstrating 
+	400G point-to-multipoint multicasting utilizing an SDN-controlled $32\times32$ optical circuit 
+	switch.
+
     
-    \item \textbf{Chapter 6: \nameref{chap:discussion}} summarizes the main contributions of this 
-	thesis and proposes future research lines to continue the advancement of large-scale 
-	programmable photonic systems.
+    % \item \textbf{Chapter 6: \nameref{chap:discussion}} summarizes the main contributions of this 
+	% thesis and proposes future research lines to continue the advancement of large-scale 
+	% programmable photonic systems.
+
+    \item \textbf{Chapter 6:\nameref{chap:discussion}} summarizes the main scientific contributions 
+	of this thesis, evaluates the fulfillment of the initial objectives, and outlines strategic 
+	future research lines to continue advancing toward fully autonomous cognitive optical networks.
 	
 \end{itemize}
 

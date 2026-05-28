@@ -285,10 +285,12 @@ L_\pi = \frac{\pi}{\beta_0 - \beta_1},
 \end{equation}
 
 where $\beta_0$ and $\beta_1$ are the propagation constants of the fundamental and first-order 
-modes, respectively. The length required to form a two-fold self-image can be approximated as
+modes, respectively. For an MMI operating in the restricted paired interference regime (where the 
+input field is launched at $x = \pm W/6$), the length required to form a two-fold self-image (3-dB 
+splitter) is significantly reduced and can be approximated as
 
 \begin{equation}
-L_{\text{MMI}} \approx \frac{3L_\pi}{2}.
+L_{\text{MMI}} \approx \frac{L_\pi}{2}.
 \end{equation}
 
 The self-imaging mechanism in a $2\times2$ MMI results in a transfer matrix 
@@ -663,7 +665,7 @@ input ($E_{In1}, E_{In2}$) and output ($E_{Out1}, E_{Out2}$) electric fields is 
 
 \begin{equation}
 \mathbf{T}_{\text{PUC}}(\phi_{upper}, \phi_{lower}) = 
-i e^{j\frac{\phi_{upper} + \phi_{lower}}{2}} 
+j e^{j\frac{\phi_{upper} + \phi_{lower}}{2}} 
 \begin{pmatrix} 
 \sin\left(\frac{\Delta\phi}{2}\right) & \cos\left(\frac{\Delta\phi}{2}\right) \\[10pt] 
 \cos\left(\frac{\Delta\phi}{2}\right) & -\sin\left(\frac{\Delta\phi}{2}\right) 
@@ -735,38 +737,4 @@ With the mathematical framework and the ideal behavior of the unit cell now defi
 logical step is to address its physical realization. In the following chapter, we will detail the 
 design, simulation, and optimization of the specific silicon photonic building blocks (MMIs, 
 phase shifters, and couplers) that constitute the hardware layer of these programmable processors.
-
-
-
-% \section{Architectures of programmable waveguide meshes}
-% \subsection{Mesh topologies}
-% % % Comparativa de geometrías.
-% % % Forward-only meshes (Redes alimentadas hacia adelante): Triangular, Rectangular. Estructuras que no permiten bucles de realimentación fácilmente.
-% % % Recirculating meshes (Redes recirculantes): Hexagonal, Triangular. Permiten sintetizar cavidades y anillos resonadores (importante para "Large-Scale").
-% \subsection{Circuit synthesis and routing}
-% % % Cómo se "programa" un circuito lógico sobre la malla física. Concepto de enrutamiento de luz por software.
-
-% \section{Challenges in large-scale integration: sources of error}
-% \subsection{Fabrication tolerances and process variations}
-% % % Variaciones estocásticas en el ancho y altura de las guías de onda (wafer thickness variations, etching errors). Cómo esto afecta al índice efectivo 
-% % % y desbalancea los MZIs.
-
-% \subsection{Component non-idealities}
-
-% \subsection{Yield vs. Scale}
-% % % Explicación estadística: a medida que aumenta el número de componentes (N), la probabilidad de tener un circuito 100% funcional decae 
-% % % exponencialmente sin tolerancia a fallos.
-
-
-% \section{State of the Art: Calibration and fault tolerance techniques}
-
-% \subsection{Automated calibration strategies}
-% % % Métodos actuales para caracterizar cada MZI individualmente (algoritmos de optimización, monitores de potencia integrados).
-
-% \subsection{Redundancy and reconfiguration}
-% % % Uso de caminos alternativos en la malla para esquivar componentes rotos (re-routing).
-
-% \subsection{Hardware-level fault tolerance}
-% % % Diseños de acopladores robustos o componentes de banda ancha que son menos sensibles a errores de fabricación (Aquí es donde probablemente 
-% % % encajará tu contribución en capítulos posteriores).
 
