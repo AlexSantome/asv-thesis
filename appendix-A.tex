@@ -2,8 +2,14 @@
 
 \appendix
 
-\chapter{} % (fold)
-% \addcontentsline{toc}{chapter}{Appendix \thechapter}
+% \chapter{} % (fold)
+% % \addcontentsline{toc}{chapter}{Appendix \thechapter}
+% \label{app:A}
+
+\refstepcounter{chapter} 
+\chapter*{Appendix \thechapter} 
+\addcontentsline{toc}{chapter}{Appendix \thechapter}
+\markboth{Appendix \thechapter}{}
 \label{app:A}
 
 \section{Node equations of the inductive method of a 2x2 network}
