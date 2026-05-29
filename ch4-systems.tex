@@ -492,7 +492,7 @@ delegating fine-grained spectral shaping to the dedicated lattice HPBs.
 \section{Inductive Modeling for Large-Scale Synthesis}
 \label{sec:inductive_modeling}
 
-The methodology developed for this kilo-scale architecture addresses the inherent limitations of 
+The methodology developed for this large-scale architecture addresses the inherent limitations of 
 traditional simulation environments when scaling to 1020 PUCs and 332 monitors 
 \cite{Santome2026_ECIO}. While previous frameworks relied on piecewise element modeling, the 
 approach presented here utilizes an inductive method based on recursive signal flow graphs to 
@@ -680,7 +680,7 @@ of supporting full $16\times16$ switching fabrics. Handling a total of 100 optic
 ports per mesh, the internal connectivity is meticulously mapped to maximize the transceiver's 
 versatility. Specifically, 60 ports from each mesh interface directly with the monitoring unit 
 array (MUA) to assess signal integrity. Allocating the remaining 40 ports involves a strategic mix 
-of connections routed to the central High-Performance Blocks, interspersed photodetectors for 
+of connections routed to the central high-performance blocks, interspersed photodetectors for 
 internal tapping, and hardwired short-circuited ports. Creating these permanent short-circuits 
 allows the mesh to synthesize resonant optical rings with cavity lengths significantly shorter than 
 those achievable strictly relying on standard Programmable Unit Cells. 
@@ -700,7 +700,7 @@ $332$ distributed photodetectors for real-time monitoring. Unsurprisingly, the t
 hexagonal meshes consume the vast majority of these resources, accounting for $864$ PUCs dedicated 
 exclusively to flexible spatial routing. 
 
-Complementing this main routing core, the MUA and the High-Performance Blocks integrate the highest 
+Complementing this main routing core, the MUA and the high-performance blocks integrate the highest 
 density of specialized photodetectors to ensure strict signal integrity and accurate spectral 
 characterization. Managing this enormous volume of $2436$ active electrical components (combining 
 phase shifters and photodetectors) decisively validates the necessity of the flip-chip bonding 
@@ -781,7 +781,7 @@ Summarizing the comprehensive architectural and physical design phases detailed 
 the successful tape-out and bare-die fabrication of the dual-polarization smart transceiver 
 represents a major milestone. Bridging the gap between theoretical system-level requirements and 
 physical implementation, the proposed layout elegantly integrates massive programmable spatial 
-routing meshes with highly specialized High-Performance Blocks. Furthermore, successfully 
+routing meshes with highly specialized high-performance blocks. Furthermore, successfully 
 accommodating over 2400 active elements within a single $18.7 \times 15.1\,\text{mm}^2$ die 
 strictly validates the adoption of a high-density flip-chip electrical packaging strategy.
 
@@ -802,5 +802,5 @@ demonstrating real-time dispersion compensation using the dedicated lattice filt
 Ultimately, fulfilling the system-level vision introduced at the beginning of this chapter, the 
 validated smart transceiver will be combined with the external plasmonic modulator and the 
 optical amplifier. This final heterogeneous assembly will enable the experimental demonstration of 
-the complete end-to-end communication link, showcasing the full potential of kilo-scale 
+the complete end-to-end communication link, showcasing the full potential of large-scale 
 programmable photonics in next-generation ultra-high-capacity networks.
