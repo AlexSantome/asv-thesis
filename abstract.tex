@@ -8,51 +8,44 @@
 % Approximately 500 words or less; try not to use formulas or special characters
 % If you don't want an initial indentation, do \noindent at the start of the abstract
 
-The continuous demand for higher performance, energy efficiency, and scalability in information processing 
-systems has driven integrated technologies beyond the limits of purely electronic solutions. Although 
-electronic integrated circuits have enabled major advances in computing and communication, fundamental 
-constraints related to bandwidth, power consumption, and interconnect scalability have become increasingly 
-significant as system complexity grows. In this context, integrated photonics has emerged as a key enabling 
-technology, exploiting the properties of light to overcome these limitations. Early photonic integrated 
-circuits were predominantly developed following an application-specific design paradigm, which enabled 
-highly efficient and compact solutions but resulted in long development cycles, limited flexibility, and 
-poor adaptability to evolving system requirements. Motivated by the success of programmable electronic 
-hardware, programmable photonic integrated circuits have been proposed as a promising alternative, offering 
-software-controlled reconfiguration on a common hardware platform, yet their widespread adoption remains 
-constrained by challenges related to scalability, reliability, and system-level integration.
+The continuous demand for higher performance, energy efficiency, and scalability in information 
+processing systems has driven integrated technologies beyond the limits of purely electronic 
+solutions. Although electronic integrated circuits have enabled major advances in computing and 
+communication, fundamental constraints related to bandwidth, power consumption, and interconnect 
+scalability have become increasingly significant. In this context, programmable integrated 
+photonics has emerged as a promising paradigm, offering software-controlled reconfiguration on a 
+common hardware platform. However, transitioning these versatile processors from foundational 
+laboratory prototypes to mass-manufacturable systems remains constrained by the "scalability 
+wall"—a set of critical bottlenecks encompassing cumulative optical losses, physical footprint 
+constraints, and ultra-dense electrical control.
 
-The primary objective of this doctoral thesis is to address the scalability challenges of programmable 
-photonic integrated circuits across multiple dimensions. At the device and circuit levels, the thesis 
-investigates design strategies that enable the integration of a large number of tunable elements on a 
-single chip while maintaining reliable and stable operation. Particular emphasis is placed on improving 
-fabrication tolerance and mitigating the impact of process variations, environmental fluctuations, 
-and long-term drift, which become increasingly critical as circuit complexity increases. By enhancing 
-robustness at the design stage, the proposed approaches aim to reduce calibration overhead and improve 
-reproducibility in large-scale programmable photonic systems.
+The primary objective of this doctoral thesis is to overcome these limitations and establish a 
+reliable technological foundation for large-scale programmable photonic integrated circuits. At the 
+device level, this work leverages advanced adjoint shape optimization to design highly 
+fault-tolerant silicon-on-insulator building blocks. Notably, the optimized multi-mode 
+interferometers achieve near-ideal 50/50 power splitting with peak excess losses as low as 0.077 dB 
+across the extended C-band. Coupled with highly tolerant inverted tapers for edge coupling, these 
+advancements establish a robust physical backbone for ultra-dense integration.
 
-At the architectural and system levels, this work explores scalable programmable photonic architectures 
-with efficient use of on-chip area and reduced control complexity. The thesis also addresses practical 
-challenges associated with electrical and optical packaging, including power consumption, thermal management, 
-and interconnection density, which often represent key bottlenecks in large-scale programmable PICs. 
-Through the co-design of photonic architectures and their associated control and packaging strategies, 
-this research seeks to enable realistic and deployable programmable photonic platforms.
+Scaling upwards to the circuit and architectural dimensions, this research overcomes traditional 
+wire-bonding bottlenecks by validating area-array flip-chip packaging. This paradigm shift enabled 
+the successful integration and control of a massive-scale smart transceiver comprising 1020 
+programmable unit cells and hundreds of distributed photodetectors. Furthermore, the thesis 
+pioneers a hybrid processing topology that seamlessly embeds specialized high-performance building 
+blocks—such as arrayed waveguide gratings and multi-stage lattice filters—within a general-purpose 
+hexagonal mesh. To resolve the computational challenges of simulating such massive architectures, 
+a novel inductive mathematical modeling framework based on recursive signal flow graphs is 
+introduced.
 
-Finally, the thesis demonstrates the applicability of the proposed scalable programmable PICs through 
-experimental validation and representative application scenarios. These demonstrations highlight the 
-potential of scalable, reliable, and fabrication-tolerant programmable photonic circuits in areas such as 
-optical signal processing, communications, and emerging photonic computing paradigms. Overall, this work 
-contributes to the advancement of programmable photonic integrated circuits from flexible research 
-demonstrators toward robust and scalable technologies capable of meeting the demands of future photonic 
-systems.
+Finally, the practical viability of the scaled architecture is experimentally validated across 
+rigorous real-world network applications. Empirical characterization of the integrated 
+polarization diversity subsystem demonstrates the robust handling of high-speed 400G data streams, 
+identifying strict sensitivity limits to differential group delay. Broadening the architectural 
+scope to address explosive datacenter traffic, the thesis successfully demonstrates 
+point-to-multipoint optical routing using a software-defined 32x32 optical circuit switch, 
+achieving error-free 400G LAN-WDM multicasting up to a 1x4 radix.
 
-% The field of programmable silicon photonics has garnered significant attention in recent years due to its potential to revolutionize various technological domains.
-% The ability to reconfigure photonic integrated circuits on demand offers unprecedented flexibility and adaptability for applications ranging from telecommunications and optical signal processing to sensing and quantum information processing.
-% This interest is driven by the promise of creating versatile photonic platforms that can be tailored to specific tasks through software control, much like their electronic counterparts.
-
-% This manuscript provides a comprehensive exploration of the theoretical underpinnings, the developmental journey, and the experimental validation of applications stemming from this research.
-% The central theme revolves around the design, implementation, and application of a multipurpose programmable photonic integrated circuit (PIC) based on a recirculating mesh architecture.
-% The thesis outlines the critical need for a robust technology stack, with a particular emphasis on the software infrastructure required to harness the full potential of photonic integrated circuits.
-% A significant portion of this work is dedicated to the in-depth documentation of various applications demonstrated on the developed photonic processor, including advancements in optical networking, tunable delay lines, optical signal processing, and topological photonics, enabled by specifically developed algorithms and high-level instructions.
-% Furthermore, the thesis delves into the theoretical intricacies of optical arbitrary matrix-multiply operators, proposing a novel theoretical model for Mach-Zehnder interferometers within a recirculating mesh array.
-% This theoretical framework is complemented by the software implementation and experimental demonstration of arbitrary parametric matrix-multiply operators on the fabricated photonic processor.
-% Finally, the thesis concludes by discussing the key findings, the challenges encountered and addressed, and the commercial and research prospects of the developed technology, while also outlining future directions to further the impact and accessibility of multipurpose programmable photonic platforms.
+Overall, this research validates the transformative capability of software-defined photonics, 
+advancing the technology toward robust, scalable platforms capable of addressing the dynamic 
+bandwidth and low-latency demands of next-generation telecommunication infrastructures and 
+AI-driven data centers.
