@@ -169,8 +169,8 @@ it was the subsequent proposal of the rectangular topology by
 \cite{clementsOptimalDesignUniversal2016} that optimized the physical footprint and balanced the 
 optical losses, making large-scale integration more feasible.
 
-Today, the field has reached a level of maturity where programmable photonic processors are no 
-longer mere laboratory curiosities. The consolidation of Silicon Photonics as the leading platform 
+Currently, the field has reached a level of maturity where programmable photonic processors are no
+longer mere laboratory curiosities. The consolidation of silicon photonics as the leading platform 
 has enabled the demonstration of meshes exceeding hundreds of unit cells on a single chip 
 \cite{harrisQuantumTransportSimulations2017}. This progress is comprehensively documented in the 
 seminal work by \cite{capmanyProgrammableIntegratedPhotonics2020}, which establishes the roadmap 
@@ -202,32 +202,13 @@ photonic integrated circuits, enabling their transition from laboratory prototyp
 large-scale systems. To achieve this, the research is divided into the following specific 
 objectives:
 
-% \begin{itemize}
-%     \item \textbf{Optimization of Fundamental Building Blocks:} Design and simulate 
-% 	high-performance silicon photonic components (MMIs and phase shifters) with a focus on 
-% 	minimizing footprint and optical losses, providing a robust hardware foundation for dense 
-% 	integration.
-    
-%     \item \textbf{Development of Resilient Architectures:} Investigate and model mesh topologies 
-% 	and unit cell configurations that are inherently tolerant to fabrication-induced variations 
-% 	and phase errors, reducing the complexity of post-fabrication trimming.
-    
-%     \item \textbf{System-Level Scalability and Management:} Analyze the impact of thermal crosstalk 
-% 	and packaging constraints in large-scale meshes, proposing architectural strategies that 
-% 	facilitate electrical and optical interfacing without compromising system density.
-    
-%     \item \textbf{Experimental Validation and Application Benchmarking:} Demonstrate the practical 
-% 	utility of the proposed scalable solutions through experimental prototypes, validating their 
-% 	performance in real-world scenarios such as optical signal processing or computing.
-% \end{itemize}
-
 \begin{itemize}
     \item \textbf{Device-Level Optimization:} Design and experimentally validate high-performance 
 	silicon photonic building blocks—specifically targeting ultra-low loss multi-mode 
 	interferometers via adjoint shape optimization and fault-tolerant edge couplers—establishing a 
 	robust hardware foundation for dense integration.
 
-    \item \textbf{Kilo-Scale Architecture and Packaging:} Overcome traditional I/O bottlenecks by 
+    \item \textbf{Large-Scale Architecture and Packaging:} Overcome traditional I/O bottlenecks by 
 	implementing a scalable flip-chip packaging strategy, enabling the control of a massive-scale 
 	programmable processor featuring over 1000 programmable unit cells and hundreds of integrated 
 	monitors.
@@ -275,24 +256,12 @@ València (UPV).
 	Multi-mode Interference (MMI) couplers. By focusing on maximizing operational bandwidth and 
 	minimizing power imbalance, this chapter establishes the fundamental structures required for 
 	the large-scale programmable architectures presented in the remainder of this thesis.
-    
-    % \item \textbf{Chapter 4: \nameref{chap:systems}} addresses the transition from individual cells 
-	% to large-scale systems. It explores different network topologies (Reck, Clements) and the 
-	% synthesis algorithms required for their configuration. Furthermore, it analyzes the impact of 
-	% fabrication tolerances and describes state-of-the-art calibration and fault-tolerance 
-	% techniques to ensure reliable operation.
 
 	\item \textbf{Chapter 4: \nameref{chap:systems}} addresses the architectural leap from 
 	individual cells to massive-scale systems. It introduces a hybrid topology combining a 
 	dual-polarization hexagonal mesh with high-performance building blocks. Furthermore, it details 
 	the physical layout optimization for flip-chip integration and presents a novel inductive 
 	modeling method to simulate the complete 1020-PUC network.
-
-
-    % \item \textbf{Chapter 5: \nameref{chap:apps}} demonstrates the practical 
-	% utility of the developed platform. Through representative use cases, this chapter evaluates the 
-	% performance of the scalable architectures in real-world scenarios, highlighting the benefits of 
-	% the proposed design methodologies.
 
     \item \textbf{Chapter 5: \nameref{chap:apps}} demonstrates the practical utility of the 
 	developed technologies in real-world communication links. It experimentally characterizes the 
@@ -301,12 +270,7 @@ València (UPV).
 	400G point-to-multipoint multicasting utilizing an SDN-controlled $32\times32$ optical circuit 
 	switch.
 
-    
-    % \item \textbf{Chapter 6: \nameref{chap:discussion}} summarizes the main contributions of this 
-	% thesis and proposes future research lines to continue the advancement of large-scale 
-	% programmable photonic systems.
-
-    \item \textbf{Chapter 6:\nameref{chap:discussion}} summarizes the main scientific contributions 
+    \item \textbf{Chapter 6: \nameref{chap:discussion}} summarizes the main scientific contributions 
 	of this thesis, evaluates the fulfillment of the initial objectives, and outlines strategic 
 	future research lines to continue advancing toward fully autonomous cognitive optical networks.
 	
