@@ -5,17 +5,17 @@
 
 \section{Introduction to the Fabrication Platform} \label{sec:fabrication_platform}
 
-Realizing the programmable photonic circuits discussed in this thesis depends fundamentally on the 
+Developing the programmable photonic circuits discussed in this thesis depends fundamentally on the 
 maturity and precision of the Silicon-on-Insulator platform. Outlined in this section are the 
 technological framework, the computational tools employed for device optimization, and the 
 experimental infrastructure used to validate the performance of these fundamental building blocks.
 
 \subsection{SOI Fabrication Platforms} \label{subsec:foundry}
 
-The devices characterized in this work were fabricated using \textbf{dedicated wafer runs} across 
-different fabrication facilities. The use of dedicated runs allowed for full-wafer layout control 
-and the implementation of specific process optimizations tailored to the requirements of 
-large-scale programmable architectures. 
+The devices characterized in this work were fabricated using dedicated wafer runs across different 
+fabrication facilities. The use of accumulated dedicated runs allowed for full-wafer layout control 
+and the implementation of specific process modelling. This is essential for design optimizations 
+tailored to the requirements of large-scale programmable architectures. 
 
 The baseline platform consists of a standard SOI wafer with a nominal silicon device layer 
 thickness of $220$~nm, resting on a thick Buried Oxide (BOX) layer that ensures modal isolation 
@@ -139,11 +139,12 @@ Figure \ref{fig:ch3-hexapod_setup}a, this bench is equipped with a 64-channel fi
 on a high-precision hexapod positioner, enabling semi-automated alignment routines.
 
 Figure \ref{fig:ch3-hexapod_setup}b illustrates the actual measurement bench during the 
-characterization of cascaded structures. By measuring chains of 16 to 18 cascaded MMIs, the 
-cumulative loss can be determined with significantly reduced experimental error. This statistical 
-approach allows for the extraction of the mean insertion loss per component through linear 
-regression of the cascaded stages, effectively filtering out fluctuations from single-device 
-measurements and fiber-to-chip coupling variations.
+characterization of cascaded structures. This procedure relies on the well-known cut-back method 
+\cite{chrostowskiSiliconPhotonicsDesign2015, zhenshengCompactLowLossMMI2012}. By measuring chains 
+of 16 to 18 cascaded MMIs, the cumulative loss can be determined with significantly reduced 
+experimental error. This statistical approach allows for the extraction of the mean insertion loss 
+per component through linear regression of the cascaded stages, effectively filtering out 
+fluctuations from single-device measurements and fiber-to-chip coupling variations.
 
 \subsubsection{Thermal Management and Stability}
 
@@ -342,8 +343,8 @@ conclusions regarding the edge coupler performance:
 \begin{itemize}
     \item \textbf{Validation of the Simulation Model:} The best-performing devices 
     (EC\#7 and EC\#8) achieved insertion losses of approximately $8.33~\text{dB}$ 
-    ($4.16~\text{dB/facet}$), which is in excellent agreement with the $8.80~\text{dB}$ predicted 
-    by simulations. 
+    ($4.16~\text{dB/facet}$), which is in excellent agreement with the $4.40~\text{dB/facet}$ 
+    predicted by simulations.
     \item \textbf{Efficiency and Lithographic Trade-off:} The absolute coupling losses are 
     acknowledged to be higher than those of record-breaking State-of-the-Art (SOTA) designs. This 
     is a direct consequence of the $100~\text{nm}$ taper tip limitation, representing a deliberate 
@@ -373,12 +374,11 @@ effective mode expansion, leading to a significant mode mismatch with the high-N
 
 However, the primary objective of this design was not to achieve record-breaking efficiency, but 
 rather to demonstrate a fault-tolerant interface that enables high-density integration systems, 
-as discussed in Chapter~\ref{chap:systems}. In this regard, the results are highly successful: 
-the coupler maintains a consistent and predictable performance despite significant dicing 
-misalignments of up to $10~\mu\text{m}$. For applications where assembly reliability and tolerance 
-to mechanical inaccuracies are prioritized over a strict power budget—such as the fault-tolerant 
-PIC architecture proposed in this work—this trade-off between absolute loss and fabrication 
-robustness is justified.
+as discussed in Chapter~\ref{chap:systems}. In this regard, the designed fab-tolerant coupler 
+maintains a consistent and predictable performance despite significant dicing misalignments of up 
+to $10~\mu\text{m}$. For applications where assembly reliability and tolerance to mechanical 
+inaccuracies are prioritized over a strict power budget—such as the fault-tolerant PIC architecture 
+proposed in this work—this trade-off between absolute loss and fabrication robustness is justified.
 
 In conclusion, the edge coupler has been successfully validated as a reliable and resilient entry 
 point for the optical signal. Having established this stable fiber-to-chip interface, the following 
