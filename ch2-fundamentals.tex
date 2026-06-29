@@ -89,12 +89,12 @@ industry, silicon photonics enables the realization of complex photonic integrat
 with high reproducibility, scalability, and cost efficiency 
 \cite{sorefPresentFutureSilicon2006,thomsonRoadmapSiliconPhotonics2016}.
 
-The central motivation behind silicon photonics is the compatibility with complementary 
-metal-oxide-semiconductor (CMOS) manufacturing processes. This compatibility allows photonic 
-devices to be fabricated using advanced lithographic tools and wafer-scale processing techniques 
-originally developed for electronic integrated circuits. As a result, silicon photonics benefits 
-from high fabrication precision, tight dimensional control, and the possibility of co-integration 
-with electronic control circuitry.
+The central motivation behind silicon photonics is the ability to leverage the longstanding 
+technological progress and massive investments made in the complementary metal-oxide-semiconductor 
+(CMOS) electronics industry. By adapting the advanced lithographic tools and wafer-scale processing 
+techniques originally developed for electronic integrated circuits, photonic devices can be 
+manufactured at scale. As a result, silicon photonics achieves high fabrication precision, tight 
+dimensional control, and the potential for co-integration with electronic control circuitry.
 
 Beyond manufacturing advantages, silicon offers favorable optical properties in the near-infrared 
 wavelength range, particularly around the telecommunication bands at 1.3~$\mu$m and 1.55~$\mu$m. 
@@ -491,11 +491,12 @@ programmable photonic circuits. While these components do not provide tunability
 they establish the essential coupling and interference pathways required to implement linear 
 optical transformations.
 
-When combined with active phase tuning elements, these passive structures form reconfigurable 
-interferometric units capable of realizing arbitrary $2 \times 2$ transformations. The integration 
-of these passive and active elements culminates in the definition of the \textit{Programmable 
-Unit Cell} (PUC), the fundamental building block of the mesh, which will be introduced in detail 
-after discussing the physical mechanisms enabling dynamic phase control in the following section.
+When combining waveguides, splitters and combiners with active phase tuning elements, these 
+structures form reconfigurable interferometric units capable of realizing arbitrary $2 \times 2$ 
+transformations. The integration of these passive and active components culminates in the 
+definition of the \textit{Programmable Unit Cell} (PUC), the fundamental building block of the 
+mesh. This core element will be introduced in detail after discussing the physical mechanisms 
+enabling dynamic phase control in the following section.
 
 
 
@@ -557,7 +558,7 @@ reaches the necessary $\Delta T$ for phase shifting, a significant amount of hea
 laterally.
 
 While TOPS offer a large tuning range and negligible additional propagation loss, this lateral heat 
-spread leads to \textbf{thermal crosstalk}, where the operation of one heater inadvertently affects 
+spread leads to thermal crosstalk, where the operation of one heater inadvertently affects 
 neighboring interferometers. Furthermore, the mechanism is limited by the thermal diffusion time 
 constant, resulting in millisecond-scale response times ($\tau \approx 10$--$100 \ \mu\text{s}$). 
 In large-scale programmable meshes, managing these thermal effects is a critical challenge that 
@@ -674,8 +675,9 @@ j e^{j\frac{\phi_{upper} + \phi_{lower}}{2}}
 \end{equation}
 
 In this expression, the term $e^{j(\phi_{upper} + \phi_{lower})/2}$ represents the common phase 
-shift (average phase), while the differential phase $\Delta\phi$ dictates the power splitting 
-ratio. This allows the PUC to transition between two fundamental operational states:
+shift (average phase), while the differential phase, defined as 
+$\Delta\phi = \phi_{upper} - \phi_{lower}$, dictates the power splitting ratio. This allows the PUC 
+to transition between two fundamental operational states:
 
 \begin{itemize}
     \item \textbf{Cross State ($\Delta\phi = 0$):} In the default state, the interference is 
@@ -720,15 +722,14 @@ principles of light propagation in silicon waveguides, we analyzed the primary m
 modulation, specifically the thermo-optic effect and the plasma dispersion effect in silicon
 structures.
 
-The core of the chapter focused on the \textbf{Programmable Unit Cell (PUC)}, modeled as a 
-symmetric Mach-Zehnder Interferometer. By applying the transfer matrix formalism, we derived the 
-mathematical operator $\mathbf{T}_{\text{PUC}}$, which relates the input and output electric fields 
-as a function of the differential phase $\Delta\phi$. This analysis confirmed that:
+The core of the chapter focused on the Programmable Unit Cell (PUC), modeled as a symmetric 
+Mach-Zehnder Interferometer. By applying the transfer matrix formalism, we derived the mathematical 
+operator $\mathbf{T}_{\text{PUC}}$, which relates the input and output electric fields as a 
+function of the differential phase $\Delta\phi$. This analysis confirmed that:
 \begin{itemize}
-    \item The unit cell naturally operates in the \textbf{Cross state} when no external stimulus is 
-    applied ($\Delta\phi = 0$).
-    \item A physical phase shift of $\pi$ radians is required to transition to the \textbf{Bar 
-    state}.
+    \item The unit cell naturally operates in the Cross state when no external stimulus is applied 
+    ($\Delta\phi = 0$).
+    \item A physical phase shift of $\pi$ radians is required to transition to the Bar state.
     \item These two degrees of freedom (amplitude via $\Delta\phi$ and common phase) allow the PUC 
     to perform the unitary transformations necessary for optical signal processing.
 \end{itemize}
