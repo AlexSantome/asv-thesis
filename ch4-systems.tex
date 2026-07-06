@@ -178,11 +178,17 @@ separation between waveguides in the array.
 
 While telecommunication-grade de-multiplexers typically demand higher isolation, the target 
 crosstalk for this system—both inter-channel and intra-channel—was set at -10 dB 
-\cite{wangLowlossLowcrosstalk82014}. This threshold is specifically optimized for centroid detection 
-algorithms. In the context of fiber sensing, where tracking the relative power distribution is more 
-critical than absolute isolation, this level of crosstalk ensures reliable wavelength 
-characterization while simplifying the design of the waveguide array and reducing the overall 
-insertion loss.
+\cite{wangLowlossLowcrosstalk82014}. This threshold is specifically optimized for centroid 
+detection algorithms. In the context of fiber sensing, where tracking the relative power 
+distribution is more critical than absolute isolation, this level of crosstalk ensures reliable 
+wavelength characterization while simplifying the design of the waveguide array and reducing the 
+overall insertion loss. However, it is important to note that this relaxed isolation target 
+inherently restricts the system's optical dynamic range. The spectrometer's ability to accurately 
+resolve adjacent spectral features is limited if their relative power levels differ by more than 10 
+dB. While this precludes the device from monitoring highly disparate signals—such as those in 
+heterogeneous telecommunication networks—it remains fully sufficient for the intended fiber sensing 
+applications, where interrogated spectral peaks generally maintain relatively uniform power 
+distributions.
 
 \begin{table}[htbp]
     \centering
@@ -359,7 +365,7 @@ intra-channel crosstalk remains well-aligned with the -10 dB requirement, with m
 around -11 dB. Although chip D5 and F3 show marginal deviations (-9.64 dB and -9.90 dB 
 respectively), the overall isolation remains sufficient to ensure the accuracy of the centroid 
 detection algorithms. This high level of reproducibility across the five measured chips confirms 
-the reliability of the AWG as a foundational building block for the autonomous transceiver.
+the reliability of the AWG as a foundational building block for the optical engine.
 
 
 \subsection{Dispersion Compensation: Reconfigurable Lattice Filters}
@@ -418,7 +424,7 @@ Mathematical modeling of the 8-stage compensator dictates that the achievable di
 fundamentally proportional to the square of the unit delay. Following the signal processing 
 approach to optical filter design detailed by Madsen and Zhao \cite{madsenOpticalFilterDesign1999}, 
 this relationship for a standard architecture is approximated as:
- 
+
 \begin{equation}
     D = \frac{12·T}{\Delta\lambda}
 \end{equation}
