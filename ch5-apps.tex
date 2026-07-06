@@ -244,6 +244,17 @@ mandatory. To guarantee error-free 400G operation, the structural length differe
 active and passive arms must be carefully minimized to keep the temporal skew well within the 
 receiver's equalization capabilities.
 
+It should be emphasized that achieving $\Delta L = 0$ in the layout does not necessarily guarantee
+zero effective delay after fabrication. In long waveguide sections, small process-induced geometric
+variations between the two polarization paths may generate a differential group delay even when both
+arms have identical physical lengths. For instance, a width mismatch of only a few tens of
+nanometers can modify the waveguide group index, resulting in a non-negligible temporal skew.
+Assuming a group-index difference on the order of $\Delta n_g \sim 0.1$, a 20-nm width variation
+between two waveguides would generate approximately 10~ps of differential delay over propagation
+lengths of about 3~cm. Therefore, besides maintaining physical path-length matching, fabrication
+tolerances must also be carefully controlled to ensure that the effective delay remains within the
+equalization capability of the receiver DSP.
+
 \clearpage
 
 \section{Smart Transceiver in Next-Generation Switching Nodes}
@@ -254,10 +265,10 @@ Dr. José Manuel Rivas-Moscoso - Telefónica for providing the conceptual schema
 node architectures discussed in this section.}}
 
 As optical networks scale to accommodate the exponential growth in data traffic, the flexibility 
-and reconfigurability of the routing elements become paramount. While the previous sections 
-validated the performance of the proposed structures in point-to-point (P2P) links, modern optical 
-networks rely heavily on dynamically reconfigurable optical switching nodes to manage traffic 
-across meshed topologies. In this context, the integration of smart transceivers—capable of 
+and reconfigurability of the routing elements become increasingly important. While the previous 
+sections validated the performance of the proposed structures in point-to-point (P2P) links, modern 
+optical networks rely heavily on dynamically reconfigurable optical switching nodes to manage 
+traffic across meshed topologies. In this context, the integration of smart transceivers—capable of 
 adapting to varying network conditions, routing paths, and signal formats—provides a significant 
 advantage for next-generation architectures \cite{bhat6GEcosystemCurrent2021, 
 welchPointtoMultipointOpticalNetworks2021}.
@@ -801,19 +812,18 @@ Broadcast-and-Select nodes. This high-density integration provides collision-fre
 multiplexing and flexible capacity allocation, significantly reducing the reliance on bulky 
 external hardware elements. 
 
-Addressing the explosive bandwidth demands of modern intra-data center traffic, the final 
+Addressing the increasing bandwidth demands of modern intra-data center traffic, the final 
 experimental campaign successfully scaled the routing paradigm to a $32\times32$ SDN-controlled 
 silicon photonics OCS. Engineered specifically for the datacom regime, this active switching 
 fabric enabled software-defined point-to-multipoint routing, achieving error-free 400G LAN-WDM 
 multicasting up to a $1\times4$ radix. Although current power budget constraints—primarily bounded 
 by the saturation threshold of the integrated SOAs—temporarily cap the maximum splitting ratio, 
-quantifying these exact limitations provides a clear technological roadmap. Implementing targeted 
-loss-reduction strategies in future chip generations will decisively unlock fully non-blocking 
-$1\times32$ multicast capabilities.
+quantifying these exact limitations provides a technological roadmap for future developments. 
+Implementing targeted loss-reduction strategies in future chip generations will potentially enable 
+fully non-blocking $1\times32$ multicast capabilities.
 
-Ultimately, the comprehensive evaluations presented throughout this chapter confirm the 
-transformative potential of programmable photonics. Proving highly versatile across both C-band 
-telecom infrastructures and O-band AI-driven datacenters, intelligent optical switching emerges as 
-a cornerstone technology to meet the ultra-high bandwidth, low-latency, and dynamic 
-reconfigurability demands of next-generation optical networks.
-
+Ultimately, the comprehensive evaluations presented throughout this chapter confirm the practical 
+potential of programmable photonics. Proving effective across both C-band telecom infrastructures 
+and O-band AI-driven datacenters, intelligent optical switching emerges as a viable enabling 
+technology to meet the ultra-high bandwidth, low-latency, and dynamic reconfigurability demands of 
+next-generation optical networks.
