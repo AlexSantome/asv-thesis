@@ -264,15 +264,15 @@ a loop-back configuration to facilitate the extraction of the insertion loss per
 
 The set of designs was defined as follows:
 \begin{description}
-    \item[EC\#3:] Represents the \textbf{nominal design}, corresponding to the optimized parameters 
+    \item[EC\#3:] Represents the nominal design, corresponding to the optimized parameters 
     derived from the simulation baseline ($sp = 0 \ \mu\text{m}$).
-    \item[EC\#1:] Consists of a version \textbf{identical to the nominal design but with a reduced 
-    total length}. This variant was included to evaluate the impact of the taper footprint on the 
+    \item[EC\#1:] Consists of a version identical to the nominal design but with a reduced 
+    total length. This variant was included to evaluate the impact of the taper footprint on the 
     coupling efficiency and to verify the adiabaticity of the mode transformation.
-    \item[EC\#2, EC\#4, and EC\#5:] Incorporate \textbf{minimal spacing variations}. In these 
+    \item[EC\#2, EC\#4, and EC\#5:] Incorporate minimal spacing variations. In these 
     instances, the taper tip was shifted slightly inwards and outwards relative to the theoretical 
     dicing line to evaluate fine fabrication and alignment tolerances.
-    \item[EC\#6, EC\#7, and EC\#8:] Involve \textbf{significant offsets}, with the coupler tips 
+    \item[EC\#6, EC\#7, and EC\#8:] Involve significant offsets, with the coupler tips 
     retracted approximately $10 \ \mu\text{m}$ from the chip edge. These variations were 
     specifically designed to characterize the impact of more aggressive dicing inaccuracies on the 
     coupling efficiency.
@@ -815,17 +815,17 @@ classified into three groups according to the optimization stage and the specifi
 evaluated:
 
 \begin{enumerate}
-    \item \textbf{Body Optimizations (Stage 1):} Devices \textbf{D1} and \textbf{D2} represent the 
-    optimized MMI bodies without integrated taper refinement. \textbf{D1} utilizes the 150 nm 
-    shallow etch layer, while \textbf{D2} utilizes the 90 nm layer. Both were optimized using 
+    \item \textbf{Body Optimizations (Stage 1):} Devices D1 and D2 represent the 
+    optimized MMI bodies without integrated taper refinement. D1 utilizes the 150 nm 
+    shallow etch layer, while D2 utilizes the 90 nm layer. Both were optimized using 
     high-resolution meshes ($45 \times 10^{-6}$ mesh size and accuracy 4).
-    \item \textbf{Integrated Body + Access Optimizations (Stage 2):} Devices \textbf{D3} and 
-    \textbf{D4} represent the holistic design approach. Both utilize the 90 nm shallow layer. 
-    \textbf{D3} serves as the low-resolution benchmark ($60 \times 10^{-6}$ mesh, accuracy 1), 
-    whereas \textbf{D4} is the final optimized design at high-resolution ($45 \times 10^{-6}$ mesh, 
+    \item \textbf{Integrated Body + Access Optimizations (Stage 2):} Devices D3 and 
+    D4 represent the holistic design approach. Both utilize the 90 nm shallow layer. 
+    D3 serves as the low-resolution benchmark ($60 \times 10^{-6}$ mesh, accuracy 1), 
+    whereas D4 is the final optimized design at high-resolution ($45 \times 10^{-6}$ mesh, 
     accuracy 4).
     \item \textbf{Tolerance and Sensitivity Study (D4 Variants):} To assess the robustness of the 
-    final integrated design (\textbf{D4}), four variants were fabricated to simulate critical 
+    final integrated design (D4), four variants were fabricated to simulate critical 
     manufacturing deviations:
     \begin{itemize}
         \item \textbf{D4.1 and D4.2:} Evaluate longitudinal tolerances by increasing and decreasing 
@@ -931,11 +931,11 @@ experimental validation yielded several key findings:
     
     \item \textbf{Experimental Validation and CD Bias:} While the nominal designs showed a 
     systematic power imbalance due to foundry-specific fabrication offsets, the inclusion of 
-    geometric variations allowed for a precise calibration of the process. Design \textbf{D4.4}, 
+    geometric variations allowed for a precise calibration of the process. Design D4.4, 
     featuring a $-0.25\,\mu$m width compensation, effectively neutralized the positive CD bias of 
     the fabrication run, achieving a near-ideal $50/50$ splitting ratio.
     
-    \item \textbf{Performance Excellence:} Experimental results for the optimized \textbf{D4.4} 
+    \item \textbf{Performance Excellence:} Experimental results for the optimized D4.4 
     design indicate an exceptional peak Excess Loss of approximately $0.06$\,dB at $1550$\,nm, 
     with losses remaining below $0.15$\,dB across the $1520$--$1580$\,nm range. This matches the 
     high-fidelity numerical predictions and confirms the efficiency of the adjoint-optimized 
