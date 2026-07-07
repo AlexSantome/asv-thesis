@@ -139,12 +139,15 @@ spectra primarily reflect the baseline insertion losses of the active optical pa
 Conversely, the 50-50\% TE-TM mixed state (c) inherently excites both the upper and lower arms of 
 the polarization subsystem simultaneously.  As expected, the optical power measured at the output
 of each structure is very similar either using pure TE, pure TM or a 50-50 mixed state. This result
-not only validates the structure but also reports low polarization-dependent loss (PDL). Note that
-there is a noticeable ripple in all the traces independent of the SOP. This behavior is 
-characteristic of a Fabry-Pérot cavity effect, caused by reflections at the chip facets when 
-coupling cleaved fibers directly to the ECs. As the performance is predictable and stable for each 
-wavelength, it does not imply any impairment in the transmission measurements discussed in the next 
-section.
+not only validates the structure but also reports low polarization-dependent loss (PDL). 
+
+Note that the measured traces exhibit a ripple with a dominant period of approximately 2.5-2.8 nm, 
+which is observed across all tested delay-line configurations and SOPs. This period does not scale 
+with the designed delay lengths of 0, 700, 3500 and 7000 µm, for which the expected MZI-related 
+spectral periods would be approximately 0.6 nm, 0.12 nm and 0.06 nm, respectively. Therefore, the 
+dominant observed ripple is not attributed to the designed delay imbalance. A secondary ripple 
+associated with the delay lines may be present, especially for the 700 µm case, but the larger 
+delays would require a finer wavelength sampling to be resolved reliably.
 
 \begin{figure}[htpb]
     \centering
@@ -586,7 +589,7 @@ illustrates the complete experimental setup used for this demonstration.
 
 \begin{figure}[htpb]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/ch5-multicast_setup.png} 
+    \includegraphics[width=0.9\textwidth]{figures/ch5-multicast_setup.png} 
     \caption{SDN-controlled $32\times32$ SiPh OCS experimental setup for 400G WDM multicast 
     ($1\times4$ configuration) using gNMI. \textit{Reproduced from 
     \cite{Santome2026_SummerTopicals}. \copyright~2026 IEEE.}}
@@ -610,14 +613,16 @@ configures the PUCs in tunable-state (TS) via the gNMI protocol by adjusting the
 shifters. This configuration allows the input signal to be accurately split across multiple output 
 ports simultaneously.
 
-For characterization and signal integrity assessment, the multicast outputs are routed to two 
-primary instruments. First, an optical spectrum analyzer (OSA) handles spectral verification and 
-optical signal-to-noise ratio (OSNR) monitoring. Simultaneously, a BER tester is employed for 
-transmission quality analysis. In order to validate the system performance against the IEEE 
-802.3ck-2022 standard for 400 Gb/s Ethernet, the measurements must fall below the KP4 FEC 
-threshold (pre-FEC $BER \le 2.4 \times 10^{-4}$) to guarantee error-free data recovery. 
-Theoretically, the expected BER for PAM4 signals operating over additive white Gaussian noise 
-(AWGN) channels can be estimated as:
+For characterization and signal integrity assessment, the multicast outputs are first passed 
+through a variable optical attenuator (VOA) to ensure operation within the receiver's linear 
+regime and prevent saturation. Subsequently, the signals are routed to two primary instruments: 
+an optical spectrum analyzer (OSA), which handles spectral verification and optical 
+signal-to-noise ratio (OSNR) monitoring, and a BER tester for transmission quality analysis.
+In order to validate the system performance against the IEEE 802.3ck-2022 standard for 400 Gb/s 
+Ethernet, the measurements must fall below the KP4 FEC threshold (pre-FEC 
+$BER \le 2.4 \times 10^{-4}$) to guarantee error-free data recovery. Theoretically, the expected 
+BER for PAM4 signals operating over additive white Gaussian noise (AWGN) channels can be estimated 
+as:
 
 \begin{equation}
     BER_{PAM4} \approx \frac{3}{8} \cdot \text{erfc}\left(\sqrt{\frac{SNR}{5}}\right)
