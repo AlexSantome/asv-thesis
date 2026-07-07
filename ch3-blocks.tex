@@ -594,7 +594,13 @@ baseline. As shown in the evolution sequence, the algorithm begins modifying the
 as early as Iteration 1, where the first morphological perturbations become observable. From 
 Iteration 5 onwards, the structure shows a clear convergence trend toward its optimal profile. This 
 final geometry is reached at Iteration 16, representing a stable state where the boundaries 
-adiabatically follow the field nodes within the silicon core.
+adiabatically follow the field nodes within the silicon core. Notably, the extreme corners at the 
+interfaces between the access ports and the multimode region remain distinctly sharp and unaltered 
+throughout this process. This behavior is a direct consequence of the adjoint optimization physics: 
+because the geometric update gradient is proportional to the local optical field intensity, and the 
+field is practically zero at these far corners where the beam is just beginning to expand, the local 
+sensitivity is negligible. Consequently, the algorithm naturally focuses its modifications on the 
+active central sidewalls, leaving the inactive corner structures as defined in the initial layout.
 
 \subsubsection{Optimization Convergence and Physical Insights}
 
@@ -789,8 +795,14 @@ response is depicted in Figure~\ref{fig:ch3-stage2_spectral}.
 The spectral results show that the splitting ratio remains virtually ideal ($0.50 \pm 0.005$) 
 across the entire 1.50--1.60 $\mu$m range. This exceptional spectral flatness confirms that the 
 simultaneous refinement of the transition regions and the multimode body is essential for 
-broadband operation. Finally, the quantitative impact of this integrated design in comparison 
-with the best result from Stage 1 is summarized in Figure~\ref{fig:performance_improvement}.
+broadband operation. Furthermore, while the optimization FoM was evaluated across a wide 60 nm 
+bandwidth to simultaneously minimize insertion loss and imbalance, the resulting excess loss 
+(Figure \ref{fig:ch3-stage2_spectral}(a)) exhibits a characteristic parabolic profile. This 
+indicates that while the structural geometry was successfully optimized for broadband operation, 
+the fundamental phase-matching conditions remain optimal at the central design wavelength of 1550 
+nm, with a natural, gradual roll-off toward the band edges. Finally, the quantitative impact of 
+this integrated design in comparison with the best result from Stage 1 is summarized in 
+Figure~\ref{fig:performance_improvement}.
 
 \begin{figure}[!ht]
     \centering
@@ -898,19 +910,35 @@ their intended application as balanced power splitters. Consequently, their EL v
 consistent with the fabrication process, do not provide additional instructive value for the final 
 device performance. 
 
-Figure~\ref{fig:ch3-mmi_el_d44} presents the spectral Excess Loss for the optimized D4.4 design. 
-The results show an average EL of approximately $0.13$\,dB per device at $\lambda = 1550$\,nm. This 
-low loss value, coupled with the high spectral flatness observed previously, confirms that the 
-$-0.25\,\mu$m width adjustment not only corrected the splitting ratio but also maintained the high 
-transmission efficiency of the MMI structure. This combination of low loss and balanced splitting 
-identifies D4.4 as the optimal building block for larger-scale interferometric structures.
+Figure~\ref{fig:ch3-mmi_el_d44} presents the spectral excess loss for the optimized D4.4 design.
+The results show a minimum EL of approximately $0.06$ dB at 1550 nm, with losses remaining strictly 
+below $0.15$\,dB across the 1520--1580 nm characterization window. This low loss value, coupled 
+with the high spectral flatness observed previously, confirms that the $-0.25\,\mu$m width 
+adjustment not only corrected the splitting ratio but also maintained the high transmission 
+efficiency of the MMI structure. This combination of low loss and balanced splitting identifies 
+D4.4 as the optimal building block for larger-scale interferometric structures.
+
+To evaluate the accuracy of the numerical models, the simulated nominal excess loss is superimposed 
+on the experimental data. As shown, there is a strong correlation between the simulation and the 
+measurement across the primary 1520--1570 nm band, sharing the same low-loss trend. However, a 
+noticeable divergence occurs at longer wavelengths (1570--1580 nm). This deviation can be attributed 
+to two primary factors inherent to the experimental and fabrication environment. First, the limited 
+optical bandwidth of the standard grating couplers used for chip I/O significantly reduces the 
+signal-to-noise ratio at the edges of the spectrum, compromising the accuracy of the normalization 
+process during data extraction. Second, while the width bias effectively neutralized the primary 
+lithographic offset, the device inevitably remains susceptible to other standard wafer-scale 
+tolerances. As is well established for SOI platforms, minor uncompensated fluctuations in 
+parameters such as the top silicon thickness or shallow etch depth can disproportionately impact 
+the phase-matching conditions of the MMI at larger wavelengths. Despite these expected edge-band 
+deviations, the overall experimental result is remarkable, demonstrating an extremely efficient 
+device that closely follows the numerical predictions within the targeted operational bandwidth.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/ch3-excess_loss_d44.png}
-    \caption{Measured Excess Loss for the D4.4 MMI variation. The solid line represents the median 
-    value across the characterized dies, while the shaded region denotes the
-     $25^{\text{th}}$--$75^{\text{th}}$ percentile range.}
+    \includegraphics[width=0.9\textwidth]{figures/ch3-excess_loss_D44_vs_sim.png}
+    \caption{Measured Excess Loss for the D4.4 MMI variation compared against the nominal design 
+    simulation (dashed line). The solid line represents the median value across the characterized 
+    dies, while the shaded region denotes the $25^{\text{th}}$--$75^{\text{th}}$ percentile range.}
     \label{fig:ch3-mmi_el_d44}
 \end{figure}
 
