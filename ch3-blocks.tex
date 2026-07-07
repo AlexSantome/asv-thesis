@@ -308,7 +308,8 @@ design against chip-to-chip variations.
     \centering
     \includegraphics[width=1.0\textwidth]{figures/ch3-edge_coupler_meas_2line.png}
     \caption{Normalized measured optical transmission spectra: (a) EC\#3 and (b) EC\#7 across 5 
-    different DIEs showing high reproducibility, and (c) comparison of all eight EC variants.}
+    different DIEs showing high reproducibility, and (c) comparison of all eight edge coupler 
+    variants.}
     \label{fig:ch3-ec_meas}
 \end{figure}
 
@@ -433,20 +434,23 @@ from the access waveguides.
 
 
 To establish a reliable reference for the subsequent optimization stages, the parametric design was 
-characterized both numerically and experimentally, as compared in Figure~\ref{fig:ch3-baseline_mmi_sr}. 
-Specifically, the splitting ratio performance of the simulated MMI in panel (a) shows an almost 
-ideal distribution, which is closely mirrored by the experimental measurements in (b). This response 
-remains remarkably balanced across the full spectrum, with experimental data showing a standard 
-deviation across dies that stays within 1\% of the target. Such wavelength insensitivity is 
-critical for the robustness and scalability of the proposed programmable architecture.
+characterized both numerically and experimentally, as compared in 
+Figure~\ref{fig:ch3-baseline_mmi_sr}. Specifically, the splitting ratio performance of the 
+simulated MMI in panel (a) shows an almost ideal distribution, which is closely mirrored by the 
+experimental measurements in (b). This response remains remarkably balanced across the full 
+spectrum. The experimental data, extracted from 8 different dies across two wafers, shows an 
+outstanding uniformity where the median stays within 1\% of the target ideal splitting. Such 
+wavelength insensitivity is critical for the robustness and scalability of the proposed 
+programmable architecture.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=\textwidth]{figures/ch3-baseline_mmi_sr_sim_meas_H.png} 
+    \includegraphics[width=\textwidth]{figures/ch3-baseline_mmi_sr_sim_meas_horizontal.png} 
     \caption{Splitting ratio comparison for the $2\times2$ MMI baseline. (a) High-fidelity 3D-FDTD
-    simulation showing a stable $50/50$ distribution. (b) Measured results across multiple dies
-    showing a deviation of less than $1\%$ from the ideal splitting across the
-    $1520\text{--}1580~\text{nm}$ range.}
+    simulation showing a stable $50/50$ distribution. (b) Measured results across the 
+    $1520\text{--}1580~\text{nm}$ range. The solid line represents the median value obtained from 
+    8 dies across two different wafers, while the shaded region indicates the total measurement 
+    spread (min-max), showing a deviation of less than $1\%$ from the ideal splitting.}
     \label{fig:ch3-baseline_mmi_sr}
 \end{figure}
 
@@ -455,18 +459,19 @@ critical for the robustness and scalability of the proposed programmable archite
 
 Furthermore, power efficiency was similarly evaluated through excess loss (EL) analysis,
 as illustrated in Figure~\ref{fig:ch3-baseline_mmi_el}. The device exhibits exceptionally low 
-excess losses, with measured values remaining below $0.25~\text{dB}$ throughout the spectrum.
-reaching a minimum of approximately $0.13~\text{dB}$ at $1550~\text{nm}$. Notably, 
-the consistency across samples—indicated by the shaded regions—reinforces the fault-tolerant nature 
-of the design against fabrication tolerances.
-
+excess losses, with measured median values remaining below $0.25~\text{dB}$ throughout the 
+spectrum, reaching a minimum of approximately $0.13~\text{dB}$ at $1550~\text{nm}$. Notably, the 
+consistency across the characterized samples—indicated by the narrow shaded region—reinforces the 
+fault-tolerant nature of the design against fabrication tolerances.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=\textwidth]{figures/ch3-baseline_mmi_el_sim_meas_H.png} 
+    \includegraphics[width=\textwidth]{figures/ch3-baseline_mmi_el_sim_meas_horizontal.png} 
     \caption{Excess loss comparison for the $2\times2$ MMI baseline. (a) Simulation estimating a 
-    loss of $\sim 0.24$~dB at $1550~\text{nm}$. (b) Measured EL reaching a minimum of 
-    $\sim 0.15$~dB, validating the efficiency of the shallow-etch design.}
+    loss of $\sim 0.24$~dB at $1550~\text{nm}$. (b) Measured EL reaching a minimum median value of 
+    $\sim 0.15$~dB, validating the efficiency of the shallow-etch design. The solid line depicts the 
+    median of 8 measured dies from two wafers, and the shaded area illustrates the total 
+    measurement range.}
     \label{fig:ch3-baseline_mmi_el}
 \end{figure}
 
@@ -474,7 +479,6 @@ Despite these high-performance metrics, this rectangular geometry represents a p
 plateau for traditional design methods. The following subsections describe the methodology used to 
 push these boundaries even further, employing shape optimization to minimize the remaining 
 scattering and further flatten the spectral response.
-
 
 \subsection{Shape Optimization Methodology}
 
