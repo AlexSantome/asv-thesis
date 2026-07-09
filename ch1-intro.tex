@@ -20,9 +20,9 @@ bottlenecks in advanced electronic systems \cite{millerRationaleChallengesOptica
 transistor switching speeds continued to improve, the performance of electrical interconnects 
 failed to scale at the same pace, leading to growing energy consumption and thermal management 
 challenges \cite{millerDeviceRequirementsOptical2009}. These limitations are especially pronounced 
-in large-scale systems, such as data centers and high-performance computing architectures, where 
-interconnects dominate both power budgets and system-level performance 
-\cite{shalfExascaleComputingTechnology2011}.
+in large-scale systems \cite{littleVERYLARGESCALEINTEGRATED2000}, such as data centers and 
+high-performance computing architectures, where interconnects dominate both power budgets and 
+system-level performance \cite{shalfExascaleComputingTechnology2011}.
 
 In parallel with these developments, photonics emerged as a powerful alternative for signal 
 generation, transmission, and processing. The invention of the laser marked a pivotal milestone in 
@@ -59,14 +59,15 @@ solutions have gained substantial interest as a complementary or alternative tec
 As a result, integrated photonics has become a key enabling technology for next-generation 
 communication, sensing, and computing systems. Its impact spans a wide range of applications, 
 including optical transceivers for data centers, chip-to-chip and on-chip interconnects for 
-high-performance computing, microwave photonics, and emerging photonic information processing 
-platforms. More recently, the convergence of electronic and photonic integration has given rise to 
+high-performance computing, microwave photonics \cite{capmanyMicrowavePhotonicsCombines2007,
+sanchezModelingAmplifiedArbitrary2021}, and emerging photonic information processing platforms. 
+More recently, the convergence of electronic and photonic integration has given rise to 
 heterogeneous and co-integrated systems, where electronic control and photonic signal processing 
-are combined to exploit the strengths of both domains 
-\cite{youngOpticalTechnologyTeraScale2010,jalaliSiliconPhotonics2006}. 
-This convergence positions integrated photonics as a central technology in addressing the 
-scalability, performance, and energy-efficiency challenges of future information processing systems 
-\cite{perezReconfigurableLatticeMesh2016,zhuangProgrammablePhotonicSignal2015}.
+are combined to exploit the strengths of both domains \cite{youngOpticalTechnologyTeraScale2010,
+jalaliSiliconPhotonics2006}. This convergence positions integrated photonics as a central 
+technology in addressing the scalability, performance, and energy-efficiency challenges of future 
+information processing systems \cite{perezReconfigurableLatticeMesh2016,
+zhuangProgrammablePhotonicSignal2015}.
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -99,7 +100,8 @@ significantly degrade the performance of fixed-function photonic circuits if no 
 tuning is available \cite{annoniAutomatedRoutingControl2016}.
 
 To mitigate these issues, reconfigurability was gradually introduced into integrated photonic 
-platforms. Initially, tunable elements such as thermo-optic or electro-optic phase shifters were 
+platforms. Initially, tunable elements such as thermo-optic 
+\cite{perez-lopezSiliconNitrideProgrammable2021} or electro-optic phase shifters were 
 incorporated to compensate for fabrication-induced deviations and to enable limited 
 post-fabrication trimming. While this represented an important step forward, these early 
 reconfigurable circuits were still largely application-specific, as their overall topology and 
@@ -111,11 +113,13 @@ alternative to conventional design methodologies \cite{perezSiliconPhotonicsRect
 perezFieldprogrammablePhotonicArrays2018,bogaertsProgrammablePhotonicCircuits2020}. 
 Rather than implementing a single predefined function 
 \cite{fandinoMonolithicIntegratedPhotonic2017, burlaOnchipCMOScompatibleHardwarecompressive2013, 
-marpaungOnChipPhotonicAssistedInstantaneous2013}, programmable PICs rely on a generic hardware 
-architecture that can be configured through software to realize a wide range of photonic signal 
-processing tasks, a paradigm shift illustrated in Figure \ref{fig:ch1-aspic_vs_programmable}. This 
-paradigm shift enables the reuse of the same physical chip across multiple applications, 
-significantly reducing development time and cost while increasing versatility.
+marpaungOnChipPhotonicAssistedInstantaneous2013, yeReconfigurableApplicationspecificPhotonic2024}, 
+programmable PICs rely on a generic hardware architecture that can be configured through software 
+to realize a wide range of photonic signal processing tasks 
+\cite{perez-lopezProgrammableTrueTime2018}, a paradigm shift illustrated in Figure 
+\ref{fig:ch1-aspic_vs_programmable}. This paradigm shift enables the reuse of the same physical 
+chip across multiple applications, significantly reducing development time and cost while 
+increasing versatility.
 
 
 A widely adopted approach to programmable photonics is based on networks of tunable 2x2 
@@ -146,7 +150,8 @@ routing, and coherent signal processing \cite{perezReconfigurableLatticeMesh2016
 marpaungIntegratedMicrowavePhotonics2019}.
 In microwave photonics, programmable PICs provide flexible platforms for beamforming and signal 
 generation. More recently, they have attracted considerable attention in emerging areas such as 
-optical computing, machine learning, and quantum information processing, where hardware 
+optical computing, machine learning \cite{tsakyridisPhotonicNeuralNetworks2024}, and quantum 
+information processing \cite{aharonovichProgrammableIntegratedQuantum2026}, where hardware 
 adaptability is a critical requirement \cite{shenDeepLearningCoherent2017}.
 
 
@@ -154,15 +159,17 @@ Despite their promise, programmable photonic integrated circuits also introduce 
 The large number of tunable elements required for complex meshes leads to increased power 
 consumption, control overhead, and calibration complexity. Thermal crosstalk, control drift, and 
 scaling limitations must be carefully addressed to ensure stable and reliable operation 
-\cite{millerSelfconfiguringUniversalLinear2013,sacchiIntegratedElectronicController2025}. These 
+\cite{cemThermalCrosstalkModeling2023, teofilovicThermalCrosstalkModelling2024, 
+millerSelfconfiguringUniversalLinear2013, sacchiIntegratedElectronicController2025}. These 
 challenges have motivated ongoing research into alternative tuning mechanisms, advanced control 
 algorithms, and hybrid electronic-photonic control architectures.
 
 Overall, the transition from application-specific to programmable photonic integrated circuits 
 represents a fundamental evolution in the design philosophy of integrated photonics. By decoupling 
 hardware from functionality, programmable PICs offer a flexible and scalable platform capable of 
-addressing the growing demands of future communication, sensing, and computing systems, while 
-accelerating innovation and reducing barriers to entry in photonic system design
+addressing the growing demands of future communication 
+\cite{xieSoftwaredefinedOpticalNetworking2024}, sensing, and computing systems, while accelerating 
+innovation and reducing barriers to entry in photonic system design
 \cite{bogaertsProgrammablePhotonicCircuits2020}.
 
 
@@ -186,8 +193,8 @@ for the next generation of software-defined photonic circuits.
 Despite these achievements, the state of the art is currently facing a "scalability wall." As the 
 number of components increases, the cumulative effect of phase errors, thermal crosstalk, and power 
 consumption becomes the primary bottleneck. Current research is therefore shifting from the 
-demonstration of basic topologies toward the development of robust, self-calibrating, and 
-fault-tolerant systems 
+demonstration of basic topologies toward the development of robust, self-calibrating 
+\cite{lopez-hernandezAutomaticSelfcalibrationProgrammable2022}, and fault-tolerant systems 
 \cite{millerSelfconfiguringUniversalLinear2013,annoniUnscramblingLightAutomatically2017}. It is 
 within this technological frontier that the present thesis is situated, seeking to address the 
 underlying hardware and architectural limitations that hinder the large-scale deployment of these 

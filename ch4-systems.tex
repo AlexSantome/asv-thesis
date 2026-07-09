@@ -30,7 +30,7 @@ photonic programmable processors, emphasizing a modular transition from discrete
 interconnected fabrics. However, as noted in recent studies on high-density interconnects for AI 
 datacenters \cite{torrijos-moranIndustryInsightPhotonics2026}, scalability is not merely a matter 
 of cell count but is fundamentally constrained by signal integrity, cumulative losses, and specific 
-application requirements.
+application requirements \cite{fanTechnology800GOptical2026}.
 
 Architectural philosophies diverge significantly when addressing these scaling challenges. While 
 application-specific designs—such as the feedforward networks optimized for AI workloads and matrix 
@@ -48,12 +48,12 @@ scalability and the performance versus the application-specific designs.
 Within large-scale systems, managing the inherent polarization randomness of light coupled from 
 standard fibers remains a critical hurdle. To address this, the architecture proposed in this 
 chapter adopts a polarization diversity \cite{fukudaSiliconPhotonicCircuit2008, 
-daiPolarizationManagementSilicon2013} scheme. Utilizing a polarization splitter and rotator (PSR), 
-arbitrary input light is separated into its constituent TE and TM components, which are then 
-processed independently by dedicated reconfigurable meshes. Such an approach ensures robust 
-operation regardless of input conditions and significantly expands the computational capacity of 
-the Photonic Integrated Circuit, enabling a higher degree of functional density than previously 
-reported.
+daiPolarizationManagementSilicon2013, tanizawaNovelPolarizationDiversity2016} scheme. Utilizing a 
+polarization splitter and rotator (PSR), arbitrary input light is separated into its constituent TE 
+and TM components, which are then processed independently by dedicated reconfigurable meshes. Such 
+an approach ensures robust operation regardless of input conditions and significantly expands the 
+computational capacity of the Photonic Integrated Circuit, enabling a higher degree of functional 
+density than previously reported.
 
 Representing a major milestone in the field, this chapter introduces a large-scale 
 SOI programmable processor featuring 1020 PUCs and 332 integrated photodetectors. Reaching this 
