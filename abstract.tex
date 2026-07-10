@@ -4,48 +4,92 @@
 %
 % The abstract environment creates all the required headers and footnote. 
 % You only need to add the text of the abstract itself.
-%
-% Approximately 500 words or less; try not to use formulas or special characters
-% If you don't want an initial indentation, do \noindent at the start of the abstract
 
 The continuous demand for higher performance, energy efficiency, and scalability in information 
 processing systems has driven integrated technologies beyond the limits of purely electronic 
-solutions. Although electronic integrated circuits have enabled major advances in computing and 
-communication, fundamental constraints related to bandwidth, power consumption, and interconnect 
-scalability have become increasingly significant. In this context, programmable integrated 
-photonics has emerged as a promising paradigm, offering software-controlled reconfiguration on a 
-common hardware platform. However, transitioning these versatile processors from foundational 
-laboratory prototypes to mass-manufacturable systems remains constrained by the "scalability 
-wall"—a set of critical bottlenecks encompassing cumulative optical losses, physical footprint 
-constraints, and ultra-dense electrical control.
+architectures. Although electronic integrated circuits have enabled decades of technological 
+advancement, fundamental physical constraints related to bandwidth, power dissipation, and 
+interconnect density have become increasingly critical bottlenecks. Programmable integrated 
+photonics has emerged as a compelling paradigm to overcome these limitations, offering 
+software-controlled reconfigurability on a common hardware platform. However, transitioning these 
+versatile processors from foundational laboratory prototypes to mass-manufacturable systems is 
+tightly constrained by a "scalability wall"—a multifaceted bottleneck encompassing cumulative 
+optical losses, physical footprint limitations, and ultra-dense electrical control interfaces.
 
-The primary objective of this doctoral thesis is to overcome these limitations and establish a 
-reliable technological foundation for large-scale programmable photonic integrated circuits. At the 
-device level, this work leverages advanced adjoint shape optimization to design highly 
-fault-tolerant silicon-on-insulator building blocks. Notably, the optimized multi-mode 
-interferometers achieve near-ideal 50/50 power splitting with peak excess losses as low as 0.077 dB 
-across the extended C-band. Coupled with highly tolerant inverted tapers for edge coupling, these 
-advancements establish a robust physical backbone for ultra-dense integration.
+To systematically overcome this scalability wall, this doctoral thesis establishes a reliable 
+technological foundation for large-scale programmable photonic integrated circuits by addressing 
+key limitations across four hierarchical dimensions: device, circuit, architecture, and 
+system-level application. At the foundational device level, adjoint shape optimization is leveraged 
+to design highly fault-tolerant silicon-on-insulator (SOI) building blocks capable of minimizing 
+cumulative routing penalties. Notably, the optimized multi-mode interferometers achieved a 
+near-ideal 50/50 power splitting ratio with peak excess losses as low as 0.077 dB across the 
+extended C-band. Integrated alongside robust inverted tapers designed for edge coupling, these 
+building blocks establish a very low-loss physical backbone capable of sustaining high-density 
+topologies.
 
-Scaling upwards to the circuit and architectural dimensions, this research overcomes traditional 
-wire-bonding bottlenecks by validating area-array flip-chip packaging. This paradigm shift enabled 
-the successful integration and control of a massive-scale smart transceiver comprising 1020 
-programmable unit cells and hundreds of distributed photodetectors. Furthermore, the thesis 
-pioneers a hybrid processing topology that seamlessly embeds specialized high-performance building 
-blocks—such as arrayed waveguide gratings and multi-stage lattice filters—within a general-purpose 
-hexagonal mesh. To resolve the computational challenges of simulating such massive architectures, 
-a novel inductive mathematical modeling framework based on recursive signal flow graphs is 
-introduced.
+Capitalizing on this optimized physical layer, the architectural scaling from individual cells to 
+large-scale circuits is realized by validating area-array flip-chip packaging as an alternative to 
+traditional perimeter wire-bonding constraints. This packaging paradigm shift enabled the 
+successful integration and simultaneous electrical control of a very high-density smart transceiver 
+comprising 1020 programmable unit cells and 332 distributed photodetectors. To transcend the 
+functional limits of general-purpose meshes, this research introduces a hybrid processing topology 
+that integrates specialized, high-performance building blocks—specifically 35-channel arrayed 
+waveguide gratings (AWGs) and multi-stage lattice filters—within a generic hexagonal core. 
+Furthermore, to resolve the complex challenges of simulating these recirculating fabrics, a novel 
+inductive mathematical modeling framework based on recursive signal flow graphs is formulated and 
+verified.
 
-Finally, the practical viability of the scaled architecture is experimentally validated across 
-rigorous real-world network applications. Empirical characterization of the integrated 
+Finally, the practical viability of this architecture is experimentally validated under rigorous 
+operating conditions in realistic network scenarios. Dynamic characterization of the integrated 
 polarization diversity subsystem demonstrates the robust handling of high-speed 400G data streams, 
-identifying strict sensitivity limits to differential group delay. Broadening the architectural 
-scope to address explosive datacenter traffic, the thesis successfully demonstrates 
-point-to-multipoint optical routing using a software-defined 32x32 optical circuit switch, 
-achieving error-free 400G LAN-WDM multicasting up to a 1x4 radix.
-
-Overall, this research validates the transformative capability of software-defined photonics, 
-advancing the technology toward robust, scalable platforms capable of addressing the dynamic 
-bandwidth and low-latency demands of next-generation telecommunication infrastructures and 
+revealing strict receiver DSP sensitivity thresholds to differential group delay (DGD). Broadening 
+the evaluation scope to address the massive traffic growth in data centers, the thesis successfully 
+demonstrates point-to-multipoint optical routing using a software-defined 32x32 optical circuit 
+switch. By doing so, error-free 400G LAN-WDM multicasting up to a 1x4 radix is achieved. Overall, 
+the contributions of this research validate the transformative capability of software-defined 
+photonics, advancing the technology toward robust, manufacturable platforms capable of meeting the 
+dynamic bandwidth and low-latency demands of next-generation telecommunication infrastructures and 
 AI-driven data centers.
+
+
+% The continuous demand for higher performance, energy efficiency, and scalability in information 
+% processing systems has driven integrated technologies beyond the limits of purely electronic 
+% solutions. Although electronic integrated circuits have enabled major advances in computing and 
+% communication, fundamental constraints related to bandwidth, power consumption, and interconnect 
+% scalability have become increasingly significant. In this context, programmable integrated 
+% photonics has emerged as a promising paradigm, offering software-controlled reconfiguration on a 
+% common hardware platform. However, transitioning these versatile processors from foundational 
+% laboratory prototypes to mass-manufacturable systems remains constrained by the "scalability 
+% wall"—a set of critical bottlenecks encompassing cumulative optical losses, physical footprint 
+% constraints, and ultra-dense electrical control.
+
+% The primary objective of this doctoral thesis is to overcome these limitations and establish a 
+% reliable technological foundation for large-scale programmable photonic integrated circuits. At the 
+% device level, this work leverages advanced adjoint shape optimization to design highly 
+% fault-tolerant silicon-on-insulator building blocks. Notably, the optimized multi-mode 
+% interferometers achieve near-ideal 50/50 power splitting with peak excess losses as low as 0.077 dB 
+% across the extended C-band. Coupled with highly tolerant inverted tapers for edge coupling, these 
+% advancements establish a robust physical backbone for ultra-dense integration.
+
+% Scaling upwards to the circuit and architectural dimensions, this research overcomes traditional 
+% wire-bonding bottlenecks by validating area-array flip-chip packaging. This paradigm shift enabled 
+% the successful integration and control of a massive-scale smart transceiver comprising 1020 
+% programmable unit cells and hundreds of distributed photodetectors. Furthermore, the thesis 
+% pioneers a hybrid processing topology that seamlessly embeds specialized high-performance building 
+% blocks—such as arrayed waveguide gratings and multi-stage lattice filters—within a general-purpose 
+% hexagonal mesh. To resolve the computational challenges of simulating such massive architectures, 
+% a novel inductive mathematical modeling framework based on recursive signal flow graphs is 
+% introduced.
+
+% Finally, the practical viability of the scaled architecture is experimentally validated across 
+% rigorous real-world network applications. Empirical characterization of the integrated 
+% polarization diversity subsystem demonstrates the robust handling of high-speed 400G data streams, 
+% identifying strict sensitivity limits to differential group delay. Broadening the architectural 
+% scope to address explosive datacenter traffic, the thesis successfully demonstrates 
+% point-to-multipoint optical routing using a software-defined 32x32 optical circuit switch, 
+% achieving error-free 400G LAN-WDM multicasting up to a 1x4 radix.
+
+% Overall, this research validates the transformative capability of software-defined photonics, 
+% advancing the technology toward robust, scalable platforms capable of addressing the dynamic 
+% bandwidth and low-latency demands of next-generation telecommunication infrastructures and 
+% AI-driven data centers.

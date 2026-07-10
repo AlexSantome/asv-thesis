@@ -10,52 +10,56 @@
 
 La demanda continua de mayor rendimiento, eficiencia energética y escalabilidad en los sistemas de 
 procesamiento de la información ha impulsado las tecnologías integradas más allá de los límites de 
-las soluciones puramente electrónicas. Aunque los circuitos integrados electrónicos han permitido 
-grandes avances en la computación y las comunicaciones, las limitaciones fundamentales relacionadas 
-con el ancho de banda, el consumo de energía y la escalabilidad de las interconexiones se han 
-vuelto cada vez más significativas. En este contexto, la fotónica integrada programable ha surgido 
-como un paradigma prometedor, ofreciendo reconfiguración controlada por software sobre una 
-plataforma de hardware común. Sin embargo, la transición de estos procesadores versátiles desde 
-prototipos de laboratorio fundamentales hacia sistemas fabricables en masa sigue limitada por el 
-"muro de la escalabilidad", un conjunto de cuellos de botella críticos que abarcan las pérdidas 
-ópticas acumulativas, las restricciones de área física y el control eléctrico de ultra alta 
-densidad.
+las arquitecturas puramente electrónicas. Aunque los circuitos integrados electrónicos han 
+permitido décadas de avance tecnológico, las restricciones físicas fundamentales relacionadas con 
+el ancho de banda, la disipación de potencia y la densidad de interconexión se han convertido en 
+cuellos de botella cada vez más críticos. La fotónica integrada programable ha surgido como un 
+paradigma convincente para superar estas limitaciones, ofreciendo reconfigurabilidad controlada por 
+software sobre una plataforma de hardware común. Sin embargo, la transición de estos procesadores 
+versátiles desde los prototipos fundamentales de laboratorio hacia sistemas fabricables a gran 
+escala está fuertemente limitada por un "muro de la escalabilidad", un cuello de botella 
+multifactorial que abarca las pérdidas ópticas acumulativas, las limitaciones de área física 
+(footprint) y las interfaces de control eléctrico de ultra alta densidad.
 
-El objetivo principal de esta tesis doctoral es superar estas limitaciones y establecer una base 
-tecnológica fiable para circuitos integrados fotónicos programables a gran escala (large-scale). A 
-nivel de dispositivo, este trabajo emplea técnicas avanzadas de optimización topológica por método 
-adjunto (adjoint shape optimization) para diseñar bloques de construcción en silicio sobre aislante 
-(SOI) altamente tolerantes a fallos de fabricación. Destaca que los interferómetros multimodales 
-optimizados logran un divisor de potencia 50/50 casi ideal con pérdidas de exceso pico de tan solo 
-0,077 dB en toda la banda C extendida. Junto con acopladores de borde (inverted tapers) altamente 
-tolerantes, estos avances establecen una infraestructura física robusta para la integración de 
-ultra alta densidad.
+Para franquear sistemáticamente este muro de la escalabilidad, esta tesis doctoral establece una 
+base tecnológica fiable para los circuitos integrados fotónicos programables a gran escala, 
+abordando las limitaciones clave en cuatro dimensiones jerárquicas: dispositivo, circuito, 
+arquitectura y aplicación a nivel de sistema. A nivel fundamental de dispositivo, se hace uso de la 
+optimización de forma por método adjunto (adjoint shape optimization) para diseñar componentes 
+fundamentales en silicio sobre aislante (SOI) altamente tolerantes a fallos y capaces de minimizar 
+las penalizaciones acumulativas de enrutamiento. Cabe destacar que los interferómetros multimodo 
+optimizados lograron una relación de división de potencia casi ideal de 50/50 con picos de exceso 
+de pérdidas de tan solo 0,077 dB en toda la banda C extendida. Al integrarse con robustas 
+estructuras de adaptación modal (inverted tapers) diseñadas para el acoplamiento lateral (edge 
+coupling), estos componentes establecen una columna vertebral física de muy bajas pérdidas capaz de 
+soportar topologías de alta densidad.
 
-Escalando hacia las dimensiones de circuito y arquitectura, esta investigación supera los cuellos 
-de botella tradicionales del wire-bonding mediante la validación del empaquetado flip-chip de 
-matriz de área. Este cambio de paradigma ha permitido la exitosa integración y control de un 
-transceptor inteligente a escala masiva compuesto por 1020 celdas unitarias programables y cientos 
-de fotodetectores distribuidos. Además, la tesis es pionera en una topología de procesamiento 
-híbrida que integra de manera fluida bloques de construcción de alto rendimiento especializados 
-—como redes de difracción de guías de onda (AWG) y filtros de celosía multietapa— dentro de una 
-malla hexagonal de propósito general. Para resolver los desafíos computacionales de simular 
-arquitecturas tan masivas, se introduce un novedoso marco de modelado matemático inductivo basado 
-en grafos de flujo de señal recursivos.
+Basándose en esta capa física optimizada, el salto arquitectónico hacia circuitos a gran escala se 
+alcanza mediante la validación tecnológica del encapsulado flip-chip bidimensional. Esto permite 
+dejar atrás las limitaciones inherentes al tradicional conexionado eléctrico perimetral 
+(wire-bonding). Este cambio de paradigma en el encapsulado ha permitido la integración exitosa y el 
+control eléctrico simultáneo de un transceptor inteligente de muy alta densidad compuesto por 1020 
+celdas unitarias programables y 332 fotodetectores distribuidos. Para trascender los límites 
+funcionales de las mallas de propósito general, esta investigación introduce una topología de 
+procesamiento híbrida que integra bloques especializados de alto rendimiento —específicamente, 
+redes de difracción en guía de onda (AWG) de 35 canales y filtros de múltiples etapas— dentro de un 
+núcleo hexagonal genérico. Además, para resolver los complejos retos que plantea la simulación de 
+estas mallas de recirculación, se formula y verifica un novedoso marco de modelado matemático 
+inductivo basado en grafos de flujo de señal recursivos.
 
-Finalmente, la viabilidad práctica de la arquitectura escalada se valida experimentalmente en 
-aplicaciones de red exigentes del mundo real. La caracterización empírica del subsistema integrado 
-de diversidad de polarización demuestra el manejo robusto de flujos de datos de alta velocidad a 
-400G, identificando un límite estricto de sensibilidad al retardo de grupo diferencial. Ampliando 
-el alcance arquitectónico para abordar el tráfico explosivo de los centros de datos, la tesis 
-demuestra con éxito el enrutamiento óptico punto a multipunto utilizando un conmutador de 
-circuitos ópticos de 32x32 definido por software, logrando transmisiones multicast LAN-WDM a 400G 
-sin errores hasta una cardinalidad de 1x4.
-
-En conjunto, esta investigación valida la capacidad transformadora de la fotónica definida por 
-software, haciendo avanzar la tecnología hacia plataformas robustas y escalables capaces de 
-satisfacer las demandas dinámicas de ancho de banda y baja latencia de las infraestructuras de 
-telecomunicaciones de próxima generación y los centros de datos impulsados por inteligencia 
-artificial.
+Finalmente, la viabilidad práctica de esta arquitectura se valida experimentalmente bajo rigurosas 
+condiciones de funcionamiento en escenarios de red realistas. La caracterización dinámica del 
+subsistema integrado de diversidad de polarización demuestra la capacidad de gestionar de forma 
+robusta flujos de datos de alta velocidad a 400G, revelando umbrales estrictos de sensibilidad del 
+DSP en el receptor frente al retardo de grupo diferencial (DGD). Ampliando el alcance de la 
+evaluación para hacer frente al gran crecimiento del tráfico en los centros de datos, la tesis 
+demuestra con éxito el enrutamiento óptico punto a multipunto utilizando un conmutador de circuitos 
+ópticos de 32x32 definido por software. De este modo, se logra un multicasting LAN-WDM a 400G sin 
+errores con un grado de ramificación (radix) de hasta 1x4. En conjunto, las contribuciones de esta 
+investigación validan la capacidad transformadora de la fotónica definida por software, impulsando 
+el avance de esta tecnología hacia plataformas robustas y fabricables, capaces de satisfacer las 
+demandas dinámicas de ancho de banda y baja latencia de las infraestructuras de telecomunicaciones 
+de próxima generación y los centros de datos impulsados por IA.
 
 
 \chapter*{Resum}
@@ -63,48 +67,53 @@ artificial.
 
 La demanda contínua de major rendiment, eficiència energètica i escalabilitat en els sistemes de 
 processament de la informació ha impulsat les tecnologies integrades més enllà dels límits de les 
-solucions purament electròniques. Encara que els circuits integrats electrònics han permés grans 
-avanços en la computació i les comunicacions, les limitacions fonamentals relacionades amb 
-l'amplada de banda, el consum d'energia i l'escalabilitat de les interconnexions han esdevingut 
-cada vegada més significatives. En este context, la fotònica integrada programable ha sorgit com 
-un paradigma prometedor, oferint reconfiguració controlada per programari (software) sobre una 
-plataforma de maquinari comuna. No obstant això, la transició d'estos processadors versàtils des de 
-prototips de laboratori fonamentals cap a sistemes fabricables en massa continua limitada pel "mur 
-de l'escalabilitat", un conjunt de colls de botella crítics que abasten les pèrdues òptiques 
-acumulatives, les restriccions d'àrea física i el control elèctric d'ultra alta densitat.
+arquitectures purament electròniques. Encara que els circuits integrats electrònics han permès 
+dècades d'avanç tecnològic, les restriccions físiques fonamentals relacionades amb l'ample de 
+banda, la dissipació de potència i la densitat d'interconnexió s'han convertit en colls de botella 
+cada vegada més crítics. La fotònica integrada programable ha sorgit com un paradigma convincent 
+per a superar aquestes limitacions, oferint reconfigurabilitat controlada per programari (software) 
+sobre una plataforma de maquinari (hardware) comuna. No obstant això, la transició d'aquests 
+processadors versàtils des dels prototips fonamentals de laboratori cap a sistemes fabricables a 
+gran escala està fortament limitada per un "mur de l'escalabilitat", un coll de botella 
+multifactorial que comprèn les pèrdues òptiques acumulatives, les limitacions d'àrea física 
+(footprint) i les interfícies de control elèctric d'ultra alta densitat.
 
-L'objectiu principal d'esta tesi doctoral és superar estes limitacions i establir una base 
-tecnològica fiable per a circuits integrats fotònics programables a gran escala (large-scale). A 
-nivell de dispositiu, este treball empra tècniques avançades d'optimització topològica per mètode 
-adjunt (adjoint shape optimization) per a dissenyar blocs de construcció en silici sobre aïllant 
-(SOI) altament tolerants a errades de fabricació. Cal destacar que els interferòmetres multimodals 
-optimitzats aconseguixen un divisor de potència 50/50 quasi ideal amb pèrdues d'excés pic de només 
-0,077 dB en tota la banda C estesa. Juntament amb acobladors de vora (inverted tapers) altament 
-tolerants, estos avanços establixen una infraestructura física robusta per a la integració d'ultra 
-alta densitat.
+Per a franquejar sistemàticament aquest mur de l'escalabilitat, aquesta tesi doctoral estableix una 
+base tecnològica fiable per als circuits integrats fotònics programables a gran escala, abordant 
+les limitacions clau en quatre dimensions jeràrquiques: dispositiu, circuit, arquitectura i 
+aplicació a nivell de sistema. A nivell fonamental de dispositiu, es fa ús de l'optimització de 
+forma per mètode adjunt (adjoint shape optimization) per a dissenyar components fonamentals en 
+silici sobre aïllant (SOI) altament tolerants a fallades i capaços de minimitzar les penalitzacions 
+acumulatives d'encaminament. Cal destacar que els interferòmetres multimode optimitzats van 
+aconseguir una relació de divisió de potència quasi ideal de 50/50 amb pics d'excés de pèrdues de 
+tan sols 0,077 dB en tota la banda C estesa. En integrar-se amb robustes estructures d'adaptació 
+modal (inverted tapers) dissenyades per a l'acoblament lateral (edge coupling), aquests components 
+estableixen una columna vertebral física de molt baixes pèrdues capaç de suportar topologies d'alta 
+densitat.
 
-Escalant cap a les dimensions de circuit i arquitectura, esta investigació supera els colls de 
-botella tradicionals del wire-bonding mitjançant la validació de l'empaquetat flip-chip de matriu 
-d'àrea. Este canvi de paradigma ha permés la integració i control amb èxit d'un transceptor 
-intel·ligent a escala massiva compost per 1020 cel·les unitàries programables i centenars de 
-fotodetectors distribuïts. A més, la tesi és pionera en una topologia de processament híbrida que 
-integra de manera fluida blocs de construcció d'alt rendiment especialitzats —com ara xarxes de 
-difracció de guies d'ona (AWG) i filtres de gelosia multietapa— dins d'una malla hexagonal de 
-propòsit general. Per a resoldre els desafiaments computacionals de simular arquitectures tan 
-massives, s'introduïx un nou marc de modelatge matemàtic inductiu basat en grafs de flux de senyal 
-recursius.
+Basant-se en aquesta capa física optimitzada, el salt arquitectònic cap a circuits a gran escala 
+s'assoleix mitjançant la validació tecnològica de l'encapsulat flip-chip bidimensional. Això permet 
+deixar arrere les limitacions inherents al tradicional conexionat elèctric perimetral 
+(wire-bonding). Aquest canvi de paradigma en l'encapsulat ha permès la integració reeixida i el 
+control elèctric simultani d'un transceptor intel·ligent de molt alta densitat compost per 1020 
+cel·les unitàries programables i 332 fotodetectors distribuïts. Per a transcendir els límits 
+funcionals de les malles de propòsit general, aquesta investigació introdueix una topologia de 
+processament híbrida que integra blocs especialitzats d'alt rendiment —específicament, xarxes de 
+difracció en guia d'ona (AWG) de 35 canals i filtres de múltiples etapes— dins d'un nucli hexagonal 
+genèric. A més, per a resoldre els complexos reptes que planteja la simulació d'aquestes malles de 
+recirculació, es formula i verifica un innovador marc de modelatge matemàtic inductiu basat en 
+grafs de flux de senyal recursius.
 
-Finalment, la viabilitat pràctica de l'arquitectura escalada es valida experimentalment en 
-aplicacions de xarxa exigents del món real. La caracterització empírica del subsistema integrat de 
-diversitat de polarització demostra el maneig robust de fluxos de dades d'alta velocitat a 400G, 
-identificant un límit estricte de sensibilitat al retard de grup diferencial. Ampliant l'abast 
-arquitectònic per a abordar el trànsit explosiu dels centres de dades, la tesi demostra amb èxit 
+Finalment, la viabilitat pràctica d'aquesta arquitectura es valida experimentalment sota rigoroses 
+condicions de funcionament en escenaris de xarxa realistes. La caracterització dinàmica del 
+subsistema integrat de diversitat de polarització demostra la capacitat de gestionar de forma 
+robusta fluxos de dades d'alta velocitat a 400G, revelant llindars estrictes de sensibilitat del 
+DSP en el receptor enfront del retard de grup diferencial (DGD). Ampliant l'abast de l'avaluació 
+per a fer front al gran creixement del trànsit en els centres de dades, la tesi demostra amb èxit 
 l'encaminament òptic punt a multipunt utilitzant un commutador de circuits òptics de 32x32 definit 
-per programari, aconseguint transmissions multicast LAN-WDM a 400G sense errades fins a una 
-cardinalitat d'1x4.
-
-En conjunt, esta investigació valida la capacitat transformadora de la fotònica definida per 
-programari, fent avançar la tecnologia cap a plataformes robustes i escalables capaços de satisfer 
-les demandes dinàmiques d'amplada de banda i baixa latència de les infraestructures de 
-telecomunicacions de pròxima generació i els centres de dades impulsats per intel·ligència 
-artificial.
+per programari. D'aquesta manera, s'aconsegueix un multicasting LAN-WDM a 400G sense errors amb un 
+grau de ramificació (radix) de fins a 1x4. En conjunt, les contribucions d'aquesta investigació 
+validen la capacitat transformadora de la fotònica definida per programari, impulsant l'avanç 
+d'aquesta tecnologia cap a plataformes robustes i fabricables, capaces de satisfer les demandes 
+dinàmiques d'ample de banda i baixa latència de les infraestructures de telecomunicacions de 
+pròxima generació i els centres de dades impulsats per IA.
