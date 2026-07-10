@@ -224,8 +224,10 @@ propagation length $L$ is given by
 P_2(L) = P_1(0)\sin^2(\kappa L),
 \end{equation}
 
-where $\kappa$ is the coupling coefficient, determined by the modal overlap and separation 
-distance. The characteristic length required for complete power transfer, known as the coupling 
+\noindent where $\kappa$ is the coupling coefficient, determined by the modal overlap and 
+separation distance. 
+\newpage
+\noindent The characteristic length required for complete power transfer, known as the coupling 
 length, is
 
 \begin{equation}
@@ -240,7 +242,7 @@ interferometers.
 Beyond power distribution, the operation of a symmetric directional coupler is more accurately 
 described by its complex-valued transfer matrix $\mathbf{T}_{\text{DC}}$. This matrix relates the 
 input complex field amplitudes $(E_{in,1}, E_{in,2})$ to the output amplitudes 
-$(E_{out,1}, E_{out,2})$ as:
+$(E_{out,1}, E_{out,2})$ as
 
 \begin{equation}
 \begin{pmatrix} E_{out,1} \\ E_{out,2} \end{pmatrix} = \mathbf{T}_{\text{DC}} \begin{pmatrix} 
@@ -260,7 +262,6 @@ programmable architectures, these systematic errors propagate through the mesh, 
 impacting the fidelity of the synthesized optical transformations 
 \cite{chrostowskiSiliconPhotonicsDesign2015}.
 
-
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\linewidth]{figures/ch2-directional_coupler.png}
@@ -271,7 +272,6 @@ impacting the fidelity of the synthesized optical transformations
 \end{figure}
 
 
-
 \subsubsection*{Multi-Mode Interferometers (MMIs)}
 
 Multi-mode interferometers exploit the self-imaging principle in multimode waveguides. When light 
@@ -279,23 +279,24 @@ is injected into a multimode section, multiple transverse modes propagate with d
 propagation constants. The interference between these modes leads to periodic reproduction of the 
 input field profile at specific distances along the propagation direction.
 
+\newpage
 The characteristic beat length between the two lowest-order modes is given by
 
 \begin{equation}
 L_\pi = \frac{\pi}{\beta_0 - \beta_1},
 \end{equation}
 
-where $\beta_0$ and $\beta_1$ are the propagation constants of the fundamental and first-order 
-modes, respectively. For an MMI operating in the restricted paired interference regime (where the 
-input field is launched at $x = \pm W/6$), the length required to form a two-fold self-image (3-dB 
-splitter) is significantly reduced and can be approximated as
+\noindent where $\beta_0$ and $\beta_1$ are the propagation constants of the fundamental and 
+first-order modes, respectively. For an MMI operating in the restricted paired interference regime 
+(where the input field is launched at $x = \pm W/6$), the length required to form a two-fold 
+self-image (3-dB splitter) is significantly reduced and can be approximated as
 
 \begin{equation}
 L_{\text{MMI}} \approx \frac{L_\pi}{2}.
 \end{equation}
 
 The self-imaging mechanism in a $2\times2$ MMI results in a transfer matrix 
-$\mathbf{T}_{\text{MMI}}$ that, assuming an ideal device with balanced splitting, is given by:
+$\mathbf{T}_{\text{MMI}}$ that, assuming an ideal device with balanced splitting, is given by
 
 \begin{equation}
 \mathbf{T}_{\text{MMI}} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & e^{j\pi/2} \\ e^{j\pi/2} & 1 
@@ -304,12 +305,19 @@ $\mathbf{T}_{\text{MMI}}$ that, assuming an ideal device with balanced splitting
 \end{equation}
 
 
-
 To illustrate the self-imaging principle in a practical building block, Figure 
 \ref{fig:ch2-mmi_2x2_self_imagin} shows a Beam Propagation Method (BPM) simulation of a $2\times2$ 
 MMI designed for the paired interference regime. By launching the input field at a transverse 
 position of $x = \pm W/6$, the device can function as either a balanced power splitter or a 
 cross-coupler depending on its longitudinal dimension.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ch2-mmi_2x2_self_imagin.pdf}
+    \caption{BPM simulation of a $2\times2$ MMI. Vertical markers indicate the numerically 
+    calibrated 3-dB splitting ($L_{\pi}/2$) and cross-over ($L_{\pi}$) imaging planes.}
+    \label{fig:ch2-mmi_2x2_self_imagin}
+\end{figure}
 
 As observed in the simulation, at a distance of approximately $L_{\pi}/2$, the interference of the 
 excited modes generates two symmetric images of the input field, realizing a 3-dB splitting ratio. 
@@ -319,14 +327,6 @@ calibration is essential to account for the effective width expansion due to fie
 the cladding. From a fault-tolerance perspective, the stability of these imaging points against 
 small lithographic deviations in $W$ is what makes the MMI a more reliable candidate than 
 directional couplers for the backbone of large-scale programmable meshes.
-
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=\textwidth]{figures/ch2-mmi_2x2_self_imagin.pdf}
-    \caption{BPM simulation of a $2\times2$ MMI. Vertical markers indicate the numerically 
-    calibrated 3-dB splitting ($L_{\pi}/2$) and cross-over ($L_{\pi}$) imaging planes.}
-    \label{fig:ch2-mmi_2x2_self_imagin}
-\end{figure}
 
 In the context of large-scale integration, MMIs offer a significant advantage in terms of 
 \textit{fault tolerance} compared to directional couplers. Their performance is primarily 
@@ -338,8 +338,6 @@ fabrication tolerances and wavelength fluctuations, ensuring a more stable power
 require a larger footprint and may introduce slightly higher insertion losses due to mode mismatch 
 at the junctions, their reliability makes them the preferred choice for the static backbone of 
 programmable photonic meshes.
-
-\FloatBarrier
 
 
 
@@ -415,8 +413,8 @@ phase-matching condition:
 \label{eq:grating_period}
 \end{equation}
 
-where $\lambda$ is the operating wavelength, $n_{\text{eff}}$ is the effective index of the guided 
-mode, and $n_{\text{clad}}$ is the refractive index of the cladding material.
+\noindent where $\lambda$ is the operating wavelength, $n_{\text{eff}}$ is the effective index of 
+the guided mode, and $n_{\text{clad}}$ is the refractive index of the cladding material.
 
 \begin{figure}[!ht]
     \centering
@@ -428,14 +426,13 @@ mode, and $n_{\text{clad}}$ is the refractive index of the cladding material.
     \label{fig:ch2-grating}
 \end{figure}
 
-\FloatBarrier
-
 Grating couplers are highly advantageous for large-scale integration as they enable wafer-scale 
 testing without the need for dicing or facet polishing. However, they typically introduce higher 
 insertion losses ($3$--$5$ \text{dB}) and have a limited operational bandwidth compared to edge 
 coupling techniques. Their efficiency and spectral response are highly sensitive to fabrication 
 parameters such as the etch depth and the duty cycle of the grating teeth.
 
+\FloatBarrier
 
 \subsubsection*{Edge Couplers}
 
@@ -468,7 +465,6 @@ interface with the external medium.
     \label{fig:ch2-edge_coupler_info}
 \end{figure}
 
-\FloatBarrier
 
 The physical principle behind this transition is the reduction of the modal confinement. As 
 evidenced by the mode profiles in Figure \ref{fig:ch2-edge_coupler_info}b, the narrow silicon tip 
@@ -648,7 +644,7 @@ device.
 
 The operational state of the cell is governed by the phase induced in the upper arm ($\phi_{upper}$) 
 and the lower arm ($\phi_{lower}$). For the characterization of the cell's response, we define the 
-differential phase shift as:
+differential phase shift as
 
 \begin{equation}
 \Delta\phi = \phi_{upper} - \phi_{lower}
@@ -662,7 +658,7 @@ tunable power splitter, or a discrete optical switch.
 
 The mathematical behavior of the PUC is described by its transfer matrix $\mathbf{T}_{\text{PUC}}$. 
 Assuming ideal $3$-dB couplers and neglecting propagation losses, the relationship between the 
-input ($E_{In1}, E_{In2}$) and output ($E_{Out1}, E_{Out2}$) electric fields is given by:
+input ($E_{In1}, E_{In2}$) and output ($E_{Out1}, E_{Out2}$) electric fields is given by
 
 \begin{equation}
 \mathbf{T}_{\text{PUC}}(\phi_{upper}, \phi_{lower}) = 
