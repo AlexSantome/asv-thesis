@@ -100,7 +100,7 @@ high-throughput measurements.
 
 The first setup is designed for maximum flexibility, allowing for the characterization of 
 individual components and test structures. As illustrated in the schematic of Figure 
-\ref{fig:ch3-siso_setup}a, the bench features high-precision motorized stages for coarse 
+\ref{fig:ch3-siso_setup}(a), the bench features high-precision motorized stages for coarse 
 positioning, which are complemented by piezoelectric actuators for fine alignment. This 
 sub-micrometric control is essential for maximizing coupling efficiency, particularly when dealing 
 with the narrow mode-field diameters of edge couplers.
@@ -113,10 +113,10 @@ The setup can be configured for two primary coupling geometries:
     couplers.
 \end{itemize}
 
-The physical implementation is shown in Figure \ref{fig:ch3-siso_setup}b. This setup serves as the 
+The physical implementation is shown in Figure \ref{fig:ch3-siso_setup}(b). This setup serves as the 
 primary station for the characterization of active components. A dashed cyan box highlights the 
 interaction area between the optical and electrical probes, which is further detailed in the inset 
-of Figure \ref{fig:ch3-siso_setup}c. This close-up view shows the vertical fiber alignment and the 
+of Figure \ref{fig:ch3-siso_setup}(c). This close-up view shows the vertical fiber alignment and the 
 two DC probe needles used to provide the electrical excitation to the thermo-optic phase shifters, 
 a configuration required to characterize tuning efficiency and phase-power relationships.
 
@@ -135,10 +135,10 @@ a configuration required to characterize tuning efficiency and phase-power relat
 
 For the precise extraction of performance metrics in passive components, such as the excess loss 
 and imbalance of MMI couplers, a high-throughput setup is utilized. As shown in the schematic of 
-Figure \ref{fig:ch3-hexapod_setup}a, this bench is equipped with a 64-channel fiber array mounted 
+Figure \ref{fig:ch3-hexapod_setup}(a), this bench is equipped with a 64-channel fiber array mounted 
 on a high-precision hexapod positioner, enabling semi-automated alignment routines.
 
-Figure \ref{fig:ch3-hexapod_setup}b illustrates the actual measurement bench during the 
+Figure \ref{fig:ch3-hexapod_setup}(b) illustrates the actual measurement bench during the 
 characterization of cascaded structures. This procedure relies on the well-known cut-back method 
 \cite{chrostowskiSiliconPhotonicsDesign2015, zhenshengCompactLowLossMMI2012}. By measuring chains 
 of 16 to 18 cascaded MMIs, the cumulative loss can be determined with significantly reduced 
@@ -621,7 +621,6 @@ in Figure~\ref{fig:ch3-it16_dashboard}.
     \label{fig:ch3-it16_dashboard}
 \end{figure}
 
-\clearpage
 
 It is important to note that the initial FoM values reflect a numerical baseline inherent to the 
 simplified simulation environment—utilizing coarser discretization and tighter boundaries—required 
@@ -659,7 +658,6 @@ within the multimode region. The total field magnitude in panel (c) confirms tha
 effect is correctly reconstructed at the output ports, showcasing the adiabatic nature of the 
 optimized boundaries which minimize light scattering into the surrounding slab.
 
-\clearpage
 
 The resulting spectral response is characterized in Figure~\ref{fig:ch3-spectral_results}. As 
 established by the previous numerical considerations, the absolute EL values in the top panel are 
@@ -688,7 +686,7 @@ for the four scenarios evaluated.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.75\textwidth]{figures/ch3-mmi_convergence_comparison.png}
+    \includegraphics[width=0.77\textwidth]{figures/ch3-mmi_convergence_comparison.png}
     \caption{Convergence history of the total transmission (FoM) for 90~nm and 150~nm cases. All 
     simulations start from a baseline between 0.51 and 0.59 and achieve stability within 20 to 26 
     iterations, validating the robustness of the adjoint method.}
@@ -703,6 +701,11 @@ boundaries.
 
 After convergence, the final performance metrics are summarized in 
 Table~\ref{tab:stage1_comparison} and visualized in Figure~\ref{fig:ch3-stage1_performance}.
+Quantitative results confirm that High Resolution meshes are essential to accurately capture the 
+optimized walls, leading to a substantial reduction in scattering. The 90~nm High Resolution case 
+achieved the most balanced response with an imbalance of only 0.046~dB. Although the 150~nm High 
+Resolution scenario exhibited the lowest absolute losses (0.154~dB), the superior power balance of 
+the 90~nm configuration led to its selection for the final optimization stage.
 
 \begin{figure}[!ht]
     \centering
@@ -726,14 +729,6 @@ Table~\ref{tab:stage1_comparison} and visualized in Figure~\ref{fig:ch3-stage1_p
 \end{tabular}
 \end{table}
 
-Quantitative results confirm that High Resolution meshes are essential to accurately capture the 
-optimized walls, leading to a substantial reduction in scattering. Specifically, the 90~nm High 
-Resolution case achieved the most balanced response with an imbalance of only 0.046~dB. Although 
-the 150~nm High Resolution scenario exhibited the lowest absolute losses (0.154~dB), the superior 
-power balance of the 90~nm configuration led to its selection for the final integrated optimization 
-stage.
-
-\clearpage
 
 \subsubsection{Stage 2: Integrated Device Optimization and Final Performance}
 
@@ -756,7 +751,7 @@ Figure~\ref{fig:total_optimization_history}.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.75\textwidth]{figures/ch3-mmi_stage2_convergence.png}
+    \includegraphics[width=0.8\textwidth]{figures/ch3-mmi_stage2_convergence.png}
     \caption{Total Adjoint Optimization History. The dashed lines represent the Stage 1 preliminary 
     runs used to evaluate the etch depth impact. The solid black line depicts the Stage 2 
     integrated optimization, starting from the initial design and achieving a superior Figure of 
@@ -790,8 +785,8 @@ response is depicted in Figure~\ref{fig:ch3-stage2_spectral}.
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=\textwidth]{figures/ch3-EL_SR_stage2.png}
-    \caption{Final spectral characterization: (a) Excess Loss (EL) showing a peak efficiency of 
-    $\sim$0.077 dB and (b) Splitting Ratio (SR) demonstrating near-ideal 50/50 balance across a 100 
+    \caption{Final spectral characterization: (a) Excess loss showing a peak efficiency of 
+    $\sim$0.077 dB and (b) Splitting ratio demonstrating near-ideal 50/50 balance across 100 
     nm bandwidth.}
     \label{fig:ch3-stage2_spectral}
 \end{figure}
@@ -810,7 +805,7 @@ Figure~\ref{fig:performance_improvement}.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.75\textwidth]{figures/ch3-mmi_stage2_performance.png}
+    \includegraphics[width=0.78\textwidth]{figures/ch3-mmi_stage2_performance.png}
     \caption{Performance Improvement: Comparison between the best body-only result (90 nm High Res) 
     and the final Stage 2 integrated design.}
     \label{fig:performance_improvement}
@@ -831,18 +826,17 @@ classified into three groups according to the optimization stage and the specifi
 evaluated:
 
 \begin{enumerate}
-    \item \textbf{Body Optimizations (Stage 1):} Devices D1 and D2 represent the 
-    optimized MMI bodies without integrated taper refinement. D1 utilizes the 150 nm 
-    shallow etch layer, while D2 utilizes the 90 nm layer. Both were optimized using 
-    high-resolution meshes ($45 \times 10^{-6}$ mesh size and accuracy 4).
-    \item \textbf{Integrated Body + Access Optimizations (Stage 2):} Devices D3 and 
-    D4 represent the holistic design approach. Both utilize the 90 nm shallow layer. 
-    D3 serves as the low-resolution benchmark ($60 \times 10^{-6}$ mesh, accuracy 1), 
-    whereas D4 is the final optimized design at high-resolution ($45 \times 10^{-6}$ mesh, 
-    accuracy 4).
-    \item \textbf{Tolerance and Sensitivity Study (D4 Variants):} To assess the robustness of the 
-    final integrated design (D4), four variants were fabricated to simulate critical 
-    manufacturing deviations:
+    \item \textbf{Body Optimizations (Stage 1):} Devices D1 and D2 represent the optimized MMI 
+    bodies without integrated taper refinement. D1 utilizes the 150 nm     shallow etch layer, 
+    while D2 utilizes the 90 nm layer. Both were optimized using high-resolution meshes 
+    ($45 \times 10^{-6}$ mesh size and accuracy 4).
+    \item \textbf{Integrated Body + Access Optimizations (Stage 2):} Devices D3 and D4 represent 
+    the holistic design approach. Both utilize the 90 nm shallow layer. D3 serves as the 
+    low-resolution benchmark ($60 \times 10^{-6}$ mesh, accuracy 1), whereas D4 is the final 
+    optimized design at high-resolution ($45 \times 10^{-6}$ mesh, accuracy 4).
+    \item \textbf{Tolerance and Sensitivity (D4 Variants):} To assess the robustness of the final 
+    integrated design (D4), four variants were fabricated to simulate critical manufacturing 
+    deviations:
     \begin{itemize}
         \item \textbf{D4.1 and D4.2:} Evaluate longitudinal tolerances by increasing and decreasing 
         the MMI body length by 0.25 $\mu$m, respectively.
@@ -854,7 +848,12 @@ evaluated:
 Evaluating the SR and EL across the C-band constitutes the core of the experimental 
 characterization. To achieve this, specific test structures were included on the fabricated chip 
 to decouple intrinsic MMI performance from auxiliary components, as illustrated in 
-Figure~\ref{fig:ch3-mmi_pic}.
+Figure~\ref{fig:ch3-mmi_pic}. Characterizing these devices relies on two distinct MMI cascades, 
+depicted in (c): one interconnecting the BAR ports and another interconnecting the CROSS ports. 
+Using both configurations simultaneously provides the necessary data to extract the SR. 
+Additionally, these combined measurements allow for a precise calculation of the EL through linear 
+regression, as the total loss scales with the number of cascaded devices in each path. Detailed 
+performance results and fabrication tolerances are presented in the following figures.
 
 \begin{figure}[!ht]
     \centering
@@ -866,13 +865,6 @@ Figure~\ref{fig:ch3-mmi_pic}.
     \label{fig:ch3-mmi_pic}
 \end{figure}
 
-Characterizing these devices relies on two distinct MMI cascades (Figure~\ref{fig:ch3-mmi_pic}(c)): 
-one interconnecting the BAR ports and another interconnecting the CROSS ports. Using both 
-configurations simultaneously provides the necessary data to extract the SR. Additionally, these 
-combined measurements allow for a precise calculation of the EL through linear regression, as the 
-total loss scales with the number of cascaded devices in each path. Detailed performance results 
-and fabrication tolerances are presented in the following figures.
-
 
 Figure~\ref{fig:ch3-mmi_SR_experimental} illustrates the experimental splitting ratio for the eight 
 evaluated $2\times2$ MMI designs across the C-band. The solid lines represent the median response 
@@ -880,21 +872,10 @@ of the characterized dies, while the shaded regions correspond to the interquart
 ($25^{\text{th}}$ to $75^{\text{th}}$ percentiles). This statistical representation provides a 
 robust measure of the fabrication uniformity across the wafer, effectively filtering out local 
 measurement artifacts and outliers. To ensure physical consistency, the results from both port 
-configurations were cross-normalized to satisfy the power conservation requirement 
+configurations were cross-normalized to satisfy the power conservation condition 
 ($SR_{\text{Bar}} + SR_{\text{Cross}} = 1$).
 
-As observed in the results, the nominal designs (D1--D4) exhibit a systematic power imbalance, 
-predominantly favoring the Bar port. This deviation suggests the presence of a positive critical 
-dimension (CD) bias during the lithography and etching stages, resulting in MMI bodies slightly 
-wider than the original GDS specifications. In contrast, design D4.4, which features a intentional 
-nominal width reduction of $0.25\,\mu$m, stands out as the most balanced and broadband 
-configuration. This geometric offset successfully compensates for the fabrication-induced bias, 
-achieving a near-ideal $50/50$ splitting ratio and exceptional spectral flatness across the entire 
-$1520$--$1580$\,nm range. The narrow interquartile range observed in D4.4 further confirms the 
-robustness of the design against process variations, identifying it as the optimal geometry for 
-this fabrication run.
-
-\begin{figure}[!ht]
+\begin{figure}[!hb]
     \centering
     \includegraphics[width=\textwidth]{figures/ch3-mmi_experimental_all.png}
     \caption{Measured splitting ratio for the eight evaluated $2\times2$ MMI designs. Each panel 
@@ -906,6 +887,17 @@ this fabrication run.
     \label{fig:ch3-mmi_SR_experimental}
 \end{figure}
 
+
+As observed in the results, the nominal designs (D1--D4) exhibit a systematic power imbalance, 
+predominantly favoring the Bar port. This deviation suggests the presence of a positive critical 
+dimension (CD) bias during the lithography and etching stages, resulting in MMI bodies slightly 
+wider than the original GDS specifications. In contrast, design D4.4, which features a intentional 
+nominal width reduction of $0.25\,\mu$m, stands out as the most balanced and broadband 
+configuration. This geometric offset successfully compensates for the fabrication-induced bias, 
+achieving a near-ideal $50/50$ splitting ratio and exceptional spectral flatness across the entire 
+$1520$--$1580$\,nm range. The narrow interquartile range observed in D4.4 further confirms the 
+robustness of the design against process variations, identifying it as the optimal geometry for 
+this fabrication run.
 
 While all designs were characterized, the detailed EL analysis focuses on design D4.4, as it 
 represents the only geometry that successfully achieves the targeted 50/50 power splitting ratio. 
@@ -922,6 +914,15 @@ adjustment not only corrected the splitting ratio but also maintained the high t
 efficiency of the MMI structure. This combination of low loss and balanced splitting identifies 
 D4.4 as the optimal building block for larger-scale interferometric structures.
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/ch3-excess_loss_D44_vs_sim.png}
+    \caption{Measured Excess Loss for the D4.4 MMI variation compared against the nominal design 
+    simulation (dashed line). The solid line represents the median value across the characterized 
+    dies, while the shaded region denotes the $25^{\text{th}}$--$75^{\text{th}}$ percentile range.}
+    \label{fig:ch3-mmi_el_d44}
+\end{figure}
+
 To evaluate the accuracy of the numerical models, the simulated nominal excess loss is superimposed 
 on the experimental data. As shown, there is a strong correlation between the simulation and the 
 measurement across the primary 1520--1570 nm band, sharing the same low-loss trend. However, a 
@@ -936,17 +937,6 @@ parameters such as the top silicon thickness or shallow etch depth can dispropor
 the phase-matching conditions of the MMI at larger wavelengths. Despite these expected edge-band 
 deviations, the overall experimental result is remarkable, demonstrating an extremely efficient 
 device that closely follows the numerical predictions within the targeted operational bandwidth.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figures/ch3-excess_loss_D44_vs_sim.png}
-    \caption{Measured Excess Loss for the D4.4 MMI variation compared against the nominal design 
-    simulation (dashed line). The solid line represents the median value across the characterized 
-    dies, while the shaded region denotes the $25^{\text{th}}$--$75^{\text{th}}$ percentile range.}
-    \label{fig:ch3-mmi_el_d44}
-\end{figure}
-
-
 
 \subsection{Conclusions}
 
